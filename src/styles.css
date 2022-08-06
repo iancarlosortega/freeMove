@@ -1,1 +1,53 @@
-/* You can add global styles to this file, and also import other style files */
+* {
+  font-family: var(--fuente-principal);
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  /* Fuentes */
+  --fuente-principal: 'Poppins', sans-serif;
+  /* Colores */
+  --blanco: #FFFFFF;
+  --negro: #000000;
+  --amarillo: #F2AC20;
+  --verde-claro: #C2E7C9;
+  --azul: #4265D6;
+  --azul-oscuro: #293855;
+  --gris: #A0A0A0;
+}
+
+/* Clase container de Boostrap */
+
+.container {
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+@media (min-width: 768px) {
+  .container {
+    width: 750px;
+  }
+}
+
+@media (min-width: 992px) {
+  .container {
+    width: 970px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .container {
+    width: 1170px;
+  }
+}
+
+/* Fix mat-select and modal */
+.cdk-global-overlay-wrapper,
+.cdk-overlay-container {
+  z-index: 9999 !important;
+}
+
