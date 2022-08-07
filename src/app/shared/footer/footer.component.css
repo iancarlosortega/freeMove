@@ -1,0 +1,43 @@
+.footer {
+  background-color: #141414;
+  color: #ADADAD;
+}
+
+.footer-logos {
+  padding: 4rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.footer-texts {
+  padding: 4rem 0;
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+}
+
+.text-short {
+  width: 15rem;
+  text-align: center;
+}
+
+.copyright {
+  text-align: center;
+  margin: 1.5rem 0;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  padding-bottom: 4rem;
+}
+
+.footer-links a {
+  width: 2rem;
+  height: 2rem;
+}
+
+.footer-links img {
+  height: 100%;
+}
