@@ -1,0 +1,81 @@
+<div class="login-container">
+  <div class="login-card">
+    <header>
+      <div class="login-logo">
+        <img src="assets/logoFreeMoveColor.png" alt="FreeMove Logo" />
+      </div>
+      <h1 class="login-title">Regístrate</h1>
+    </header>
+    <form
+      class="login-form"
+      [formGroup]="miFormulario"
+      (submit)="registerUser()"
+    >
+      <mat-form-field appearance="outline">
+        <mat-label>Nombres</mat-label>
+        <input
+          type="text"
+          matInput
+          formControlName="firstName"
+          placeholder="Escribe tus nombres"
+        />
+        <mat-error *ngIf="campoNoValido('firstName')">
+          Los nombres son <strong>obligatorios</strong>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Apellidos</mat-label>
+        <input
+          type="text"
+          matInput
+          formControlName="lastName"
+          placeholder="Escribe tus apellidos"
+        />
+        <mat-error *ngIf="campoNoValido('lastName')">
+          Los apellidos son <strong>obligatorios</strong>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Correo Electrónico</mat-label>
+        <input
+          type="email"
+          matInput
+          formControlName="email"
+          placeholder="example@gmail.com"
+        />
+        <mat-error *ngIf="campoNoValido('email')">
+          El correo electrónico es <strong>requerido</strong>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Contraseña</mat-label>
+        <input
+          type="password"
+          matInput
+          formControlName="password"
+          placeholder="********"
+        />
+        <mat-error *ngIf="campoNoValido('password')">
+          La contraseña debe tener mínimo <strong>6</strong> caracteres
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Confirmar contraseña</mat-label>
+        <input
+          type="password"
+          matInput
+          formControlName="password2"
+          placeholder="Repetir la contraseña"
+        />
+        <mat-error *ngIf="campoNoValido('password2')">
+          Las contraseñas deben ser <strong>iguales</strong>
+        </mat-error>
+      </mat-form-field>
+      <button type="submit" class="login-button">Continuar</button>
+      <footer class="login-footer">
+        <p>¿Ya tienes una cuenta?</p>
+        <p class="register" routerLink="../login">Ingresa aquí</p>
+      </footer>
+    </form>
+  </div>
+</div>

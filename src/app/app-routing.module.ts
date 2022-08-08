@@ -29,6 +29,10 @@ const routes: Routes = [
     path: 'servicios',
     component: ServicesComponent,
   },
+  {
+    path: 'auth',
+    loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),
+  },
   { path: '**', redirectTo: '' },
 ];
 

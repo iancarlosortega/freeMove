@@ -16,6 +16,7 @@ img {
   --blanco: #FFFFFF;
   --negro: #000000;
   --amarillo: #F2AC20;
+  --amarillo-hover: #c58b16;
   --verde-claro: #C2E7C9;
   --azul: #4265D6;
   --azul-oscuro: #293855;
@@ -55,3 +56,30 @@ img {
   z-index: 9999 !important;
 }
 
+/* Input Color */
+
+.mat-focused .mat-form-field-label {
+  /*change color of label*/
+  color: #b6b6b6 !important;
+}
+
+.mat-form-field-appearance-outline .mat-form-field-outline {
+  /*change color of underline*/
+  color: #b6b6b6 !important;
+}
+
+.mat-input-element {
+  caret-color: #000000 !important;
+}
+
+/* Input Error */
+
+.mat-form-field-appearance-outline.mat-form-field-invalid.mat-form-field-invalid .mat-form-field-outline-thick {
+  color: red !important;
+  opacity: 0.8 !important;
+}
+
+.mat-form-field-invalid .mat-input-element,
+.mat-warn .mat-input-element {
+  caret-color: red !important;
+}
