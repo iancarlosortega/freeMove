@@ -5,6 +5,9 @@
         <img src="assets/logoFreeMoveColor.png" alt="FreeMove Logo" />
       </div>
       <h1 class="login-title">Regístrate</h1>
+      <div @fade *ngIf="isError" class="alert alert--error">
+        <p><strong>Error!</strong> El correo ingresado ya está en uso</p>
+      </div>
     </header>
     <form
       class="login-form"
@@ -56,7 +59,7 @@
           placeholder="********"
         />
         <mat-error *ngIf="campoNoValido('password')">
-          La contraseña debe tener mínimo <strong>6</strong> caracteres
+          Mínimo <strong>6</strong> caracteres
         </mat-error>
       </mat-form-field>
       <mat-form-field appearance="outline">

@@ -17,39 +17,12 @@ export class AuthService {
     private userService: UserService
   ) {}
 
-  register(user: User) {
-    this.afAuth
-      .createUserWithEmailAndPassword(user.email, user.password!)
-      .then((userCredential: any) => {
-        user.idUser = userCredential.user.uid;
-        delete user.password;
-
-        this.userService
-          .addUser(user)
-          .then(() => {
-            //TODO: Redireccionar a la pagina de newUser
-            this.router.navigateByUrl('/');
-          })
-          .catch((error) => {
-            console.log('Error al agregar el usuario:', error);
-          });
-      })
-      .catch((error) => {
-        console.log('Error al registrar el usuario:', error);
-      });
+  register(email: string, password: string) {
+    return this.afAuth.createUserWithEmailAndPassword(email, password);
   }
 
   loginEmailPassword(email: string, password: string) {
-    this.afAuth
-      .signInWithEmailAndPassword(email, password)
-      .then((res) => {
-        console.log(res);
-        //TODO: redireccionar a la pagina de dashboard
-        this.router.navigateByUrl('/');
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    return this.afAuth.signInWithEmailAndPassword(email, password);
   }
 
   loginGoogle() {
@@ -78,7 +51,7 @@ export class AuthService {
           };
 
           this.userService
-            .addUser(user)
+            .createUser(user)
             .then((res) => {
               this.router.navigate(['auth/register/', user.idUser]);
             })

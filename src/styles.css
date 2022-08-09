@@ -21,6 +21,23 @@ img {
   --azul: #4265D6;
   --azul-oscuro: #293855;
   --gris: #A0A0A0;
+  /* Alerts */
+  /* success */
+  --alertsuccess : #ddf0d7;
+  --alertsuccessborder : #a4cd98;
+  --alertsuccesstext : #1c652c;
+  /* warning */
+  --alertwarning : #ffefc6;
+  --alertwarningborder : #e5c073;
+  --alertwarningtext : #795d27;
+  /* error */
+  --alerterror : #f6ddde;
+  --alerterrorborder : #d4aaac;
+  --alerterrortext : #972a3d;
+  /* info */
+  --alertinfo : #d4edf7;
+  --alertinfoborder : #93c7da;
+  --alertinfotext : #114a59;
 }
 
 /* Clase container de Boostrap */
@@ -54,6 +71,77 @@ img {
 .cdk-global-overlay-wrapper,
 .cdk-overlay-container {
   z-index: 9999 !important;
+}
+
+/* Effects */
+
+.fade-in {
+  -webkit-animation-duration: 0.5s;
+  animation-duration: 0.5s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+
+  -webkit-animation-name: fadeIn;
+  animation-name: fadeIn;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Alerts */
+
+.alert {
+  padding: 10px 35px 10px 14px;
+  background-color: #eee;
+  border-radius: 4px;
+  position: relative;
+  margin: 10px 0;
+  width: 100%;
+}
+
+.alert p {
+  font-size: 0.8rem;
+  margin: 0;
+}
+
+.alert--success {
+  background: var(--alertsuccess);
+  border-color: var(--alertsuccessborder);
+  color: var(--alertsuccesstext);
+
+}
+
+.alert--warning {
+  background: var(--alertwarning);
+  border-color: var(--alertwarningborder);
+  color: var(--alertwarningtext);
+}
+
+.alert--info {
+  background: var(--alertinfo);
+}
+
+.alert--error {
+  background: var(--alerterror);
+  border-color: var(--alerterrorborder);
+  color: var(--alerterrortext);
 }
 
 /* Input Color */

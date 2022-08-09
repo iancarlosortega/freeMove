@@ -8,7 +8,7 @@ import { User } from '../interfaces';
 export class UserService {
   constructor(private firestore: AngularFirestore) {}
 
-  addUser(user: User) {
+  createUser(user: User) {
     return this.firestore.collection('users').doc(user.idUser).set(user);
   }
 }

@@ -7,6 +7,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { AngularFireModule } from '@angular/fire/compat';
 import { environment } from 'src/environments/environment';
 
+import { ToastrModule } from 'ngx-toastr';
+
 import { SharedModule } from './shared/shared.module';
 
 import { AppComponent } from './app.component';
@@ -32,6 +34,12 @@ import { ServicesComponent } from './pages/services/services.component';
     HttpClientModule,
     SharedModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
+    ToastrModule.forRoot({
+      positionClass: 'toast-top-right',
+      timeOut: 3000,
+      maxOpened: 1,
+      preventDuplicates: true,
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent],

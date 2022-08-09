@@ -5,6 +5,9 @@
         <img src="assets/logoFreeMoveColor.png" alt="FreeMove Logo" />
       </div>
       <h1 class="login-title">Iniciar Sesión</h1>
+      <div @fade *ngIf="isError" class="alert alert--error">
+        <p><strong>Error!</strong> El correo o contraseña son incorrectos</p>
+      </div>
     </header>
     <form class="login-form" [formGroup]="miFormulario" (submit)="loginUser()">
       <mat-form-field appearance="outline">
