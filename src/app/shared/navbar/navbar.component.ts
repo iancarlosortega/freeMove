@@ -1,15 +1,26 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component } from '@angular/core';
+import { BreakpointObserver } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css']
+  styleUrls: ['./navbar.component.css'],
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent implements AfterViewInit {
+  isPhone: boolean = false;
+  showMenu: boolean = false;
 
-  constructor() { }
+  constructor(private breakpointObs: BreakpointObserver) {}
 
-  ngOnInit(): void {
+  ngAfterViewInit() {
+    setTimeout(() => {
+      this.breakpointObs.observe(['(min-width: 768px)']).subscribe((res) => {
+        if (res.matches) {
+          this.isPhone = false;
+        } else {
+          this.isPhone = true;
+        }
+      });
+    }, 0);
   }
-
 }

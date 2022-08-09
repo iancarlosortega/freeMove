@@ -24,6 +24,10 @@
   }
 }
 
+.login-logo {
+  cursor: pointer;
+}
+
 .login-title {
   text-align: center;
   color: var(--azul-oscuro);

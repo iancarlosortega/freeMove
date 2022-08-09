@@ -13,13 +13,31 @@
 .header-logo {
   position: absolute;
   bottom: 40%;
-  right: 50%;
+  right: 30%;
+}
+
+@media (min-width: 768px){
+  .header-logo {
+    right: 40%;
+  }
+}
+
+@media (min-width: 992px){
+  .header-logo {
+    right: 50%;
+  }
 }
 
 /* City */
 
 .city-information {
-  padding: 2rem;
+  padding: 2rem 0;
+}
+
+@media (min-width:768px){
+  .city-information {
+    padding: 2rem;
+  }
 }
 
 .city-header {
@@ -36,6 +54,7 @@
   font-weight: 300;
   font-size: 2rem;
   text-transform: uppercase;
+  text-align: center;
 }
 
 .city-header button {
@@ -46,6 +65,12 @@
   font-size: 0.8rem;
   font-weight: 600;
   padding: 0.5rem 1rem;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+}
+
+.city-header button:hover {
+  background-color: var(--amarillo-hover);
 }
 
 .info-cards {
@@ -54,8 +79,20 @@
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
   display: grid;
   gap: 1rem; 
-  grid-template-columns: repeat(6, 1fr); 
+  grid-template-columns: repeat(2, 1fr); 
   padding: 2.5rem 1.5rem;
+}
+
+@media (min-width: 768px){
+  .info-cards {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 992px){
+  .info-cards {
+    grid-template-columns: repeat(6, 1fr);
+  }
 }
 
 .card {
@@ -87,15 +124,28 @@
 }
 
 .container2 {
-  padding: 3rem;
+  padding: 1rem;
+}
+
+@media (min-width:768px){
+  .container2 {
+    padding: 3rem;
+  }
 }
 
 .health-container {
   background-color: rgba(255, 255, 255, 0.8);
   display: grid;
   gap: 2rem;
-  grid-template-columns: 1fr 1fr;
-  padding: 3rem;
+  grid-template-columns: 1fr;
+  padding: 1.5rem;
+}
+
+@media (min-width: 768px){
+  .health-container {
+    padding: 3rem;
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
 .health-img {
@@ -106,14 +156,28 @@
 }
 
 .health-text h3 {
-  font-weight: 300;
+  font-weight: 500;
   font-size: 2rem;
   color: var(--azul-oscuro);
+  text-align: center;
+}
+
+@media (min-width: 768px){
+  .health-text h3 {
+    font-weight: 300;
+    text-align: left;
+  }
 }
 
 .health-text ul {
   padding-left: 2rem;
-  padding-top: 1rem;
+}
+
+@media (min-width:768px){
+  .health-text ul {
+      padding-left: 2rem;
+      padding-top: 1rem;
+    }
 }
 
 .health-text li {
@@ -124,7 +188,19 @@
 
 .services-container {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 768px){
+  .services-container {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width:992px){
+  .services-container {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
 }
 
 .services-card {
@@ -162,6 +238,10 @@
   transition: opacity 0.5s ease-in-out;
 }
 
+.show-hover {
+  opacity: 1;
+}
+
 .services-card-information-listado li {
   margin: 1rem 0;
   font-weight: 300;
@@ -183,22 +263,60 @@
   color: var(--azul-oscuro);
   font-size: 2.5rem;
   font-weight: 300;
-  margin: 4rem 0;
+  margin: 2rem 0;
   text-align: center;
+}
+
+@media (min-width: 768px){
+  .process-title {
+    margin: 4rem 0;
+  }
 }
 
 .process-container {
   align-items: center;
   display: flex;
-  gap: 3rem;
+  flex-direction: column;
+  gap: 1rem;
   justify-content: center;
   margin-bottom: 8rem;
+}
+
+@media (min-width:768px){
+  .process-container {
+    flex-direction: row;
+    gap: 1.5rem;
+  }
+}
+
+@media (min-width: 992px){
+  .process-container {
+    gap: 3rem;
+  }
 }
 
 .process-item {
   background-color: var(--azul);
   border-radius: 50%;
-  height: 7rem;
-  padding: 2rem;
-  width: 7rem;
+  height: 5rem;
+  width: 5rem;
+  padding: 1.5rem;
+}
+
+@media (min-width: 992px){
+  .process-item {
+    padding: 2rem;
+    height: 7rem;
+    width: 7rem;
+  }
+}
+
+.process-arrow {
+  transform: rotateZ(90deg);
+}
+
+@media (min-width: 768px){
+  .process-arrow {
+    transform: initial;
+  }
 }

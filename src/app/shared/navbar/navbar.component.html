@@ -1,22 +1,27 @@
-<nav class="navbar">
+<nav class="navbar" *ngIf="!isPhone">
   <div class="navbar-logo" routerLink="/">
     <img src="assets/logoFreeMove.png" alt="FreeMove Logo" />
   </div>
   <ul class="navbar-listado">
     <li class="navbar-listado-item">
-      <a routerLink="/">Inicio</a>
+      <a
+        routerLink="/"
+        [routerLinkActiveOptions]="{ exact: true }"
+        routerLinkActive="activeLink"
+        >Inicio</a
+      >
     </li>
     <li class="navbar-listado-item">
-      <a routerLink="/about">Acerca de</a>
+      <a routerLinkActive="activeLink" routerLink="/about">Acerca de</a>
     </li>
     <li class="navbar-listado-item">
-      <a routerLink="/city">Ciudad</a>
+      <a routerLinkActive="activeLink" routerLink="/city">Ciudad</a>
     </li>
     <li class="navbar-listado-item">
-      <a routerLink="/health">Salud</a>
+      <a routerLinkActive="activeLink" routerLink="/health">Salud</a>
     </li>
     <li class="navbar-listado-item">
-      <a routerLink="/services">Servicios</a>
+      <a routerLinkActive="activeLink" routerLink="/services">Servicios</a>
     </li>
     <li>
       <button routerLink="/auth/login" class="boton-login">
@@ -24,4 +29,73 @@
       </button>
     </li>
   </ul>
+</nav>
+
+<nav class="navbar-phone" *ngIf="isPhone">
+  <ul class="navbar-responsive">
+    <li class="item">
+      <img
+        class="item-logo"
+        src="assets/logoFreeMove.png"
+        alt="FreeMove Logo"
+      />
+    </li>
+    <li class="item">
+      <button class="item-button" (click)="showMenu = true">
+        <img class="item-open" src="/assets/icons/menu.png" alt="Abrir Menu" />
+      </button>
+    </li>
+  </ul>
+  <div class="menu-items-responsive" [ngClass]="{ 'show-menu': showMenu }">
+    <div class="button-responsive">
+      <button class="item-button" (click)="showMenu = false">
+        <img src="/assets/icons/close.png" alt="Cerrar Menu" />
+      </button>
+    </div>
+    <ul class="listado-items-responsive">
+      <li
+        class="navbar-listado-item-responsive"
+        routerLink="/"
+        routerLinkActive="activeLinkResponsive"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        <a>Inicio</a>
+      </li>
+      <li
+        class="navbar-listado-item-responsive"
+        routerLink="/about"
+        routerLinkActive="activeLinkResponsive"
+      >
+        <a>Acerca de</a>
+      </li>
+      <li
+        class="navbar-listado-item-responsive"
+        routerLink="/city"
+        routerLinkActive="activeLinkResponsive"
+      >
+        <a>Ciudad</a>
+      </li>
+      <li
+        class="navbar-listado-item-responsive"
+        routerLink="/health"
+        routerLinkActive="activeLinkResponsive"
+      >
+        <a>Salud</a>
+      </li>
+      <li
+        class="navbar-listado-item-responsive"
+        routerLink="/services"
+        routerLinkActive="activeLinkResponsive"
+      >
+        <a>Servicios</a>
+      </li>
+      <li
+        class="navbar-listado-item-responsive"
+        routerLink="/services"
+        routerLinkActive="activeLinkResponsive"
+      >
+        <a>Registro/Ingreso</a>
+      </li>
+    </ul>
+  </div>
 </nav>
