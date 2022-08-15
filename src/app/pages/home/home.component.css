@@ -57,22 +57,6 @@
   text-align: center;
 }
 
-.city-header button {
-  background-color: var(--amarillo);
-  border-radius: 3px;
-  border: none;
-  color: var(--blanco);
-  font-size: 0.8rem;
-  font-weight: 600;
-  padding: 0.5rem 1rem;
-  transition: background-color 0.3s ease;
-  cursor: pointer;
-}
-
-.city-header button:hover {
-  background-color: var(--amarillo-hover);
-}
-
 .info-cards {
   border-radius: 5px;
   border: 1px solid #F1F1F1;

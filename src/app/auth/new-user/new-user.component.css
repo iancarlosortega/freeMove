@@ -1,0 +1,55 @@
+.main-container {
+  padding-top: 2.5rem;
+}
+
+.header {
+  margin-bottom: 2rem;
+  color: rgb(71, 71, 71);
+  font-size: 1.5rem;
+  text-align: center;
+  display: flex;
+  gap: 1rem;
+}
+
+@media (min-width: 768px){
+  .header {
+    text-align: left;
+  }
+}
+
+.header-welcome {
+  animation: 1.3s ease leftToRight;
+}
+
+.header-freemove {
+  display: inline-block;
+  font-family: var(--fuente-logo);
+  color: var(--amarillo);
+  font-size: 3.5rem;
+  animation: 1.3s ease rightToLeft;
+}
+
+.section h2 {
+  color: var(--azul-oscuro);
+}
+
+.section p {
+  color: rgb(71, 71, 71);
+}
+
+.form-inputs {
+  margin: 2rem 0;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width:768px){
+  .form-inputs {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.form-button {
+  font-size: 1rem;
+}

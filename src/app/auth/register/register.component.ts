@@ -22,7 +22,7 @@ import { User } from 'src/app/interfaces';
 export class RegisterComponent implements OnInit {
   isError: boolean = false;
 
-  miFormulario = this.fb.group(
+  registerForm = this.fb.group(
     {
       email: ['', [Validators.required, Validators.email]],
       firstName: ['', [Validators.required, Validators.minLength(6)]],
@@ -47,35 +47,36 @@ export class RegisterComponent implements OnInit {
 
   campoNoValido(campo: string) {
     return (
-      this.miFormulario.get(campo)?.invalid &&
-      this.miFormulario.get(campo)?.touched
+      this.registerForm.get(campo)?.invalid &&
+      this.registerForm.get(campo)?.touched
     );
   }
 
   registerUser() {
-    if (this.miFormulario.invalid) {
-      this.miFormulario.markAllAsTouched();
+    if (this.registerForm.invalid) {
+      this.registerForm.markAllAsTouched();
       return;
     }
 
-    const { email, password } = this.miFormulario.value;
+    const { email, password } = this.registerForm.value;
 
     this.authService
       .register(email!, password!)
       .then((userCredential: any) => {
         const user: User = {
           idUser: userCredential.user.uid,
-          email: this.miFormulario.value.email!,
-          firstName: this.miFormulario.value.firstName!,
-          lastName: this.miFormulario.value.lastName!,
+          email: this.registerForm.value.email!,
+          firstName: this.registerForm.value.firstName!,
+          lastName: this.registerForm.value.lastName!,
           role: 'CLIENT-ROLE',
+          followers: 0,
+          following: 0,
         };
 
         this.userService
           .createUser(user)
           .then(() => {
-            //TODO: Redireccionar a la pagina de newUser
-            this.router.navigateByUrl('/');
+            this.router.navigateByUrl('/auth/new-user');
           })
           .catch((error) => {
             console.log('Error al agregar el usuario:', error);

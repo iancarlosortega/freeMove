@@ -53,8 +53,7 @@ export class LoginComponent implements OnInit {
       .loginEmailPassword(email!, password!)
       .then((res) => {
         console.log(res);
-        //TODO: redireccionar a la pagina de dashboard
-        this.router.navigateByUrl('/');
+        this.router.navigateByUrl('/dashboard');
       })
       .catch((error) => {
         console.log(error);

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { map, Observable, switchMap, tap } from 'rxjs';
 
 import firebase from '@firebase/app-compat';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
@@ -16,6 +17,22 @@ export class AuthService {
     private router: Router,
     private userService: UserService
   ) {}
+
+  getAuthState(): Observable<boolean> {
+    return this.afAuth.authState.pipe(
+      switchMap((authState) =>
+        this.userService.getUserById(authState?.uid || '')
+      ),
+      tap((user) => this.userService.setUser(user)),
+      map((user) => {
+        if (user) {
+          return true;
+        } else {
+          return false;
+        }
+      })
+    );
+  }
 
   register(email: string, password: string) {
     return this.afAuth.createUserWithEmailAndPassword(email, password);
@@ -48,19 +65,21 @@ export class AuthService {
             email: response.user?.email!,
             photoUrl: response.user?.photoURL!,
             role: 'CLIENT-ROLE',
+            followers: 0,
+            following: 0,
           };
 
           this.userService
             .createUser(user)
             .then((res) => {
-              this.router.navigate(['auth/register/', user.idUser]);
+              this.router.navigateByUrl('/auth/new-user');
             })
             .catch((err) => {
               console.log('Error agregar usuario', err);
             });
         } else {
           const { redirect } = window.history.state;
-          this.router.navigateByUrl(redirect || '/play');
+          this.router.navigateByUrl(redirect || '/');
         }
       })
       .catch((err) => {
@@ -68,7 +87,7 @@ export class AuthService {
       });
   }
 
-  async logout() {
-    await this.afAuth.signOut();
+  logout() {
+    this.afAuth.signOut();
   }
 }

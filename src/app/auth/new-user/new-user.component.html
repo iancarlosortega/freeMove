@@ -1,1 +1,106 @@
-<p>new-user works!</p>
+<div *ngIf="!isLoading" class="container main-container fade-in">
+  <header class="header">
+    <h1 class="header-welcome">Bienvenido a</h1>
+    <h1 class="header-freemove">FreeMove</h1>
+  </header>
+
+  <form
+    class="fade-in"
+    autocomplete="off"
+    [formGroup]="newUserForm"
+    (submit)="saveUserInfo()"
+  >
+    <section class="section">
+      <h2>Datos generales (opcionales)</h2>
+      <p>
+        Estos datos podrán permitir a la aplicación saber más sobre usted, y así
+        sugerirle mejores recomendaciones.
+      </p>
+      <!-- TextFields -->
+      <div class="form-inputs">
+        <mat-form-field appearance="outline">
+          <mat-label>Teléfono</mat-label>
+          <input
+            type="tel"
+            matInput
+            formControlName="phone"
+            placeholder="+593 9999-9999"
+          />
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Género</mat-label>
+          <mat-select formControlName="gender">
+            <mat-option value="Masculino">Masculino</mat-option>
+            <mat-option value="Femenino">Femenino</mat-option>
+            <mat-option value="Otro">Otro</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>País</mat-label>
+          <mat-select formControlName="country">
+            <mat-option *ngFor="let country of countries" [value]="country">
+              {{ country }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Ciudad</mat-label>
+          <mat-select formControlName="city">
+            <mat-option *ngFor="let city of cities" [value]="city">
+              {{ city }}
+            </mat-option>
+          </mat-select>
+          <mat-hint>Debe seleccionar primero el país</mat-hint>
+        </mat-form-field>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Datos de salud (obligatorios)</h2>
+      <p>
+        Estos datos son obligatorios para que la aplicación pueda hacer los
+        cálculos sobre el estado de salud del atleta.
+      </p>
+      <!-- TextFields -->
+      <div class="form-inputs">
+        <mat-form-field appearance="outline">
+          <mat-label>Altura</mat-label>
+          <input
+            type="number"
+            matInput
+            min="0"
+            formControlName="height"
+            placeholder="Escribe tu altura en metros"
+          />
+          <mat-error *ngIf="campoNoValido('height')">
+            La altura debe ser mayor a <strong>0</strong>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Peso</mat-label>
+          <input
+            type="number"
+            matInput
+            min="0"
+            formControlName="weight"
+            placeholder="Escribe tu peso en kg"
+          />
+          <mat-error *ngIf="campoNoValido('weight')">
+            El peso debe ser mayor a <strong>0</strong>
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </section>
+    <div class="flex-center">
+      <button type="submit" class="primary-button form-button">
+        <mat-icon>done</mat-icon>
+        <span>Continuar</span>
+      </button>
+    </div>
+  </form>
+</div>
+
+<div *ngIf="isLoading" class="full-screen flex-center">
+  <mat-spinner class="spinner" [diameter]="100"></mat-spinner>
+</div>
