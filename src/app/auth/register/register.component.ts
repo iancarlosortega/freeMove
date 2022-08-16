@@ -21,7 +21,7 @@ import { User } from 'src/app/interfaces';
 })
 export class RegisterComponent implements OnInit {
   isError: boolean = false;
-
+  //TODO: Quitar el lastname
   registerForm = this.fb.group(
     {
       email: ['', [Validators.required, Validators.email]],

@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { map, switchMap, tap } from 'rxjs';
+import { map, Subscription, switchMap, tap } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { CountryService, UserService } from 'src/app/services';
 import { City, User } from 'src/app/interfaces';
@@ -11,11 +11,12 @@ import { City, User } from 'src/app/interfaces';
   templateUrl: './new-user.component.html',
   styleUrls: ['./new-user.component.css'],
 })
-export class NewUserComponent implements OnInit {
+export class NewUserComponent implements OnInit, OnDestroy {
   user!: User;
   countries: string[] = [];
   cities: string[] = [];
   isLoading: boolean = true;
+  userObs!: Subscription;
 
   newUserForm = this.fb.group({
     phone: [''],
@@ -37,7 +38,8 @@ export class NewUserComponent implements OnInit {
   ngOnInit(): void {
     // Get information about user logged in
 
-    this.userService.user$.subscribe((user) => {
+    this.userObs = this.userService.user$.subscribe((user) => {
+      console.log(user);
       this.user = user;
       this.isLoading = false;
     });
@@ -68,6 +70,10 @@ export class NewUserComponent implements OnInit {
       .subscribe((cities: City) => {
         this.cities = cities['data'];
       });
+  }
+
+  ngOnDestroy(): void {
+    this.userObs.unsubscribe();
   }
 
   campoNoValido(campo: string) {

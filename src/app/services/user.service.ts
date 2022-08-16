@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { map, Subject } from 'rxjs';
+import { BehaviorSubject, map, Subject } from 'rxjs';
 import { User } from '../interfaces';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
-  private _user$: Subject<User> = new Subject();
+  // private _user$: Subject<User> = new Subject();
+  private _user$: BehaviorSubject<User> = new BehaviorSubject({} as User);
 
   constructor(private firestore: AngularFirestore) {}
 

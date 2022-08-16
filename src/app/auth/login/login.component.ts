@@ -63,4 +63,16 @@ export class LoginComponent implements OnInit {
         }, 3500);
       });
   }
+
+  loginGoogle() {
+    this.authService.loginGoogle();
+  }
+
+  loginFacebook() {
+    // this.authService.loginFacebook();
+  }
+
+  loginMicrosoft() {
+    // this.authService.loginMicrosoft();
+  }
 }

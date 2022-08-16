@@ -29,16 +29,9 @@
   cursor: pointer;
 }
 
-.login-title {
-  text-align: center;
-  color: var(--azul-oscuro);
-}
-
 .login-form {
-  margin: 1.5rem 0;
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
 }
 
 .login-button {
@@ -49,7 +42,6 @@
   padding: 0.5rem 1rem;
   font-size: 1rem;
   cursor: pointer;
-  margin: 1rem 0;
   transition: background-color 0.2s ease-in-out;
 }
 
@@ -57,7 +49,63 @@
   background-color: var(--amarillo-hover);
 }
 
+.divider {
+  margin: 1rem 0;
+  display: grid;
+  place-items: center;
+  grid-template-columns: 45% 10% 45%;
+  
+}
+
+.divider hr {
+  width: 100%;
+}
+
+.mid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mid p {
+  margin: 0;
+  color: #47474793;
+  font-weight: 300;
+}
+
+.button-oauth {
+  width: 100%;
+  margin: 0.5rem 0;
+  height: 40px;
+  border-radius: 7px;
+  border: 1px solid #d0d0d0;
+  background-color: #ffffff;
+  text-align: center;
+  cursor: pointer;
+  font-size: 15px;
+  color: #6a6a6a;
+  padding-left: 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.button-oauth img {
+  width: 1.2rem;
+}
+
+.button-oauth p {
+  margin: 0;
+  margin-left: 0.5rem;
+}
+
+.button-oauth:hover {
+  background-color: #f5f5f5;
+}
+
 .login-footer {
+  margin: 1rem 0;
   font-size: 0.9rem;
   text-align: center;
   color: #757575;
@@ -72,3 +120,4 @@
 .register:hover {
   color: #474747;
 }
+

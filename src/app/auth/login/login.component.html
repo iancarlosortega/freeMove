@@ -4,7 +4,6 @@
       <div class="login-logo" routerLink="/">
         <img src="assets/logoFreeMoveColor.png" alt="FreeMove Logo" />
       </div>
-      <h1 class="login-title">Iniciar Sesión</h1>
       <div @fade *ngIf="isError" class="alert alert--error">
         <p><strong>Error!</strong> El correo o contraseña son incorrectos</p>
       </div>
@@ -31,14 +30,31 @@
           placeholder="********"
         />
         <mat-error *ngIf="campoNoValido('password')">
-          La contraseña debe tener mínimo <strong>1</strong> caracteres
+          Mínimo <strong>6</strong> caracteres
         </mat-error>
       </mat-form-field>
       <button type="submit" class="login-button">Continuar</button>
-      <footer class="login-footer">
-        <p>¿No tienes una cuenta?</p>
-        <p class="register" routerLink="../register">Regístrate aquí</p>
-      </footer>
+
+      <div class="divider">
+        <hr />
+        <div class="mid">
+          <p>o</p>
+        </div>
+        <hr />
+      </div>
     </form>
+    <button class="button-oauth" (click)="loginGoogle()">
+      <img src="assets/icons/google.png" alt="Google" />
+      <p>Continuar con Google</p>
+    </button>
+    <button class="button-oauth" (click)="loginFacebook()">
+      <img src="assets/icons/facebook.png" alt="Facebook" />
+      <p>Continuar con Facebook</p>
+    </button>
+
+    <footer class="login-footer">
+      <p>¿No tienes una cuenta?</p>
+      <p class="register" routerLink="../register">Regístrate aquí</p>
+    </footer>
   </div>
 </div>

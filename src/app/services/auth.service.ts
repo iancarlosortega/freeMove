@@ -18,7 +18,7 @@ export class AuthService {
     private userService: UserService
   ) {}
 
-  getAuthState(): Observable<boolean> {
+  checkAuthState(): Observable<boolean> {
     return this.afAuth.authState.pipe(
       switchMap((authState) =>
         this.userService.getUserById(authState?.uid || '')
@@ -52,8 +52,8 @@ export class AuthService {
     this.loginProvider(facebookAuthProvider);
   }
 
-  async loginProvider(provider: any) {
-    return this.afAuth
+  loginProvider(provider: any) {
+    this.afAuth
       .signInWithPopup(provider)
       .then((response) => {
         if (response.additionalUserInfo?.isNewUser === true) {
