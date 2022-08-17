@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { AuthGuard, NewUserGuard } from '../guards';
+// Guards
+import { AuthGuard, DashboardGuard } from '../guards';
 
 import { LoginComponent } from './login/login.component';
 import { NewUserComponent } from './new-user/new-user.component';
@@ -26,8 +27,8 @@ const routes: Routes = [
       {
         path: 'new-user',
         component: NewUserComponent,
-        canActivate: [NewUserGuard],
-        canLoad: [NewUserGuard],
+        canActivate: [DashboardGuard],
+        canLoad: [DashboardGuard],
       },
       { path: '**', redirectTo: 'login' },
     ],

@@ -69,10 +69,6 @@ export class LoginComponent implements OnInit {
   }
 
   loginFacebook() {
-    // this.authService.loginFacebook();
-  }
-
-  loginMicrosoft() {
-    // this.authService.loginMicrosoft();
+    this.authService.loginFacebook();
   }
 }

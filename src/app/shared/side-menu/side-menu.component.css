@@ -1,0 +1,33 @@
+.list-items li {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  margin: 1rem;
+  color: #A0A0A0;
+  font-weight: 500;
+}
+
+.list-items p {
+  transition: color 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+.list-items p:hover {
+  color: var(--azul-oscuro);
+}
+
+.list-items img {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.active-link {
+  color: var(--azul-oscuro);
+}
+
+.subtitle {
+  text-align: center;
+  color: #575757;
+  font-weight: 500;
+  margin: 2rem 0;
+}

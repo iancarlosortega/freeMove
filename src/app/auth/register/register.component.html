@@ -15,27 +15,15 @@
       (submit)="registerUser()"
     >
       <mat-form-field appearance="outline">
-        <mat-label>Nombres</mat-label>
+        <mat-label>Nombres y Apellidos</mat-label>
         <input
           type="text"
           matInput
-          formControlName="firstName"
-          placeholder="Escribe tus nombres"
+          formControlName="name"
+          placeholder="Escribe tus nombres completos"
         />
-        <mat-error *ngIf="campoNoValido('firstName')">
-          Los nombres son <strong>obligatorios</strong>
-        </mat-error>
-      </mat-form-field>
-      <mat-form-field appearance="outline">
-        <mat-label>Apellidos</mat-label>
-        <input
-          type="text"
-          matInput
-          formControlName="lastName"
-          placeholder="Escribe tus apellidos"
-        />
-        <mat-error *ngIf="campoNoValido('lastName')">
-          Los apellidos son <strong>obligatorios</strong>
+        <mat-error *ngIf="campoNoValido('name')">
+          Los nombres y apellidos son <strong>obligatorios</strong>
         </mat-error>
       </mat-form-field>
       <mat-form-field appearance="outline">

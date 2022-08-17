@@ -6,7 +6,7 @@ import { AuthService } from '../services';
 @Injectable({
   providedIn: 'root',
 })
-export class NewUserGuard implements CanActivate, CanLoad {
+export class DashboardGuard implements CanActivate, CanLoad {
   constructor(private router: Router, private authService: AuthService) {}
 
   canActivate(): Observable<boolean> | Promise<boolean> | boolean {

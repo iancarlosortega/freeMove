@@ -39,7 +39,6 @@ export class NewUserComponent implements OnInit, OnDestroy {
     // Get information about user logged in
 
     this.userObs = this.userService.user$.subscribe((user) => {
-      console.log(user);
       this.user = user;
       this.isLoading = false;
     });

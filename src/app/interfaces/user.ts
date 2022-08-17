@@ -1,8 +1,7 @@
 export interface User {
   idUser: string;
   // Datos de registro
-  firstName: string;
-  lastName: string;
+  name: string;
   email: string;
   password?: string;
   password2?: string;

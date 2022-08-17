@@ -1,0 +1,27 @@
+<mat-sidenav-container>
+  <mat-sidenav #sidenav="matSidenav">
+    <app-side-menu (onCloseSidenav)="closeSidenav()"></app-side-menu>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <mat-toolbar>
+      <div
+        class="navbar-button"
+        [ngClass]="{ 'navbar-button-border': sidenav.mode == 'over' }"
+      >
+        <button
+          mat-icon-button
+          *ngIf="sidenav.mode === 'over'"
+          (click)="sidenav.toggle()"
+        >
+          <mat-icon *ngIf="!sidenav.opened"> menu </mat-icon>
+          <mat-icon *ngIf="sidenav.opened"> close </mat-icon>
+        </button>
+      </div>
+      <!-- <app-navbar></app-navbar> -->
+    </mat-toolbar>
+    <div class="content">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

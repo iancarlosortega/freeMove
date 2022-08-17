@@ -28,7 +28,6 @@ export class UserService {
       .pipe(
         map((a) => {
           const data = a.payload.data() as User;
-          data.idUser = a.payload.id;
           return data;
         })
       );

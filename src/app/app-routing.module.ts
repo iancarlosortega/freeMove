@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+// Guards
+import { AuthGuard, DashboardGuard } from './guards';
+
 // Componentes
 import { AboutComponent } from './pages/about/about.component';
 import { CityComponent } from './pages/city/city.component';
@@ -37,6 +40,8 @@ const routes: Routes = [
     path: 'dashboard',
     loadChildren: () =>
       import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
+    canActivate: [DashboardGuard],
+    canLoad: [DashboardGuard],
   },
   { path: '**', redirectTo: '' },
 ];

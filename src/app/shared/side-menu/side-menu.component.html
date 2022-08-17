@@ -1,0 +1,38 @@
+<header>
+  <img src="assets/logoFreeMoveColor.png" alt="FreeMove" />
+</header>
+<section>
+  <ul class="list-items">
+    <li *ngFor="let item of menuItems">
+      <img [src]="item.icon" [alt]="item.name" />
+      <p
+        (click)="cerrarSidenav()"
+        [routerLink]="item.route"
+        routerLinkActive="active-link"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        {{ item.name }}
+      </p>
+    </li>
+  </ul>
+</section>
+<section>
+  <h3 class="subtitle">Configuración</h3>
+  <ul class="list-items">
+    <li>
+      <img src="assets/icons/perfil.svg" alt="Perfil de usuario" />
+      <p
+        (click)="cerrarSidenav()"
+        routerLink="./perfil"
+        routerLinkActive="active-link"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        Perfil
+      </p>
+    </li>
+    <li>
+      <img src="assets/icons/logout.svg" alt="Cerrar sesión" />
+      <p (click)="logout()">Cerrar sesión</p>
+    </li>
+  </ul>
+</section>

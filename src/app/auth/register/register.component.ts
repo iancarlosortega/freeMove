@@ -25,8 +25,7 @@ export class RegisterComponent implements OnInit {
   registerForm = this.fb.group(
     {
       email: ['', [Validators.required, Validators.email]],
-      firstName: ['', [Validators.required, Validators.minLength(6)]],
-      lastName: ['', [Validators.required, Validators.minLength(6)]],
+      name: ['', [Validators.required, Validators.minLength(6)]],
       password: ['', [Validators.required, Validators.minLength(6)]],
       password2: ['', [Validators.required]],
     },
@@ -66,8 +65,7 @@ export class RegisterComponent implements OnInit {
         const user: User = {
           idUser: userCredential.user.uid,
           email: this.registerForm.value.email!,
-          firstName: this.registerForm.value.firstName!,
-          lastName: this.registerForm.value.lastName!,
+          name: this.registerForm.value.name!,
           role: 'CLIENT-ROLE',
           followers: 0,
           following: 0,

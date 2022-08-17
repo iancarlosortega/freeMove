@@ -21,7 +21,7 @@ export class AuthService {
   checkAuthState(): Observable<boolean> {
     return this.afAuth.authState.pipe(
       switchMap((authState) =>
-        this.userService.getUserById(authState?.uid || '')
+        this.userService.getUserById(authState?.uid || ' ')
       ),
       tap((user) => this.userService.setUser(user)),
       map((user) => {
@@ -29,6 +29,22 @@ export class AuthService {
           return true;
         } else {
           return false;
+        }
+      })
+    );
+  }
+
+  checkDashState(): Observable<boolean> {
+    return this.afAuth.authState.pipe(
+      switchMap((authState) =>
+        this.userService.getUserById(authState?.uid || ' ')
+      ),
+      tap((user) => this.userService.setUser(user)),
+      map((user) => {
+        if (user) {
+          return false;
+        } else {
+          return true;
         }
       })
     );
@@ -60,8 +76,7 @@ export class AuthService {
           console.log(response);
           const user: User = {
             idUser: response.user?.uid!,
-            firstName: response.user?.displayName!,
-            lastName: response.user?.displayName!,
+            name: response.user?.displayName!,
             email: response.user?.email!,
             photoUrl: response.user?.photoURL!,
             role: 'CLIENT-ROLE',
@@ -79,7 +94,7 @@ export class AuthService {
             });
         } else {
           const { redirect } = window.history.state;
-          this.router.navigateByUrl(redirect || '/');
+          this.router.navigateByUrl(redirect || '/dashboard');
         }
       })
       .catch((err) => {
