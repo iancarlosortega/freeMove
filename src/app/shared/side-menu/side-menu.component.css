@@ -1,3 +1,7 @@
+.header {
+  cursor: pointer;
+}
+
 .list-items li {
   display: flex;
   gap: 1rem;

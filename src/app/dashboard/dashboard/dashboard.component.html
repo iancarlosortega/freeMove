@@ -5,23 +5,21 @@
 
   <mat-sidenav-content>
     <mat-toolbar>
-      <div
+      <button
         class="navbar-button"
         [ngClass]="{ 'navbar-button-border': sidenav.mode == 'over' }"
+        mat-icon-button
+        *ngIf="sidenav.mode === 'over'"
+        (click)="sidenav.toggle()"
       >
-        <button
-          mat-icon-button
-          *ngIf="sidenav.mode === 'over'"
-          (click)="sidenav.toggle()"
-        >
-          <mat-icon *ngIf="!sidenav.opened"> menu </mat-icon>
-          <mat-icon *ngIf="sidenav.opened"> close </mat-icon>
-        </button>
-      </div>
-      <!-- <app-navbar></app-navbar> -->
+        <mat-icon *ngIf="!sidenav.opened"> menu </mat-icon>
+        <mat-icon *ngIf="sidenav.opened"> close </mat-icon>
+      </button>
+      <app-nav></app-nav>
     </mat-toolbar>
     <div class="content">
       <router-outlet></router-outlet>
     </div>
   </mat-sidenav-content>
 </mat-sidenav-container>
+<app-footer></app-footer>

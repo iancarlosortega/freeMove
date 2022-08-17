@@ -1,0 +1,28 @@
+<nav class="navbar">
+  <h2>Bienvenido a FreeMove</h2>
+  <div class="search">
+    <div class="p-input-icon-right search-input">
+      <i class="pi pi-search"></i>
+      <input
+        type="text"
+        pInputText
+        placeholder="Buscar..."
+        (keyup.enter)="search()"
+      />
+    </div>
+    <button class="nav-button">
+      <mat-icon>settings</mat-icon>
+    </button>
+  </div>
+  <div class="options">
+    <button class="nav-button flex-center">
+      <mat-icon>messenger</mat-icon>
+    </button>
+    <button class="nav-button flex-center">
+      <mat-icon>notifications</mat-icon>
+    </button>
+    <button class="nav-button flex-center">
+      <mat-icon>person</mat-icon>
+    </button>
+  </div>
+</nav>
