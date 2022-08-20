@@ -1,1 +1,235 @@
-<p>profile works!</p>
+<div *ngIf="!isLoading" class="fade-in">
+  <h2>Editar Perfil</h2>
+  <p>Ut laboris aute ut aute.Enim officia aliqua quis sunt nulla amet dolor.</p>
+
+  <form [formGroup]="profileForm" (submit)="updateProfile()" autocomplete="off">
+    <div class="photo-profile">
+      <!-- Previsualizacion de la foto de perfil -->
+      <div class="photo fade-in" *ngIf="format === 'image' && url">
+        <img [src]="url" alt="Foto de perfil" />
+      </div>
+      <div class="photo fade-in" *ngIf="!url">
+        <img src="assets/no-image.png" alt="No Image" />
+      </div>
+
+      <!-- Input File -->
+
+      <div class="custom-file wrapper">
+        <input
+          #inputFile
+          type="file"
+          class="form-control"
+          formControlName="file"
+          accept="image/png, image/jpg, image/*"
+          (change)="selectFile($event)"
+        />
+      </div>
+      <!-- Barra de porcentaje -->
+      <div class="percentage wrapper" *ngIf="currentFileUpload && visible">
+        <div class="alert alert-info loading">
+          <p>Cambiando imagen...</p>
+          <p-progressSpinner
+            [style]="{ width: '20px', height: '20px' }"
+            styleClass="custom-spinner"
+            strokeWidth="8"
+            animationDuration=".5s"
+          >
+          </p-progressSpinner>
+        </div>
+
+        <div class="progress mt-2">
+          <div
+            class="progress-bar progress-bar-striped"
+            role="progressbar"
+            attr.aria-valuenow="{{ percentage }}"
+            aria-valuemin="0"
+            aria-valuemax="100"
+            [ngStyle]="{ width: percentage + '%' }"
+            [ngClass]="{
+              'bg-success': percentage > 70,
+              'bg-info': percentage > 40 && percentage < 70,
+              'bg-warning': percentage > 20 && percentage < 40,
+              'bg-danger': percentage > 0 && percentage < 20
+            }"
+          >
+            {{ percentage }}%
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 col-lg-6">
+        <mat-form-field appearance="outline">
+          <mat-label>Nombres y Apellidos</mat-label>
+          <input
+            type="text"
+            matInput
+            formControlName="name"
+            placeholder="Escribe tus nombres completos"
+          />
+          <mat-error *ngIf="invalidInput('name')">
+            Los nombres y apellidos son <strong>obligatorios</strong>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Email</mat-label>
+          <input
+            type="email"
+            matInput
+            formControlName="email"
+            placeholder="example@gmail.com"
+          />
+          <mat-error *ngIf="invalidInput('email')">
+            El correo es <strong>obligatorio</strong>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>País</mat-label>
+          <mat-select formControlName="country">
+            <mat-option *ngFor="let country of countries" [value]="country">
+              {{ country }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Ciudad</mat-label>
+          <mat-select formControlName="city">
+            <mat-option *ngFor="let city of cities" [value]="city">
+              {{ city }}
+            </mat-option>
+          </mat-select>
+          <mat-hint>Debe seleccionar primero el país</mat-hint>
+        </mat-form-field>
+      </div>
+      <div class="col-12 col-lg-6">
+        <mat-form-field appearance="outline">
+          <mat-label>Teléfono</mat-label>
+          <input
+            type="tel"
+            matInput
+            formControlName="phone"
+            placeholder="+593 9999-9999"
+          />
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Género</mat-label>
+          <mat-select formControlName="gender">
+            <mat-option value="Masculino">Masculino</mat-option>
+            <mat-option value="Femenino">Femenino</mat-option>
+            <mat-option value="Otro">Otro</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Altura</mat-label>
+          <input
+            type="number"
+            matInput
+            min="0"
+            formControlName="height"
+            placeholder="Escribe tu altura en metros"
+          />
+          <mat-error *ngIf="invalidInput('height')">
+            La altura debe ser mayor a <strong>0</strong>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Peso</mat-label>
+          <input
+            type="number"
+            matInput
+            min="0"
+            formControlName="weight"
+            placeholder="Escribe tu peso en kg"
+          />
+          <mat-error *ngIf="invalidInput('weight')">
+            El peso debe ser mayor a <strong>0</strong>
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="flex-center">
+        <button
+          [disabled]="disabled"
+          type="submit"
+          class="primary-button form-button"
+        >
+          <span>Actualizar</span>
+          <mat-icon>save</mat-icon>
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<div *ngIf="isLoading" class="flex-center spinner-loading">
+  <mat-spinner [diameter]="100"></mat-spinner>
+</div>
+
+<!-- Modal Update Email -->
+<ng-template #modalEmail>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Acualizar Correo</h4>
+    <button
+      type="button"
+      class="btn-close close pull-right"
+      aria-label="Close"
+      (click)="modalRef?.hide()"
+    >
+      <span aria-hidden="true" class="visually-hidden">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p class="modal-text">
+      ¿Está seguro que desea actualizar su correo electrónico?
+    </p>
+    <form [formGroup]="emailForm" #formulario autocomplete="off">
+      <div @fade *ngIf="isError" class="alert alert--error">
+        <p><strong>¡Error!</strong> La contraseña es incorrecta</p>
+      </div>
+      <mat-form-field appearance="outline">
+        <mat-label>Contraseña</mat-label>
+        <input
+          type="password"
+          matInput
+          formControlName="password"
+          placeholder="********"
+        />
+        <mat-error *ngIf="invalidInputEmail('password')">
+          Mínimo <strong>6</strong> caracteres
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Confirmar contraseña</mat-label>
+        <input
+          type="password"
+          matInput
+          formControlName="password2"
+          placeholder="Repetir la contraseña"
+        />
+        <mat-error *ngIf="invalidInputEmail('password2')">
+          Las contraseñas deben ser <strong>iguales</strong>
+        </mat-error>
+      </mat-form-field>
+    </form>
+  </div>
+
+  <div class="modal-footer">
+    <button
+      pButton
+      (click)="closeModal()"
+      label="Cancelar"
+      icon="pi pi-times"
+      iconPos="left"
+      class="p-button-raised button-cancel"
+    ></button>
+
+    <button
+      pButton
+      (click)="updateEmail()"
+      label="Actualizar"
+      icon="pi pi-check"
+      iconPos="right"
+      class="p-button-raised"
+    ></button>
+  </div>
+</ng-template>

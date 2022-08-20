@@ -18,6 +18,10 @@ export class AuthService {
     private userService: UserService
   ) {}
 
+  getClaims() {
+    return this.afAuth.idTokenResult;
+  }
+
   checkAuthState(): Observable<boolean> {
     return this.afAuth.authState.pipe(
       switchMap((authState) =>

@@ -43,31 +43,6 @@ img {
 
 /* Utilities */
 
-.container {
-  padding-right: 15px;
-  padding-left: 15px;
-  margin-right: auto;
-  margin-left: auto;
-}
-
-@media (min-width: 768px) {
-  .container {
-    width: 750px;
-  }
-}
-
-@media (min-width: 992px) {
-  .container {
-    width: 970px;
-  }
-}
-
-@media (min-width: 1200px) {
-  .container {
-    width: 1170px;
-  }
-}
-
 .full-screen {
   height: 100%;
   min-height: 100vh;
@@ -78,6 +53,18 @@ img {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.spinner-loading {
+  min-height: calc(100vh - 6rem);
+  height: calc(100% - 6rem);
+}
+
+@media (min-width:768px) {
+  .spinner-loading {
+    min-height: calc(100vh - 12rem);
+    height: calc(100% - 12rem);
+  }
 }
 
 /* Effects */
@@ -161,6 +148,12 @@ img {
   background-color: var(--amarillo-hover);
 }
 
+.primary-button:disabled {
+  background-color: rgb(211, 211, 211);
+  color: rgb(236, 236, 236);
+  cursor: not-allowed;
+}
+
 /* Alerts */
 
 .alert {
@@ -210,6 +203,7 @@ img {
 .mat-form-field-appearance-outline .mat-form-field-outline {
   /*change color of underline*/
   color: #b6b6b6 !important;
+  background-color: #FFF !important;
 }
 
 .mat-input-element {

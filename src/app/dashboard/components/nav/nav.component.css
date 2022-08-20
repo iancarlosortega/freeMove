@@ -3,11 +3,11 @@
   justify-content: space-between;
   align-items: center;
   height: 4rem;
+  padding: 0;
 }
 
 @media (min-width:1280px){
   .navbar {
-    padding: 2rem;
     height: 5rem;
   }
 }

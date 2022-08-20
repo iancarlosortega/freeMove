@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { MaterialModule } from '../material/material.module';
+import { ModalModule } from 'ngx-bootstrap/modal';
 import { PrimeNgModule } from '../prime-ng/prime-ng.module';
 import { SharedModule } from '../shared/shared.module';
 
@@ -13,6 +14,7 @@ import { IncidentsComponent } from './incidents/incidents.component';
 import { CommunityComponent } from './community/community.component';
 import { ProfileComponent } from './profile/profile.component';
 import { NavComponent } from './components/nav/nav.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -27,9 +29,11 @@ import { NavComponent } from './components/nav/nav.component';
   imports: [
     CommonModule,
     DashboardRoutingModule,
+    ReactiveFormsModule,
     MaterialModule,
     PrimeNgModule,
     SharedModule,
+    ModalModule.forRoot(),
   ],
 })
 export class DashboardModule {}

@@ -3,32 +3,31 @@
 </header>
 <section>
   <ul class="list-items">
-    <li *ngFor="let item of menuItems">
+    <li
+      (click)="cerrarSidenav()"
+      [routerLink]="item.route"
+      routerLinkActive="active-link"
+      [routerLinkActiveOptions]="{ exact: true }"
+      *ngFor="let item of menuItems"
+    >
       <img [src]="item.icon" [alt]="item.name" />
-      <p
-        (click)="cerrarSidenav()"
-        [routerLink]="item.route"
-        routerLinkActive="active-link"
-        [routerLinkActiveOptions]="{ exact: true }"
-      >
+      <p>
         {{ item.name }}
       </p>
     </li>
   </ul>
 </section>
 <section>
-  <h3 class="subtitle">Configuración</h3>
+  <h3 class="section-title">Configuración</h3>
   <ul class="list-items">
-    <li>
+    <li
+      (click)="cerrarSidenav()"
+      routerLink="./perfil"
+      routerLinkActive="active-link"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
       <img src="assets/icons/perfil.svg" alt="Perfil de usuario" />
-      <p
-        (click)="cerrarSidenav()"
-        routerLink="./perfil"
-        routerLinkActive="active-link"
-        [routerLinkActiveOptions]="{ exact: true }"
-      >
-        Perfil
-      </p>
+      <p>Perfil</p>
     </li>
     <li>
       <img src="assets/icons/logout.svg" alt="Cerrar sesión" />

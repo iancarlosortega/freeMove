@@ -13,6 +13,7 @@ export interface User {
   city?: string;
   photoUrl?: string;
   photoFilename?: string;
+  file?: string;
   role: UserRole;
   // Datos de salud
   weight?: number;
