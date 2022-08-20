@@ -38,6 +38,19 @@ export class SideMenuComponent implements OnInit {
       route: './comunidad',
     },
   ];
+
+  configMenuItems = [
+    {
+      name: 'Perfil',
+      icon: 'assets/icons/perfil.svg',
+      route: './perfil',
+    },
+    {
+      name: 'Contraseña',
+      icon: 'assets/icons/clave.svg',
+      route: './cambiar-clave',
+    },
+  ];
   constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {}

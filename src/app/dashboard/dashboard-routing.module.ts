@@ -1,14 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { DashboardGuard } from '../guards';
-
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HomeComponent } from './home/home.component';
 import { CommunityComponent } from './community/community.component';
 import { IncidentsComponent } from './incidents/incidents.component';
 import { RoutesComponent } from './routes/routes.component';
 import { ProfileComponent } from './profile/profile.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 const routes: Routes = [
   {
@@ -39,6 +38,10 @@ const routes: Routes = [
       {
         path: 'perfil',
         component: ProfileComponent,
+      },
+      {
+        path: 'cambiar-clave',
+        component: ChangePasswordComponent,
       },
       {
         path: '**',

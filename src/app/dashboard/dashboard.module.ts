@@ -15,6 +15,7 @@ import { CommunityComponent } from './community/community.component';
 import { ProfileComponent } from './profile/profile.component';
 import { NavComponent } from './components/nav/nav.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     CommunityComponent,
     ProfileComponent,
     NavComponent,
+    ChangePasswordComponent,
   ],
   imports: [
     CommonModule,

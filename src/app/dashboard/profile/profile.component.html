@@ -148,11 +148,7 @@
         </mat-form-field>
       </div>
       <div class="flex-center">
-        <button
-          [disabled]="disabled"
-          type="submit"
-          class="primary-button form-button"
-        >
+        <button [disabled]="disabled" type="submit" class="primary-button">
           <span>Actualizar</span>
           <mat-icon>save</mat-icon>
         </button>
@@ -182,7 +178,7 @@
     <p class="modal-text">
       ¿Está seguro que desea actualizar su correo electrónico?
     </p>
-    <form [formGroup]="emailForm" #formulario autocomplete="off">
+    <form [formGroup]="emailForm" autocomplete="off">
       <div @fade *ngIf="isError" class="alert alert--error">
         <p><strong>¡Error!</strong> La contraseña es incorrecta</p>
       </div>

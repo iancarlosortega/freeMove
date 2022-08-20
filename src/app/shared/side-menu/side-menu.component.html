@@ -22,12 +22,15 @@
   <ul class="list-items">
     <li
       (click)="cerrarSidenav()"
-      routerLink="./perfil"
+      [routerLink]="item.route"
       routerLinkActive="active-link"
       [routerLinkActiveOptions]="{ exact: true }"
+      *ngFor="let item of configMenuItems"
     >
-      <img src="assets/icons/perfil.svg" alt="Perfil de usuario" />
-      <p>Perfil</p>
+      <img [src]="item.icon" [alt]="item.name" />
+      <p>
+        {{ item.name }}
+      </p>
     </li>
     <li>
       <img src="assets/icons/logout.svg" alt="Cerrar sesión" />
