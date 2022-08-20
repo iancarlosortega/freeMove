@@ -27,6 +27,7 @@
 
 .login-logo {
   cursor: pointer;
+  margin-bottom: 1rem;
 }
 
 .login-form {
@@ -111,6 +112,10 @@
   color: #757575;
 }
 
+.login-footer p {
+  margin: 0;
+}
+
 .register {
   text-decoration: underline;
   cursor: pointer;
@@ -121,3 +126,15 @@
   color: #474747;
 }
 
+.text-grey {
+  font-size: 0.9rem;
+  color: #757575;
+}
+
+.text-grey label {
+  margin-left: 0.25rem;
+}
+
+.text-grey input {
+  accent-color: #4e905a;
+}

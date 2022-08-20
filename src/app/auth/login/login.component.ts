@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { trigger, transition, style, animate } from '@angular/animations';
 import { FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services';
-import { trigger, transition, style, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-login',
@@ -21,9 +21,10 @@ import { trigger, transition, style, animate } from '@angular/animations';
 export class LoginComponent implements OnInit {
   isError: boolean = false;
 
-  miFormulario = this.fb.group({
+  loginForm = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required, Validators.minLength(6)]],
+    remember: [false],
   });
 
   constructor(
@@ -32,27 +33,37 @@ export class LoginComponent implements OnInit {
     private authService: AuthService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if (localStorage.getItem('email')) {
+      this.loginForm.patchValue({
+        email: localStorage.getItem('email'),
+        remember: true,
+      });
+    }
+  }
 
-  campoNoValido(campo: string) {
+  invalidInput(campo: string) {
     return (
-      this.miFormulario.get(campo)?.invalid &&
-      this.miFormulario.get(campo)?.touched
+      this.loginForm.get(campo)?.invalid && this.loginForm.get(campo)?.touched
     );
   }
 
   loginUser() {
-    if (this.miFormulario.invalid) {
-      this.miFormulario.markAllAsTouched();
+    if (this.loginForm.invalid) {
+      this.loginForm.markAllAsTouched();
       return;
     }
 
-    const { email, password } = this.miFormulario.value;
+    const { email, password, remember } = this.loginForm.value;
 
     this.authService
       .loginEmailPassword(email!, password!)
       .then((res) => {
-        console.log(res);
+        if (remember) {
+          localStorage.setItem('email', email!);
+        } else {
+          localStorage.removeItem('email');
+        }
         this.router.navigateByUrl('/dashboard');
       })
       .catch((error) => {

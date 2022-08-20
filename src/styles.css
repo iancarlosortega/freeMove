@@ -22,6 +22,8 @@ img {
   --azul: #4265D6;
   --azul-oscuro: #293855;
   --gris: #A0A0A0;
+  --gris-texto: #757575;
+  --gris-texto-hover: #474747;
   /* Alerts */
   /* success */
   --alertsuccess : #ddf0d7;
@@ -52,6 +54,18 @@ img {
 .flex-center {
   display: flex;
   justify-content: center;
+  align-items: center;
+}
+
+.flex-start {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.flex-end {
+  display: flex;
+  justify-content: flex-end;
   align-items: center;
 }
 
@@ -148,9 +162,14 @@ img {
 }
 
 .primary-button:disabled {
-  background-color: rgb(211, 211, 211);
-  color: rgb(236, 236, 236);
+  background-color: rgb(190, 190, 190);
+  color: rgb(255, 255, 255);
   cursor: not-allowed;
+  transition: background-color 0.3s ease;
+}
+
+.primary-button:disabled:hover {
+  background-color: rgb(144, 144, 144);
 }
 
 /* Alerts */

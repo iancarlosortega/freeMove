@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { map, Observable, switchMap, tap } from 'rxjs';
 
+import { ToastrService } from 'ngx-toastr';
 import firebase from '@firebase/app-compat';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 
@@ -15,7 +16,8 @@ export class AuthService {
   constructor(
     private afAuth: AngularFireAuth,
     private router: Router,
-    private userService: UserService
+    private userService: UserService,
+    private toastr: ToastrService
   ) {}
 
   getClaims() {
@@ -108,5 +110,25 @@ export class AuthService {
 
   logout() {
     this.afAuth.signOut();
+  }
+
+  forgotPassword(email: string) {
+    this.afAuth
+      .sendPasswordResetEmail(email)
+      .then(() => {
+        this.router.navigateByUrl('/auth/login');
+        this.toastr.success(
+          'Por favor revise su bandeja de entrada',
+          'Email enviado'
+        );
+      })
+      .catch((err) => {
+        if (err.code === 'auth/user-not-found') {
+          this.toastr.error(
+            'Usuario no encontrado, pruebe otro email',
+            'Error'
+          );
+        }
+      });
   }
 }

@@ -8,7 +8,7 @@
         <p><strong>Error!</strong> El correo o contraseña son incorrectos</p>
       </div>
     </header>
-    <form class="login-form" [formGroup]="miFormulario" (submit)="loginUser()">
+    <form class="login-form" [formGroup]="loginForm" (submit)="loginUser()">
       <mat-form-field appearance="outline">
         <mat-label>Correo Electrónico</mat-label>
         <input
@@ -17,8 +17,8 @@
           formControlName="email"
           placeholder="example@gmail.com"
         />
-        <mat-error *ngIf="campoNoValido('email')">
-          El correo electrónico es <strong>requerido</strong>
+        <mat-error *ngIf="invalidInput('email')">
+          El correo electrónico es <strong>obligatorio</strong>
         </mat-error>
       </mat-form-field>
       <mat-form-field appearance="outline">
@@ -29,10 +29,20 @@
           formControlName="password"
           placeholder="********"
         />
-        <mat-error *ngIf="campoNoValido('password')">
+        <mat-error *ngIf="invalidInput('password')">
           Mínimo <strong>6</strong> caracteres
         </mat-error>
       </mat-form-field>
+      <div class="flex-start text-grey">
+        <input type="checkbox" id="remember" formControlName="remember" />
+        <label for="remember">Recordarme</label>
+      </div>
+      <div class="flex-end text-grey">
+        <p class="register" routerLink="../forgot-password">
+          ¿Olvidaste tu contraseña?
+        </p>
+      </div>
+
       <button type="submit" class="login-button">Continuar</button>
 
       <div class="divider">

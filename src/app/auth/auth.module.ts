@@ -8,9 +8,15 @@ import { MaterialModule } from '../material/material.module';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { NewUserComponent } from './new-user/new-user.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 
 @NgModule({
-  declarations: [LoginComponent, RegisterComponent, NewUserComponent],
+  declarations: [
+    LoginComponent,
+    RegisterComponent,
+    NewUserComponent,
+    ForgotPasswordComponent,
+  ],
   imports: [
     CommonModule,
     AuthRoutingModule,
