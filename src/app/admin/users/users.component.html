@@ -1,0 +1,94 @@
+<h2>Gestión de roles</h2>
+<div class="card">
+  <p-table
+    #dt
+    [value]="users"
+    dataKey="name"
+    selectionMode="single"
+    [rows]="15"
+    [showCurrentPageReport]="true"
+    [rowsPerPageOptions]="[15, 25, 50]"
+    [loading]="isLoading"
+    styleClass="p-datatable-usuarios p-datatable-gridlines fade-in"
+    [paginator]="true"
+    [scrollable]="scrollable"
+    scrollDirection="both"
+    currentPageReportTemplate="Mostrando {first} - {last} de {totalRecords} usuarios"
+    [globalFilterFields]="['name', 'email', 'country', 'city']"
+  >
+    <ng-template pTemplate="caption">
+      <div class="p-d-flex wrapper">
+        <span class="p-input-icon-left p-ml-auto">
+          <i class="pi pi-search"></i>
+          <input
+            class="p-inputtext p-component"
+            pInputText
+            type="text"
+            (input)="applyFilterGlobal($event, 'contains')"
+            placeholder="Buscar usuario"
+          />
+        </span>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr>
+        <th pSortableColumn="name" style="width: 200px">
+          <div class="p-d-flex p-jc-between p-ai-center">
+            Nombres
+            <p-sortIcon field="name"></p-sortIcon>
+          </div>
+        </th>
+        <th pSortableColumn="email" style="width: 300px">
+          <div class="p-d-flex p-jc-between p-ai-center">
+            Correo electronico
+            <p-sortIcon field="email"></p-sortIcon>
+          </div>
+        </th>
+        <th pSortableColumn="country" style="width: 150px">
+          <div class="p-d-flex p-jc-between p-ai-center">
+            País
+            <p-sortIcon field="country"></p-sortIcon>
+          </div>
+        </th>
+        <th pSortableColumn="city" style="width: 200px">
+          <div class="p-d-flex p-jc-between p-ai-center">
+            Ciudad
+            <p-sortIcon field="city"></p-sortIcon>
+          </div>
+        </th>
+        <th style="width: 100px">Hacer Admin</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-user>
+      <tr>
+        <td style="width: 200px">
+          {{ user.name }}
+        </td>
+        <td style="width: 300px">
+          {{ user.email }}
+        </td>
+        <td style="width: 150px">
+          {{ user.country }}
+        </td>
+        <td style="width: 200px">
+          {{ user.city }}
+        </td>
+
+        <td style="width: 100px">
+          <mat-checkbox
+            [disabled]="adminCheck"
+            (change)="toggleRole($event, user.idUser)"
+            [value]="user.idUser"
+            [checked]="user.role === 'ADMIN-ROLE'"
+          >
+          </mat-checkbox>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td class="sin-usuarios" colspan="9">Ningún usuario encontrado.</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

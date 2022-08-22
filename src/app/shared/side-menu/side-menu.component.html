@@ -17,6 +17,23 @@
     </li>
   </ul>
 </section>
+<section *ngIf="isAdmin">
+  <h3 class="section-title">Administración</h3>
+  <ul class="list-items">
+    <li
+      (click)="cerrarSidenav()"
+      [routerLink]="item.route"
+      routerLinkActive="active-link"
+      [routerLinkActiveOptions]="{ exact: true }"
+      *ngFor="let item of adminMenuItems"
+    >
+      <img [src]="item.icon" [alt]="item.name" />
+      <p>
+        {{ item.name }}
+      </p>
+    </li>
+  </ul>
+</section>
 <section>
   <h3 class="section-title">Configuración</h3>
   <ul class="list-items">

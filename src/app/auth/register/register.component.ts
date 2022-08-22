@@ -61,6 +61,7 @@ export class RegisterComponent implements OnInit {
     this.authService
       .register(email!, password!)
       .then((userCredential: any) => {
+        //TODO: Update profile in auth firebase
         const user: User = {
           idUser: userCredential.user.uid,
           email: this.registerForm.value.email!,

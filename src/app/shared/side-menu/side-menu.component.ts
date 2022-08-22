@@ -1,14 +1,22 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { Router } from '@angular/router';
-import { AuthService } from 'src/app/services';
+import {
+  Component,
+  EventEmitter,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core';
+import { Subscription } from 'rxjs';
+import { AuthService, UserService } from 'src/app/services';
 
 @Component({
   selector: 'app-side-menu',
   templateUrl: './side-menu.component.html',
   styleUrls: ['./side-menu.component.css'],
 })
-export class SideMenuComponent implements OnInit {
+export class SideMenuComponent implements OnInit, OnDestroy {
   @Output() onCloseSidenav: EventEmitter<any> = new EventEmitter();
+  userObs!: Subscription;
+  isAdmin: boolean = false;
 
   // Menus
   menuItems = [
@@ -39,6 +47,24 @@ export class SideMenuComponent implements OnInit {
     },
   ];
 
+  adminMenuItems = [
+    {
+      name: 'Usuarios',
+      icon: 'assets/icons/usuarios.svg',
+      route: './admin/usuarios',
+    },
+    {
+      name: 'Rutas',
+      icon: 'assets/icons/rutas.svg',
+      route: './admin/rutas',
+    },
+    {
+      name: 'Incidentes',
+      icon: 'assets/icons/incidentes.svg',
+      route: './admin/incidentes',
+    },
+  ];
+
   configMenuItems = [
     {
       name: 'Perfil',
@@ -51,13 +77,23 @@ export class SideMenuComponent implements OnInit {
       route: './cambiar-clave',
     },
   ];
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private userService: UserService
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.userObs = this.userService.user$.subscribe((user) => {
+      this.isAdmin = user.role === 'ADMIN-ROLE';
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.userObs.unsubscribe();
+  }
 
   logout() {
     this.authService.logout();
-    this.router.navigateByUrl('/');
   }
 
   cerrarSidenav() {

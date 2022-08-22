@@ -63,6 +63,10 @@
   color: #757575;
 }
 
+.login-footer p {
+  margin: 0;
+}
+
 .register {
   text-decoration: underline;
   cursor: pointer;

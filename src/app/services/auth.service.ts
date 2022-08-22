@@ -56,6 +56,22 @@ export class AuthService {
     );
   }
 
+  isAdmin(): Observable<boolean> {
+    return this.afAuth.authState.pipe(
+      switchMap((authState) =>
+        this.userService.getUserById(authState?.uid || ' ')
+      ),
+      tap((user) => this.userService.setUser(user)),
+      map((user) => {
+        if (user.role === 'CLIENT-ROLE') {
+          return false;
+        } else {
+          return true;
+        }
+      })
+    );
+  }
+
   register(email: string, password: string) {
     return this.afAuth.createUserWithEmailAndPassword(email, password);
   }
@@ -109,7 +125,9 @@ export class AuthService {
   }
 
   logout() {
-    this.afAuth.signOut();
+    this.afAuth.signOut().then(() => {
+      this.router.navigateByUrl('/');
+    });
   }
 
   forgotPassword(email: string) {

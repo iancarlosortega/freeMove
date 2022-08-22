@@ -4,7 +4,6 @@
       <div class="login-logo" routerLink="/">
         <img src="assets/logoFreeMoveColor.png" alt="FreeMove Logo" />
       </div>
-      <h1 class="login-title">Regístrate</h1>
       <div @fade *ngIf="isError" class="alert alert--error">
         <p><strong>Error!</strong> El correo ingresado ya está en uso</p>
       </div>
@@ -62,7 +61,7 @@
           Las contraseñas deben ser <strong>iguales</strong>
         </mat-error>
       </mat-form-field>
-      <button type="submit" class="login-button">Continuar</button>
+      <button type="submit" class="login-button">Registrarse</button>
       <footer class="login-footer">
         <p>¿Ya tienes una cuenta?</p>
         <p class="register" routerLink="../login">Ingresa aquí</p>

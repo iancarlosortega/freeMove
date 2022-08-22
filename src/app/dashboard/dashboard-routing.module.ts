@@ -8,6 +8,7 @@ import { IncidentsComponent } from './incidents/incidents.component';
 import { RoutesComponent } from './routes/routes.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
+import { AdminGuard } from '../guards';
 
 const routes: Routes = [
   {
@@ -34,6 +35,13 @@ const routes: Routes = [
       {
         path: 'comunidad',
         component: CommunityComponent,
+      },
+      {
+        path: 'admin',
+        loadChildren: () =>
+          import('../admin/admin.module').then((m) => m.AdminModule),
+        canActivate: [AdminGuard],
+        canLoad: [AdminGuard],
       },
       {
         path: 'perfil',

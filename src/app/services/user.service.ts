@@ -26,6 +26,21 @@ export class UserService {
     return this._user$.asObservable();
   }
 
+  getUsers() {
+    return this.firestore
+      .collection('users')
+      .snapshotChanges()
+      .pipe(
+        map((actions) => {
+          return actions.map((a) => {
+            const data = a.payload.doc.data() as User;
+            data.idUser = a.payload.doc.id;
+            return data;
+          });
+        })
+      );
+  }
+
   getUserById(id: string) {
     return this.firestore
       .collection('users')
@@ -66,5 +81,17 @@ export class UserService {
       .subscribe();
 
     return uploadTask.percentageChanges();
+  }
+
+  addAdminRole(idUser: string) {
+    return this.firestore.collection('users').doc(idUser).update({
+      role: 'ADMIN-ROLE',
+    });
+  }
+
+  removeAdminRole(idUser: string) {
+    return this.firestore.collection('users').doc(idUser).update({
+      role: 'CLIENT-ROLE',
+    });
   }
 }
