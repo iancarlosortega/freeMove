@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { DashboardRoutingModule } from './dashboard-routing.module';
+
 import { MaterialModule } from '../material/material.module';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { PrimeNgModule } from '../prime-ng/prime-ng.module';
@@ -16,6 +17,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { NavComponent } from './components/nav/nav.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ChangePasswordComponent } from './change-password/change-password.component';
+import { ChangeEmailComponent } from './change-email/change-email.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +29,7 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
     ProfileComponent,
     NavComponent,
     ChangePasswordComponent,
+    ChangeEmailComponent,
   ],
   imports: [
     CommonModule,

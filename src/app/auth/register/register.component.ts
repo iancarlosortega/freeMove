@@ -8,7 +8,7 @@ import { User } from 'src/app/interfaces';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css'],
+  styleUrls: ['../login/login.component.css'],
   animations: [
     trigger('fade', [
       transition('void => *', [

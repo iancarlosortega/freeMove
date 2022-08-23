@@ -1,0 +1,72 @@
+<div *ngIf="!isLoading" class="fade-in">
+  <h2>Cambiar Correo Electrónico</h2>
+  <form
+    [formGroup]="newEmailForm"
+    #form
+    autocomplete="off"
+    (submit)="updateEmail()"
+  >
+    <div *ngIf="isDisabled" class="alert alert--error">
+      <p>
+        No es posible actualizar el correo si inicio sesión con
+        <strong>Google</strong> o <strong>Facebook</strong>
+      </p>
+    </div>
+    <div @fade *ngIf="isErrorPassword" class="alert alert--error">
+      <p><strong>¡Error!</strong> La contraseña es incorrecta</p>
+    </div>
+    <div @fade *ngIf="isErrorEmail" class="alert alert--error">
+      <p>
+        <strong>¡Error!</strong> El email ingresado ya está en uso, intente con
+        otro.
+      </p>
+    </div>
+    <mat-form-field appearance="outline">
+      <mat-label>Correo anterior</mat-label>
+      <input
+        type="email"
+        matInput
+        formControlName="oldEmail"
+        placeholder="example@gmail.com"
+      />
+      <mat-error *ngIf="invalidInput('oldEmail')">
+        El correo es <strong>obligatorio</strong>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Correo nuevo</mat-label>
+      <input
+        type="email"
+        matInput
+        formControlName="newEmail"
+        placeholder="example@gmail.com"
+      />
+      <mat-error *ngIf="invalidInput('newEmail')">
+        El correo es <strong>obligatorio</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Contraseña</mat-label>
+      <input
+        type="password"
+        matInput
+        formControlName="password"
+        placeholder="********"
+      />
+      <mat-error *ngIf="invalidInput('password')">
+        Mínimo <strong>6</strong> caracteres
+      </mat-error>
+    </mat-form-field>
+    <div class="flex-center">
+      <button type="submit" class="primary-button" [disabled]="isDisabled">
+        <span>Actualizar</span>
+        <mat-icon>save</mat-icon>
+      </button>
+    </div>
+  </form>
+</div>
+
+<div *ngIf="isLoading" class="flex-center spinner-loading">
+  <mat-spinner [diameter]="100"></mat-spinner>
+</div>

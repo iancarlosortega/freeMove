@@ -41,30 +41,3 @@ mat-form-field {
 .custom-file {
   margin: 1rem 0;
 }
-
-/* Modal */
-
-.modal-text {
-  font-size: 1.3rem;
-  color: rgb(80, 80, 80);
-}
-
-.modal-footer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
-}
-
-.button-cancel {
-  background-color: rgb(211, 211, 211);
-  color: rgb(255, 255, 255);
-  border: 1px solid rgb(211, 211, 211);
-  transition: all 0.3s ease;
-}
-
-.button-cancel:hover {
-  background-color: rgb(168, 168, 168);
-  color: rgb(219, 219, 219);
-  border: 1px solid rgb(168, 168, 168);
-}

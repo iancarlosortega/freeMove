@@ -72,6 +72,11 @@ export class SideMenuComponent implements OnInit, OnDestroy {
       route: './perfil',
     },
     {
+      name: 'Email',
+      icon: 'assets/icons/email.svg',
+      route: './cambiar-correo',
+    },
+    {
       name: 'Contraseña',
       icon: 'assets/icons/clave.svg',
       route: './cambiar-clave',

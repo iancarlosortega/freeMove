@@ -1,6 +1,5 @@
 <div *ngIf="!isLoading" class="fade-in">
   <h2>Editar Perfil</h2>
-  <p>Ut laboris aute ut aute.Enim officia aliqua quis sunt nulla amet dolor.</p>
 
   <form [formGroup]="profileForm" (submit)="updateProfile()" autocomplete="off">
     <div class="photo-profile">
@@ -69,18 +68,6 @@
           />
           <mat-error *ngIf="invalidInput('name')">
             Los nombres y apellidos son <strong>obligatorios</strong>
-          </mat-error>
-        </mat-form-field>
-        <mat-form-field appearance="outline">
-          <mat-label>Email</mat-label>
-          <input
-            type="email"
-            matInput
-            formControlName="email"
-            placeholder="example@gmail.com"
-          />
-          <mat-error *ngIf="invalidInput('email')">
-            El correo es <strong>obligatorio</strong>
           </mat-error>
         </mat-form-field>
         <mat-form-field appearance="outline">
@@ -160,72 +147,3 @@
 <div *ngIf="isLoading" class="flex-center spinner-loading">
   <mat-spinner [diameter]="100"></mat-spinner>
 </div>
-
-<!-- Modal Update Email -->
-<ng-template #modalEmail>
-  <div class="modal-header">
-    <h4 class="modal-title pull-left">Acualizar Correo</h4>
-    <button
-      type="button"
-      class="btn-close close pull-right"
-      aria-label="Close"
-      (click)="modalRef?.hide()"
-    >
-      <span aria-hidden="true" class="visually-hidden">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    <p class="modal-text">
-      ¿Está seguro que desea actualizar su correo electrónico?
-    </p>
-    <form [formGroup]="emailForm" autocomplete="off">
-      <div @fade *ngIf="isError" class="alert alert--error">
-        <p><strong>¡Error!</strong> La contraseña es incorrecta</p>
-      </div>
-      <mat-form-field appearance="outline">
-        <mat-label>Contraseña</mat-label>
-        <input
-          type="password"
-          matInput
-          formControlName="password"
-          placeholder="********"
-        />
-        <mat-error *ngIf="invalidInputEmail('password')">
-          Mínimo <strong>6</strong> caracteres
-        </mat-error>
-      </mat-form-field>
-      <mat-form-field appearance="outline">
-        <mat-label>Confirmar contraseña</mat-label>
-        <input
-          type="password"
-          matInput
-          formControlName="password2"
-          placeholder="Repetir la contraseña"
-        />
-        <mat-error *ngIf="invalidInputEmail('password2')">
-          Las contraseñas deben ser <strong>iguales</strong>
-        </mat-error>
-      </mat-form-field>
-    </form>
-  </div>
-
-  <div class="modal-footer">
-    <button
-      pButton
-      (click)="closeModal()"
-      label="Cancelar"
-      icon="pi pi-times"
-      iconPos="left"
-      class="p-button-raised button-cancel"
-    ></button>
-
-    <button
-      pButton
-      (click)="updateEmail()"
-      label="Actualizar"
-      icon="pi pi-check"
-      iconPos="right"
-      class="p-button-raised"
-    ></button>
-  </div>
-</ng-template>
