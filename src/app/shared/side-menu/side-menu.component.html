@@ -1,57 +1,30 @@
 <header class="header" routerLink="/">
   <img src="assets/logoFreeMoveAzul.png" alt="FreeMove" />
 </header>
-<section>
-  <ul class="list-items">
-    <li
-      (click)="cerrarSidenav()"
-      [routerLink]="item.route"
-      routerLinkActive="active-link"
-      [routerLinkActiveOptions]="{ exact: true }"
-      *ngFor="let item of menuItems"
-    >
-      <img [src]="item.icon" [alt]="item.name" />
-      <p>
-        {{ item.name }}
-      </p>
-    </li>
-  </ul>
-</section>
-<section *ngIf="isAdmin">
-  <h3 class="section-title">Administración</h3>
-  <ul class="list-items">
-    <li
-      (click)="cerrarSidenav()"
-      [routerLink]="item.route"
-      routerLinkActive="active-link"
-      [routerLinkActiveOptions]="{ exact: true }"
-      *ngFor="let item of adminMenuItems"
-    >
-      <img [src]="item.icon" [alt]="item.name" />
-      <p>
-        {{ item.name }}
-      </p>
-    </li>
-  </ul>
-</section>
-<section>
-  <h3 class="section-title">Configuración</h3>
-  <ul class="list-items">
-    <li
-      (click)="cerrarSidenav()"
-      [routerLink]="item.route"
-      routerLinkActive="active-link"
-      [routerLinkActiveOptions]="{ exact: true }"
-      *ngFor="let item of configMenuItems"
-    >
-      <img [src]="item.icon" [alt]="item.name" />
-      <p>
-        {{ item.name }}
-      </p>
-    </li>
-    <li>
-      <img src="assets/icons/logout.svg" alt="Cerrar sesión" />
-      <p (click)="logout()">Cerrar sesión</p>
-    </li>
-  </ul>
-</section>
+<div *ngFor="let item of menuItems">
+  <section *ngIf="item.available">
+    <h3 class="section-title">{{ item.title }}</h3>
+    <ul class="list-items">
+      <div *ngFor="let subItem of item.subItems">
+        <li
+          (click)="cerrarSidenav()"
+          [routerLink]="subItem.route"
+          routerLinkActive="active-link"
+          [routerLinkActiveOptions]="{ exact: true }"
+          *ngIf="subItem.available"
+        >
+          <img [src]="subItem.icon" [alt]="subItem.name" />
+          <p>
+            {{ subItem.name }}
+          </p>
+        </li>
+      </div>
+    </ul>
+  </section>
+</div>
+
+<!-- Logout -->
+<button class="logout-button" (click)="logout()">
+  Cerrar sesión
+  <mat-icon>logout</mat-icon>
+</button>

@@ -138,9 +138,13 @@
 
 .health-img {
   display: grid;
-  place-content: center-;
-  opacity: 0.8;
-  padding: 3rem;
+  place-content: center;
+}
+
+@media (min-width: 992px){
+  .health-img {
+    padding: 3rem;
+  }
 }
 
 .health-text h3 {
@@ -183,11 +187,19 @@
   .services-container {
     grid-template-columns: 1fr 1fr;
   }
+
+  .last-card {
+    grid-column: span 2;
+  }
 }
 
 @media (min-width:992px){
   .services-container {
     grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .last-card {
+    grid-column: inherit
   }
 }
 

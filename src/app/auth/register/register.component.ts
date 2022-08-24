@@ -67,6 +67,7 @@ export class RegisterComponent implements OnInit {
           email: this.registerForm.value.email!,
           name: this.registerForm.value.name!,
           role: 'CLIENT-ROLE',
+          provider: 'email-password',
           followers: 0,
           following: 0,
         };

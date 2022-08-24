@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { AdminGuard } from '../guards';
+import { AdminGuard, ProviderGuard } from '../guards';
 
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HomeComponent } from './home/home.component';
@@ -52,10 +52,14 @@ const routes: Routes = [
       {
         path: 'cambiar-clave',
         component: ChangePasswordComponent,
+        canActivate: [ProviderGuard],
+        canLoad: [ProviderGuard],
       },
       {
         path: 'cambiar-correo',
         component: ChangeEmailComponent,
+        canActivate: [ProviderGuard],
+        canLoad: [ProviderGuard],
       },
       {
         path: '**',

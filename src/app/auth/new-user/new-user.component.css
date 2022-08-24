@@ -18,6 +18,7 @@
 }
 
 .header-welcome {
+  font-size: 3.5rem;
   animation: 1.3s ease leftToRight;
 }
 

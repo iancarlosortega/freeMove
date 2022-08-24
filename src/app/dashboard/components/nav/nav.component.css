@@ -28,7 +28,7 @@
   }
 }
 
-@media (min-width: 992px){
+@media (min-width: 1280px){
   .navbar h2 {
     display: block;
   }
@@ -100,4 +100,37 @@
   .nav-button mat-icon:hover {
     color: #646464;
   }
+}
+
+/* Menu */
+
+.user-info {
+  padding: 1rem;
+}
+
+.name {
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: var(--azul-oscuro);
+}
+
+.email {
+  text-align: center;
+  font-size: 1rem;
+  margin: 0;
+  color: var(--azul-oscuro);
+}
+
+.photo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.photo img {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 50%;
 }

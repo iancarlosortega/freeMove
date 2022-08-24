@@ -34,7 +34,6 @@ export class ChangeEmailComponent implements OnInit {
   isErrorEmail: boolean = false;
   isDisabled: boolean = false;
   userObs!: Subscription;
-  providerObs!: Subscription;
 
   newEmailForm: FormGroup = this.fb.group({
     oldEmail: ['', [Validators.required, Validators.email]],
@@ -52,25 +51,20 @@ export class ChangeEmailComponent implements OnInit {
   ngOnInit(): void {
     // Get information about user logged in
 
-    this.providerObs = this.authService.getClaims().subscribe((res: any) => {
-      const provider = res?.claims['firebase'].sign_in_provider;
-      if (provider !== 'password') {
+    this.userObs = this.userService.user$.subscribe((user) => {
+      this.newEmailForm.patchValue({
+        oldEmail: user.email,
+      });
+      this.user = user;
+      if (user.provider !== 'email-password') {
         this.newEmailForm.disable();
         this.isDisabled = true;
       }
-
-      this.userObs = this.userService.user$.subscribe((user) => {
-        this.newEmailForm.patchValue({
-          oldEmail: user.email,
-        });
-        this.user = user;
-        this.isLoading = false;
-      });
+      this.isLoading = false;
     });
   }
 
   ngOnDestroy(): void {
-    this.providerObs.unsubscribe();
     this.userObs.unsubscribe();
   }
 

@@ -15,14 +15,75 @@
     </button>
   </div>
   <div class="options">
-    <button class="nav-button flex-center">
-      <mat-icon>messenger</mat-icon>
+    <button
+      mat-icon-button
+      [matMenuTriggerFor]="messagesMenu"
+      aria-label="Example icon-button with a menu"
+      class="nav-button flex-center"
+    >
+      <mat-icon matBadge="4" matBadgeColor="primary">messenger</mat-icon>
+      <!-- Menu -->
+      <mat-menu #messagesMenu>
+        <!-- TODO: Completar los mensajes -->
+      </mat-menu>
     </button>
-    <button class="nav-button flex-center">
-      <mat-icon>notifications</mat-icon>
+    <button
+      mat-icon-button
+      [matMenuTriggerFor]="notificationsMenu"
+      aria-label="Example icon-button with a menu"
+      class="nav-button flex-center"
+    >
+      <mat-icon matBadge="+9" matBadgeColor="warn">notifications</mat-icon>
+
+      <!-- Menu -->
+      <mat-menu #notificationsMenu>
+        <!-- TODO: Completar las notificaciones -->
+      </mat-menu>
     </button>
-    <button class="nav-button flex-center">
+    <button
+      mat-icon-button
+      [matMenuTriggerFor]="profileMenu"
+      aria-label="Example icon-button with a menu"
+      class="nav-button flex-center"
+    >
       <mat-icon>person</mat-icon>
+
+      <!-- Menu -->
+      <mat-menu #profileMenu>
+        <div class="user-info">
+          <!-- Photo Preview -->
+          <div class="photo">
+            <img [src]="url" alt="Foto de perfil" />
+          </div>
+
+          <!-- Name -->
+          <p class="name">
+            {{
+              user.name.length > 20
+                ? (user.name | slice: 0:20) + "..."
+                : user.name
+            }}
+          </p>
+
+          <!-- Email -->
+          <p class="email">
+            {{
+              user.email.length > 20
+                ? (user.email | slice: 0:20) + "..."
+                : user.email
+            }}
+          </p>
+        </div>
+
+        <button mat-menu-item routerLink="./perfil">
+          <mat-icon>account_circle</mat-icon>
+          <span>Editar Perfil</span>
+        </button>
+        <button mat-menu-item (click)="logout()">
+          <mat-icon>logout</mat-icon>
+          <span>Cerrar Sesión</span>
+        </button>
+      </mat-menu>
     </button>
   </div>
 </nav>

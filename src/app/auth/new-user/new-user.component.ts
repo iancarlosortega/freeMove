@@ -1,10 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { map, Subscription, switchMap, tap } from 'rxjs';
+import { Subscription, switchMap, tap } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { CountryService, UserService } from 'src/app/services';
-import { City, User } from 'src/app/interfaces';
+import { User } from 'src/app/interfaces';
 
 @Component({
   selector: 'app-new-user',
@@ -45,15 +45,9 @@ export class NewUserComponent implements OnInit, OnDestroy {
 
     // Get countries
 
-    this.countryService
-      .getCountries()
-      .pipe(
-        map((country) => country.data),
-        map((countries) => countries.map((country) => country.name))
-      )
-      .subscribe((countries) => {
-        this.countries = countries;
-      });
+    this.countryService.getCountries().subscribe((countries) => {
+      this.countries = countries;
+    });
 
     // Get cities by country selected
 
@@ -66,8 +60,8 @@ export class NewUserComponent implements OnInit, OnDestroy {
         }),
         switchMap((country) => this.countryService.getCitiesByCountry(country!))
       )
-      .subscribe((cities: City) => {
-        this.cities = cities['data'];
+      .subscribe((cities: string[]) => {
+        this.cities = cities.sort();
       });
   }
 

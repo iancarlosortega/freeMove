@@ -71,6 +71,14 @@
           </mat-error>
         </mat-form-field>
         <mat-form-field appearance="outline">
+          <mat-label>Género</mat-label>
+          <mat-select formControlName="gender">
+            <mat-option value="Masculino">Masculino</mat-option>
+            <mat-option value="Femenino">Femenino</mat-option>
+            <mat-option value="Otro">Otro</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
           <mat-label>País</mat-label>
           <mat-select formControlName="country">
             <mat-option *ngFor="let country of countries" [value]="country">
@@ -98,14 +106,6 @@
             formControlName="phone"
             placeholder="+593 9999-9999"
           />
-        </mat-form-field>
-        <mat-form-field appearance="outline">
-          <mat-label>Género</mat-label>
-          <mat-select formControlName="gender">
-            <mat-option value="Masculino">Masculino</mat-option>
-            <mat-option value="Femenino">Femenino</mat-option>
-            <mat-option value="Otro">Otro</mat-option>
-          </mat-select>
         </mat-form-field>
         <mat-form-field appearance="outline">
           <mat-label>Altura</mat-label>

@@ -12,7 +12,7 @@
   align-items: center;
   margin: 0.5rem 0;
   padding: 0.5rem 1rem;
-  color: #A0A0A0;
+  color: #757575;
   font-weight: 500;
   transition: all 0.2s ease-in-out;
   cursor: pointer;
@@ -55,4 +55,31 @@
   font-weight: 500;
   font-size: 1.3rem;
   margin: 1rem 0;
+}
+
+/* Logout Button */
+
+.logout-button {
+  align-items: center;
+  background-image: linear-gradient(to right, var(--amarillo-hover) 0%, var(--amarillo) 50%, var(--amarillo-hover) 100%);
+  background-size: 200% auto;
+  border-radius: 6px;
+  border: none;
+  box-shadow: 0 4px 6px rgba(50, 50, 93, .11), 0 1px 3px rgba(0, 0, 0, .08);
+  color: #fff;
+  color: white;
+  display: flex;
+  font-size: 1em;
+  font-weight: 800;
+  gap: 0.5rem;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+  text-align: center;
+  text-decoration: none;
+  transition: 0.5s;
+  width: 100%;
+}
+
+.logout-button:hover {
+  background-position: right center;
 }

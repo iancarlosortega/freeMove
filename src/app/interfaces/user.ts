@@ -15,6 +15,7 @@ export interface User {
   photoFilename?: string;
   file?: string;
   role: UserRole;
+  provider: UserProvider;
   // Datos de salud
   weight?: number;
   height?: number;
@@ -23,4 +24,5 @@ export interface User {
   following?: number;
 }
 
+export type UserProvider = 'email-password' | 'google.com' | 'facebook.com';
 type UserRole = 'ADMIN-ROLE' | 'CLIENT-ROLE';

@@ -32,7 +32,6 @@ export class ChangePasswordComponent implements OnInit, OnDestroy {
   isError: boolean = false;
   isDisabled: boolean = false;
   userObs!: Subscription;
-  providerObs!: Subscription;
 
   newPasswordForm: FormGroup = this.fb.group(
     {
@@ -55,18 +54,13 @@ export class ChangePasswordComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     // Get information about user logged in
-
-    this.providerObs = this.authService.getClaims().subscribe((res: any) => {
-      const provider = res?.claims['firebase'].sign_in_provider;
-      if (provider !== 'password') {
+    this.userObs = this.userService.user$.subscribe((user) => {
+      this.email = user.email;
+      if (user.provider !== 'email-password') {
         this.newPasswordForm.disable();
         this.isDisabled = true;
       }
-
-      this.userObs = this.userService.user$.subscribe((user) => {
-        this.email = user.email;
-        this.isLoading = false;
-      });
+      this.isLoading = false;
     });
   }
 

@@ -2,14 +2,14 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { map, Subscription, switchMap, take, tap } from 'rxjs';
+import { Subscription, switchMap, tap } from 'rxjs';
 import {
   AuthService,
   CountryService,
   StorageService,
   UserService,
 } from 'src/app/services';
-import { City, User } from 'src/app/interfaces';
+import { User } from 'src/app/interfaces';
 import { FileUpload } from 'src/app/models';
 
 @Component({
@@ -98,15 +98,9 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
     // Get countries
 
-    this.countryService
-      .getCountries()
-      .pipe(
-        map((country) => country.data),
-        map((countries) => countries.map((country) => country.name))
-      )
-      .subscribe((countries) => {
-        this.countries = countries;
-      });
+    this.countryService.getCountries().subscribe((countries) => {
+      this.countries = countries;
+    });
 
     // Get cities by country selected
 
@@ -119,8 +113,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
         }),
         switchMap((country) => this.countryService.getCitiesByCountry(country!))
       )
-      .subscribe((cities: City) => {
-        this.cities = cities['data'].sort();
+      .subscribe((cities: string[]) => {
+        this.cities = cities.sort();
       });
   }
 

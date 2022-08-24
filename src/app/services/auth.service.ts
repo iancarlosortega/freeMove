@@ -7,7 +7,7 @@ import firebase from '@firebase/app-compat';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 
 import { UserService } from './user.service';
-import { User } from '../interfaces';
+import { User, UserProvider } from '../interfaces';
 
 @Injectable({
   providedIn: 'root',
@@ -48,6 +48,19 @@ export class AuthService {
       tap((user) => this.userService.setUser(user)),
       map((user) => {
         if (user) {
+          return false;
+        } else {
+          return true;
+        }
+      })
+    );
+  }
+
+  checkProvider() {
+    return this.getClaims().pipe(
+      map((res: any) => {
+        const provider = res?.claims['firebase'].sign_in_provider;
+        if (provider !== 'password') {
           return false;
         } else {
           return true;
@@ -100,7 +113,9 @@ export class AuthService {
             idUser: response.user?.uid!,
             name: response.user?.displayName!,
             email: response.user?.email!,
+            // photoUrl: response.additionalUserInfo?.profile?.picture.data.url,
             photoUrl: response.user?.photoURL!,
+            provider: response.additionalUserInfo?.providerId! as UserProvider,
             role: 'CLIENT-ROLE',
             followers: 0,
             following: 0,
