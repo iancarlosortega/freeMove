@@ -10,7 +10,7 @@ import { MatSidenav } from '@angular/material/sidenav';
 export class DashboardComponent {
   @ViewChild(MatSidenav)
   sidenav!: MatSidenav;
-  phone: boolean = true;
+  isPhone: boolean = true;
 
   constructor(private observer: BreakpointObserver) {}
 
@@ -18,11 +18,11 @@ export class DashboardComponent {
     setTimeout(() => {
       this.observer.observe(['(max-width: 768px)']).subscribe((res) => {
         if (res.matches) {
-          this.phone = true;
+          this.isPhone = true;
           this.sidenav.mode = 'over';
           this.sidenav.close();
         } else {
-          this.phone = false;
+          this.isPhone = false;
           this.sidenav.mode = 'side';
           this.sidenav.open();
         }
@@ -31,7 +31,7 @@ export class DashboardComponent {
   }
 
   closeSidenav() {
-    if (this.phone) {
+    if (this.isPhone) {
       this.sidenav.mode = 'over';
       this.sidenav.close();
     }

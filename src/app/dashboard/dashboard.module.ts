@@ -3,9 +3,10 @@ import { CommonModule } from '@angular/common';
 
 import { DashboardRoutingModule } from './dashboard-routing.module';
 
+import { SwiperModule } from 'swiper/angular';
 import { MaterialModule } from '../material/material.module';
-import { ModalModule } from 'ngx-bootstrap/modal';
 import { PrimeNgModule } from '../prime-ng/prime-ng.module';
+import { ModalModule } from 'ngx-bootstrap/modal';
 import { SharedModule } from '../shared/shared.module';
 
 import { HomeComponent } from './home/home.component';
@@ -35,6 +36,7 @@ import { ChangeEmailComponent } from './change-email/change-email.component';
     CommonModule,
     DashboardRoutingModule,
     ReactiveFormsModule,
+    SwiperModule,
     MaterialModule,
     PrimeNgModule,
     SharedModule,

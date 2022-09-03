@@ -11,7 +11,7 @@ import { AuthService, UserService } from 'src/app/services';
 export class NavComponent implements OnInit, OnDestroy {
   user!: User;
   userObs!: Subscription;
-  url: string = '';
+  photoUrl: string = '';
 
   constructor(
     private userService: UserService,
@@ -21,7 +21,7 @@ export class NavComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.userObs = this.userService.user$.subscribe((user) => {
       this.user = user;
-      this.url = user.photoUrl || 'assets/no-image.png';
+      this.photoUrl = user.photoUrl || 'assets/no-image.png';
     });
   }
 

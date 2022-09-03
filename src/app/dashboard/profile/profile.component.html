@@ -3,28 +3,28 @@
 
   <form [formGroup]="profileForm" (submit)="updateProfile()" autocomplete="off">
     <div class="photo-profile">
-      <!-- Previsualizacion de la foto de perfil -->
-      <div class="photo fade-in" *ngIf="format === 'image' && url">
-        <img [src]="url" alt="Foto de perfil" />
-      </div>
-      <div class="photo fade-in" *ngIf="!url">
-        <img src="assets/no-image.png" alt="No Image" />
+      <!-- Image Preview -->
+      <div class="photo fade-in">
+        <img [src]="photoUrl" alt="Foto de perfil" />
+        <label class="edit-photo" for="inputFile">
+          <div class="flex-center">
+            <mat-icon>edit</mat-icon>
+          </div>
+        </label>
       </div>
 
-      <!-- Input File -->
+      <input
+        id="inputFile"
+        type="file"
+        accept="image/png, image/jpg, image/*"
+        (change)="selectFile($event)"
+        hidden
+      />
 
-      <div class="custom-file wrapper">
-        <input
-          #inputFile
-          type="file"
-          class="form-control"
-          formControlName="file"
-          accept="image/png, image/jpg, image/*"
-          (change)="selectFile($event)"
-        />
-      </div>
-      <!-- Barra de porcentaje -->
-      <div class="percentage wrapper" *ngIf="currentFileUpload && visible">
+      <div
+        class="percentage wrapper"
+        *ngIf="currentImageToUpload && isUploading"
+      >
         <div class="alert alert-info loading">
           <p>Cambiando imagen...</p>
           <p-progressSpinner
@@ -40,18 +40,18 @@
           <div
             class="progress-bar progress-bar-striped"
             role="progressbar"
-            attr.aria-valuenow="{{ percentage }}"
+            attr.aria-valuenow="{{ uploadPercentage }}"
             aria-valuemin="0"
             aria-valuemax="100"
-            [ngStyle]="{ width: percentage + '%' }"
+            [ngStyle]="{ width: uploadPercentage + '%' }"
             [ngClass]="{
-              'bg-success': percentage > 70,
-              'bg-info': percentage > 40 && percentage < 70,
-              'bg-warning': percentage > 20 && percentage < 40,
-              'bg-danger': percentage > 0 && percentage < 20
+              'bg-success': uploadPercentage > 70,
+              'bg-info': uploadPercentage > 40 && uploadPercentage < 70,
+              'bg-warning': uploadPercentage > 20 && uploadPercentage < 40,
+              'bg-danger': uploadPercentage > 0 && uploadPercentage < 20
             }"
           >
-            {{ percentage }}%
+            {{ uploadPercentage }}%
           </div>
         </div>
       </div>
@@ -135,7 +135,7 @@
         </mat-form-field>
       </div>
       <div class="flex-center">
-        <button [disabled]="disabled" type="submit" class="primary-button">
+        <button [disabled]="isDisabled" type="submit" class="primary-button">
           <span>Actualizar</span>
           <mat-icon>save</mat-icon>
         </button>

@@ -13,9 +13,7 @@ export class AdminGuard implements CanActivate, CanLoad {
     return this.authService.isAdmin().pipe(
       tap((isAuthenticated) => {
         if (!isAuthenticated) {
-          this.router.navigate(['/dashboard'], {
-            state: { redirect: this.router.url },
-          });
+          this.router.navigate(['/dashboard']);
         }
       })
     );
@@ -25,9 +23,7 @@ export class AdminGuard implements CanActivate, CanLoad {
     return this.authService.isAdmin().pipe(
       tap((isAuthenticated) => {
         if (!isAuthenticated) {
-          this.router.navigate(['/dashboard'], {
-            state: { redirect: this.router.url },
-          });
+          this.router.navigate(['/dashboard']);
         }
       })
     );

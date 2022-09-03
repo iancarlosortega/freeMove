@@ -13,9 +13,7 @@ export class ProviderGuard implements CanActivate, CanLoad {
     return this.authService.checkProvider().pipe(
       tap((isAuthenticated) => {
         if (!isAuthenticated) {
-          this.router.navigate(['/dashboard'], {
-            state: { redirect: this.router.url },
-          });
+          this.router.navigate(['/dashboard']);
         }
       })
     );
@@ -25,9 +23,7 @@ export class ProviderGuard implements CanActivate, CanLoad {
     return this.authService.checkProvider().pipe(
       tap((isAuthenticated) => {
         if (!isAuthenticated) {
-          this.router.navigate(['/dashboard'], {
-            state: { redirect: this.router.url },
-          });
+          this.router.navigate(['/dashboard']);
         }
       })
     );

@@ -62,8 +62,8 @@ export class UserService {
     return this.firestore.collection('users').doc(user.idUser).update(user);
   }
 
-  updateProfile(fileUpload: FileUpload, fileName: string, usuarioData: User) {
-    const filePath = `${this.basePath}/${fileName}`;
+  updateProfile(fileUpload: FileUpload, user: User) {
+    const filePath = `${this.basePath}/${user.photoFilename}`;
     const storageRef = this.storage.ref(filePath);
     const uploadTask = this.storage.upload(filePath, fileUpload.file);
 
@@ -73,8 +73,8 @@ export class UserService {
       .pipe(
         finalize(() => {
           storageRef.getDownloadURL().subscribe((downloadURL) => {
-            usuarioData.photoUrl = downloadURL;
-            this.updateUser(usuarioData);
+            user.photoUrl = downloadURL;
+            this.updateUser(user);
           });
         })
       )

@@ -131,6 +131,7 @@ export class AuthService {
             });
         } else {
           const { redirect } = window.history.state;
+          console.log(redirect);
           this.router.navigateByUrl(redirect || '/dashboard');
         }
       })

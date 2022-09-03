@@ -36,7 +36,10 @@ export class ChangeEmailComponent implements OnInit {
   userObs!: Subscription;
 
   newEmailForm: FormGroup = this.fb.group({
-    oldEmail: ['', [Validators.required, Validators.email]],
+    oldEmail: [
+      { value: '', disabled: true },
+      [Validators.required, Validators.email],
+    ],
     newEmail: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required, Validators.minLength(6)]],
   });
@@ -50,7 +53,6 @@ export class ChangeEmailComponent implements OnInit {
 
   ngOnInit(): void {
     // Get information about user logged in
-
     this.userObs = this.userService.user$.subscribe((user) => {
       this.newEmailForm.patchValue({
         oldEmail: user.email,

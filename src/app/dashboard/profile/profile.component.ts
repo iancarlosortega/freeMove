@@ -32,14 +32,13 @@ export class ProfileComponent implements OnInit, OnDestroy {
   providerObs!: Subscription;
   countries: string[] = [];
   cities: string[] = [];
-  selectedFiles?: any;
-  currentFileUpload?: FileUpload;
-  url: any;
-  format: string = '';
-  percentage: number = 0;
-  visible: boolean = true;
+  selectedImage?: any;
+  currentImageToUpload?: FileUpload;
+  photoUrl!: string;
+  uploadPercentage: number = 0;
+  isUploading: boolean = true;
   isLoading: boolean = true;
-  disabled: boolean = false;
+  isDisabled: boolean = false;
 
   profileForm: FormGroup = this.fb.group({
     name: [
@@ -58,15 +57,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
       { value: '', disabled: false },
       [Validators.required, Validators.min(0)],
     ],
-    file: [{ value: '', disabled: false }],
   });
-
-  invalidInput(campo: string) {
-    return (
-      this.profileForm.get(campo)?.invalid &&
-      this.profileForm.get(campo)?.touched
-    );
-  }
 
   constructor(
     private fb: FormBuilder,
@@ -79,7 +70,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     // Get information about user logged in
-
     this.providerObs = this.authService.getClaims().subscribe((res: any) => {
       const uid = res?.claims['user_id'];
       this.userObs = this.userService
@@ -87,8 +77,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
         .subscribe((user: User) => {
           this.user = user;
           this.isLoading = false;
-          this.format = 'image';
-          this.url = user.photoUrl;
+          this.photoUrl = user.photoUrl || 'assets/no-image.png';
           //Reset form with user information
           this.profileForm.reset({
             ...this.user,
@@ -96,14 +85,11 @@ export class ProfileComponent implements OnInit, OnDestroy {
         });
     });
 
-    // Get countries
-
     this.countryService.getCountries().subscribe((countries) => {
       this.countries = countries;
     });
 
     // Get cities by country selected
-
     this.profileForm
       .get('country')
       ?.valueChanges.pipe(
@@ -123,31 +109,33 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this.userObs.unsubscribe();
   }
 
+  invalidInput(field: string) {
+    return (
+      this.profileForm.get(field)?.invalid &&
+      this.profileForm.get(field)?.touched
+    );
+  }
+
   selectFile(event: any): void {
     const file = event.target.files && event.target.files[0];
 
-    //Previsualizacion de la imagen
-    if (file) {
-      var reader = new FileReader();
-      reader.readAsDataURL(file);
+    if (!file) {
+      this.photoUrl = this.user.photoUrl || 'assets/no-image.png';
+      this.selectedImage = undefined;
+      return;
+    }
 
-      if (file.type.indexOf('image') > -1) {
-        this.selectedFiles = event.target.files;
-        this.format = 'image';
-        reader.onload = (event) => {
-          this.url = (<FileReader>event.target).result;
-        };
-      } else {
-        this.selectedFiles = null;
-        this.url = null;
-        this.toastr.error(
-          'Por favor, solo subir archivos de formato imagen',
-          'Error'
-        );
-      }
+    let reader = new FileReader();
+    reader.readAsDataURL(file);
+    if (file.type.includes('image')) {
+      this.selectedImage = file;
+      reader.onload = (event) => {
+        this.photoUrl = (<FileReader>event.target).result!.toString();
+      };
     } else {
-      this.url = null;
-      this.selectedFiles = null;
+      this.selectedImage = undefined;
+      this.photoUrl = this.user.photoUrl || 'assets/no-image.png';
+      this.toastr.error('Por favor, solo subir imágenes.', 'Error');
     }
   }
 
@@ -156,69 +144,63 @@ export class ProfileComponent implements OnInit, OnDestroy {
       this.profileForm.markAllAsTouched();
       return;
     }
-    // Disabled submit button
-    this.disabled = true;
 
-    // Get form values
+    this.isDisabled = true;
     this.user = {
       ...this.user,
       ...this.profileForm.value,
     };
 
-    if (this.selectedFiles) {
-      if (this.user.photoFilename) {
-        this.storageService.deleteImage(
-          '/userPhotos',
-          this.user.photoFilename!
-        );
-      }
-      const id = new Date().getTime();
-      let fileName: string = this.profileForm.controls['file'].value;
-      fileName = `${id}-${fileName.split('\\').slice(-1)[0]}`;
-      this.user.photoFilename = fileName;
-      delete this.user.file;
-
-      let file: File | null = this.selectedFiles.item(0);
-      this.selectedFiles = undefined;
-
-      if (file) {
-        this.currentFileUpload = new FileUpload(file);
-        this.visible = true;
-        this.userService
-          .updateProfile(this.currentFileUpload, fileName, this.user)
-          .subscribe((percentage) => {
-            this.userService.setUser(this.user);
-            this.percentage = Math.round(percentage ? percentage : 0);
-            if (this.percentage == 100) {
-              setTimeout(() => {
-                this.toastr.info(
-                  'El perfil fue actualizado con éxito!',
-                  'Perfil actualizado'
-                );
-                this.visible = false;
-                this.percentage = 0;
-                this.disabled = false;
-              }, 500);
-            }
-          });
-      } else {
-        this.toastr.info('Warning', 'Aviso');
-      }
-    } else {
-      delete this.user.file;
+    // User didn't change the image
+    if (!this.selectedImage) {
       this.userService
         .updateUser(this.user)
         .then((res) => {
           this.userService.setUser(this.user);
-          this.disabled = false;
+          this.isDisabled = false;
           this.toastr.info(
-            'El perfil fue actualizado con éxito!',
+            '¡El perfil fue actualizado con éxito!',
             'Perfil actualizado'
           );
         })
         .catch((err) => {
           this.toastr.error('Error al actualizar el perfil', 'Error');
         });
+      return;
     }
+
+    if (this.user.photoFilename) {
+      this.storageService.deleteImage('/userPhotos', this.user.photoFilename);
+    }
+
+    this.user.photoFilename = this.createUniqueFilename(
+      this.selectedImage.name
+    );
+
+    this.currentImageToUpload = new FileUpload(this.selectedImage);
+    this.isUploading = true;
+    this.userService
+      .updateProfile(this.currentImageToUpload, this.user)
+      .subscribe((percentage) => {
+        this.userService.setUser(this.user);
+        this.uploadPercentage = Math.round(percentage ? percentage : 0);
+        if (this.uploadPercentage == 100) {
+          setTimeout(() => {
+            this.toastr.info(
+              'El perfil fue actualizado con éxito!',
+              'Perfil actualizado'
+            );
+            this.isUploading = false;
+            this.isDisabled = false;
+            this.uploadPercentage = 0;
+            this.selectedImage = undefined;
+          }, 500);
+        }
+      });
+  }
+
+  createUniqueFilename(filename: string): string {
+    const id = new Date().getTime();
+    return `${id}-${filename.split('\\').slice(-1)[0]}`;
   }
 }

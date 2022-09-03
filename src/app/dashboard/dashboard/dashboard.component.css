@@ -13,7 +13,7 @@ mat-toolbar {
   padding: 0 1rem;
   height: 4rem;
   width: 100%;
-  background-color: var(--amarillo);
+  background-color: var(--azul-oscuro);
 }
 
 @media (min-width: 768px){
@@ -69,6 +69,6 @@ mat-sidenav {
   .content {
     min-height: calc(100vh - 5rem);
     height: calc(100% - 5rem);
-    padding: 2.5rem 0;
+    padding: 2rem 0;
   }
 }

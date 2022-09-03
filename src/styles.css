@@ -21,6 +21,7 @@ img {
   --verde-claro: #C2E7C9;
   --azul: #4265D6;
   --azul-oscuro: #293855;
+  --azul-oscuro-hover: #1d273b;
   --gris: #A0A0A0;
   --gris-texto: #757575;
   --gris-texto-hover: #474747;
@@ -245,6 +246,12 @@ img {
 .mat-progress-spinner circle,
 .mat-spinner circle {
   stroke: var(--amarillo-hover) !important;
+}
+
+/* Mat Menu */
+
+.mat-menu-content {
+  width: 16rem !important;
 }
 
 /* Fix mat-select and modal */
