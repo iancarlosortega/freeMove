@@ -19,12 +19,16 @@ img {
   --amarillo: #F2AC20;
   --amarillo-hover: #c58b16;
   --verde-claro: #C2E7C9;
+  --verde: #59ac68;
+  --verde-oscuro: #3a7d46;
   --azul: #4265D6;
   --azul-oscuro: #293855;
   --azul-oscuro-hover: #1d273b;
   --gris: #A0A0A0;
   --gris-texto: #757575;
   --gris-texto-hover: #474747;
+  --rojo: #BC6060;
+  --rojo-hover: #843e3e;
   /* Alerts */
   /* success */
   --alertsuccess : #ddf0d7;

@@ -1,0 +1,55 @@
+.map {
+  min-height: calc(100vh - 6rem);
+  height: calc(100% - 6rem);
+}
+
+@media (min-width:992px) {
+  .map {
+    height: 100%;
+  }
+}
+
+.route-title-group {
+  display: flex;
+  justify-content: center;
+}
+
+.route-title {
+  margin-bottom: 2rem;
+}
+
+.route-title h1{
+  color: #4f6082;
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+}
+
+.underline {
+  height: 6px;
+  width: 100%;
+  margin: auto;
+  background-color: var(--azul-oscuro);
+}
+
+.main-container {
+  display: grid;
+  gap: 1rem;
+}
+
+@media (min-width: 992px){
+  .main-container {
+    grid-template-columns: 70% 30%;
+  }
+}
+
+@media (min-width: 1200px) {
+  .main-container {
+    grid-template-columns: 75% 25%;
+  }
+}
+
+.route-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}

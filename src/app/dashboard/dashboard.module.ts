@@ -19,6 +19,8 @@ import { NavComponent } from './components/nav/nav.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { ChangeEmailComponent } from './change-email/change-email.component';
+import { RouteComponent } from './route/route.component';
+import { CardComponent } from './components/card/card.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +33,8 @@ import { ChangeEmailComponent } from './change-email/change-email.component';
     NavComponent,
     ChangePasswordComponent,
     ChangeEmailComponent,
+    RouteComponent,
+    CardComponent,
   ],
   imports: [
     CommonModule,

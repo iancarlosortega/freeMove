@@ -1,0 +1,77 @@
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  margin: 1.5rem 0;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  border-radius: 5px;
+  padding: 1rem;
+  cursor: pointer;
+}
+
+.route-header {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.route-header-icon {
+  width: 8rem;
+}
+
+.route-header-icon img {
+  height: 100%;
+  aspect-ratio: 1/1;
+  object-fit: contain;
+}
+
+.route-header-info h3{
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.route-header-info main {
+  font-weight: 600;
+}
+
+.route-header-info p {
+  margin-bottom: 0.5rem;
+}
+
+.route-header-info span {
+  font-weight: 400;
+}
+
+.route-time {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.route-time-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.route-time-group-info {
+  text-align: center;
+}
+
+.route-time-group-info p {
+  margin-bottom: 0.3rem;
+}
+
+.route-time-group-icon {
+  width: 32px;
+}
+
+.route-path {
+  margin: 0.5rem 0;
+  background-image: url(/assets/icons/road.svg);
+  height: 48px;
+  width: 100%;
+}

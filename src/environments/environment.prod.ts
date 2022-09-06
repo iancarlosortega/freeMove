@@ -1,6 +1,8 @@
 export const environment = {
   production: true,
   paisesURL: 'https://countriesnow.space/api/v0.1',
+  mapboxToken:
+    'pk.eyJ1IjoiaWFuY2FybG9zb3J0ZWdhIiwiYSI6ImNrcThncW1rYjAwZ3gybnBrc2EyeGphNWoifQ.jDCs1Sv56p2qalAYsOlLTA',
   firebaseConfig: {
     apiKey: 'AIzaSyDISUgvhG1LrWUToausnto-0z-YDTd9kRU',
     authDomain: 'freemove-aa0c5.firebaseapp.com',

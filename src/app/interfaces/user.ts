@@ -13,7 +13,6 @@ export interface User {
   city?: string;
   photoUrl?: string;
   photoFilename?: string;
-  file?: string;
   role: UserRole;
   provider: UserProvider;
   // Datos de salud

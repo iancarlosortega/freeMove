@@ -1,0 +1,42 @@
+.custom-card {
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  border-radius: 5px;
+  padding: 1rem;
+  display: grid;
+  width: 15rem;
+  min-width: 100%;
+  gap: 1rem;
+  grid-template-columns: 30% 70%;
+}
+
+.card-icon {
+  display: grid;
+  place-items: center;
+}
+
+.card-icon img {
+  max-width: 100%;
+  width: 4rem;
+}
+
+.card-info {
+  display: grid;
+  place-items: center;
+}
+
+@media (min-width:992px) {
+  .card-info {
+    place-items: initial;
+  }
+}
+
+.card-title {
+  font-size: 1rem;
+  font-weight: lighter;
+}
+
+.card-description {
+  margin: 0;
+  font-size: 1.3rem;
+  font-weight: bold;
+}

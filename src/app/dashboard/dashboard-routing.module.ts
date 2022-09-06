@@ -3,14 +3,15 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { AdminGuard, ProviderGuard } from '../guards';
 
+import { ChangeEmailComponent } from './change-email/change-email.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
+import { CommunityComponent } from './community/community.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HomeComponent } from './home/home.component';
-import { CommunityComponent } from './community/community.component';
 import { IncidentsComponent } from './incidents/incidents.component';
-import { RoutesComponent } from './routes/routes.component';
 import { ProfileComponent } from './profile/profile.component';
-import { ChangePasswordComponent } from './change-password/change-password.component';
-import { ChangeEmailComponent } from './change-email/change-email.component';
+import { RouteComponent } from './route/route.component';
+import { RoutesComponent } from './routes/routes.component';
 
 const routes: Routes = [
   {
@@ -24,6 +25,10 @@ const routes: Routes = [
       {
         path: 'rutas',
         component: RoutesComponent,
+      },
+      {
+        path: 'ruta/:id',
+        component: RouteComponent,
       },
       //TODO: Agregar componente de bitácora
       {

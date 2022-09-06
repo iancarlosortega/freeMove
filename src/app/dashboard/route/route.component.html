@@ -1,0 +1,74 @@
+<header class="route-header">
+  <div class="route-title-group">
+    <div class="route-title">
+      <h1>{{ route.name }}</h1>
+      <div class="underline"></div>
+    </div>
+  </div>
+</header>
+<main class="main-container">
+  <div #mapDiv class="map"></div>
+  <div class="route-info">
+    <app-card
+      title="Distancia"
+      iconSrc="assets/icons/distance.png"
+      [description]="route.distance"
+      measurement="m"
+    ></app-card>
+    <app-card
+      title="Ciudad"
+      iconSrc="assets/icons/place.png"
+      [description]="route.city"
+    ></app-card>
+    <app-card
+      title="Tiempo de Inicio"
+      iconSrc="assets/icons/start-time.png"
+      [description]="route.startDate"
+    ></app-card>
+    <app-card
+      title="Tiempo de finalización"
+      iconSrc="assets/icons/start-time.png"
+      [description]="route.endDate"
+    ></app-card>
+    <app-card
+      title="Tiempo trasncurrido"
+      iconSrc="assets/icons/time-elapsed.png"
+      [description]="route.timeElapsed"
+      measurement="minutos"
+    ></app-card>
+    <!-- TODO: Agregar tiempo en movimiento -->
+    <!-- <app-card
+      title="Tiempo en Movimiento"
+      iconSrc="assets/icons/place.png"
+      [description]="route.city"
+    ></app-card> -->
+    <app-card
+      title="Tipo de Ruta"
+      iconSrc="assets/icons/type.png"
+      [description]="route.type"
+    ></app-card>
+    <app-card
+      title="Tipo de Actividad"
+      iconSrc="assets/icons/activity-type.png"
+      [description]="route.activityType"
+    ></app-card>
+    <app-card
+      title="Calorías Quemadas"
+      iconSrc="assets/icons/burnout-calories.png"
+      [description]="route.burnoutCalories"
+      measurement="cal"
+    ></app-card>
+    <app-card
+      title="Velocidad Promedio"
+      iconSrc="assets/icons/velocity-avg.png"
+      [description]="route.velocityAvg"
+      measurement="Km/h"
+    ></app-card>
+    <app-card
+      title="Velocidad Máxima"
+      iconSrc="assets/icons/velocity-max.png"
+      [description]="route.velocityMax"
+      measurement="Km/h"
+    ></app-card>
+  </div>
+</main>

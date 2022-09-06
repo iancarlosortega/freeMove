@@ -8,9 +8,10 @@ import { PrimeNgModule } from '../prime-ng/prime-ng.module';
 import { UsersComponent } from './users/users.component';
 import { RoutesComponent } from './routes/routes.component';
 import { IncidentsComponent } from './incidents/incidents.component';
+import { RouteComponent } from './route/route.component';
 
 @NgModule({
-  declarations: [UsersComponent, RoutesComponent, IncidentsComponent],
+  declarations: [UsersComponent, RoutesComponent, IncidentsComponent, RouteComponent],
   imports: [CommonModule, AdminRoutingModule, MaterialModule, PrimeNgModule],
 })
 export class AdminModule {}

@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
@@ -17,6 +17,11 @@ import { AboutComponent } from './pages/about/about.component';
 import { CityComponent } from './pages/city/city.component';
 import { HealthComponent } from './pages/health/health.component';
 import { ServicesComponent } from './pages/services/services.component';
+
+//Cambiar el idioma de la app
+import localeEs from '@angular/common/locales/es';
+import { registerLocaleData } from '@angular/common';
+registerLocaleData(localeEs);
 
 @NgModule({
   declarations: [
@@ -41,7 +46,7 @@ import { ServicesComponent } from './pages/services/services.component';
       preventDuplicates: true,
     }),
   ],
-  providers: [],
+  providers: [{ provide: LOCALE_ID, useValue: 'es' }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

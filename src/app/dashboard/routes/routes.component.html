@@ -1,1 +1,46 @@
-<p>routes works!</p>
+<h1>Historial de Rutas</h1>
+<ul>
+  <li *ngFor="let route of routes" [routerLink]="['../ruta', route.idRoute]">
+    <header class="route-header">
+      <div class="route-header-icon">
+        <img src="assets/icons/type.png" alt="Icono de ruta" />
+      </div>
+      <div class="route-header-info">
+        <h3>{{ route.name }}</h3>
+        <main>
+          <p>
+            Distancia Recorrida: <span>{{ route.distance }} metros</span>
+          </p>
+          <p>
+            Ciudad: <span>{{ route.city }}</span>
+          </p>
+          <p>
+            Fecha:
+            <span>{{ route.startDate | date: "fullDate" | titlecase }}</span>
+          </p>
+        </main>
+      </div>
+    </header>
+    <div class="route-time">
+      <div class="route-time-group">
+        <div class="route-time-group-info">
+          <p>Tiempo de Inicio</p>
+          <p>{{ route.startDate | date: "mediumTime" }}</p>
+        </div>
+        <div class="route-time-group-icon">
+          <img src="assets/icons/location.svg" alt="Icono de ubicación" />
+        </div>
+      </div>
+      <div class="route-time-group">
+        <div class="route-time-group-info">
+          <p>Tiempo de Fin</p>
+          <p>{{ route.endDate | date: "mediumTime" }}</p>
+        </div>
+        <div class="route-time-group-icon">
+          <img src="assets/icons/flag.svg" alt="Icono de Bandera de Meta" />
+        </div>
+      </div>
+    </div>
+    <div class="route-path"></div>
+  </li>
+</ul>
