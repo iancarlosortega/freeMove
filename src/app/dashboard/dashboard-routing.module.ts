@@ -17,14 +17,17 @@ const routes: Routes = [
   {
     path: '',
     component: DashboardComponent,
+    data: { breadcrumb: 'Dashboard' },
     children: [
       {
         path: '',
         component: HomeComponent,
+        data: { breadcrumb: '' },
       },
       {
         path: 'rutas',
         component: RoutesComponent,
+        data: { breadcrumb: 'Historial de Rutas' },
       },
       {
         path: 'ruta/:id',
@@ -38,10 +41,12 @@ const routes: Routes = [
       {
         path: 'incidentes',
         component: IncidentsComponent,
+        data: { breadcrumb: 'Incidentes' },
       },
       {
         path: 'comunidad',
         component: CommunityComponent,
+        data: { breadcrumb: 'Comunidad' },
       },
       {
         path: 'admin',
@@ -53,16 +58,19 @@ const routes: Routes = [
       {
         path: 'perfil',
         component: ProfileComponent,
+        data: { breadcrumb: 'Editar Perfil' },
       },
       {
         path: 'cambiar-clave',
         component: ChangePasswordComponent,
+        data: { breadcrumb: 'Cambiar Contraseña' },
         canActivate: [ProviderGuard],
         canLoad: [ProviderGuard],
       },
       {
         path: 'cambiar-correo',
         component: ChangeEmailComponent,
+        data: { breadcrumb: 'Cambiar Correo Electrónico' },
         canActivate: [ProviderGuard],
         canLoad: [ProviderGuard],
       },

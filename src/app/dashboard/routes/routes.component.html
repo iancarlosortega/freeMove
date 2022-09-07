@@ -1,5 +1,4 @@
-<h1>Historial de Rutas</h1>
-<ul>
+<ul *ngIf="!isLoading" class="fade-in">
   <li *ngFor="let route of routes" [routerLink]="['../ruta', route.idRoute]">
     <header class="route-header">
       <div class="route-header-icon">
@@ -44,3 +43,7 @@
     <div class="route-path"></div>
   </li>
 </ul>
+
+<div *ngIf="isLoading" class="flex-center spinner-loading">
+  <mat-spinner [diameter]="100"></mat-spinner>
+</div>

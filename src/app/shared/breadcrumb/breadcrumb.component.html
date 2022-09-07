@@ -1,0 +1,9 @@
+<section class="custom-breadcrumb" [ngClass]="{ 'display-none': isDashboard }">
+  <h3>{{ title }}</h3>
+  <ul class="custom-breadcrumb-items">
+    <li class="custom-breadcrumb-item" *ngFor="let breadcrumb of breadcrumbs">
+      <a [routerLink]="breadcrumb.url">{{ breadcrumb.label }}</a>
+      <i class="arrow right"></i>
+    </li>
+  </ul>
+</section>

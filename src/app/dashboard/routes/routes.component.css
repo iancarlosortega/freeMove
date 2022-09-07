@@ -4,7 +4,7 @@ ul {
 }
 
 li {
-  margin: 1.5rem 0;
+  margin-bottom: 1.5rem;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   border-radius: 5px;
   padding: 1rem;
@@ -19,6 +19,13 @@ li {
 
 .route-header-icon {
   width: 8rem;
+  display: none;
+}
+
+@media (min-width: 768px){
+  .route-header-icon {
+    display: block;
+  }
 }
 
 .route-header-icon img {

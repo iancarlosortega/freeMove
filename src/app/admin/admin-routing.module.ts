@@ -13,10 +13,12 @@ const routes: Routes = [
       {
         path: 'usuarios',
         component: UsersComponent,
+        data: { breadcrumb: 'Gestión de Usuarios' },
       },
       {
         path: 'rutas',
         component: RoutesComponent,
+        data: { breadcrumb: 'Gestión de Rutas' },
       },
       {
         path: 'ruta/:id',
@@ -25,6 +27,7 @@ const routes: Routes = [
       {
         path: 'incidentes',
         component: IncidentsComponent,
+        data: { breadcrumb: 'Gestión de Incidentes' },
       },
     ],
   },

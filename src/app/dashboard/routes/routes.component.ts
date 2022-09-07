@@ -11,6 +11,7 @@ import { RouteService, UserService } from 'src/app/services';
 export class RoutesComponent implements OnInit, OnDestroy {
   userObs!: Subscription;
   routes: Route[] = [];
+  isLoading: boolean = true;
 
   constructor(
     private routeService: RouteService,
@@ -22,6 +23,7 @@ export class RoutesComponent implements OnInit, OnDestroy {
       .pipe(switchMap((user) => this.routeService.getRoutesByUser(user.idUser)))
       .subscribe((routes) => {
         this.routes = routes;
+        this.isLoading = false;
       });
   }
 
