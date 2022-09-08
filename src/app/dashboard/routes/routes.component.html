@@ -1,5 +1,18 @@
+<header class="header">
+  <div class="filter">
+    <mat-icon>search</mat-icon>
+    <input (keyup)="filterRoutes($event)" type="text" placeholder="Buscar..." />
+  </div>
+  <button
+    pButton
+    type="button"
+    label="Eliminar Historial"
+    (click)="deleteAllRoutes()"
+    class="p-button-raised p-button-danger"
+  ></button>
+</header>
 <ul *ngIf="!isLoading" class="fade-in">
-  <li *ngFor="let route of routes" [routerLink]="['../ruta', route.idRoute]">
+  <li *ngFor="let route of routes">
     <header class="route-header">
       <div class="route-header-icon">
         <img src="assets/icons/type.png" alt="Icono de ruta" />
@@ -17,6 +30,12 @@
             Fecha:
             <span>{{ route.startDate | date: "fullDate" | titlecase }}</span>
           </p>
+          <button
+            class="primary-button info-button"
+            [routerLink]="['./', route.idRoute]"
+          >
+            Ver Más
+          </button>
         </main>
       </div>
     </header>
@@ -41,6 +60,14 @@
       </div>
     </div>
     <div class="route-path"></div>
+    <button
+      pButton
+      icon="pi pi-trash"
+      iconPos="right"
+      type="button"
+      (click)="deleteRoute(route.idRoute)"
+      class="p-button-raised p-button-rounded p-button-danger route-button"
+    ></button>
   </li>
 </ul>
 

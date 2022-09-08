@@ -1,0 +1,14 @@
+h5 {
+  text-align: center;
+}
+
+.buttons {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: space-around;
+}
+
+.cancel {
+  background-color: #56717D;
+  color: #FFFFFF;
+}

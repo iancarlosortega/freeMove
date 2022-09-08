@@ -9,28 +9,6 @@
   }
 }
 
-.route-title-group {
-  display: flex;
-  justify-content: center;
-}
-
-.route-title {
-  margin-bottom: 2rem;
-}
-
-.route-title h1{
-  color: #4f6082;
-  font-size: 3rem;
-  margin-bottom: 0.5rem;
-}
-
-.underline {
-  height: 6px;
-  width: 100%;
-  margin: auto;
-  background-color: var(--azul-oscuro);
-}
-
 .main-container {
   display: grid;
   gap: 1rem;

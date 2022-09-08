@@ -26,12 +26,19 @@ const routes: Routes = [
       },
       {
         path: 'rutas',
-        component: RoutesComponent,
         data: { breadcrumb: 'Historial de Rutas' },
-      },
-      {
-        path: 'ruta/:id',
-        component: RouteComponent,
+        children: [
+          {
+            path: '',
+            component: RoutesComponent,
+            data: { breadcrumb: '' },
+          },
+          {
+            path: ':id',
+            component: RouteComponent,
+            data: { breadcrumb: 'Gestión de Ruta' },
+          },
+        ],
       },
       //TODO: Agregar componente de bitácora
       {

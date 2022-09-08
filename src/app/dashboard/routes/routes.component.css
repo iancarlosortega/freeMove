@@ -1,3 +1,46 @@
+.header {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 2rem;
+}
+
+@media (min-width: 768px){
+  .header {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+/* Filter */
+
+.filter {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  border-bottom: 2px solid #CDCDCD;
+  margin: 2rem 0;
+  padding-bottom: 0.5rem;
+}
+
+@media (min-width: 768px){
+  .filter {
+    width: 20rem;
+  }
+}
+
+.filter input,
+.filter input:focus {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  width: 100%;
+}
+
+.filter mat-icon {
+  color: #797979;
+}
+
 ul {
   list-style: none;
   padding: 0;
@@ -8,7 +51,7 @@ li {
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   border-radius: 5px;
   padding: 1rem;
-  cursor: pointer;
+  position: relative;
 }
 
 .route-header {
@@ -81,4 +124,24 @@ li {
   background-image: url(/assets/icons/road.svg);
   height: 48px;
   width: 100%;
+}
+
+.info-button {
+  width: 10rem;
+  font-size: 0.9rem;
+}
+
+/* Delete route */
+
+.route-button {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+}
+
+@media (min-width: 768px){
+  .route-button {
+    top: 1rem;
+    right: 1rem;
+  }
 }

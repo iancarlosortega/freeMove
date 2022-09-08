@@ -21,6 +21,7 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
 import { ChangeEmailComponent } from './change-email/change-email.component';
 import { RouteComponent } from './route/route.component';
 import { CardComponent } from './components/card/card.component';
+import { ConfirmDeleteComponent } from './components/confirm-delete/confirm-delete.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { CardComponent } from './components/card/card.component';
     ChangeEmailComponent,
     RouteComponent,
     CardComponent,
+    ConfirmDeleteComponent,
   ],
   imports: [
     CommonModule,
