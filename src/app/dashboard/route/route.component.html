@@ -1,5 +1,16 @@
 <main class="main-container">
-  <div #mapDiv class="map"></div>
+  <div #mapDiv class="map">
+    <share-buttons
+      class="share-buttons"
+      theme="circles-dark"
+      [include]="['copy', 'facebook', 'twitter', 'whatsapp']"
+      [showIcon]="true"
+      [showText]="false"
+      [url]="shareUrl"
+      description="¡Conoce todos los datos de mi recorrido gracias a FreeMove!"
+    >
+    </share-buttons>
+  </div>
   <div class="route-info">
     <app-card
       title="Distancia"

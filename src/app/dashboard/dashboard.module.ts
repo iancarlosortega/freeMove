@@ -7,6 +7,8 @@ import { SwiperModule } from 'swiper/angular';
 import { MaterialModule } from '../material/material.module';
 import { PrimeNgModule } from '../prime-ng/prime-ng.module';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { ShareButtonsModule } from 'ngx-sharebuttons/buttons';
+import { ShareIconsModule } from 'ngx-sharebuttons/icons';
 import { SharedModule } from '../shared/shared.module';
 
 import { HomeComponent } from './home/home.component';
@@ -47,6 +49,8 @@ import { ConfirmDeleteComponent } from './components/confirm-delete/confirm-dele
     PrimeNgModule,
     SharedModule,
     ModalModule.forRoot(),
+    ShareButtonsModule,
+    ShareIconsModule,
   ],
 })
 export class DashboardModule {}

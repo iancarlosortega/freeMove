@@ -18,6 +18,9 @@ import { switchMap } from 'rxjs';
 })
 export class RouteComponent implements OnInit, AfterViewInit {
   @ViewChild('mapDiv') mapElement!: ElementRef;
+
+  //TODO: Probar en producción
+  shareUrl: string = location.href;
   route: Route = {
     idRoute: '',
     idUser: '',
@@ -60,6 +63,8 @@ export class RouteComponent implements OnInit, AfterViewInit {
       .pipe(switchMap(({ id }) => this.routeService.getRouteById(id)))
       .subscribe((route) => {
         this.route = route;
+
+        //TODO: ELiminar todo este bloque de código cuando se tenga la data real
         this.route.startDate = new Date(
           this.route.startDate
         ).toLocaleString() as any;
@@ -71,6 +76,7 @@ export class RouteComponent implements OnInit, AfterViewInit {
         this.route.coordinates = this.route.coordinates.map((route: any) =>
           route.split(',').map((coord: any) => parseFloat(coord))
         ) as any;
+
         const map = new Map({
           container: this.mapElement.nativeElement,
           style: 'mapbox://styles/mapbox/streets-v11',

@@ -74,3 +74,10 @@
 <div *ngIf="isLoading" class="flex-center spinner-loading">
   <mat-spinner [diameter]="100"></mat-spinner>
 </div>
+
+<div
+  *ngIf="routes.length === 0 && !isLoading"
+  class="alert alert--info fade-in"
+>
+  No se encontró ningún resultado.
+</div>
