@@ -20,35 +20,37 @@
         <img src="assets/icons/bicicleta.svg" alt="Bicicleta" />
       </header>
       <div class="group">
-        <h5>Julio</h5>
+        <h5>{{ currentDay | date: "MMMM" | titlecase }}</h5>
         <div class="group-info">
           <div class="group-item">
-            <h6>347</h6>
+            <h6>
+              {{ monthStadistics.distanceTraveled }}
+            </h6>
             <p>Kilómetros</p>
           </div>
           <div class="group-item">
-            <h6>3472</h6>
+            <h6>{{ monthStadistics.burnoutCalories }}</h6>
             <p>Calorías</p>
           </div>
           <div class="group-item">
-            <h6>23</h6>
+            <h6>{{ monthStadistics.numberOfRoutes }}</h6>
             <p>Rutas</p>
           </div>
         </div>
       </div>
       <div class="group">
-        <h5>Lunes 3 de Julio</h5>
+        <h5>{{ currentDay | date: "EEEE d 'de' MMMM" | titlecase }}</h5>
         <div class="group-info">
           <div class="group-item">
-            <h6>347</h6>
+            <h6>{{ dayStadistics.distanceTraveled }}</h6>
             <p>Kilómetros</p>
           </div>
           <div class="group-item">
-            <h6>3472</h6>
+            <h6>{{ dayStadistics.burnoutCalories }}</h6>
             <p>Calorías</p>
           </div>
           <div class="group-item">
-            <h6>23</h6>
+            <h6>{{ dayStadistics.numberOfRoutes }}</h6>
             <p>Rutas</p>
           </div>
         </div>
@@ -60,7 +62,7 @@
         <img src="assets/icons/persona.svg" alt="Persona" />
       </header>
       <div class="group-health">
-        <h5>Julio</h5>
+        <h5>{{ currentDay | date: "MMMM" | titlecase }}</h5>
         <div class="group-info">
           <div class="group-item">
             <h6>347</h6>
@@ -77,7 +79,7 @@
         </div>
       </div>
       <div class="group-health">
-        <h5>Lunes 3 de Julio</h5>
+        <h5>{{ currentDay | date: "EEEE d 'de' MMMM" | titlecase }}</h5>
         <div class="group-info">
           <div class="group-item">
             <h6>347</h6>

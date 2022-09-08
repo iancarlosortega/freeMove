@@ -93,11 +93,13 @@
 }
 
 .group h5 {
+  text-align: center;
   font-weight: 600;
   color: var(--amarillo);
 }
 
 .group-health h5 {
+  text-align: center;
   font-weight: 600;
   color: #666666;
 }
