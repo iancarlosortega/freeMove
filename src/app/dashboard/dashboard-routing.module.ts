@@ -9,6 +9,7 @@ import { CommunityComponent } from './community/community.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HomeComponent } from './home/home.component';
 import { IncidentsComponent } from './incidents/incidents.component';
+import { LinkAccountComponent } from './link-account/link-account.component';
 import { ProfileComponent } from './profile/profile.component';
 import { RouteComponent } from './route/route.component';
 import { RoutesComponent } from './routes/routes.component';
@@ -80,6 +81,11 @@ const routes: Routes = [
         data: { breadcrumb: 'Cambiar Correo Electrónico' },
         canActivate: [ProviderGuard],
         canLoad: [ProviderGuard],
+      },
+      {
+        path: 'vincular-cuenta',
+        component: LinkAccountComponent,
+        data: { breadcrumb: 'Vincular Cuenta' },
       },
       {
         path: '**',

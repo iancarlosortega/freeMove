@@ -57,9 +57,7 @@
   margin: 1rem 0;
 }
 
-/* Logout Button */
-
-.logout-button {
+.gradient-button {
   align-items: center;
   background-image: linear-gradient(to right, var(--amarillo-hover) 0%, var(--amarillo) 50%, var(--amarillo-hover) 100%);
   background-size: 200% auto;
@@ -80,6 +78,24 @@
   width: 100%;
 }
 
-.logout-button:hover {
+.gradient-button:hover {
   background-position: right center;
+}
+
+/* Alert Button */
+
+.activate-button {
+  background-image: linear-gradient(to right, var(--rojo-hover) 0%, var(--rojo) 50%, var(--rojo-hover) 100%);
+  margin: 1rem 0;
+}
+
+.desactivate-button {
+  background-image: linear-gradient(to right, var(--verde-oscuro) 0%, var(--verde) 50%, var(--verde-oscuro) 100%);
+  margin: 1rem 0;
+}
+
+/* Logout Button */
+
+.logout-button {
+  background-image: linear-gradient(to right, var(--amarillo-hover) 0%, var(--amarillo) 50%, var(--amarillo-hover) 100%);
 }

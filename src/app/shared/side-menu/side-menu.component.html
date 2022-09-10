@@ -2,16 +2,16 @@
   <img src="assets/logoFreeMoveAzul.png" alt="FreeMove" />
 </header>
 <div *ngFor="let item of menuItems">
-  <section *ngIf="item.available">
+  <section *ngIf="item.isAvailable">
     <h3 class="section-title">{{ item.title }}</h3>
     <ul class="list-items">
       <div *ngFor="let subItem of item.subItems">
         <li
-          (click)="cerrarSidenav()"
+          (click)="closeMenu()"
           [routerLink]="subItem.route"
           routerLinkActive="active-link"
           [routerLinkActiveOptions]="{ exact: true }"
-          *ngIf="subItem.available"
+          *ngIf="subItem.isAvailable"
         >
           <img [src]="subItem.icon" [alt]="subItem.name" />
           <p>
@@ -22,9 +22,26 @@
     </ul>
   </section>
 </div>
+<!-- Security Alert -->
+<button
+  *ngIf="!isAlertActive"
+  class="gradient-button activate-button"
+  (click)="activateAlert()"
+>
+  Activar Alerta
+  <mat-icon>add_alert</mat-icon>
+</button>
+<button
+  *ngIf="isAlertActive"
+  class="gradient-button desactivate-button"
+  (click)="desactivateAlert()"
+>
+  Pausar Alerta
+  <mat-icon>stop</mat-icon>
+</button>
 
 <!-- Logout -->
-<button class="logout-button" (click)="logout()">
+<button class="gradient-button logout-button" (click)="logout()">
   Cerrar sesión
   <mat-icon>logout</mat-icon>
 </button>

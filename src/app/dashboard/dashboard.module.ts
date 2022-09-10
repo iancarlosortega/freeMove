@@ -24,6 +24,9 @@ import { ChangeEmailComponent } from './change-email/change-email.component';
 import { RouteComponent } from './route/route.component';
 import { CardComponent } from './components/card/card.component';
 import { ConfirmDeleteComponent } from './components/confirm-delete/confirm-delete.component';
+import { ConfirmAlertComponent } from './components/confirm-alert/confirm-alert.component';
+import { StopAlertComponent } from './components/stop-alert/stop-alert.component';
+import { LinkAccountComponent } from './link-account/link-account.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +42,9 @@ import { ConfirmDeleteComponent } from './components/confirm-delete/confirm-dele
     RouteComponent,
     CardComponent,
     ConfirmDeleteComponent,
+    ConfirmAlertComponent,
+    StopAlertComponent,
+    LinkAccountComponent,
   ],
   imports: [
     CommonModule,

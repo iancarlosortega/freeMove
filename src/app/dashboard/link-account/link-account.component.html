@@ -1,0 +1,38 @@
+<div *ngIf="!isLoading" class="fade-in">
+  <p>
+    Para poder vincular una cuenta debe solicitar a otro usuario aceptar su
+    petición de vinculamiento.
+  </p>
+  <form
+    [formGroup]="linkAccountForm"
+    #form
+    autocomplete="off"
+    (submit)="linkAccount()"
+  >
+    <div @fade *ngIf="isErrorEmail" class="alert alert--error">
+      <p><strong>¡Error!</strong> No puede ingresar su correo actual.</p>
+    </div>
+    <mat-form-field appearance="outline">
+      <mat-label>Correo a vincular</mat-label>
+      <input
+        type="email"
+        matInput
+        formControlName="linkedEmail"
+        placeholder="example@gmail.com"
+      />
+      <mat-error *ngIf="invalidInput('linkedEmail')">
+        El correo es <strong>obligatorio</strong>
+      </mat-error>
+    </mat-form-field>
+    <div class="flex-center">
+      <button type="submit" class="primary-button" [disabled]="isDisabled">
+        <span>Enviar invitación</span>
+        <mat-icon>send</mat-icon>
+      </button>
+    </div>
+  </form>
+</div>
+
+<div *ngIf="isLoading" class="flex-center spinner-loading">
+  <mat-spinner [diameter]="100"></mat-spinner>
+</div>

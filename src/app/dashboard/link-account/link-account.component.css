@@ -1,0 +1,13 @@
+form {
+  width: 38rem;
+  max-width: 100%;
+}
+
+mat-form-field {
+  display: block;
+  width: 100%;
+}
+
+.alert {
+  margin-bottom: 1.5rem;
+}
