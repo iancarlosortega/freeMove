@@ -37,7 +37,7 @@ export class SideMenuComponent implements OnInit, OnDestroy {
         switchMap((user) => this.securityService.getAlertByUser(user.idUser))
       )
       .subscribe((alert) => {
-        if (alert.isActive) {
+        if (alert && alert.isActive) {
           this.isAlertActive = true;
           this.idAlert = alert.idAlert;
         }

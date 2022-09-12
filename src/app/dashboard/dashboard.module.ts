@@ -27,6 +27,7 @@ import { ConfirmDeleteComponent } from './components/confirm-delete/confirm-dele
 import { ConfirmAlertComponent } from './components/confirm-alert/confirm-alert.component';
 import { StopAlertComponent } from './components/stop-alert/stop-alert.component';
 import { LinkAccountComponent } from './link-account/link-account.component';
+import { LinkAccountInvitationComponent } from './link-account-invitation/link-account-invitation.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { LinkAccountComponent } from './link-account/link-account.component';
     ConfirmAlertComponent,
     StopAlertComponent,
     LinkAccountComponent,
+    LinkAccountInvitationComponent,
   ],
   imports: [
     CommonModule,

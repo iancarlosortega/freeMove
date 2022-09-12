@@ -3,14 +3,17 @@
     Para poder vincular una cuenta debe solicitar a otro usuario aceptar su
     petición de vinculamiento.
   </p>
-  <form
-    [formGroup]="linkAccountForm"
-    #form
-    autocomplete="off"
-    (submit)="linkAccount()"
-  >
+  <form [formGroup]="linkAccountForm" #form autocomplete="off">
     <div @fade *ngIf="isErrorEmail" class="alert alert--error">
-      <p><strong>¡Error!</strong> No puede ingresar su correo actual.</p>
+      <p>
+        <strong>¡Error!</strong> No puede enviar la solicitud a usted mismo.
+      </p>
+    </div>
+    <div @fade *ngIf="isErrorUser" class="alert alert--error">
+      <p>
+        <strong>¡Error!</strong> No existe un usuario con ese correo
+        electrónico.
+      </p>
     </div>
     <mat-form-field appearance="outline">
       <mat-label>Correo a vincular</mat-label>
@@ -25,9 +28,33 @@
       </mat-error>
     </mat-form-field>
     <div class="flex-center">
-      <button type="submit" class="primary-button" [disabled]="isDisabled">
+      <button
+        *ngIf="!notification"
+        class="primary-button"
+        (click)="sendInvitation()"
+      >
         <span>Enviar invitación</span>
         <mat-icon>send</mat-icon>
+      </button>
+    </div>
+    <div class="flex-center">
+      <button
+        *ngIf="notification?.status === 'pending'"
+        class="primary-button"
+        disabled
+      >
+        <span>Invitación enviada</span>
+        <mat-icon>access_time_filled</mat-icon>
+      </button>
+    </div>
+    <div class="flex-center">
+      <button
+        *ngIf="alert?.linkedAccount"
+        class="primary-button"
+        (click)="changeLinkedEmail()"
+      >
+        <span>Cambiar email vinculado</span>
+        <mat-icon>change_circle</mat-icon>
       </button>
     </div>
   </form>

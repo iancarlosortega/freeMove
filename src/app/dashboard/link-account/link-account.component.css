@@ -11,3 +11,7 @@ mat-form-field {
 .alert {
   margin-bottom: 1.5rem;
 }
+
+.primary-button {
+  width: 16rem;
+}

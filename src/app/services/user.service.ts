@@ -54,6 +54,22 @@ export class UserService {
       );
   }
 
+  getUserByEmail(email: string) {
+    return this.firestore
+      .collection('users', (ref) => ref.where('email', '==', email))
+      .snapshotChanges()
+      .pipe(
+        map((result) => {
+          return result.map((a) => {
+            const data = a.payload.doc.data() as User;
+            data.idUser = a.payload.doc.id;
+            return data;
+          });
+        }),
+        map((result) => result[0])
+      );
+  }
+
   createUser(user: User) {
     return this.firestore.collection('users').doc(user.idUser).set(user);
   }

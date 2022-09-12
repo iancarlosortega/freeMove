@@ -37,7 +37,19 @@
 
       <!-- Menu -->
       <mat-menu #notificationsMenu>
-        <!-- TODO: Completar las notificaciones -->
+        <div class="notifications">
+          <h3>Notificaciones</h3>
+          <ul class="notifications-list" *ngIf="notifications.length > 0">
+            <li
+              *ngFor="let notification of notifications"
+              [routerLink]="['/dashboard/']"
+            >
+              <h4>{{ notification.title }}</h4>
+              <p>{{ notification.message }}</p>
+            </li>
+          </ul>
+          <p *ngIf="notifications.length === 0">No hay notificaciones</p>
+        </div>
       </mat-menu>
     </button>
     <button
