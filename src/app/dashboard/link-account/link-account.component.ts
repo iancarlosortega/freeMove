@@ -2,17 +2,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { ToastrService } from 'ngx-toastr';
-import {
-  NotificationService,
-  SecurityService,
-  UserService,
-} from 'src/app/services';
-import {
-  LinkAccountNotification,
-  SecurityAlert,
-  User,
-} from 'src/app/interfaces';
+import { AlertService, UserService } from 'src/app/services';
+import { Alert, User } from 'src/app/interfaces';
 
 @Component({
   selector: 'app-link-account',
@@ -31,8 +22,7 @@ import {
 export class LinkAccountComponent implements OnInit, OnDestroy {
   userObs!: Subscription;
   user!: User;
-  alert!: SecurityAlert;
-  notification!: LinkAccountNotification;
+  alert!: Alert;
   isLoading: boolean = true;
   isErrorEmail: boolean = false;
   isErrorUser: boolean = false;
@@ -44,9 +34,8 @@ export class LinkAccountComponent implements OnInit, OnDestroy {
   constructor(
     private fb: FormBuilder,
     private userService: UserService,
-    private securityService: SecurityService,
-    private notificationService: NotificationService,
-    private toastrService: ToastrService
+    private securityService: AlertService,
+    private alertService: AlertService
   ) {}
 
   ngOnInit(): void {
@@ -60,35 +49,29 @@ export class LinkAccountComponent implements OnInit, OnDestroy {
               user.idUser
             );
             const data = await alertRef.get();
-            this.alert = data.data() as SecurityAlert;
+            this.alert = data.data() as Alert;
             return;
           }
           this.alert = alert;
-          this.notificationService
-            .getNotificationByAlert(alert.idAlert)
-            .subscribe((notification) => {
-              if (!notification) {
-                this.isLoading = false;
-                return;
-              }
-              this.notification = notification;
-              switch (notification.status) {
-                case 'accepted':
-                  this.linkAccountForm
-                    .get('linkedEmail')
-                    ?.setValue(this.alert.linkedAccount);
-                  break;
-                case 'pending':
-                  this.linkAccountForm
-                    .get('linkedEmail')
-                    ?.setValue(this.notification.emailToVinculate);
-                  this.linkAccountForm.disable();
-                  break;
-                default:
-                  break;
-              }
-              this.isLoading = false;
-            });
+          this.isLoading = false;
+          switch (alert.notificationStatus) {
+            case 'accepted':
+              this.linkAccountForm
+                .get('linkedEmail')
+                ?.setValue(this.alert.linkedAccount);
+              this.linkAccountForm.enable();
+              break;
+            case 'pending':
+              this.linkAccountForm
+                .get('linkedEmail')
+                ?.setValue(this.alert.emailToVinculate);
+              this.linkAccountForm.disable();
+              break;
+            default:
+              this.linkAccountForm.reset();
+              this.linkAccountForm.enable();
+              break;
+          }
         });
     });
   }
@@ -120,37 +103,38 @@ export class LinkAccountComponent implements OnInit, OnDestroy {
       return;
     }
 
-    this.userService.getUserByEmail(linkedEmail).subscribe((user) => {
-      if (!user) {
-        this.isErrorUser = true;
-        setTimeout(() => {
-          this.isErrorUser = false;
-        }, 3500);
-        return;
-      }
-
-      const notification: LinkAccountNotification = {
-        idUser: user.idUser,
-        idUserFrom: this.user.idUser,
-        idAlert: this.alert.idAlert,
-        title: 'Vincular Cuenta',
-        message: `${this.user.name} quiere vincular su cuenta con la tuya.`,
-        status: 'pending',
-        emailToVinculate: user.email,
-        emailFrom: this.user.email,
-        url: 'invitacion-vinculamiento',
-      };
-
-      this.notificationService.createNotification(notification).then(() => {
-        this.toastrService.success(
-          'Se ha enviado una notificación al usuario',
-          'Notificación enviada'
-        );
+    this.alertService
+      .createInvitation(linkedEmail, this.user, this.alert)
+      .subscribe((error) => {
+        if (error) {
+          this.isErrorUser = true;
+          setTimeout(() => {
+            this.isErrorUser = false;
+          }, 3500);
+        }
       });
-    });
   }
 
   changeLinkedEmail() {
-    console.log('changeLinkedEmail');
+    if (this.linkAccountForm.invalid) {
+      this.linkAccountForm.markAllAsTouched();
+      return;
+    }
+    const linkedEmail = this.linkAccountForm.get('linkedEmail')?.value;
+    if (this.alert.linkedAccount === linkedEmail) {
+      console.log('No se ha cambiado el email');
+      return;
+    }
+
+    this.alertService
+      .createInvitation(linkedEmail, this.user, this.alert)
+      .subscribe((error) => {
+        if (error) {
+          this.isErrorUser = true;
+          setTimeout(() => {
+            this.isErrorUser = false;
+          }, 3500);
+        }
+      });
   }
 }

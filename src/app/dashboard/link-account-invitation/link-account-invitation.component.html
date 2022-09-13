@@ -1,1 +1,28 @@
-<p>link-account-invitation works!</p>
+<div *ngIf="isAccepted && !isLoading" class="alert alert--success">
+  Su cuenta fue vinculada correctamente con la cuenta de
+  {{ alert.emailFrom }}.
+</div>
+
+<div *ngIf="!isAccepted && !isLoading" class="custom-card">
+  <p>
+    El usuario <span>{{ alert.emailFrom }}</span> quiere vincular su cuenta con
+    usted para poder tener las utilidades de seguridad por parte de FreeMove,
+    como saber la ubicación actual cuando se active la alerta de seguridad desde
+    su cuenta.
+  </p>
+
+  <footer class="custom-card-footer">
+    <button mat-raised-button class="cancel-button" (click)="reject()">
+      Rechazar
+      <mat-icon>highlight_off</mat-icon>
+    </button>
+    <button mat-raised-button class="confirm-button" (click)="accept()">
+      Aceptar
+      <mat-icon>check</mat-icon>
+    </button>
+  </footer>
+</div>
+
+<div *ngIf="isLoading" class="flex-center spinner-loading">
+  <mat-spinner [diameter]="100"></mat-spinner>
+</div>

@@ -33,7 +33,13 @@
       aria-label="Example icon-button with a menu"
       class="nav-button flex-center"
     >
-      <mat-icon matBadge="+9" matBadgeColor="warn">notifications</mat-icon>
+      <mat-icon
+        *ngIf="notifications.length > 0"
+        [matBadge]="notifications.length > 9 ? '9+' : notifications.length"
+        matBadgeColor="warn"
+        >notifications</mat-icon
+      >
+      <mat-icon *ngIf="notifications.length === 0">notifications</mat-icon>
 
       <!-- Menu -->
       <mat-menu #notificationsMenu>
@@ -42,7 +48,7 @@
           <ul class="notifications-list" *ngIf="notifications.length > 0">
             <li
               *ngFor="let notification of notifications"
-              [routerLink]="['/dashboard/']"
+              (click)="navigateTo(notification)"
             >
               <h4>{{ notification.title }}</h4>
               <p>{{ notification.message }}</p>

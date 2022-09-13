@@ -6,6 +6,7 @@ import {
   UserService,
 } from 'src/app/services';
 import { Notification, User } from 'src/app/interfaces';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nav',
@@ -19,6 +20,7 @@ export class NavComponent implements OnInit, OnDestroy {
   notifications: Notification[] = [];
 
   constructor(
+    private router: Router,
     private userService: UserService,
     private authService: AuthService,
     private notificationService: NotificationService
@@ -46,6 +48,16 @@ export class NavComponent implements OnInit, OnDestroy {
 
   //TODO: Implementar el buscador
   search() {}
+
+  navigateTo(notification: Notification) {
+    if (notification.url) {
+      this.router.navigateByUrl(
+        `/dashboard/${notification.url}/${notification.idAlert}`
+      );
+      return;
+    }
+    this.router.navigateByUrl('/dashboard/notificaciones');
+  }
 
   logout() {
     this.authService.logout();

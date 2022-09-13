@@ -160,6 +160,10 @@
   background-color: var(--amarillo);
 }
 
+.listado-items-responsive li {
+  cursor: pointer;
+}
+
 .listado-items-responsive a {
   color: white;
   font-size: 1.2rem;

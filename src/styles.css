@@ -178,6 +178,24 @@ img {
   background-color: rgb(144, 144, 144);
 }
 
+.cancel-button {
+  background-color: #56717D !important;
+  color: #FFFFFF !important;
+}
+
+.cancel-button:hover {
+  background-color: #3a4d55 !important;
+}
+
+.confirm-button {
+  background-color: #3a7d46 !important;
+  color: #FFFFFF !important;
+}
+
+.confirm-button:hover {
+  background-color: #2c5e34 !important;
+}
+
 /* Alerts */
 
 .alert {

@@ -1,0 +1,19 @@
+.custom-card {
+  width: 100%;
+  max-width: 40rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+span {
+  color: var(--azul-oscuro);
+  font-weight: 500;
+}
+
+.custom-card-footer {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}

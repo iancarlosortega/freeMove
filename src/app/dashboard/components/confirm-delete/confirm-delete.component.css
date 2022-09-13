@@ -7,13 +7,3 @@ h5 {
   display: flex;
   justify-content: space-around;
 }
-
-.cancel {
-  background-color: #56717D;
-  color: #FFFFFF;
-}
-
-.confirm {
-  background-color: #3a7d46;
-  color: #FFFFFF;
-}

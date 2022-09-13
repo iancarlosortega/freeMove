@@ -11,6 +11,7 @@ import { HomeComponent } from './home/home.component';
 import { IncidentsComponent } from './incidents/incidents.component';
 import { LinkAccountInvitationComponent } from './link-account-invitation/link-account-invitation.component';
 import { LinkAccountComponent } from './link-account/link-account.component';
+import { NotificationsComponent } from './notifications/notifications.component';
 import { ProfileComponent } from './profile/profile.component';
 import { RouteComponent } from './route/route.component';
 import { RoutesComponent } from './routes/routes.component';
@@ -89,9 +90,14 @@ const routes: Routes = [
         data: { breadcrumb: 'Vincular Cuenta' },
       },
       {
-        path: 'invitacion-vinculamiento',
+        path: 'invitacion-vinculamiento/:id',
         component: LinkAccountInvitationComponent,
         data: { breadcrumb: 'Invitación de Vinculamiento de Cuenta' },
+      },
+      {
+        path: 'notificaciones',
+        component: NotificationsComponent,
+        data: { breadcrumb: 'Notificaciones' },
       },
       {
         path: '**',

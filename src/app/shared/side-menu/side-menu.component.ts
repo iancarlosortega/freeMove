@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { Subscription, switchMap, tap } from 'rxjs';
 import { User } from 'src/app/interfaces';
-import { AuthService, SecurityService, UserService } from 'src/app/services';
+import { AuthService, AlertService, UserService } from 'src/app/services';
 
 @Component({
   selector: 'app-side-menu',
@@ -27,7 +27,7 @@ export class SideMenuComponent implements OnInit, OnDestroy {
   constructor(
     private authService: AuthService,
     private userService: UserService,
-    private securityService: SecurityService
+    private securityService: AlertService
   ) {}
 
   ngOnInit(): void {
@@ -152,6 +152,7 @@ export class SideMenuComponent implements OnInit, OnDestroy {
   }
 
   activateAlert() {
+    this.onCloseSidenav.emit();
     this.securityService.activateAlert(this.user.idUser);
   }
 
