@@ -6,7 +6,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 import { ConfirmAlertComponent } from 'src/app/dashboard/components/confirm-alert/confirm-alert.component';
 import { StopAlertComponent } from 'src/app/dashboard/components/stop-alert/stop-alert.component';
-import { UserService, NotificationService } from './';
+import { UserService, NotificationService, GeolocationService } from './';
 import { Alert, Notification, User } from 'src/app/interfaces';
 
 @Injectable({
@@ -19,7 +19,8 @@ export class AlertService {
     private firestore: AngularFirestore,
     private router: Router,
     private userService: UserService,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private geolocationService: GeolocationService
   ) {}
 
   activateAlert(idUser: string) {
@@ -30,7 +31,7 @@ export class AlertService {
     dialog.afterClosed().subscribe((result: boolean) => {
       if (!result) return;
 
-      this.getAlertByUser(idUser).subscribe((alert) => {
+      this.getAlertByUserNoRealtime(idUser).subscribe(async (alert) => {
         if (!alert) {
           this.createAlert(idUser);
           this.toastr.warning(
@@ -50,27 +51,37 @@ export class AlertService {
           return;
         }
 
-        this.firestore.collection('alerts').doc(alert.idAlert).update({
-          isActive: true,
-          startTime: Date.now(),
-        });
+        this.firestore
+          .collection('alerts')
+          .doc(alert.idAlert)
+          .update({
+            isActive: true,
+            startTime: Date.now(),
+            startPosition: await this.geolocationService.getUserLocation(),
+            endTime: '',
+            endPosition: '',
+            //TODO: Cambiar las coords
+            coordinates: await this.geolocationService.getUserLocation(),
+          });
       });
     });
   }
 
-  desactivateAlert(idAlert: string) {
+  desactivateAlert(alert: Alert) {
     const dialog = this.dialog.open(StopAlertComponent, {
       width: '400px',
     });
 
-    dialog.afterClosed().subscribe((result: boolean) => {
+    dialog.afterClosed().subscribe(async (result: boolean) => {
       if (result) {
-        this.firestore.collection('alerts').doc(idAlert).update({
-          isActive: false,
-          endTime: Date.now(),
-          //TODO: Calcular el tiempo transcurrido
-          timeElapsed: 111,
-        });
+        this.firestore
+          .collection('alerts')
+          .doc(alert.idAlert)
+          .update({
+            isActive: false,
+            endTime: Date.now(),
+            endPosition: await this.geolocationService.getUserLocation(),
+          });
       }
     });
   }
@@ -162,6 +173,36 @@ export class AlertService {
   getAlertByUser(idUser: string) {
     return this.firestore
       .collection('alerts', (ref) => ref.where('idUser', '==', idUser))
+      .snapshotChanges()
+      .pipe(
+        map((result) => {
+          return result.map((a) => {
+            const data = a.payload.doc.data() as Alert;
+            data.idAlert = a.payload.doc.id;
+            return data;
+          });
+        }),
+        map((result) => result[0])
+      );
+  }
+
+  getAlertByUserNoRealtime(idUser: string) {
+    return this.firestore
+      .collection('alerts', (ref) => ref.where('idUser', '==', idUser))
+      .get()
+      .pipe(
+        map((result) => {
+          if (result.docs.length === 0) return null;
+          const alert = result.docs[0].data() as Alert;
+          alert.idAlert = result.docs[0].id;
+          return alert;
+        })
+      );
+  }
+
+  getAlertToUserVinculated(email: string) {
+    return this.firestore
+      .collection('alerts', (ref) => ref.where('emailToVinculate', '==', email))
       .snapshotChanges()
       .pipe(
         map((result) => {

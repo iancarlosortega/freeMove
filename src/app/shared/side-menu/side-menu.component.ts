@@ -6,7 +6,7 @@ import {
   Output,
 } from '@angular/core';
 import { Subscription, switchMap, tap } from 'rxjs';
-import { User } from 'src/app/interfaces';
+import { Alert, User } from 'src/app/interfaces';
 import { AuthService, AlertService, UserService } from 'src/app/services';
 
 @Component({
@@ -18,29 +18,25 @@ export class SideMenuComponent implements OnInit, OnDestroy {
   @Output() onCloseSidenav: EventEmitter<any> = new EventEmitter();
   userObs!: Subscription;
   user!: User;
-  idAlert: string = '';
+  alert!: Alert;
   isAdmin: boolean = false;
   isEmailProvider: boolean = false;
-  isAlertActive: boolean = false;
   menuItems: any = [];
 
   constructor(
     private authService: AuthService,
     private userService: UserService,
-    private securityService: AlertService
+    private alertService: AlertService
   ) {}
 
   ngOnInit(): void {
     this.userObs = this.userService.user$
       .pipe(
         tap((user) => (this.user = user)),
-        switchMap((user) => this.securityService.getAlertByUser(user.idUser))
+        switchMap((user) => this.alertService.getAlertByUser(user.idUser))
       )
       .subscribe((alert) => {
-        if (alert && alert.isActive) {
-          this.isAlertActive = true;
-          this.idAlert = alert.idAlert;
-        }
+        this.alert = alert;
         this.isAdmin = this.user.role === 'ADMIN-ROLE';
         this.isEmailProvider = this.user.provider === 'email-password';
         const menuItems = [
@@ -76,6 +72,12 @@ export class SideMenuComponent implements OnInit, OnDestroy {
                 name: 'Comunidad',
                 icon: 'assets/icons/comunidad.svg',
                 route: './comunidad',
+                isAvailable: true,
+              },
+              {
+                name: 'Rastreo',
+                icon: 'assets/icons/rastreo.svg',
+                route: './rastreo',
                 isAvailable: true,
               },
             ],
@@ -153,10 +155,11 @@ export class SideMenuComponent implements OnInit, OnDestroy {
 
   activateAlert() {
     this.onCloseSidenav.emit();
-    this.securityService.activateAlert(this.user.idUser);
+    this.alertService.activateAlert(this.user.idUser);
   }
 
   desactivateAlert() {
-    this.securityService.desactivateAlert(this.idAlert);
+    this.onCloseSidenav.emit();
+    this.alertService.desactivateAlert(this.alert);
   }
 }

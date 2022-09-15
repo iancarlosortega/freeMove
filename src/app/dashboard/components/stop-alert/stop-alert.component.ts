@@ -1,15 +1,19 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-stop-alert',
   templateUrl: './stop-alert.component.html',
-  styleUrls: ['./stop-alert.component.css']
+  styleUrls: ['../confirm-delete/confirm-delete.component.css'],
 })
-export class StopAlertComponent implements OnInit {
+export class StopAlertComponent {
+  constructor(private dialogRef: MatDialogRef<StopAlertComponent>) {}
 
-  constructor() { }
-
-  ngOnInit(): void {
+  stopAlert() {
+    this.dialogRef.close(true);
   }
 
+  closeDialog() {
+    this.dialogRef.close();
+  }
 }

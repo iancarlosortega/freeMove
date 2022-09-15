@@ -29,6 +29,7 @@ import { StopAlertComponent } from './components/stop-alert/stop-alert.component
 import { LinkAccountComponent } from './link-account/link-account.component';
 import { LinkAccountInvitationComponent } from './link-account-invitation/link-account-invitation.component';
 import { NotificationsComponent } from './notifications/notifications.component';
+import { TrackingComponent } from './tracking/tracking.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { NotificationsComponent } from './notifications/notifications.component'
     LinkAccountComponent,
     LinkAccountInvitationComponent,
     NotificationsComponent,
+    TrackingComponent,
   ],
   imports: [
     CommonModule,

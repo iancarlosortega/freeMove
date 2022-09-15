@@ -15,6 +15,7 @@ import { NotificationsComponent } from './notifications/notifications.component'
 import { ProfileComponent } from './profile/profile.component';
 import { RouteComponent } from './route/route.component';
 import { RoutesComponent } from './routes/routes.component';
+import { TrackingComponent } from './tracking/tracking.component';
 
 const routes: Routes = [
   {
@@ -57,6 +58,11 @@ const routes: Routes = [
         path: 'comunidad',
         component: CommunityComponent,
         data: { breadcrumb: 'Comunidad' },
+      },
+      {
+        path: 'rastreo',
+        component: TrackingComponent,
+        data: { breadcrumb: 'Rastrear Ubicación' },
       },
       {
         path: 'admin',

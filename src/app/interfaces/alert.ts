@@ -4,8 +4,9 @@ export interface Alert {
   isActive: boolean;
   linkedAccount?: string;
   startTime?: number;
+  startPosition?: [number, number];
   endTime?: number;
-  timeElapsed?: number;
+  endPosition?: [number, number];
   coordinates?: [number, number][];
   notificationStatus: NotificationStatus;
   emailToVinculate: string;

@@ -24,7 +24,7 @@
 </div>
 <!-- Security Alert -->
 <button
-  *ngIf="!isAlertActive"
+  *ngIf="!alert?.isActive"
   class="gradient-button activate-button"
   (click)="activateAlert()"
 >
@@ -32,7 +32,7 @@
   <mat-icon>add_alert</mat-icon>
 </button>
 <button
-  *ngIf="isAlertActive"
+  *ngIf="alert?.isActive"
   class="gradient-button desactivate-button"
   (click)="desactivateAlert()"
 >
