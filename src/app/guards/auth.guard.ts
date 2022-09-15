@@ -10,9 +10,6 @@ export class AuthGuard implements CanActivate, CanLoad {
   constructor(private router: Router, private authService: AuthService) {}
 
   canActivate(): Observable<boolean> | Promise<boolean> | boolean {
-    console.log('Auth Guard');
-    // const { redirect } = window.history.state;
-    // console.log(redirect);
     return this.authService.checkDashState().pipe(
       tap((isAuthenticated) => {
         if (!isAuthenticated) {
@@ -23,9 +20,6 @@ export class AuthGuard implements CanActivate, CanLoad {
   }
 
   canLoad(): Observable<boolean> | Promise<boolean> | boolean {
-    console.log('Auth Guard');
-    // const { redirect } = window.history.state;
-    // console.log(redirect);
     return this.authService.checkDashState().pipe(
       tap((isAuthenticated) => {
         if (!isAuthenticated) {

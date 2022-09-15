@@ -47,6 +47,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
     ],
     country: [{ value: '', disabled: false }],
     city: [{ value: '', disabled: false }],
+    age: [{ value: '', disabled: false }],
     gender: [{ value: '', disabled: false }],
     phone: [{ value: '', disabled: false }],
     weight: [

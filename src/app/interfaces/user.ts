@@ -6,6 +6,7 @@ export interface User {
   password?: string;
   password2?: string;
   // Datos adicionales
+  age?: number;
   phone?: string;
   gender?: string;
   identificationCard?: string;

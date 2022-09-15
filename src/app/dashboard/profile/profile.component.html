@@ -106,6 +106,19 @@
           />
         </mat-form-field>
         <mat-form-field appearance="outline">
+          <mat-label>Edad</mat-label>
+          <input
+            type="number"
+            matInput
+            min="0"
+            formControlName="age"
+            placeholder="Escribe tu edad"
+          />
+          <mat-error *ngIf="invalidInput('age')">
+            La edad debe ser mayor a <strong>0</strong>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
           <mat-label>Altura</mat-label>
           <input
             type="number"

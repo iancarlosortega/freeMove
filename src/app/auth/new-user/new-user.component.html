@@ -19,6 +19,20 @@
       <!-- TextFields -->
       <div class="form-inputs">
         <mat-form-field appearance="outline">
+          <mat-label>Edad</mat-label>
+          <input
+            type="number"
+            matInput
+            min="0"
+            formControlName="age"
+            placeholder="Escribe tu edad"
+          />
+          <mat-error *ngIf="campoNoValido('age')">
+            La edad debe ser mayor a <strong>0</strong>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
           <mat-label>Teléfono</mat-label>
           <input
             type="tel"
@@ -27,6 +41,7 @@
             placeholder="+593 9999-9999"
           />
         </mat-form-field>
+
         <mat-form-field appearance="outline">
           <mat-label>Género</mat-label>
           <mat-select formControlName="gender">
@@ -35,6 +50,7 @@
             <mat-option value="Otro">Otro</mat-option>
           </mat-select>
         </mat-form-field>
+
         <mat-form-field appearance="outline">
           <mat-label>País</mat-label>
           <mat-select formControlName="country">

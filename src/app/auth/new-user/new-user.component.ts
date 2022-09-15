@@ -19,6 +19,7 @@ export class NewUserComponent implements OnInit, OnDestroy {
   userObs!: Subscription;
 
   newUserForm = this.fb.group({
+    age: [''],
     phone: [''],
     gender: [''],
     country: [''],
@@ -40,6 +41,9 @@ export class NewUserComponent implements OnInit, OnDestroy {
 
     this.userObs = this.userService.user$.subscribe((user) => {
       this.user = user;
+      this.newUserForm.reset({
+        ...(this.user as any),
+      });
       this.isLoading = false;
     });
 
@@ -82,11 +86,12 @@ export class NewUserComponent implements OnInit, OnDestroy {
       return;
     }
 
-    const { phone, gender, country, city, height, weight } =
+    const { age, phone, gender, country, city, height, weight } =
       this.newUserForm.value;
 
     this.user = {
       ...this.user,
+      age: Number(age)!,
       phone: phone!,
       gender: gender!,
       country: country!,
