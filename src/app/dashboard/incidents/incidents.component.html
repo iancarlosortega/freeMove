@@ -1,1 +1,52 @@
-<p>incidents works!</p>
+<div class="filter">
+  <mat-icon>search</mat-icon>
+  <input
+    (keyup)="filterIncidents($event)"
+    type="text"
+    placeholder="Buscar..."
+  />
+</div>
+
+<main *ngIf="!isLoading && incidents.length > 0" class="fade-in">
+  <ul class="list">
+    <li
+      class="list-item card"
+      *ngFor="let incident of incidents"
+      [routerLink]="['./', incident.idIncident]"
+    >
+      <h4>{{ incident.title }}</h4>
+      <p>
+        {{
+          incident.description.length > 230
+            ? (incident.description | slice: 0:230) + "..."
+            : incident.description
+        }}
+      </p>
+      <p class="bold">
+        Tipo: <span>{{ incident.type }}</span>
+      </p>
+      <p class="bold">
+        Fecha:
+        <span>{{ incident.createdAt | date: "fullDate" | titlecase }}</span>
+      </p>
+    </li>
+  </ul>
+  <p-paginator
+    class="card"
+    [rows]="9"
+    [totalRecords]="numberOfIncidents"
+    [rowsPerPageOptions]="[9, 24, 30]"
+    (onPageChange)="paginateIncidents($event)"
+  ></p-paginator>
+</main>
+
+<div *ngIf="isLoading" class="flex-center spinner-loading">
+  <mat-spinner [diameter]="100"></mat-spinner>
+</div>
+
+<div
+  *ngIf="incidents.length === 0 && !isLoading"
+  class="alert alert--info fade-in"
+>
+  No se encontró ningún resultado.
+</div>

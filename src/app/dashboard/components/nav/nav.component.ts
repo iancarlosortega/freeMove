@@ -18,6 +18,7 @@ export class NavComponent implements OnInit, OnDestroy {
   userObs!: Subscription;
   photoUrl: string = '';
   notifications: Notification[] = [];
+  messages: any[] = [];
 
   constructor(
     private router: Router,

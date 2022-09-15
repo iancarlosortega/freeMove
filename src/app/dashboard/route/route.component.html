@@ -10,6 +10,9 @@
       description="¡Conoce todos los datos de mi recorrido gracias a FreeMove!"
     >
     </share-buttons>
+    <!-- Markers -->
+    <div class="marker start-marker" #startMarker></div>
+    <div class="marker end-marker" #endMarker></div>
   </div>
   <div class="route-info">
     <app-card
@@ -39,12 +42,12 @@
       [description]="route.timeElapsed"
       measurement="minutos"
     ></app-card>
-    <!-- TODO: Agregar tiempo en movimiento -->
-    <!-- <app-card
+    <app-card
       title="Tiempo en Movimiento"
-      iconSrc="assets/icons/place.png"
-      [description]="route.city"
-    ></app-card> -->
+      iconSrc="assets/icons/time-elapsed.png"
+      [description]="route.timeInMoving"
+      measurement="minutos"
+    ></app-card>
     <app-card
       title="Tipo de Ruta"
       iconSrc="assets/icons/type.png"

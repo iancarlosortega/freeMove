@@ -21,10 +21,25 @@
       aria-label="Example icon-button with a menu"
       class="nav-button flex-center"
     >
-      <mat-icon matBadge="4" matBadgeColor="primary">messenger</mat-icon>
+      <mat-icon
+        *ngIf="messages.length > 0"
+        [matBadge]="messages.length > 9 ? '9+' : messages.length"
+        matBadgeColor="primary"
+        >messenger</mat-icon
+      >
+      <mat-icon *ngIf="messages.length === 0">messenger</mat-icon>
       <!-- Menu -->
       <mat-menu #messagesMenu>
-        <!-- TODO: Completar los mensajes -->
+        <div class="messages">
+          <h3>Mensajes</h3>
+          <ul class="messages-list" *ngIf="messages.length > 0">
+            <li *ngFor="let message of messages">
+              <h4>{{ message.title }}</h4>
+              <p>{{ message.message }}</p>
+            </li>
+          </ul>
+          <p *ngIf="messages.length === 0">No hay mensajes</p>
+        </div>
       </mat-menu>
     </button>
     <button

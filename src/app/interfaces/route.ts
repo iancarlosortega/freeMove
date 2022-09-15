@@ -5,9 +5,10 @@ export interface Route {
   distance: number;
   type: string;
   city: string;
-  startPoint: [number, number];
+  //TODO: Cambiar date por time
+  startPosition: [number, number];
   startDate: Date;
-  endPoint: [number, number];
+  endPosition: [number, number];
   endDate: Date;
   coordinates: [number, number][];
   burnoutCalories: number;

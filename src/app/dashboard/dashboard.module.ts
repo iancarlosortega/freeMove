@@ -11,45 +11,49 @@ import { ShareButtonsModule } from 'ngx-sharebuttons/buttons';
 import { ShareIconsModule } from 'ngx-sharebuttons/icons';
 import { SharedModule } from '../shared/shared.module';
 
-import { HomeComponent } from './home/home.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { RoutesComponent } from './routes/routes.component';
-import { IncidentsComponent } from './incidents/incidents.component';
-import { CommunityComponent } from './community/community.component';
-import { ProfileComponent } from './profile/profile.component';
-import { NavComponent } from './components/nav/nav.component';
-import { ReactiveFormsModule } from '@angular/forms';
-import { ChangePasswordComponent } from './change-password/change-password.component';
-import { ChangeEmailComponent } from './change-email/change-email.component';
-import { RouteComponent } from './route/route.component';
+import { BitacoraComponent } from './bitacora/bitacora.component';
 import { CardComponent } from './components/card/card.component';
-import { ConfirmDeleteComponent } from './components/confirm-delete/confirm-delete.component';
+import { ChangeEmailComponent } from './change-email/change-email.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
+import { CommunityComponent } from './community/community.component';
 import { ConfirmAlertComponent } from './components/confirm-alert/confirm-alert.component';
-import { StopAlertComponent } from './components/stop-alert/stop-alert.component';
+import { ConfirmDeleteComponent } from './components/confirm-delete/confirm-delete.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { HomeComponent } from './home/home.component';
+import { IncidentComponent } from './incident/incident.component';
+import { IncidentsComponent } from './incidents/incidents.component';
 import { LinkAccountComponent } from './link-account/link-account.component';
 import { LinkAccountInvitationComponent } from './link-account-invitation/link-account-invitation.component';
+import { NavComponent } from './components/nav/nav.component';
 import { NotificationsComponent } from './notifications/notifications.component';
+import { ProfileComponent } from './profile/profile.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { RouteComponent } from './route/route.component';
+import { RoutesComponent } from './routes/routes.component';
+import { StopAlertComponent } from './components/stop-alert/stop-alert.component';
 import { TrackingComponent } from './tracking/tracking.component';
 
 @NgModule({
   declarations: [
-    HomeComponent,
-    DashboardComponent,
-    RoutesComponent,
-    IncidentsComponent,
-    CommunityComponent,
-    ProfileComponent,
-    NavComponent,
-    ChangePasswordComponent,
-    ChangeEmailComponent,
-    RouteComponent,
+    BitacoraComponent,
     CardComponent,
-    ConfirmDeleteComponent,
+    ChangeEmailComponent,
+    ChangePasswordComponent,
+    CommunityComponent,
     ConfirmAlertComponent,
-    StopAlertComponent,
+    ConfirmDeleteComponent,
+    DashboardComponent,
+    HomeComponent,
+    IncidentComponent,
+    IncidentsComponent,
     LinkAccountComponent,
     LinkAccountInvitationComponent,
+    NavComponent,
     NotificationsComponent,
+    ProfileComponent,
+    RouteComponent,
+    RoutesComponent,
+    StopAlertComponent,
     TrackingComponent,
   ],
   imports: [

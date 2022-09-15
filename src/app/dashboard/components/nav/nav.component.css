@@ -135,36 +135,36 @@
   border-radius: 50%;
 }
 
-/* Notifications */
+/* Notifications & Messages */
 
-.notifications {
+.notifications, .messages {
   padding: 1rem;
 }
 
-.notifications h3 {
+.notifications h3, .messages h3 {
   font-size: 1.4rem;
   font-weight: bold;
   color: var(--azul-oscuro);
   margin-bottom: 1rem;
 }
 
-.notifications-list {
+.notifications-list, .messages-list {
   list-style: none;
   padding: 0;
 }
 
-.notifications-list li {
+.notifications-list li, .messages-list li {
   cursor: pointer;
   border-bottom: 1px solid #E5E5E5;
 }
 
-.notifications-list h4 {
+.notifications-list h4, .messages-list h4 {
   margin-top: 0.5rem;
   font-size: 1rem;
   font-weight: bold;
 }
 
-.notifications-list p {
+.notifications-list p, .messages-list p {
   font-size: 1rem;
   color: #5c5c5c;
 }

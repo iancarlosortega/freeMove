@@ -3,6 +3,7 @@ export * from './auth.service';
 export * from './breadcrumb.service';
 export * from './country.service';
 export * from './geolocation.service';
+export * from './incident.service';
 export * from './notification.service';
 export * from './route.service';
 export * from './storage.service';

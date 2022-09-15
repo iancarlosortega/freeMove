@@ -2,12 +2,14 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { AdminGuard, ProviderGuard } from '../guards';
+import { BitacoraComponent } from './bitacora/bitacora.component';
 
 import { ChangeEmailComponent } from './change-email/change-email.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { CommunityComponent } from './community/community.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HomeComponent } from './home/home.component';
+import { IncidentComponent } from './incident/incident.component';
 import { IncidentsComponent } from './incidents/incidents.component';
 import { LinkAccountInvitationComponent } from './link-account-invitation/link-account-invitation.component';
 import { LinkAccountComponent } from './link-account/link-account.component';
@@ -40,19 +42,30 @@ const routes: Routes = [
           {
             path: ':id',
             component: RouteComponent,
-            data: { breadcrumb: 'Gestión de Ruta' },
+            data: { breadcrumb: 'Estadísticas de la Ruta' },
           },
         ],
       },
-      //TODO: Agregar componente de bitácora
       {
         path: 'bitacora',
-        component: HomeComponent,
+        component: BitacoraComponent,
+        data: { breadcrumb: 'Bitácora' },
       },
       {
         path: 'incidentes',
-        component: IncidentsComponent,
         data: { breadcrumb: 'Incidentes' },
+        children: [
+          {
+            path: '',
+            component: IncidentsComponent,
+            data: { breadcrumb: '' },
+          },
+          {
+            path: ':id',
+            component: IncidentComponent,
+            data: { breadcrumb: 'Gestión de Incidente' },
+          },
+        ],
       },
       {
         path: 'comunidad',

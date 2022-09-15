@@ -39,3 +39,24 @@
   flex-direction: column;
   gap: 1rem;
 }
+
+/* Markers */
+
+.marker {
+  background-size: cover;
+  width: 35px;
+  height: 35px;
+  cursor: pointer;
+}
+
+.start-marker {
+  background-image: url(/assets/icons/start.png);
+}
+
+.end-marker {
+  background-image: url(/assets/icons/finish.png);
+}
+
+.incident-marker {
+  background-image: url(/assets/icons/warning.png);
+}
