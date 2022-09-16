@@ -6,4 +6,5 @@ export interface Incident {
   type: string;
   createdAt: number;
   position: [number, number];
+  photos: string[];
 }

@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 
 import { DashboardRoutingModule } from './dashboard-routing.module';
 
+import { GalleryModule } from 'ng-gallery';
+import { LightboxModule } from 'ng-gallery/lightbox';
 import { SwiperModule } from 'swiper/angular';
 import { MaterialModule } from '../material/material.module';
 import { PrimeNgModule } from '../prime-ng/prime-ng.module';
@@ -60,6 +62,8 @@ import { TrackingComponent } from './tracking/tracking.component';
     CommonModule,
     DashboardRoutingModule,
     ReactiveFormsModule,
+    GalleryModule,
+    LightboxModule,
     SwiperModule,
     MaterialModule,
     PrimeNgModule,

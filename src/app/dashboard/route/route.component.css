@@ -40,6 +40,19 @@
   gap: 1rem;
 }
 
+.images-container {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr 1fr;
+}
+
+.images-container img {
+  cursor: pointer;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+  height: 100px;
+}
+
 /* Markers */
 
 .marker {

@@ -11,6 +11,14 @@ import { Map, Marker, Popup } from 'mapbox-gl';
 import { IncidentService, RouteService } from 'src/app/services';
 import { Incident, Route } from 'src/app/interfaces';
 import { switchMap, tap } from 'rxjs';
+import {
+  Gallery,
+  GalleryItem,
+  ImageItem,
+  ImageSize,
+  ThumbnailsPosition,
+} from 'ng-gallery';
+import { Lightbox } from 'ng-gallery/lightbox';
 
 @Component({
   selector: 'app-route',
@@ -21,6 +29,7 @@ export class RouteComponent implements OnInit, AfterViewInit {
   @ViewChild('mapDiv') mapElement!: ElementRef;
   @ViewChild('startMarker') startMarker!: ElementRef;
   @ViewChild('endMarker') endMarker!: ElementRef;
+  @ViewChild('popupMarker') popupMarker!: ElementRef;
 
   //TODO: Probar en producción
   shareUrl: string = location.href;
@@ -44,8 +53,11 @@ export class RouteComponent implements OnInit, AfterViewInit {
     activityType: '',
   };
   incidents: Incident[] = [];
+  incidentImages: GalleryItem[] = [];
 
   constructor(
+    public gallery: Gallery,
+    public lightbox: Lightbox,
     private renderer: Renderer2,
     private activatedRoute: ActivatedRoute,
     private routeService: RouteService,
@@ -106,14 +118,35 @@ export class RouteComponent implements OnInit, AfterViewInit {
           this.renderer.addClass(element, 'marker');
           this.renderer.addClass(element, 'incident-marker');
 
-          const popup = new Popup({ offset: 25 }).setHTML(
-            '<h5>' + incident.title + '</h5><p>' + incident.description + '</p>'
-          );
+          const htmlPopup = this.renderer.createElement('div');
+          const htmlPopupTitle = this.renderer.createElement('h5');
+          const htmlPopupDescription = this.renderer.createElement('p');
+          htmlPopupTitle.innerHTML = incident.title;
+          htmlPopupDescription.innerHTML = incident.description;
+          this.renderer.appendChild(htmlPopup, htmlPopupTitle);
+          this.renderer.appendChild(htmlPopup, htmlPopupDescription);
+          const imagesContainer = this.renderer.createElement('div');
+          this.renderer.addClass(imagesContainer, 'images-container');
+
+          incident.photos.forEach((image, index) => {
+            const imageElement = this.renderer.createElement('img');
+            this.renderer.addClass(imageElement, 'image');
+            this.renderer.setAttribute(imageElement, 'src', image);
+            this.renderer.appendChild(imagesContainer, imageElement);
+          });
+          this.renderer.appendChild(htmlPopup, imagesContainer);
+          const popup = new Popup({
+            anchor: 'center',
+          }).setHTML(htmlPopup.outerHTML);
 
           new Marker(element)
             .setLngLat(incident.position)
             .setPopup(popup)
             .addTo(map);
+
+          this.incidentImages = incident.photos.map(
+            (photo) => new ImageItem({ src: photo, thumb: photo })
+          );
         });
 
         map.on('load', () => {

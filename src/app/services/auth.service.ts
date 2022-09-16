@@ -108,12 +108,10 @@ export class AuthService {
       .signInWithPopup(provider)
       .then((response) => {
         if (response.additionalUserInfo?.isNewUser === true) {
-          console.log(response);
           const user: User = {
             idUser: response.user?.uid!,
             name: response.user?.displayName!,
             email: response.user?.email!,
-            // photoUrl: response.additionalUserInfo?.profile?.picture.data.url,
             photoUrl: response.user?.photoURL!,
             provider: response.additionalUserInfo?.providerId! as UserProvider,
             role: 'CLIENT-ROLE',
@@ -131,7 +129,6 @@ export class AuthService {
             });
         } else {
           const { redirect } = window.history.state;
-          console.log(redirect);
           this.router.navigateByUrl(redirect || '/dashboard');
         }
       })

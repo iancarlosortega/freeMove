@@ -4,6 +4,17 @@ import { switchMap } from 'rxjs';
 import { Map, Marker } from 'mapbox-gl';
 import { Incident } from 'src/app/interfaces';
 import { IncidentService } from 'src/app/services';
+import {
+  Gallery,
+  GalleryItem,
+  ImageItem,
+  ImageSize,
+  ThumbnailsPosition,
+} from 'ng-gallery';
+import { Lightbox } from 'ng-gallery/lightbox';
+
+import SwiperCore, { Pagination } from 'swiper';
+SwiperCore.use([Pagination]);
 
 @Component({
   selector: 'app-incident',
@@ -12,6 +23,7 @@ import { IncidentService } from 'src/app/services';
 })
 export class IncidentComponent implements AfterViewInit {
   @ViewChild('mapDiv') mapElement!: ElementRef;
+  @ViewChild('incidentMarker') incidentMarker!: ElementRef;
   incident: Incident = {
     idIncident: '',
     idRoute: '',
@@ -20,9 +32,13 @@ export class IncidentComponent implements AfterViewInit {
     type: '',
     createdAt: 0,
     position: [0, 0],
+    photos: [],
   };
+  incidentImages: GalleryItem[] = [];
 
   constructor(
+    public gallery: Gallery,
+    public lightbox: Lightbox,
     private activatedRoute: ActivatedRoute,
     private incidentService: IncidentService
   ) {}
@@ -38,7 +54,23 @@ export class IncidentComponent implements AfterViewInit {
           center: this.incident.position,
           zoom: 15,
         });
-        new Marker().setLngLat(this.incident.position).addTo(map);
+        new Marker(this.incidentMarker.nativeElement)
+          .setLngLat(this.incident.position)
+          .addTo(map);
+        this.incidentImages = this.incident.photos.map(
+          (photo) => new ImageItem({ src: photo, thumb: photo })
+        );
+        // Get a lightbox gallery ref
+        const lightboxRef = this.gallery.ref('lightbox');
+
+        // Add custom gallery config to the lightbox (optional)
+        lightboxRef.setConfig({
+          imageSize: ImageSize.Cover,
+          thumbPosition: ThumbnailsPosition.Top,
+        });
+
+        // Load items into the lightbox gallery ref
+        lightboxRef.load(this.incidentImages);
       });
   }
 }
