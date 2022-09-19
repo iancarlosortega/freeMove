@@ -12,16 +12,16 @@
       >
     </li>
     <li class="navbar-listado-item">
-      <a routerLinkActive="activeLink" routerLink="/about">Acerca de</a>
+      <a (click)="scrollToSection('city')">Ciudad</a>
     </li>
     <li class="navbar-listado-item">
-      <a routerLinkActive="activeLink" routerLink="/city">Ciudad</a>
+      <a (click)="scrollToSection('health')">Salud</a>
     </li>
     <li class="navbar-listado-item">
-      <a routerLinkActive="activeLink" routerLink="/health">Salud</a>
+      <a (click)="scrollToSection('services')">Servicios</a>
     </li>
     <li class="navbar-listado-item">
-      <a routerLinkActive="activeLink" routerLink="/services">Servicios</a>
+      <a (click)="scrollToSection('process')">Procesos</a>
     </li>
     <li>
       <button routerLink="/dashboard" class="boton-login">
@@ -63,37 +63,29 @@
       </li>
       <li
         class="navbar-listado-item-responsive"
-        routerLink="/about"
-        routerLinkActive="activeLinkResponsive"
-      >
-        <a>Acerca de</a>
-      </li>
-      <li
-        class="navbar-listado-item-responsive"
-        routerLink="/city"
-        routerLinkActive="activeLinkResponsive"
+        (click)="scrollToSection('city'); showMenu = false"
       >
         <a>Ciudad</a>
       </li>
       <li
         class="navbar-listado-item-responsive"
-        routerLink="/health"
-        routerLinkActive="activeLinkResponsive"
+        (click)="scrollToSection('health'); showMenu = false"
       >
         <a>Salud</a>
       </li>
       <li
         class="navbar-listado-item-responsive"
-        routerLink="/services"
-        routerLinkActive="activeLinkResponsive"
+        (click)="scrollToSection('services'); showMenu = false"
       >
         <a>Servicios</a>
       </li>
       <li
         class="navbar-listado-item-responsive"
-        routerLink="/dashboard"
-        routerLinkActive="activeLinkResponsive"
+        (click)="scrollToSection('process'); showMenu = false"
       >
+        <a>Procesos</a>
+      </li>
+      <li class="navbar-listado-item-responsive" routerLink="/dashboard">
         <a>Registro/Ingreso</a>
       </li>
     </ul>

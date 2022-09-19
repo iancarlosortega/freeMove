@@ -3,6 +3,10 @@ export interface Route {
   idUser: string;
   name: string;
   distance: number;
+  calification: number;
+  difficulty: RouteDifficulty;
+  photos: string[];
+  keywords: string[];
   type: string;
   city: string;
   //TODO: Cambiar date por time
@@ -18,3 +22,5 @@ export interface Route {
   velocityMax: number;
   activityType: string;
 }
+
+type RouteDifficulty = 'Fácil' | 'Medio' | 'Difícil';

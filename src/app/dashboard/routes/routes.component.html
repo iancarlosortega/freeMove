@@ -14,28 +14,60 @@
 <ul *ngIf="!isLoading" class="fade-in">
   <li *ngFor="let route of routes">
     <header class="route-header">
-      <div class="route-header-icon">
-        <img src="assets/icons/type.png" alt="Icono de ruta" />
-      </div>
       <div class="route-header-info">
-        <h3>{{ route.name }}</h3>
+        <div class="route-title">
+          <h3>{{ route.name }} ({{ route.distance }} metros)</h3>
+          <button
+            pButton
+            icon="pi pi-trash"
+            iconPos="right"
+            type="button"
+            (click)="deleteRoute(route.idRoute)"
+            class="p-button-raised p-button-rounded p-button-danger route-button"
+          ></button>
+        </div>
         <main>
-          <p>
-            Distancia Recorrida: <span>{{ route.distance }} metros</span>
-          </p>
-          <p>
-            Ciudad: <span>{{ route.city }}</span>
-          </p>
           <p>
             Fecha:
             <span>{{ route.startDate | date: "fullDate" | titlecase }}</span>
           </p>
-          <button
-            class="primary-button info-button"
-            [routerLink]="['./', route.idRoute]"
-          >
-            Ver Más
-          </button>
+          <p>
+            Ciudad: <span>{{ route.city }}</span>
+          </p>
+          <div class="route-keywords">
+            <p>Palabras Clave:</p>
+            <span class="keyword" *ngFor="let keyword of route.keywords">
+              {{ keyword }}
+            </span>
+          </div>
+          <div class="route-difficulty">
+            <p>Dificultad:</p>
+            <span
+              class="route-difficulty-level"
+              [ngClass]="{
+                easy: route.difficulty === 'Fácil',
+                medium: route.difficulty === 'Medio',
+                hard: route.difficulty === 'Difícil'
+              }"
+              >{{ route.difficulty }}</span
+            >
+          </div>
+          <footer class="route-footer">
+            <p class="route-rating">
+              Calificación:
+              <bar-rating
+                [rate]="route.calification"
+                [max]="5"
+                [readOnly]="true"
+              ></bar-rating>
+            </p>
+            <button
+              class="primary-button info-button"
+              [routerLink]="['./', route.idRoute]"
+            >
+              Ver Más
+            </button>
+          </footer>
         </main>
       </div>
     </header>
@@ -60,14 +92,6 @@
       </div>
     </div>
     <div class="route-path"></div>
-    <button
-      pButton
-      icon="pi pi-trash"
-      iconPos="right"
-      type="button"
-      (click)="deleteRoute(route.idRoute)"
-      class="p-button-raised p-button-rounded p-button-danger route-button"
-    ></button>
   </li>
 </ul>
 

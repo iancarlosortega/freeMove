@@ -44,6 +44,15 @@
 ul {
   list-style: none;
   padding: 0;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 992px){
+  ul {
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
 li {
@@ -54,40 +63,111 @@ li {
   position: relative;
 }
 
-.route-header {
-  display: flex;
-  gap: 2rem;
-  margin-bottom: 1.5rem;
-}
-
-.route-header-icon {
-  width: 8rem;
-  display: none;
-}
-
 @media (min-width: 768px){
-  .route-header-icon {
-    display: block;
+  li {
+    padding: 1.5rem;
   }
 }
 
-.route-header-icon img {
-  height: 100%;
-  aspect-ratio: 1/1;
-  object-fit: contain;
+.route-header {
+  margin-bottom: 1.5rem;
 }
 
 .route-header-info h3{
   font-weight: bold;
-  margin-bottom: 1rem;
+  margin-bottom: 0;
+  width: 80%;
+}
+
+@media (min-width: 768px){
+  .route-header-info h3{
+    width: initial;
+  }
+}
+
+.route-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
 }
 
 .route-header-info main {
   font-weight: 600;
+  display: grid;
+  gap: 1rem;
 }
 
 .route-header-info p {
-  margin-bottom: 0.5rem;
+  margin-bottom: 0;
+}
+
+.route-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+@media (min-width: 768px){
+  .route-footer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.route-keywords {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.keyword {
+  padding: 0.25rem 0.75rem;
+  border-radius: 15px;
+  background-color: #114a59;
+  color: #FFF;
+  font-size: 0.75rem;
+}
+
+.route-difficulty {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.route-difficulty p, .route-keywords p {
+  margin-bottom: 0;
+}
+
+.route-difficulty-level {
+  color: #FFF;
+  padding: 0.25rem 1rem;
+  border-radius: 5px;
+}
+
+.easy {
+  background-color: var(--verde-oscuro);
+}
+
+.medium {
+  background-color: var(--amarillo-hover);
+}
+
+.hard {
+  background-color: var(--rojo-hover);
+}
+
+.route-rating {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0 !important;
+}
+
+.route-rating bar-rating {
+  display: inline-block;
 }
 
 .route-header-info span {
@@ -134,14 +214,6 @@ li {
 /* Delete route */
 
 .route-button {
-  position: absolute;
-  top: 0.5rem;
-  right: 0.5rem;
-}
-
-@media (min-width: 768px){
-  .route-button {
-    top: 1rem;
-    right: 1rem;
-  }
+  width: 3rem;
+  height: 3rem !important;
 }

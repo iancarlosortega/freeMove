@@ -1,3 +1,61 @@
+<header class="route-header">
+  <h3>{{ route.name }}</h3>
+  <div class="route-keywords">
+    <p>Palabras Clave:</p>
+    <span class="keyword" *ngFor="let keyword of route.keywords">
+      {{ keyword }}
+    </span>
+  </div>
+  <div class="route-difficulty">
+    <p>Dificultad:</p>
+    <span
+      class="route-difficulty-level"
+      [ngClass]="{
+        easy: route.difficulty === 'Fácil',
+        medium: route.difficulty === 'Medio',
+        hard: route.difficulty === 'Difícil'
+      }"
+      >{{ route.difficulty }}</span
+    >
+  </div>
+  <div class="route-calification">
+    <p>Calificación:</p>
+    <bar-rating
+      [rate]="route.calification"
+      [max]="5"
+      [readOnly]="true"
+    ></bar-rating>
+  </div>
+  <div class="photos">
+    <swiper
+      [spaceBetween]="10"
+      [slidesPerView]="1.2"
+      [pagination]="true"
+      [grabCursor]="true"
+      [breakpoints]="{
+        '499': {
+          slidesPerView: 2.2
+        },
+        '768': {
+          slidesPerView: 2.5
+        },
+        '992': {
+          slidesPerView: 3.2
+        },
+        '1200': {
+          slidesPerView: 4.5
+        }
+      }"
+    >
+      <ng-template
+        swiperSlide
+        *ngFor="let photo of route.photos; let i = index"
+      >
+        <img [src]="photo" (click)="lightbox.open(i)" />
+      </ng-template>
+    </swiper>
+  </div>
+</header>
 <main class="main-container">
   <div #mapDiv class="map">
     <share-buttons

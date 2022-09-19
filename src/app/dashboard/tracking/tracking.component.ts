@@ -55,7 +55,7 @@ export class TrackingComponent implements AfterViewInit, OnDestroy {
         const map = new Map({
           container: this.mapElement.nativeElement,
           style: 'mapbox://styles/mapbox/streets-v11',
-          center: this.alert.startPosition,
+          center: this.alert.endPosition || this.alert.startPosition,
           zoom: 15,
         });
         new Marker()

@@ -20,6 +20,9 @@ import {
 } from 'ng-gallery';
 import { Lightbox } from 'ng-gallery/lightbox';
 
+import SwiperCore, { Pagination } from 'swiper';
+SwiperCore.use([Pagination]);
+
 @Component({
   selector: 'app-route',
   templateUrl: './route.component.html',
@@ -51,8 +54,13 @@ export class RouteComponent implements OnInit, AfterViewInit {
     velocityAvg: 0,
     velocityMax: 0,
     activityType: '',
+    calification: 0,
+    difficulty: 'Fácil',
+    photos: [],
+    keywords: [],
   };
   incidents: Incident[] = [];
+  routeImages: GalleryItem[] = [];
   incidentImages: GalleryItem[] = [];
 
   constructor(
@@ -100,6 +108,21 @@ export class RouteComponent implements OnInit, AfterViewInit {
           route.split(',').map((coord: any) => parseFloat(coord))
         ) as any;
 
+        this.routeImages = this.route.photos.map(
+          (photo) => new ImageItem({ src: photo, thumb: photo })
+        );
+        // Get a lightbox gallery ref
+        const lightboxRef = this.gallery.ref('lightbox');
+
+        // Add custom gallery config to the lightbox (optional)
+        lightboxRef.setConfig({
+          imageSize: ImageSize.Cover,
+          thumbPosition: ThumbnailsPosition.Top,
+        });
+
+        // Load items into the lightbox gallery ref
+        lightboxRef.load(this.routeImages);
+
         const map = new Map({
           container: this.mapElement.nativeElement,
           style: 'mapbox://styles/mapbox/streets-v11',
@@ -143,10 +166,6 @@ export class RouteComponent implements OnInit, AfterViewInit {
             .setLngLat(incident.position)
             .setPopup(popup)
             .addTo(map);
-
-          this.incidentImages = incident.photos.map(
-            (photo) => new ImageItem({ src: photo, thumb: photo })
-          );
         });
 
         map.on('load', () => {

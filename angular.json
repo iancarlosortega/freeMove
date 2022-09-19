@@ -27,7 +27,8 @@
               "node_modules/primeicons/primeicons.css",
               "node_modules/primeng/resources/themes/lara-light-blue/theme.css",
               "node_modules/primeng/resources/primeng.min.css",
-              "node_modules/swiper/swiper-bundle.min.css"
+              "node_modules/swiper/swiper-bundle.min.css",
+              "node_modules/ngx-bar-rating/themes/br-default-theme.scss"
             ],
             "scripts": ["node_modules/swiper/swiper-bundle.min.js"]
           },

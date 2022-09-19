@@ -3,14 +3,15 @@ import { CommonModule } from '@angular/common';
 
 import { DashboardRoutingModule } from './dashboard-routing.module';
 
+import { BarRatingModule } from 'ngx-bar-rating';
 import { GalleryModule } from 'ng-gallery';
 import { LightboxModule } from 'ng-gallery/lightbox';
-import { SwiperModule } from 'swiper/angular';
 import { MaterialModule } from '../material/material.module';
-import { PrimeNgModule } from '../prime-ng/prime-ng.module';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { PrimeNgModule } from '../prime-ng/prime-ng.module';
 import { ShareButtonsModule } from 'ngx-sharebuttons/buttons';
 import { ShareIconsModule } from 'ngx-sharebuttons/icons';
+import { SwiperModule } from 'swiper/angular';
 import { SharedModule } from '../shared/shared.module';
 
 import { BitacoraComponent } from './bitacora/bitacora.component';
@@ -62,15 +63,16 @@ import { TrackingComponent } from './tracking/tracking.component';
     CommonModule,
     DashboardRoutingModule,
     ReactiveFormsModule,
+    BarRatingModule,
     GalleryModule,
     LightboxModule,
-    SwiperModule,
     MaterialModule,
-    PrimeNgModule,
-    SharedModule,
     ModalModule.forRoot(),
+    PrimeNgModule,
     ShareButtonsModule,
+    SharedModule,
     ShareIconsModule,
+    SwiperModule,
   ],
 })
 export class DashboardModule {}

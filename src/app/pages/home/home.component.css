@@ -52,9 +52,10 @@
 .city-header h2 {
   color: #9F9F9F;
   font-weight: 300;
-  font-size: 2rem;
+  font-size: 2.5rem;
   text-transform: uppercase;
   text-align: center;
+  margin-bottom: 1.5rem;
 }
 
 .city-button {
@@ -149,14 +150,14 @@
 
 .health-text h3 {
   font-weight: 500;
-  font-size: 2rem;
+  font-size: 2.5rem;
   color: var(--azul-oscuro);
   text-align: center;
+  margin-bottom: 1rem;
 }
 
 @media (min-width: 768px){
   .health-text h3 {
-    font-weight: 300;
     text-align: left;
   }
 }
@@ -167,13 +168,12 @@
 
 @media (min-width:768px){
   .health-text ul {
-      padding-left: 2rem;
-      padding-top: 1rem;
+      padding-left: 1rem;
     }
 }
 
 .health-text li {
-  margin: 1rem 0;
+  margin: 0.5rem 0;
 }
 
 /* Services */
@@ -261,15 +261,15 @@
 
 .process-title {
   color: var(--azul-oscuro);
-  font-size: 2.5rem;
-  font-weight: 300;
+  font-size: 3rem;
+  font-weight: 500;
   margin: 2rem 0;
   text-align: center;
 }
 
 @media (min-width: 768px){
   .process-title {
-    margin: 4rem 0;
+    margin: 3rem 0;
   }
 }
 

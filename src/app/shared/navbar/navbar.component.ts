@@ -23,4 +23,13 @@ export class NavbarComponent implements AfterViewInit {
       });
     }, 0);
   }
+
+  scrollToSection(elementId: string) {
+    const element = document.getElementById(elementId);
+    element?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start',
+      inline: 'nearest',
+    });
+  }
 }
