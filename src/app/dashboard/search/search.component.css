@@ -1,0 +1,16 @@
+.results {
+  margin-bottom: 2rem;
+}
+
+.results h3 {
+  font-size: 1.5rem;
+  font-weight: 300;
+}
+
+.alert {
+  margin-bottom: 2rem;
+}
+
+.bold-text {
+  font-weight: 500;
+}

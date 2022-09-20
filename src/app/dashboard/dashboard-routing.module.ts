@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { AdminGuard, ProviderGuard } from '../guards';
 import { BitacoraComponent } from './bitacora/bitacora.component';
+import { SearchComponent } from './search/search.component';
 
 import { ChangeEmailComponent } from './change-email/change-email.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
@@ -29,6 +30,11 @@ const routes: Routes = [
         path: '',
         component: HomeComponent,
         data: { breadcrumb: '' },
+      },
+      {
+        path: 'buscar',
+        component: SearchComponent,
+        data: { breadcrumb: 'Búsqueda' },
       },
       {
         path: 'rutas',

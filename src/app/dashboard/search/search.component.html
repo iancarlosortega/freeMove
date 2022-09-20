@@ -1,0 +1,37 @@
+<div *ngIf="isLoading" class="flex-center spinner-loading">
+  <mat-spinner [diameter]="100"></mat-spinner>
+</div>
+
+<div
+  *ngIf="routes.length === 0 && !isLoading"
+  class="alert alert--info fade-in"
+>
+  No se encontró ningún resultado con la búsqueda de
+  <span class="bold-text">{{ query }}</span
+  >.
+</div>
+
+<div *ngIf="routes.length > 0 && !isLoading" class="results fade-in">
+  <h3>
+    Resultados que coinciden con el término
+    <span class="bold-text">{{ query }}</span>
+  </h3>
+  <ul class="results-list">
+    <li *ngFor="let route of routes">
+      <a [routerLink]="['/dashboard/rutas', route.idRoute]">
+        {{ route.name }}
+      </a>
+    </li>
+  </ul>
+</div>
+
+<div *ngIf="suggestedRoutes.length > 0 && !isLoading" class="results fade-in">
+  <h3>Sugerencias de Rutas</h3>
+  <ul class="results-list">
+    <li *ngFor="let route of suggestedRoutes">
+      <a [routerLink]="['/dashboard/rutas', route.idRoute]">
+        {{ route.name }}
+      </a>
+    </li>
+  </ul>
+</div>

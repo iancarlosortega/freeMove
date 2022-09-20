@@ -3,9 +3,10 @@ import { Subscription, switchMap, tap } from 'rxjs';
 import {
   AuthService,
   NotificationService,
+  RouteService,
   UserService,
 } from 'src/app/services';
-import { Notification, User } from 'src/app/interfaces';
+import { Notification, Route, User } from 'src/app/interfaces';
 import { Router } from '@angular/router';
 
 @Component({
@@ -19,12 +20,15 @@ export class NavComponent implements OnInit, OnDestroy {
   photoUrl: string = '';
   notifications: Notification[] = [];
   messages: any[] = [];
+  routes: Route[] = [];
+  filteredRoutes: Route[] = [];
 
   constructor(
     private router: Router,
     private userService: UserService,
     private authService: AuthService,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private routeService: RouteService
   ) {}
 
   ngOnInit(): void {
@@ -40,6 +44,9 @@ export class NavComponent implements OnInit, OnDestroy {
       )
       .subscribe((notifications) => {
         this.notifications = notifications;
+        this.routeService.getRoutes().subscribe((routes) => {
+          this.routes = routes;
+        });
       });
   }
 
@@ -47,8 +54,24 @@ export class NavComponent implements OnInit, OnDestroy {
     this.userObs.unsubscribe();
   }
 
-  //TODO: Implementar el buscador
-  search() {}
+  search(event: any) {
+    this.router.navigate(['/dashboard/buscar'], {
+      queryParams: { q: event.target.value },
+    });
+  }
+
+  filterRoutes(event: any) {
+    const value = event.target.value;
+    if (value.length === 0) {
+      this.filteredRoutes = [];
+      return;
+    }
+    this.filteredRoutes = this.routes.filter(
+      (route) =>
+        route.name.toLowerCase().includes(value.toLowerCase().trim()) ||
+        route.keywords?.includes(value.toLowerCase().trim())
+    );
+  }
 
   navigateTo(notification: Notification) {
     if (notification.url) {

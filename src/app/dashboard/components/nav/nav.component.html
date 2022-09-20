@@ -7,8 +7,18 @@
         type="text"
         pInputText
         placeholder="Buscar..."
-        (keyup.enter)="search()"
+        (keyup)="filterRoutes($event)"
+        (keyup.enter)="search($event)"
+        [matAutocomplete]="auto"
       />
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option
+          *ngFor="let route of filteredRoutes"
+          [routerLink]="['/dashboard/rutas', route.idRoute]"
+        >
+          {{ route.name }}
+        </mat-option>
+      </mat-autocomplete>
     </div>
     <button class="nav-button flex-center">
       <mat-icon>settings</mat-icon>

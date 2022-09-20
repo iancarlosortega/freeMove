@@ -6,6 +6,7 @@ export * from './geolocation.service';
 export * from './incident.service';
 export * from './notification.service';
 export * from './route.service';
+export * from './search.service';
 export * from './storage.service';
 export * from './user.service';
 export * from './validator.service';

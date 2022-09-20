@@ -35,6 +35,7 @@ import { RouteComponent } from './route/route.component';
 import { RoutesComponent } from './routes/routes.component';
 import { StopAlertComponent } from './components/stop-alert/stop-alert.component';
 import { TrackingComponent } from './tracking/tracking.component';
+import { SearchComponent } from './search/search.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +59,7 @@ import { TrackingComponent } from './tracking/tracking.component';
     RoutesComponent,
     StopAlertComponent,
     TrackingComponent,
+    SearchComponent,
   ],
   imports: [
     CommonModule,
