@@ -1,23 +1,5 @@
 <header class="route-header">
-  <h3>{{ route.name }}</h3>
-  <div class="route-keywords">
-    <p>Palabras Clave:</p>
-    <span class="keyword" *ngFor="let keyword of route.keywords">
-      {{ keyword }}
-    </span>
-  </div>
-  <div class="route-difficulty">
-    <p>Dificultad:</p>
-    <span
-      class="route-difficulty-level"
-      [ngClass]="{
-        easy: route.difficulty === 'Fácil',
-        medium: route.difficulty === 'Medio',
-        hard: route.difficulty === 'Difícil'
-      }"
-      >{{ route.difficulty }}</span
-    >
-  </div>
+  <h3>{{ route.name }}({{ route.distance }} metros)</h3>
   <div class="route-calification">
     <p>Calificación:</p>
     <bar-rating
@@ -25,6 +7,12 @@
       [max]="5"
       [readOnly]="true"
     ></bar-rating>
+  </div>
+  <div class="route-keywords">
+    <p>Palabras Clave:</p>
+    <span class="keyword" *ngFor="let keyword of route.keywords">
+      {{ keyword }}
+    </span>
   </div>
   <div class="photos">
     <swiper
@@ -51,7 +39,7 @@
         swiperSlide
         *ngFor="let photo of route.photos; let i = index"
       >
-        <img [src]="photo" (click)="lightbox.open(i)" />
+        <img [src]="photo.photoUrl" (click)="lightbox.open(i)" />
       </ng-template>
     </swiper>
   </div>
@@ -68,16 +56,13 @@
       description="¡Conoce todos los datos de mi recorrido gracias a FreeMove!"
     >
     </share-buttons>
-    <!-- Markers -->
-    <div class="marker start-marker" #startMarker></div>
-    <div class="marker end-marker" #endMarker></div>
   </div>
   <div class="route-info">
     <app-card
       title="Distancia"
       iconSrc="assets/icons/distance.png"
       [description]="route.distance"
-      measurement="m"
+      measurement="metros"
     ></app-card>
     <app-card
       title="Ciudad"
@@ -85,14 +70,26 @@
       [description]="route.city"
     ></app-card>
     <app-card
+      title="Dificultad"
+      iconSrc="assets/icons/difficulty.png"
+      [description]="route.difficulty"
+    ></app-card>
+    <app-card
+      title="Tipo de Ruta"
+      iconSrc="assets/icons/type.png"
+      [description]="route.type"
+    ></app-card>
+    <app-card
       title="Tiempo de Inicio"
       iconSrc="assets/icons/start-time.png"
       [description]="route.startDate"
+      [isDate]="true"
     ></app-card>
     <app-card
       title="Tiempo de finalización"
       iconSrc="assets/icons/start-time.png"
       [description]="route.endDate"
+      [isDate]="true"
     ></app-card>
     <app-card
       title="Tiempo trasncurrido"
@@ -105,11 +102,6 @@
       iconSrc="assets/icons/time-elapsed.png"
       [description]="route.timeInMoving"
       measurement="minutos"
-    ></app-card>
-    <app-card
-      title="Tipo de Ruta"
-      iconSrc="assets/icons/type.png"
-      [description]="route.type"
     ></app-card>
     <app-card
       title="Tipo de Actividad"

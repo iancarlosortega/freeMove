@@ -16,7 +16,7 @@ export class DashboardComponent implements AfterViewInit {
 
   ngAfterViewInit() {
     setTimeout(() => {
-      this.observer.observe(['(max-width: 768px)']).subscribe((res) => {
+      this.observer.observe(['(max-width: 992px)']).subscribe((res) => {
         if (res.matches) {
           this.isPhone = true;
           this.sidenav.mode = 'over';

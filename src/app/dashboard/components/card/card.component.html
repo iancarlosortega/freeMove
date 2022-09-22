@@ -1,11 +1,14 @@
-<div class="container">
-  <div class="custom-card">
-    <div class="card-icon">
-      <img [src]="iconSrc" [alt]="title" />
-    </div>
-    <div class="card-info">
-      <h3 class="card-title">{{ title }}</h3>
-      <p class="card-description">{{ description }} {{ measurement }}</p>
-    </div>
+<div class="custom-card">
+  <div class="card-icon">
+    <img [src]="iconSrc" [alt]="title" />
+  </div>
+  <div class="card-info">
+    <h3 class="card-title">{{ title }}</h3>
+    <p *ngIf="!isDate" class="card-description">
+      {{ description }} {{ measurement }}
+    </p>
+    <p *ngIf="isDate" class="card-description">
+      {{ description | date: "mediumTime" }}
+    </p>
   </div>
 </div>

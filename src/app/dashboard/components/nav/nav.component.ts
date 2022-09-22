@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Subscription, switchMap, tap } from 'rxjs';
 import {
   AuthService,
@@ -8,6 +8,7 @@ import {
 } from 'src/app/services';
 import { Notification, Route, User } from 'src/app/interfaces';
 import { Router } from '@angular/router';
+import { MatAutocompleteTrigger } from '@angular/material/autocomplete';
 
 @Component({
   selector: 'app-nav',
@@ -15,6 +16,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./nav.component.css'],
 })
 export class NavComponent implements OnInit, OnDestroy {
+  @ViewChild(MatAutocompleteTrigger) autocomplete!: MatAutocompleteTrigger;
   user!: User;
   userObs!: Subscription;
   photoUrl: string = '';
@@ -55,6 +57,7 @@ export class NavComponent implements OnInit, OnDestroy {
   }
 
   search(event: any) {
+    this.autocomplete.closePanel();
     this.router.navigate(['/dashboard/buscar'], {
       queryParams: { q: event.target.value },
     });

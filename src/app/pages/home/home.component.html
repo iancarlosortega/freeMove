@@ -1,7 +1,19 @@
 <header class="header">
   <app-navbar></app-navbar>
+  <swiper
+    class="header-slider"
+    [loop]="true"
+    [autoplay]="{
+      delay: 5000,
+      disableOnInteraction: true
+    }"
+  >
+    <ng-template swiperSlide *ngFor="let photo of sliderPhotos">
+      <img [src]="photo" />
+    </ng-template>
+  </swiper>
   <div class="header-logo">
-    <img src="assets/home/logo-header.png" alt="FreeMove" />
+    <img src="assets/home/logo-header2.png" alt="FreeMove" />
   </div>
 </header>
 
@@ -68,10 +80,10 @@
       <div class="health-text">
         <h3>Salud</h3>
         <ul>
-          <li>Registra tu información corporal</li>
-          <li>Registra tus instrumentos deportivos</li>
-          <li>Registra tus actividades deportivas</li>
-          <li>Mira tus resultados de salud</li>
+          <li>Registra tu información corporal: peso y altura.</li>
+          <li>Observa tus resultados de salud.</li>
+          <li>Avances del estado físico: quema de calorías.</li>
+          <li>Alerta de descanso e hidratación.</li>
         </ul>
       </div>
     </div>
@@ -85,10 +97,9 @@
       <div class="services-card-information">
         <div class="services-card-information-listado">
           <ul>
-            <li>Registra tu información corporal</li>
-            <li>Registra tus instrumentos deportivos</li>
-            <li>Registra tus actividades deportivas</li>
-            <li>Mira tus resultados de salud</li>
+            <li>Rutas realizadas.</li>
+            <li>Distancias recorridas.</li>
+            <li>Calorías quemadas.</li>
           </ul>
         </div>
         <p>Bitácora</p>
@@ -99,10 +110,9 @@
       <div class="services-card-information">
         <div class="services-card-information-listado">
           <ul>
-            <li>Registra tu información corporal</li>
-            <li>Registra tus instrumentos deportivos</li>
-            <li>Registra tus actividades deportivas</li>
-            <li>Mira tus resultados de salud</li>
+            <li>Reporte de incidentes.</li>
+            <li>Seguimientos a terceros.</li>
+            <li>Botón de pánico.</li>
           </ul>
         </div>
         <p>Seguridad</p>
@@ -113,10 +123,10 @@
       <div class="services-card-information">
         <div class="services-card-information-listado">
           <ul>
-            <li>Registra tu información corporal</li>
-            <li>Registra tus instrumentos deportivos</li>
-            <li>Registra tus actividades deportivas</li>
-            <li>Mira tus resultados de salud</li>
+            <li>Ruta seleccionada y nivel de complejidad.</li>
+            <li>Difundir fotos realizados durante el recorrido de una ruta.</li>
+            <li>Compartir logros obtenidos durante una ruta asignada.</li>
+            <li>Observar el número de seguidores y seguidos.</li>
           </ul>
         </div>
         <p>Comparte</p>

@@ -10,6 +10,7 @@ export class CardComponent implements OnInit {
   @Input() description: any = '';
   @Input() iconSrc: string = '';
   @Input() measurement: string = '';
+  @Input() isDate: boolean = false;
 
   constructor() {}
 

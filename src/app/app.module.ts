@@ -8,15 +8,12 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { environment } from 'src/environments/environment';
 
 import { ToastrModule } from 'ngx-toastr';
+import { SwiperModule } from 'swiper/angular';
 
 import { SharedModule } from './shared/shared.module';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/home.component';
-import { AboutComponent } from './pages/about/about.component';
-import { CityComponent } from './pages/city/city.component';
-import { HealthComponent } from './pages/health/health.component';
-import { ServicesComponent } from './pages/services/services.component';
 
 //Cambiar el idioma de la app
 import localeEs from '@angular/common/locales/es';
@@ -24,14 +21,7 @@ import { registerLocaleData } from '@angular/common';
 registerLocaleData(localeEs);
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HomeComponent,
-    AboutComponent,
-    CityComponent,
-    HealthComponent,
-    ServicesComponent,
-  ],
+  declarations: [AppComponent, HomeComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -39,6 +29,7 @@ registerLocaleData(localeEs);
     HttpClientModule,
     SharedModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
+    SwiperModule,
     ToastrModule.forRoot({
       positionClass: 'toast-top-right',
       timeOut: 3000,

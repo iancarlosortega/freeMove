@@ -24,6 +24,7 @@ export class SearchComponent implements OnInit {
     this.activatedRoute.queryParams
       .pipe(
         tap(({ q }) => (this.query = q)),
+        tap(() => (this.isLoading = true)),
         switchMap(() => this.searchService.searchRoutes(this.query))
       )
       .subscribe((routes) => {

@@ -5,7 +5,7 @@ export interface Route {
   distance: number;
   calification: number;
   difficulty: RouteDifficulty;
-  photos: string[];
+  photos: PhotoRoute[];
   keywords: string[];
   type: string;
   city: string;
@@ -21,6 +21,12 @@ export interface Route {
   velocityAvg: number;
   velocityMax: number;
   activityType: string;
+}
+
+interface PhotoRoute {
+  latitude: number;
+  longitude: number;
+  photoUrl: string;
 }
 
 type RouteDifficulty = 'Fácil' | 'Medio' | 'Difícil';

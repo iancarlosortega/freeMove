@@ -1,13 +1,25 @@
 .header {
-  background-image:
-      linear-gradient(to bottom, #003472 0%, #D9D9D900 30%),
-      url(/assets/home/fondo-header.png);
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
   height: 60vh;
   position: relative;
   width: 100%;
+}
+
+.header-slider {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -99;
+}
+
+.header-slider img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 60% 50%;
+  aspect-ratio: 16/9;
+  filter: brightness(0.8);
 }
 
 .header-logo {

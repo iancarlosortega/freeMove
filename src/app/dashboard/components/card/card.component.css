@@ -7,6 +7,7 @@
   min-width: 100%;
   gap: 1rem;
   grid-template-columns: 30% 70%;
+  height: 100%;
 }
 
 .card-icon {
