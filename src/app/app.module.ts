@@ -20,6 +20,14 @@ import localeEs from '@angular/common/locales/es';
 import { registerLocaleData } from '@angular/common';
 registerLocaleData(localeEs);
 
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { HttpClient } from '@angular/common/http';
+
+export function HttpLoaderFactory(httpClient: HttpClient) {
+  return new TranslateHttpLoader(httpClient, './assets/i18n/', '.json');
+}
+
 @NgModule({
   declarations: [AppComponent, HomeComponent],
   imports: [
@@ -35,6 +43,14 @@ registerLocaleData(localeEs);
       timeOut: 3000,
       maxOpened: 1,
       preventDuplicates: true,
+    }),
+    TranslateModule.forRoot({
+      defaultLanguage: 'es',
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient],
+      },
     }),
   ],
   providers: [{ provide: LOCALE_ID, useValue: 'es' }],

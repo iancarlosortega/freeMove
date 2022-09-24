@@ -235,6 +235,12 @@ img {
   color: var(--alerterrortext);
 }
 
+/* Calendar */
+
+.p-element, .p-calendar, .p-dropdown {
+  width: 100%;
+}
+
 /* Input Color */
 
 .mat-focused .mat-form-field-label {

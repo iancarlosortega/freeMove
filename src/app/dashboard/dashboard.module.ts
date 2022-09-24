@@ -2,12 +2,14 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { DashboardRoutingModule } from './dashboard-routing.module';
-
+//TODO: Borrar el módulo del Modal en caso de no usarlo
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BarRatingModule } from 'ngx-bar-rating';
 import { GalleryModule } from 'ng-gallery';
 import { LightboxModule } from 'ng-gallery/lightbox';
 import { MaterialModule } from '../material/material.module';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { NgChartsModule } from 'ng2-charts';
 import { PrimeNgModule } from '../prime-ng/prime-ng.module';
 import { ShareButtonsModule } from 'ngx-sharebuttons/buttons';
 import { ShareIconsModule } from 'ngx-sharebuttons/icons';
@@ -30,7 +32,6 @@ import { LinkAccountInvitationComponent } from './link-account-invitation/link-a
 import { NavComponent } from './components/nav/nav.component';
 import { NotificationsComponent } from './notifications/notifications.component';
 import { ProfileComponent } from './profile/profile.component';
-import { ReactiveFormsModule } from '@angular/forms';
 import { RouteComponent } from './route/route.component';
 import { RoutesComponent } from './routes/routes.component';
 import { StopAlertComponent } from './components/stop-alert/stop-alert.component';
@@ -64,17 +65,19 @@ import { SearchComponent } from './search/search.component';
   imports: [
     CommonModule,
     DashboardRoutingModule,
+    FormsModule,
     ReactiveFormsModule,
     BarRatingModule,
     GalleryModule,
     LightboxModule,
     MaterialModule,
     ModalModule.forRoot(),
+    NgChartsModule,
     PrimeNgModule,
     ShareButtonsModule,
-    SharedModule,
     ShareIconsModule,
     SwiperModule,
+    SharedModule,
   ],
 })
 export class DashboardModule {}
