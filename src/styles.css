@@ -237,8 +237,12 @@ img {
 
 /* Calendar */
 
-.p-element, .p-calendar, .p-dropdown {
+.p-calendar, p-dropdown, .p-dropdown {
   width: 100%;
+}
+
+.p-paginator > p-dropdown {
+  width: initial;
 }
 
 /* Input Color */

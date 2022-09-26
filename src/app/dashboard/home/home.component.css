@@ -78,7 +78,7 @@
   height: 2.5rem;
 }
 
-.group, .group-health {
+.group{
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -127,4 +127,53 @@
 
 .group-item p {
   color: var(--azul-oscuro);
+}
+
+@media (min-width: 768px) and (max-width: 992px){
+  .health-tablet {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.height-center h5{
+  margin-bottom: 1rem;
+}
+
+.height {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.height p {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.weight-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.weight {
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+}
+
+.weight p {
+  font-size: 1.1rem;
+}
+
+.weight h5, .weight p {
+  margin: 0 !important;
 }

@@ -23,7 +23,7 @@ export interface Route {
   activityType: string;
 }
 
-interface PhotoRoute {
+export interface PhotoRoute {
   latitude: number;
   longitude: number;
   photoUrl: string;

@@ -20,6 +20,7 @@ import { BitacoraComponent } from './bitacora/bitacora.component';
 import { CardComponent } from './components/card/card.component';
 import { ChangeEmailComponent } from './change-email/change-email.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
+import { ChartComponent } from './components/chart/chart.component';
 import { CommunityComponent } from './community/community.component';
 import { ConfirmAlertComponent } from './components/confirm-alert/confirm-alert.component';
 import { ConfirmDeleteComponent } from './components/confirm-delete/confirm-delete.component';
@@ -44,6 +45,7 @@ import { SearchComponent } from './search/search.component';
     CardComponent,
     ChangeEmailComponent,
     ChangePasswordComponent,
+    ChartComponent,
     CommunityComponent,
     ConfirmAlertComponent,
     ConfirmDeleteComponent,
