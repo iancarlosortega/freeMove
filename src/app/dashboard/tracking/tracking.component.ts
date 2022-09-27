@@ -29,7 +29,7 @@ export class TrackingComponent implements AfterViewInit, OnDestroy {
   };
   idUser: string = '';
   isLoading: boolean = true;
-  hasBeenVinculated: boolean = true;
+  hasBeenVinculated: boolean = false;
 
   constructor(
     private userService: UserService,
@@ -45,22 +45,20 @@ export class TrackingComponent implements AfterViewInit, OnDestroy {
         )
       )
       .subscribe((alert) => {
-        if (!alert) {
-          this.isLoading = false;
-          this.hasBeenVinculated = false;
-          return;
+        if (alert) {
+          this.alert = alert;
+          this.hasBeenVinculated = true;
+          const map = new Map({
+            container: this.mapElement.nativeElement,
+            style: 'mapbox://styles/mapbox/streets-v11',
+            center: this.alert.endPosition || this.alert.startPosition,
+            zoom: 15,
+          });
+          new Marker()
+            .setLngLat(this.alert.endPosition || this.alert.startPosition!)
+            .addTo(map);
         }
-        this.alert = alert;
         this.isLoading = false;
-        const map = new Map({
-          container: this.mapElement.nativeElement,
-          style: 'mapbox://styles/mapbox/streets-v11',
-          center: this.alert.endPosition || this.alert.startPosition,
-          zoom: 15,
-        });
-        new Marker()
-          .setLngLat(this.alert.endPosition || this.alert.startPosition!)
-          .addTo(map);
       });
   }
 

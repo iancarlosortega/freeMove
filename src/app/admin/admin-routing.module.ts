@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { IncidentsComponent } from './incidents/incidents.component';
 import { RouteComponent } from './route/route.component';
 import { RoutesComponent } from './routes/routes.component';
 import { UsersComponent } from './users/users.component';
@@ -23,11 +22,6 @@ const routes: Routes = [
       {
         path: 'ruta/:id',
         component: RouteComponent,
-      },
-      {
-        path: 'incidentes',
-        component: IncidentsComponent,
-        data: { breadcrumb: 'Gestión de Incidentes' },
       },
     ],
   },

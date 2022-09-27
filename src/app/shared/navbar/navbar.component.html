@@ -24,7 +24,7 @@
       <a (click)="scrollToSection('process')">Proceso</a>
     </li>
     <li>
-      <button routerLink="/dashboard" class="boton-login">
+      <button (click)="navigateToDashboard()" class="boton-login">
         Registro/Ingreso
       </button>
     </li>
@@ -85,7 +85,10 @@
       >
         <a>Procesos</a>
       </li>
-      <li class="navbar-listado-item-responsive" routerLink="/dashboard">
+      <li
+        (click)="navigateToDashboard()"
+        class="navbar-listado-item-responsive"
+      >
         <a>Registro/Ingreso</a>
       </li>
     </ul>

@@ -1,6 +1,8 @@
 <div class="dashboard">
   <main class="main">
     <swiper
+      *ngIf="photos.length > 0"
+      class="slider"
       [loop]="true"
       [autoplay]="{
         delay: 5000,
@@ -15,14 +17,16 @@
       [chartData]="last7daysData"
       title="Rendimiento en los últimos 7 días"
     ></app-chart>
-    <app-chart
-      [chartData]="last30daysData"
-      title="Rendimiento en los últimos 30 días"
-    ></app-chart>
+    <div class="chart">
+      <app-chart
+        [chartData]="last30daysData"
+        title="Rendimiento en los últimos 30 días"
+      ></app-chart>
+    </div>
   </main>
   <aside class="aside">
     <div class="stadistics">
-      <header class="stadistics-header">
+      <header class="stadistics-header" routerLink="/dashboard/bitacora">
         <h4>Mis Estadísticas</h4>
         <img src="assets/icons/bicicleta.svg" alt="Bicicleta" />
       </header>

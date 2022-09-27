@@ -1,13 +1,7 @@
-import {
-  AfterViewInit,
-  Component,
-  ElementRef,
-  OnInit,
-  ViewChild,
-} from '@angular/core';
+import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { Map } from 'mapbox-gl';
-import { environment } from 'src/environments/environment';
-// const MapboxDirections = require('@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions');
+import { Route } from 'src/app/interfaces';
+import { RouteService } from 'src/app/services';
 
 @Component({
   selector: 'app-routes',
@@ -17,89 +11,147 @@ import { environment } from 'src/environments/environment';
 export class RoutesComponent implements AfterViewInit {
   @ViewChild('mapDiv') mapElement!: ElementRef;
   map!: Map;
+  routes: Route[] = [];
 
-  constructor() {}
+  constructor(private routeService: RouteService) {}
+
   ngAfterViewInit(): void {
-    // const map = new Map({
-    //   container: this.mapElement.nativeElement,
-    //   style: 'mapbox://styles/mapbox/streets-v11',
-    //   center: [-79.2433982, -4.0075088],
-    //   zoom: 13,
-    // });
-    // this.map.addControl(
-    //   new MapboxDirections({
-    //     accessToken: environment.mapboxToken,
-    //     unit: 'metric',
-    //     profile: 'mapbox/cycling',
-    //   }),
-    //   'top-left'
-    // );
-    // map.on('load', function () {
-    //   var url =
-    //     'https://s3.us-east-1.amazonaws.com/hdx-production-filestore/resources/6fa37b41-ad28-40a6-9641-3b4efd4dbe13/ecuador.geojson?AWSAccessKeyId=AKIAXYC32WNARK756OUG&Signature=CxrCpR%2BCwvBxWgP%2FX1rUSQ%2FFXWs%3D&Expires=1662251187';
-    //   map.addSource('source_id', { type: 'geojson', data: url });
-    // });
-    // const map = new Map({
-    //   container: this.mapElement.nativeElement,
-    //   // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
-    //   style: 'mapbox://styles/mapbox/streets-v11',
-    //   center: [-122.486052, 37.830348],
-    //   zoom: 15,
-    // });
-    // map.on('load', () => {
-    //   map.addSource('route', {
-    //     type: 'geojson',
-    //     data: {
-    //       type: 'Feature',
-    //       properties: {},
-    //       geometry: {
-    //         type: 'LineString',
-    //         coordinates: [
-    //           [-122.483696, 37.833818],
-    //           [-122.483482, 37.833174],
-    //           [-122.483396, 37.8327],
-    //           [-122.483568, 37.832056],
-    //           [-122.48404, 37.831141],
-    //           [-122.48404, 37.830497],
-    //           [-122.483482, 37.82992],
-    //           [-122.483568, 37.829548],
-    //           [-122.48507, 37.829446],
-    //           [-122.4861, 37.828802],
-    //           [-122.486958, 37.82931],
-    //           [-122.487001, 37.830802],
-    //           [-122.487516, 37.831683],
-    //           [-122.488031, 37.832158],
-    //           [-122.488889, 37.832971],
-    //           [-122.489876, 37.832632],
-    //           [-122.490434, 37.832937],
-    //           [-122.49125, 37.832429],
-    //           [-122.491636, 37.832564],
-    //           [-122.492237, 37.833378],
-    //           [-122.493782, 37.833683],
-    //         ],
-    //       },
-    //     },
-    //   });
-    //   map.addLayer({
-    //     id: 'route',
-    //     type: 'line',
-    //     source: 'route',
-    //     layout: {
-    //       'line-join': 'round',
-    //       'line-cap': 'round',
-    //     },
-    //     paint: {
-    //       'line-color': '#888',
-    //       'line-width': 8,
-    //     },
-    //   });
-    // });
+    this.routeService.getRoutes().subscribe((routes) => {
+      this.routes = routes;
+      this.map = new Map({
+        container: this.mapElement.nativeElement,
+        // style: 'mapbox://styles/mapbox/dark-v10',
+        style: 'mapbox://styles/mapbox/satellite-streets-v11',
+        center: [-79.207599, -4.001713],
+        // center: this.routes[0].startPosition,
+        zoom: 12,
+        bearing: 0,
+      });
+
+      this.map.on('load', () => {
+        // this.add3D();
+        this.routes.forEach((route, index) => {
+          //TODO: ELiminar todo este bloque de código cuando se tenga la data real
+          // Cambiar el tipo de coordinates de acuerdo a la respuesta de la base de datos
+          route.coordinates = route.coordinates.map((route: any) =>
+            route.split(',').map((coord: any) => parseFloat(coord))
+          ) as any;
+
+          //TODO: Preguntar si lineas o mapa de calor
+          this.map.addSource('route' + index, {
+            type: 'geojson',
+            data: {
+              type: 'Feature',
+              properties: {},
+              geometry: {
+                type: 'LineString',
+                coordinates: route.coordinates as any,
+              },
+            },
+          });
+          // this.map.addLayer({
+          //   id: 'route' + index,
+          //   type: 'line',
+          //   source: 'route' + index,
+          //   layout: {
+          //     'line-join': 'round',
+          //     'line-cap': 'round',
+          //   },
+          //   paint: {
+          //     'line-color': '#843e3e',
+          //     'line-width': 6,
+          //   },
+          // });
+
+          this.map.addLayer(
+            {
+              id: 'routeheat' + index,
+              type: 'heatmap',
+              source: 'route' + index,
+              maxzoom: 24,
+              paint: {
+                // increase weight as diameter breast height increases
+                'heatmap-weight': {
+                  property: 'dbh',
+                  type: 'exponential',
+                  stops: [
+                    [1, 0],
+                    [62, 1],
+                  ],
+                },
+                // increase intensity as zoom level increases
+                'heatmap-intensity': {
+                  stops: [
+                    [11, 1],
+                    [15, 3],
+                  ],
+                },
+                // assign color values be applied to points depending on their density
+                'heatmap-color': [
+                  'interpolate',
+                  ['linear'],
+                  ['heatmap-density'],
+                  0,
+                  'rgba(236,222,239,0)',
+                  0.2,
+                  'rgb(208,209,230)',
+                  0.4,
+                  'rgb(166,189,219)',
+                  0.6,
+                  'rgb(103,169,207)',
+                  0.8,
+                  'rgb(28,144,153)',
+                ],
+                // increase radius as zoom increases
+                'heatmap-radius': {
+                  stops: [
+                    [11, 15],
+                    [15, 20],
+                  ],
+                },
+                // decrease opacity to transition into the circle layer
+                'heatmap-opacity': {
+                  default: 1,
+                  stops: [
+                    [14, 1],
+                    [15, 0],
+                  ],
+                },
+              },
+            },
+            'waterway-label'
+          );
+        });
+      });
+    });
   }
 
-  ngOnInit(): void {}
+  add3D() {
+    // add map 3d terrain and sky layer and fog
+    // Add some fog in the background
+    this.map.setFog({
+      range: [0.5, 10],
+      color: 'white',
+      'horizon-blend': 0.2,
+    });
 
-  saveRoute() {
-    console.log(this.map);
-    console.log('save route');
+    // Add a sky layer over the horizon
+    this.map.addLayer({
+      id: 'sky',
+      type: 'sky',
+      paint: {
+        'sky-type': 'atmosphere',
+        'sky-atmosphere-color': 'rgba(85, 151, 210, 0.5)',
+      },
+    });
+
+    // Add terrain source, with slight exaggeration
+    this.map.addSource('mapbox-dem', {
+      type: 'raster-dem',
+      url: 'mapbox://mapbox.terrain-rgb',
+      tileSize: 512,
+      maxzoom: 14,
+    });
+    this.map.setTerrain({ source: 'mapbox-dem', exaggeration: 1 });
   }
 }

@@ -1,5 +1,6 @@
-import { AfterViewInit, Component } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Output } from '@angular/core';
 import { BreakpointObserver } from '@angular/cdk/layout';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -7,10 +8,14 @@ import { BreakpointObserver } from '@angular/cdk/layout';
   styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent implements AfterViewInit {
+  @Output() isLoading: EventEmitter<boolean> = new EventEmitter();
   isPhone: boolean = false;
   showMenu: boolean = false;
 
-  constructor(private breakpointObs: BreakpointObserver) {}
+  constructor(
+    private breakpointObs: BreakpointObserver,
+    private router: Router
+  ) {}
 
   ngAfterViewInit() {
     setTimeout(() => {
@@ -22,6 +27,11 @@ export class NavbarComponent implements AfterViewInit {
         }
       });
     }, 0);
+  }
+
+  navigateToDashboard() {
+    this.isLoading.emit(true);
+    this.router.navigateByUrl('/dashboard');
   }
 
   scrollToSection(elementId: string) {

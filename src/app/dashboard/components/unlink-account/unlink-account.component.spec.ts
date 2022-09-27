@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { IncidentsComponent } from './incidents.component';
+import { UnlinkAccountComponent } from './unlink-account.component';
 
-describe('IncidentsComponent', () => {
-  let component: IncidentsComponent;
-  let fixture: ComponentFixture<IncidentsComponent>;
+describe('UnlinkAccountComponent', () => {
+  let component: UnlinkAccountComponent;
+  let fixture: ComponentFixture<UnlinkAccountComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ IncidentsComponent ]
+      declarations: [ UnlinkAccountComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(IncidentsComponent);
+    fixture = TestBed.createComponent(UnlinkAccountComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

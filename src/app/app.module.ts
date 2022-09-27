@@ -9,6 +9,7 @@ import { environment } from 'src/environments/environment';
 
 import { ToastrModule } from 'ngx-toastr';
 import { SwiperModule } from 'swiper/angular';
+import { MaterialModule } from './material/material.module';
 
 import { SharedModule } from './shared/shared.module';
 
@@ -38,6 +39,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     SharedModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     SwiperModule,
+    MaterialModule,
     ToastrModule.forRoot({
       positionClass: 'toast-top-right',
       timeOut: 3000,

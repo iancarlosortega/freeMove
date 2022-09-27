@@ -37,4 +37,4 @@
   </div>
   <div class="route-path"></div>
 </header>
-<div #mapDiv class="map"></div>
+<div *ngIf="alert.coordinates" #mapDiv class="map"></div>

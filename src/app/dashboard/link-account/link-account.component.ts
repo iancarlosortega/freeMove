@@ -4,6 +4,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { AlertService, UserService } from 'src/app/services';
 import { Alert, User } from 'src/app/interfaces';
+import { MatDialog } from '@angular/material/dialog';
+import { UnlinkAccountComponent } from '../components/unlink-account/unlink-account.component';
 
 @Component({
   selector: 'app-link-account',
@@ -32,6 +34,7 @@ export class LinkAccountComponent implements OnInit, OnDestroy {
   });
 
   constructor(
+    public dialog: MatDialog,
     private fb: FormBuilder,
     private userService: UserService,
     private securityService: AlertService,
@@ -126,15 +129,23 @@ export class LinkAccountComponent implements OnInit, OnDestroy {
       return;
     }
 
-    this.alertService
-      .createInvitation(linkedEmail, this.user, this.alert)
-      .subscribe((error) => {
-        if (error) {
-          this.isErrorUser = true;
-          setTimeout(() => {
-            this.isErrorUser = false;
-          }, 3500);
-        }
-      });
+    const dialog = this.dialog.open(UnlinkAccountComponent, {
+      width: '400px',
+    });
+
+    dialog.afterClosed().subscribe(async (result: boolean) => {
+      if (result) {
+        this.alertService
+          .createInvitation(linkedEmail, this.user, this.alert)
+          .subscribe((error) => {
+            if (error) {
+              this.isErrorUser = true;
+              setTimeout(() => {
+                this.isErrorUser = false;
+              }, 3500);
+            }
+          });
+      }
+    });
   }
 }

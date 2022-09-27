@@ -22,10 +22,18 @@
   }
 }
 
+.slider {
+  margin-bottom: 1rem;
+}
+
 .main img {
   aspect-ratio: 16/9;
   object-fit: cover;
   max-height: 25rem;
+}
+
+.chart {
+  margin: 1rem 0;
 }
 
 .aside {
@@ -59,12 +67,18 @@
   align-items: center;
   gap: 0.5rem;
   margin-bottom: 1.5rem;
+  cursor: pointer;
 }
 
 .stadistics-header h4 {
   color: var(--azul);
   font-weight: 400;
   margin: 0;
+  transition: color .3s ease;
+}
+
+.stadistics-header h4:hover {
+  color: #283b7b;
 }
 
 @media (min-width: 992px){

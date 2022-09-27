@@ -104,6 +104,12 @@ export class AlertService {
           notificationStatus: 'pending',
           emailToVinculate: linkedEmail,
           emailFrom: userFrom.email,
+          linkedAccount: '',
+          startTime: '',
+          endTime: '',
+          startPosition: '',
+          endPosition: '',
+          coordinates: '',
         });
 
         const notification: Notification = {

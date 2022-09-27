@@ -1,173 +1,180 @@
-<header class="header">
-  <app-navbar></app-navbar>
-  <swiper
-    class="header-slider"
-    [loop]="true"
-    [autoplay]="{
-      delay: 5000,
-      disableOnInteraction: true
-    }"
-  >
-    <ng-template swiperSlide *ngFor="let photo of sliderPhotos">
-      <img [src]="photo" />
-    </ng-template>
-  </swiper>
-  <div class="header-logo">
-    <img src="assets/home/logo-header2.png" alt="FreeMove" />
+<div @fade *ngIf="isLoading" class="full-screen flex-center">
+  <mat-spinner class="spinner" [diameter]="100"></mat-spinner>
+</div>
+<div *ngIf="!isLoading">
+  <header class="header">
+    <app-navbar (isLoading)="changeLoadingState()"></app-navbar>
+    <swiper
+      class="header-slider"
+      [loop]="true"
+      [autoplay]="{
+        delay: 5000,
+        disableOnInteraction: true
+      }"
+    >
+      <ng-template swiperSlide *ngFor="let photo of sliderPhotos">
+        <img [src]="photo" />
+      </ng-template>
+    </swiper>
+    <div class="header-logo">
+      <img src="assets/home/logo-header2.png" alt="FreeMove" />
+    </div>
+  </header>
+
+  <div class="container">
+    <section class="city-information" id="city" #city>
+      <header class="city-header">
+        <h2>Ciudad Inteligente</h2>
+        <button class="primary-button city-button">Más información</button>
+      </header>
+
+      <div class="info-cards">
+        <div class="card">
+          <p>Rutas</p>
+          <div class="card-img">
+            <img src="assets/home/rutas-icon.svg" alt="Rutas" />
+          </div>
+          <p>21</p>
+        </div>
+        <div class="card">
+          <p>Ciclistas</p>
+          <div class="card-img">
+            <img src="assets/home/ciclistas-icon.svg" alt="Ciclistas" />
+          </div>
+          <p>57</p>
+        </div>
+        <div class="card">
+          <p>Incidentes</p>
+          <div class="card-img">
+            <img src="assets/home/incidentes-icon.svg" alt="Incidentes" />
+          </div>
+          <p>8</p>
+        </div>
+        <div class="card">
+          <p>Accesibilidad</p>
+          <div class="card-img">
+            <img src="assets/home/accesibilidad-icon.svg" alt="Accesibilidad" />
+          </div>
+          <p>5</p>
+        </div>
+        <div class="card">
+          <p>Vehículos</p>
+          <div class="card-img">
+            <img src="assets/home/vehiculos-icon.svg" alt="Vehículos" />
+          </div>
+          <p>11</p>
+        </div>
+        <div class="card">
+          <p>Conductores</p>
+          <div class="card-img">
+            <img src="assets/home/conductores-icon.svg" alt="Conductores" />
+          </div>
+          <p>14</p>
+        </div>
+      </div>
+    </section>
   </div>
-</header>
 
-<div class="container">
-  <section class="city-information" id="city" #city>
-    <header class="city-header">
-      <h2>Ciudad Inteligente</h2>
-      <button class="primary-button city-button">Más información</button>
-    </header>
-
-    <div class="info-cards">
-      <div class="card">
-        <p>Rutas</p>
-        <div class="card-img">
-          <img src="assets/home/rutas-icon.svg" alt="Rutas" />
+  <section class="health-information" id="health">
+    <div class="container container2">
+      <div class="health-container">
+        <div class="health-img">
+          <img src="assets/logoFreeMoveAzul.png" alt="FreMove logo" />
         </div>
-        <p>21</p>
-      </div>
-      <div class="card">
-        <p>Ciclistas</p>
-        <div class="card-img">
-          <img src="assets/home/ciclistas-icon.svg" alt="Ciclistas" />
+        <div class="health-text">
+          <h3>Salud</h3>
+          <ul>
+            <li>Registra tu información corporal: peso y altura.</li>
+            <li>Observa tus resultados de salud.</li>
+            <li>Avances del estado físico: quema de calorías.</li>
+            <li>Alerta de descanso e hidratación.</li>
+          </ul>
         </div>
-        <p>57</p>
-      </div>
-      <div class="card">
-        <p>Incidentes</p>
-        <div class="card-img">
-          <img src="assets/home/incidentes-icon.svg" alt="Incidentes" />
-        </div>
-        <p>8</p>
-      </div>
-      <div class="card">
-        <p>Accesibilidad</p>
-        <div class="card-img">
-          <img src="assets/home/accesibilidad-icon.svg" alt="Accesibilidad" />
-        </div>
-        <p>5</p>
-      </div>
-      <div class="card">
-        <p>Vehículos</p>
-        <div class="card-img">
-          <img src="assets/home/vehiculos-icon.svg" alt="Vehículos" />
-        </div>
-        <p>11</p>
-      </div>
-      <div class="card">
-        <p>Conductores</p>
-        <div class="card-img">
-          <img src="assets/home/conductores-icon.svg" alt="Conductores" />
-        </div>
-        <p>14</p>
       </div>
     </div>
   </section>
+
+  <section class="services-information" id="services">
+    <div class="services-container">
+      <div class="services-card">
+        <img src="assets/home/bitacora.png" alt="Bitácora" />
+        <div class="services-card-information">
+          <div class="services-card-information-listado">
+            <ul>
+              <li>Rutas realizadas.</li>
+              <li>Distancias recorridas.</li>
+              <li>Calorías quemadas.</li>
+            </ul>
+          </div>
+          <p>Bitácora</p>
+        </div>
+      </div>
+      <div class="services-card">
+        <img src="assets/home/seguridad.png" alt="Seguridad" />
+        <div class="services-card-information">
+          <div class="services-card-information-listado">
+            <ul>
+              <li>Reporte de incidentes.</li>
+              <li>Seguimientos a terceros.</li>
+              <li>Botón de pánico.</li>
+            </ul>
+          </div>
+          <p>Seguridad</p>
+        </div>
+      </div>
+      <div class="services-card last-card">
+        <img src="assets/home/comparte.png" alt="Comparte" />
+        <div class="services-card-information">
+          <div class="services-card-information-listado">
+            <ul>
+              <li>Ruta seleccionada y nivel de complejidad.</li>
+              <li>
+                Difundir fotos realizados durante el recorrido de una ruta.
+              </li>
+              <li>Compartir logros obtenidos durante una ruta asignada.</li>
+              <li>Observar el número de seguidores y seguidos.</li>
+            </ul>
+          </div>
+          <p>Comparte</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="process-information" id="process" #process>
+    <div class="container">
+      <h3 class="process-title">Proceso</h3>
+      <div class="process-container">
+        <div class="process-item">
+          <img src="assets/home/process1.svg" alt="Proceso" />
+        </div>
+        <div class="process-arrow">
+          <img src="assets/home/arrow.svg" alt="Flecha" />
+        </div>
+        <div class="process-item">
+          <img src="assets/home/process2.svg" alt="Proceso" />
+        </div>
+        <div class="process-arrow">
+          <img src="assets/home/arrow.svg" alt="Flecha" />
+        </div>
+        <div class="process-item">
+          <img src="assets/home/process3.svg" alt="Proceso" />
+        </div>
+        <div class="process-arrow">
+          <img src="assets/home/arrow.svg" alt="Flecha" />
+        </div>
+        <div class="process-item">
+          <img src="assets/home/process4.svg" alt="Proceso" />
+        </div>
+        <div class="process-arrow">
+          <img src="assets/home/arrow.svg" alt="Flecha" />
+        </div>
+        <div class="process-item">
+          <img src="assets/home/process5.svg" alt="Proceso" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <app-footer></app-footer>
 </div>
-
-<section class="health-information" id="health">
-  <div class="container container2">
-    <div class="health-container">
-      <div class="health-img">
-        <img src="assets/logoFreeMoveAzul.png" alt="FreMove logo" />
-      </div>
-      <div class="health-text">
-        <h3>Salud</h3>
-        <ul>
-          <li>Registra tu información corporal: peso y altura.</li>
-          <li>Observa tus resultados de salud.</li>
-          <li>Avances del estado físico: quema de calorías.</li>
-          <li>Alerta de descanso e hidratación.</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="services-information" id="services">
-  <div class="services-container">
-    <div class="services-card">
-      <img src="assets/home/bitacora.png" alt="Bitácora" />
-      <div class="services-card-information">
-        <div class="services-card-information-listado">
-          <ul>
-            <li>Rutas realizadas.</li>
-            <li>Distancias recorridas.</li>
-            <li>Calorías quemadas.</li>
-          </ul>
-        </div>
-        <p>Bitácora</p>
-      </div>
-    </div>
-    <div class="services-card">
-      <img src="assets/home/seguridad.png" alt="Seguridad" />
-      <div class="services-card-information">
-        <div class="services-card-information-listado">
-          <ul>
-            <li>Reporte de incidentes.</li>
-            <li>Seguimientos a terceros.</li>
-            <li>Botón de pánico.</li>
-          </ul>
-        </div>
-        <p>Seguridad</p>
-      </div>
-    </div>
-    <div class="services-card last-card">
-      <img src="assets/home/comparte.png" alt="Comparte" />
-      <div class="services-card-information">
-        <div class="services-card-information-listado">
-          <ul>
-            <li>Ruta seleccionada y nivel de complejidad.</li>
-            <li>Difundir fotos realizados durante el recorrido de una ruta.</li>
-            <li>Compartir logros obtenidos durante una ruta asignada.</li>
-            <li>Observar el número de seguidores y seguidos.</li>
-          </ul>
-        </div>
-        <p>Comparte</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="process-information" id="process" #process>
-  <div class="container">
-    <h3 class="process-title">Proceso</h3>
-    <div class="process-container">
-      <div class="process-item">
-        <img src="assets/home/process1.svg" alt="Proceso" />
-      </div>
-      <div class="process-arrow">
-        <img src="assets/home/arrow.svg" alt="Flecha" />
-      </div>
-      <div class="process-item">
-        <img src="assets/home/process2.svg" alt="Proceso" />
-      </div>
-      <div class="process-arrow">
-        <img src="assets/home/arrow.svg" alt="Flecha" />
-      </div>
-      <div class="process-item">
-        <img src="assets/home/process3.svg" alt="Proceso" />
-      </div>
-      <div class="process-arrow">
-        <img src="assets/home/arrow.svg" alt="Flecha" />
-      </div>
-      <div class="process-item">
-        <img src="assets/home/process4.svg" alt="Proceso" />
-      </div>
-      <div class="process-arrow">
-        <img src="assets/home/arrow.svg" alt="Flecha" />
-      </div>
-      <div class="process-item">
-        <img src="assets/home/process5.svg" alt="Proceso" />
-      </div>
-    </div>
-  </div>
-</section>
-
-<app-footer></app-footer>

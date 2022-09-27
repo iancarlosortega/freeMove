@@ -38,6 +38,7 @@ import { RoutesComponent } from './routes/routes.component';
 import { StopAlertComponent } from './components/stop-alert/stop-alert.component';
 import { TrackingComponent } from './tracking/tracking.component';
 import { SearchComponent } from './search/search.component';
+import { UnlinkAccountComponent } from './components/unlink-account/unlink-account.component';
 
 @NgModule({
   declarations: [
@@ -63,6 +64,7 @@ import { SearchComponent } from './search/search.component';
     StopAlertComponent,
     TrackingComponent,
     SearchComponent,
+    UnlinkAccountComponent,
   ],
   imports: [
     CommonModule,
