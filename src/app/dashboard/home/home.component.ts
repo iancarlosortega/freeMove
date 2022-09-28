@@ -43,7 +43,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     labels: [],
   };
 
-  last30daysData: ChartConfiguration['data'] = {
+  last15daysData: ChartConfiguration['data'] = {
     datasets: [],
     labels: [],
   };
@@ -62,7 +62,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       .subscribe((routes) => {
         this.routes = routes;
         this.last7daysData = this.createChart(7);
-        this.last30daysData = this.createChart(30);
+        this.last15daysData = this.createChart(15);
 
         routes.forEach((route) => {
           route.photos?.forEach((photo) => {

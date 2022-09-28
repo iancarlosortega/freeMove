@@ -35,9 +35,10 @@ import { NotificationsComponent } from './notifications/notifications.component'
 import { ProfileComponent } from './profile/profile.component';
 import { RouteComponent } from './route/route.component';
 import { RoutesComponent } from './routes/routes.component';
+import { SearchComponent } from './search/search.component';
+import { StadisticsComponent } from './stadistics/stadistics.component';
 import { StopAlertComponent } from './components/stop-alert/stop-alert.component';
 import { TrackingComponent } from './tracking/tracking.component';
-import { SearchComponent } from './search/search.component';
 import { UnlinkAccountComponent } from './components/unlink-account/unlink-account.component';
 
 @NgModule({
@@ -61,9 +62,10 @@ import { UnlinkAccountComponent } from './components/unlink-account/unlink-accou
     ProfileComponent,
     RouteComponent,
     RoutesComponent,
+    SearchComponent,
+    StadisticsComponent,
     StopAlertComponent,
     TrackingComponent,
-    SearchComponent,
     UnlinkAccountComponent,
   ],
   imports: [
@@ -83,5 +85,6 @@ import { UnlinkAccountComponent } from './components/unlink-account/unlink-accou
     SwiperModule,
     SharedModule,
   ],
+  exports: [BitacoraComponent],
 })
 export class DashboardModule {}

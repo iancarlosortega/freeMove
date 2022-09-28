@@ -99,15 +99,9 @@ export class UserService {
     return uploadTask.percentageChanges();
   }
 
-  addAdminRole(idUser: string) {
+  toggleRole(idUser: string, role: string) {
     return this.firestore.collection('users').doc(idUser).update({
-      role: 'ADMIN-ROLE',
-    });
-  }
-
-  removeAdminRole(idUser: string) {
-    return this.firestore.collection('users').doc(idUser).update({
-      role: 'CLIENT-ROLE',
+      role,
     });
   }
 }

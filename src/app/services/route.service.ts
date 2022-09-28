@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { ToastrService } from 'ngx-toastr';
-import { map } from 'rxjs';
+import { catchError, map, of } from 'rxjs';
 import { Route } from 'src/app/interfaces';
 
 @Injectable({
@@ -52,6 +52,9 @@ export class RouteService {
         map((a) => {
           const data = a.payload.data() as Route;
           return data;
+        }),
+        catchError((error) => {
+          return of(null);
         })
       );
   }

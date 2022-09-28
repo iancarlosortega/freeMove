@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Incident } from 'src/app/interfaces';
 import { IncidentService } from 'src/app/services';
+import { Incident } from 'src/app/interfaces';
 
 @Component({
   selector: 'app-incidents',
@@ -17,7 +17,7 @@ export class IncidentsComponent implements OnInit {
   constructor(private incidentService: IncidentService) {}
 
   ngOnInit(): void {
-    this.incidentService.getIncidents().subscribe((incidents) => {
+    this.incidentService.getActiveIncidents().subscribe((incidents) => {
       this.incidents = incidents;
       this.incidentsAux = incidents;
       this.incidentsTotal = incidents;

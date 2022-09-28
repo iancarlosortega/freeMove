@@ -16,7 +16,7 @@ export class UsersComponent implements OnInit {
   users: User[] = [];
   isLoading: boolean = true;
   scrollable: boolean = true;
-  adminCheck: boolean = false;
+  isDisabled: boolean = false;
 
   constructor(
     private observer: BreakpointObserver,
@@ -51,31 +51,11 @@ export class UsersComponent implements OnInit {
   }
 
   toggleRole(event: any, idUser: string) {
-    this.adminCheck = true;
-    if (event.checked) {
-      this.userService
-        .addAdminRole(idUser)
-        .then((_) => {
-          this.toastService.success('Rol agregado');
-          this.adminCheck = false;
-        })
-        .catch((err) => {
-          console.log(err);
-          this.toastService.error(err, 'Error');
-          this.adminCheck = false;
-        });
-    } else {
-      this.userService
-        .removeAdminRole(idUser)
-        .then((_) => {
-          this.toastService.success('Rol removido');
-          this.adminCheck = false;
-        })
-        .catch((err) => {
-          console.log(err);
-          this.toastService.error(err, 'Error');
-          this.adminCheck = false;
-        });
-    }
+    this.isDisabled = true;
+    const role = event.checked ? 'ADMIN-ROLE' : 'CLIENT-ROLE';
+    this.userService.toggleRole(idUser, role).then((_) => {
+      this.toastService.info('Rol actualizado');
+      this.isDisabled = false;
+    });
   }
 }

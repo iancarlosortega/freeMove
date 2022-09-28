@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { switchMap } from 'rxjs';
 import { Map, Marker } from 'mapbox-gl';
 import { Incident } from 'src/app/interfaces';
@@ -33,12 +33,14 @@ export class IncidentComponent implements AfterViewInit {
     createdAt: 0,
     position: [0, 0],
     photos: [],
+    isActive: false,
   };
   incidentImages: GalleryItem[] = [];
 
   constructor(
     public gallery: Gallery,
     public lightbox: Lightbox,
+    private router: Router,
     private activatedRoute: ActivatedRoute,
     private incidentService: IncidentService
   ) {}
@@ -47,6 +49,10 @@ export class IncidentComponent implements AfterViewInit {
     this.activatedRoute.params
       .pipe(switchMap(({ id }) => this.incidentService.getIncidentById(id)))
       .subscribe((incident) => {
+        if (!incident) {
+          this.router.navigateByUrl('/dashboard/incidentes');
+          return;
+        }
         this.incident = incident;
         const map = new Map({
           container: this.mapElement.nativeElement,

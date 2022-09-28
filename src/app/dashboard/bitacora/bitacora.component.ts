@@ -1,11 +1,9 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { switchMap } from 'rxjs';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import moment, { unitOfTime } from 'moment';
 import { ChartConfiguration, ChartType } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
 import { PrimeNGConfig } from 'primeng/api';
 import { TranslateService } from '@ngx-translate/core';
-import { RouteService, UserService } from 'src/app/services';
 import { Route } from 'src/app/interfaces';
 
 @Component({
@@ -15,8 +13,8 @@ import { Route } from 'src/app/interfaces';
 })
 export class BitacoraComponent implements OnInit {
   @ViewChild(BaseChartDirective) chart?: BaseChartDirective;
-
-  routes: Route[] = [];
+  @Input() routes: Route[] = [];
+  @Input() needAvg: boolean = false;
   options = [
     {
       value: 7,
@@ -84,18 +82,11 @@ export class BitacoraComponent implements OnInit {
 
   constructor(
     private primengConfig: PrimeNGConfig,
-    private translateService: TranslateService,
-    private routeService: RouteService,
-    private userService: UserService
+    private translateService: TranslateService
   ) {}
 
   ngOnInit(): void {
-    this.userService.user$
-      .pipe(switchMap((user) => this.routeService.getRoutesByUser(user.idUser)))
-      .subscribe((routes) => {
-        this.routes = routes;
-        this.filterGraphByDays();
-      });
+    this.filterGraphByDays();
   }
 
   ngAfterViewInit() {
@@ -142,10 +133,6 @@ export class BitacoraComponent implements OnInit {
       labels: this.getLabelsFromData(data, format),
     };
     this.chart?.update();
-  }
-
-  changeChartType(): void {
-    this.chartType = this.chartType === 'bar' ? 'line' : 'bar';
   }
 
   filterGraphByDays() {
@@ -260,6 +247,31 @@ export class BitacoraComponent implements OnInit {
   ) {
     // Break reference with original routes
     const data: Route[] = JSON.parse(JSON.stringify(routes));
+    if (this.needAvg) {
+      return data
+        .reduce((acc, route) => {
+          const date = moment(route.startDate);
+          const index = acc.findIndex((r) =>
+            moment(r.startDate).isSame(date, timeUnit)
+          );
+          if (index === -1) {
+            route.count = 1;
+            acc.push(route);
+          } else {
+            acc[index].distance += route.distance;
+            acc[index].timeElapsed += route.timeElapsed;
+            acc[index].burnoutCalories += route.burnoutCalories;
+            acc[index].count ? acc[index].count!++ : (acc[index].count = 1);
+          }
+          return acc;
+        }, [] as Route[])
+        .map((route) => {
+          route.distance = route.distance / route.count!;
+          route.timeElapsed = route.timeElapsed / route.count!;
+          route.burnoutCalories = route.burnoutCalories / route.count!;
+          return route;
+        });
+    }
 
     return data.reduce((acc, route) => {
       const date = moment(route.startDate);

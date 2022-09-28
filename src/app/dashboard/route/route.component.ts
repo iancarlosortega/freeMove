@@ -6,7 +6,7 @@ import {
   Renderer2,
   ViewChild,
 } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Map, Marker, Popup } from 'mapbox-gl';
 import { IncidentService, RouteService } from 'src/app/services';
 import { Incident, Route } from 'src/app/interfaces';
@@ -73,6 +73,7 @@ export class RouteComponent implements OnInit, AfterViewInit {
     public gallery: Gallery,
     public lightbox: Lightbox,
     private renderer: Renderer2,
+    private router: Router,
     private activatedRoute: ActivatedRoute,
     private routeService: RouteService,
     private incidentService: IncidentService
@@ -84,9 +85,15 @@ export class RouteComponent implements OnInit, AfterViewInit {
     this.activatedRoute.params
       .pipe(
         switchMap(({ id }) => this.routeService.getRouteById(id)),
-        tap((route) => (this.route = route)),
+        tap((route) => {
+          if (!route) {
+            this.router.navigateByUrl('/dashboard/rutas');
+            return;
+          }
+          this.route = route;
+        }),
         switchMap((route) =>
-          this.incidentService.getIncidentsFromRoute(route.idRoute)
+          this.incidentService.getIncidentsFromRoute(route!.idRoute)
         )
       )
       .subscribe(async (incidents) => {
@@ -116,7 +123,7 @@ export class RouteComponent implements OnInit, AfterViewInit {
         this.generateIncidentsInMap();
 
         this.map.on('load', async () => {
-          // this.add3D();
+          this.add3D();
           // fetch the geojson for the linestring to be animated
 
           // const trackGeojson = {
@@ -213,7 +220,7 @@ export class RouteComponent implements OnInit, AfterViewInit {
       // follow the path while slowly rotating the camera, passing in the camera bearing and altitude from the previous animation
       await animatePath({
         map,
-        duration: 5000,
+        duration: 30000,
         path: trackGeojson,
         startBearing: bearing,
         startAltitude: altitude,

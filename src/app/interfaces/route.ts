@@ -21,6 +21,7 @@ export interface Route {
   velocityAvg: number;
   velocityMax: number;
   activityType: string;
+  count?: number;
 }
 
 export interface PhotoRoute {

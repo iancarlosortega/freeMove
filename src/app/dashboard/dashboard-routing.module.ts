@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { AdminGuard, ProviderGuard } from '../guards';
-import { BitacoraComponent } from './bitacora/bitacora.component';
 import { SearchComponent } from './search/search.component';
 
 import { ChangeEmailComponent } from './change-email/change-email.component';
@@ -12,12 +11,13 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { HomeComponent } from './home/home.component';
 import { IncidentComponent } from './incident/incident.component';
 import { IncidentsComponent } from './incidents/incidents.component';
-import { LinkAccountInvitationComponent } from './link-account-invitation/link-account-invitation.component';
 import { LinkAccountComponent } from './link-account/link-account.component';
+import { LinkAccountInvitationComponent } from './link-account-invitation/link-account-invitation.component';
 import { NotificationsComponent } from './notifications/notifications.component';
 import { ProfileComponent } from './profile/profile.component';
 import { RouteComponent } from './route/route.component';
 import { RoutesComponent } from './routes/routes.component';
+import { StadisticsComponent } from './stadistics/stadistics.component';
 import { TrackingComponent } from './tracking/tracking.component';
 
 const routes: Routes = [
@@ -54,7 +54,7 @@ const routes: Routes = [
       },
       {
         path: 'bitacora',
-        component: BitacoraComponent,
+        component: StadisticsComponent,
         data: { breadcrumb: 'Bitácora' },
       },
       {

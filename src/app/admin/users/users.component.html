@@ -38,7 +38,7 @@
       </th>
       <th pSortableColumn="email" style="width: 300px">
         <div class="p-d-flex p-jc-between p-ai-center">
-          Correo electronico
+          Correo electrónico
           <p-sortIcon field="email"></p-sortIcon>
         </div>
       </th>
@@ -54,7 +54,7 @@
           <p-sortIcon field="city"></p-sortIcon>
         </div>
       </th>
-      <th style="width: 100px">Hacer Admin</th>
+      <th style="width: 150px">Hacer Admin</th>
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-user>
@@ -72,20 +72,22 @@
         {{ user.city }}
       </td>
 
-      <td style="width: 100px">
-        <mat-checkbox
-          [disabled]="adminCheck"
-          (change)="toggleRole($event, user.idUser)"
-          [value]="user.idUser"
-          [checked]="user.role === 'ADMIN-ROLE'"
-        >
-        </mat-checkbox>
+      <td style="width: 150px">
+        <div class="flex-center">
+          <mat-checkbox
+            [disabled]="isDisabled"
+            (change)="toggleRole($event, user.idUser)"
+            [value]="user.idUser"
+            [checked]="user.role === 'ADMIN-ROLE'"
+          >
+          </mat-checkbox>
+        </div>
       </td>
     </tr>
   </ng-template>
   <ng-template pTemplate="emptymessage">
     <tr>
-      <td class="sin-usuarios" colspan="9">Ningún usuario encontrado.</td>
+      <td class="no-results" colspan="5">Ningún usuario encontrado.</td>
     </tr>
   </ng-template>
 </p-table>

@@ -2,7 +2,7 @@
   <main class="main">
     <swiper
       *ngIf="photos.length > 0"
-      class="slider"
+      class="slider fade-in"
       [loop]="true"
       [autoplay]="{
         delay: 5000,
@@ -13,15 +13,19 @@
         <img [src]="photo" />
       </ng-template>
     </swiper>
-    <app-chart
-      [chartData]="last7daysData"
-      title="Rendimiento en los últimos 7 días"
-    ></app-chart>
-    <div class="chart">
-      <app-chart
-        [chartData]="last30daysData"
-        title="Rendimiento en los últimos 30 días"
-      ></app-chart>
+    <div class="charts">
+      <div class="chart">
+        <app-chart
+          [chartData]="last7daysData"
+          title="Rendimiento en los últimos 7 días"
+        ></app-chart>
+      </div>
+      <div class="chart">
+        <app-chart
+          [chartData]="last15daysData"
+          title="Rendimiento en los últimos 15 días"
+        ></app-chart>
+      </div>
     </div>
   </main>
   <aside class="aside">

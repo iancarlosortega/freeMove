@@ -29,11 +29,25 @@
 .main img {
   aspect-ratio: 16/9;
   object-fit: cover;
-  max-height: 25rem;
+  max-height: 15rem;
 }
 
-.chart {
-  margin: 1rem 0;
+@media (min-width: 992px){
+  .main img {
+    max-height: 20rem;
+  }
+}
+
+.charts {
+  display: grid;
+  grid-template-columns: 100%;
+  gap: 1rem;
+}
+
+@media (min-width: 1500px){
+  .charts {
+    grid-template-columns: 50% 50%;
+  }
 }
 
 .aside {
