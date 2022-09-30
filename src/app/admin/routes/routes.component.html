@@ -1,1 +1,81 @@
-<div #mapDiv class="map"></div>
+<div *ngIf="isLoading" class="flex-center spinner-loading">
+  <mat-spinner [diameter]="100"></mat-spinner>
+</div>
+
+<div class="total">
+  <h1>Total:</h1>
+  <p>
+    {{ routes.length }}
+    {{ routes.length > 1 || routes.length == 0 ? "rutas" : "ruta" }}
+  </p>
+</div>
+<section class="hours">
+  <div class="top-hours">
+    <header class="header">
+      <h1>Horas más recurrentes</h1>
+    </header>
+    <ul>
+      <li class="top" *ngFor="let hour of currentHours; let i = index">
+        <div class="top-circle">
+          {{ i + 1 }}
+        </div>
+        <div class="top-info">
+          <p class="text-bold">{{ hour.hour }}H00:</p>
+          <p>{{ hour.count }} {{ hour.count > 1 ? "rutas" : "ruta" }}</p>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <div class="range-hours">
+    <header class="header">
+      <h1>Rango de horas más recurrentes</h1>
+    </header>
+    <ul>
+      <li class="range">
+        <h3>3H00 - 7H59</h3>
+        <p>
+          {{ firstRange }}
+          {{ firstRange > 1 || firstRange == 0 ? "rutas" : "ruta" }}
+        </p>
+      </li>
+      <li class="range">
+        <h3>8H00 - 12H59</h3>
+        <p>
+          {{ secondRange }}
+          {{ secondRange > 1 || secondRange == 0 ? "rutas" : "ruta" }}
+        </p>
+      </li>
+      <li class="range">
+        <h3>13H00 - 17H59</h3>
+        <p>
+          {{ thirdRange }}
+          {{ thirdRange > 1 || thirdRange == 0 ? "rutas" : "ruta" }}
+        </p>
+      </li>
+      <li class="range">
+        <h3>18H00 - 22H59</h3>
+        <p>
+          {{ fourthRange }}
+          {{ fourthRange > 1 || fourthRange == 0 ? "rutas" : "ruta" }}
+        </p>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<section class="stadistics">
+  <header class="header">
+    <h1>Estadísticas Promedio</h1>
+  </header>
+  <div class="fade-in" *ngIf="routes.length > 0 && !isLoading">
+    <app-bitacora [needAvg]="true" [routes]="routes"></app-bitacora>
+  </div>
+</section>
+
+<section class="heat-map">
+  <header class="header">
+    <h1>Mapa de Calor</h1>
+  </header>
+  <div #mapDiv class="map"></div>
+</section>
