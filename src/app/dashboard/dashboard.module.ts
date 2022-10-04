@@ -16,11 +16,13 @@ import { ShareIconsModule } from 'ngx-sharebuttons/icons';
 import { SwiperModule } from 'swiper/angular';
 import { SharedModule } from '../shared/shared.module';
 
+import { AccountSettingsComponent } from './account-settings/account-settings.component';
 import { BitacoraComponent } from './bitacora/bitacora.component';
 import { CardComponent } from './components/card/card.component';
 import { ChangeEmailComponent } from './change-email/change-email.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { ChartComponent } from './components/chart/chart.component';
+import { CommentComponent } from './components/comment/comment.component';
 import { CommunityComponent } from './community/community.component';
 import { ConfirmAlertComponent } from './components/confirm-alert/confirm-alert.component';
 import { ConfirmDeleteComponent } from './components/confirm-delete/confirm-delete.component';
@@ -28,26 +30,32 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { HomeComponent } from './home/home.component';
 import { IncidentComponent } from './incident/incident.component';
 import { IncidentsComponent } from './incidents/incidents.component';
+import { LikesComponent } from './components/likes/likes.component';
 import { LinkAccountComponent } from './link-account/link-account.component';
 import { LinkAccountInvitationComponent } from './link-account-invitation/link-account-invitation.component';
 import { NavComponent } from './components/nav/nav.component';
 import { NotificationsComponent } from './notifications/notifications.component';
+import { PostComponent } from './components/post/post.component';
 import { ProfileComponent } from './profile/profile.component';
 import { RouteComponent } from './route/route.component';
 import { RoutesComponent } from './routes/routes.component';
 import { SearchComponent } from './search/search.component';
 import { StadisticsComponent } from './stadistics/stadistics.component';
 import { StopAlertComponent } from './components/stop-alert/stop-alert.component';
+import { SuggestedComponent } from './components/suggested/suggested.component';
 import { TrackingComponent } from './tracking/tracking.component';
 import { UnlinkAccountComponent } from './components/unlink-account/unlink-account.component';
+import { UserComponent } from './components/user/user.component';
 
 @NgModule({
   declarations: [
+    AccountSettingsComponent,
     BitacoraComponent,
     CardComponent,
     ChangeEmailComponent,
     ChangePasswordComponent,
     ChartComponent,
+    CommentComponent,
     CommunityComponent,
     ConfirmAlertComponent,
     ConfirmDeleteComponent,
@@ -55,18 +63,22 @@ import { UnlinkAccountComponent } from './components/unlink-account/unlink-accou
     HomeComponent,
     IncidentComponent,
     IncidentsComponent,
+    LikesComponent,
     LinkAccountComponent,
     LinkAccountInvitationComponent,
     NavComponent,
     NotificationsComponent,
+    PostComponent,
     ProfileComponent,
     RouteComponent,
     RoutesComponent,
     SearchComponent,
     StadisticsComponent,
     StopAlertComponent,
+    SuggestedComponent,
     TrackingComponent,
     UnlinkAccountComponent,
+    UserComponent,
   ],
   imports: [
     CommonModule,

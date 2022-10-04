@@ -19,6 +19,7 @@ import { RouteComponent } from './route/route.component';
 import { RoutesComponent } from './routes/routes.component';
 import { StadisticsComponent } from './stadistics/stadistics.component';
 import { TrackingComponent } from './tracking/tracking.component';
+import { AccountSettingsComponent } from './account-settings/account-settings.component';
 
 const routes: Routes = [
   {
@@ -91,9 +92,9 @@ const routes: Routes = [
         canLoad: [AdminGuard],
       },
       {
-        path: 'perfil',
-        component: ProfileComponent,
-        data: { breadcrumb: 'Editar Perfil' },
+        path: 'ajustes',
+        component: AccountSettingsComponent,
+        data: { breadcrumb: 'Ajustes de la Cuenta' },
       },
       {
         path: 'cambiar-clave',
@@ -123,6 +124,11 @@ const routes: Routes = [
         path: 'notificaciones',
         component: NotificationsComponent,
         data: { breadcrumb: 'Notificaciones' },
+      },
+      {
+        path: 'usuario/:id',
+        component: ProfileComponent,
+        data: { breadcrumb: 'Perfil de Usuario' },
       },
       {
         path: '**',

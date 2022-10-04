@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { switchMap } from 'rxjs';
 import { Route } from 'src/app/interfaces';
 import { RouteService, UserService } from 'src/app/services';
+import { mapRoute } from 'src/app/utils';
 
 @Component({
   selector: 'app-stadistics',
@@ -21,7 +22,7 @@ export class StadisticsComponent implements OnInit {
     this.userService.user$
       .pipe(switchMap((user) => this.routeService.getRoutesByUser(user.idUser)))
       .subscribe((routes) => {
-        this.routes = routes;
+        this.routes = routes.map((route) => mapRoute(route));
         this.isLoading = false;
       });
   }

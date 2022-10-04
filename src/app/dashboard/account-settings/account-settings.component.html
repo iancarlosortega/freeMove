@@ -1,0 +1,160 @@
+<div *ngIf="!isLoading" class="fade-in">
+  <form [formGroup]="profileForm" (submit)="updateProfile()" autocomplete="off">
+    <div class="photo-profile">
+      <!-- Image Preview -->
+      <div class="photo fade-in">
+        <img [src]="photoUrl" alt="Foto de perfil" />
+        <label class="edit-photo" for="inputFile">
+          <div class="flex-center">
+            <mat-icon>edit</mat-icon>
+          </div>
+        </label>
+      </div>
+
+      <input
+        id="inputFile"
+        type="file"
+        accept="image/png, image/jpg, image/*"
+        (change)="selectFile($event)"
+        hidden
+      />
+
+      <div
+        class="percentage wrapper"
+        *ngIf="currentImageToUpload && isUploading"
+      >
+        <div class="alert alert-info loading">
+          <p>Cambiando imagen...</p>
+          <p-progressSpinner
+            [style]="{ width: '20px', height: '20px' }"
+            styleClass="custom-spinner"
+            strokeWidth="8"
+            animationDuration=".5s"
+          >
+          </p-progressSpinner>
+        </div>
+
+        <div class="progress mt-2">
+          <div
+            class="progress-bar progress-bar-striped"
+            role="progressbar"
+            attr.aria-valuenow="{{ uploadPercentage }}"
+            aria-valuemin="0"
+            aria-valuemax="100"
+            [ngStyle]="{ width: uploadPercentage + '%' }"
+            [ngClass]="{
+              'bg-success': uploadPercentage > 70,
+              'bg-info': uploadPercentage > 40 && uploadPercentage < 70,
+              'bg-warning': uploadPercentage > 20 && uploadPercentage < 40,
+              'bg-danger': uploadPercentage > 0 && uploadPercentage < 20
+            }"
+          >
+            {{ uploadPercentage }}%
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 col-lg-6">
+        <mat-form-field appearance="outline">
+          <mat-label>Nombres y Apellidos</mat-label>
+          <input
+            type="text"
+            matInput
+            formControlName="name"
+            placeholder="Escribe tus nombres completos"
+          />
+          <mat-error *ngIf="invalidInput('name')">
+            Los nombres y apellidos son <strong>obligatorios</strong>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Género</mat-label>
+          <mat-select formControlName="gender">
+            <mat-option value="Masculino">Masculino</mat-option>
+            <mat-option value="Femenino">Femenino</mat-option>
+            <mat-option value="Otro">Otro</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>País</mat-label>
+          <mat-select formControlName="country">
+            <mat-option *ngFor="let country of countries" [value]="country">
+              {{ country }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Ciudad</mat-label>
+          <mat-select formControlName="city">
+            <mat-option *ngFor="let city of cities" [value]="city">
+              {{ city }}
+            </mat-option>
+          </mat-select>
+          <mat-hint>Debe seleccionar primero el país</mat-hint>
+        </mat-form-field>
+      </div>
+      <div class="col-12 col-lg-6">
+        <mat-form-field appearance="outline">
+          <mat-label>Teléfono</mat-label>
+          <input
+            type="tel"
+            matInput
+            formControlName="phone"
+            placeholder="+593 9999-9999"
+          />
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Edad</mat-label>
+          <input
+            type="number"
+            matInput
+            min="0"
+            formControlName="age"
+            placeholder="Escribe tu edad"
+          />
+          <mat-error *ngIf="invalidInput('age')">
+            La edad debe ser mayor a <strong>0</strong>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Altura</mat-label>
+          <input
+            type="number"
+            matInput
+            min="0"
+            formControlName="height"
+            placeholder="Escribe tu altura en metros"
+          />
+          <mat-error *ngIf="invalidInput('height')">
+            La altura debe ser mayor a <strong>0</strong>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Peso</mat-label>
+          <input
+            type="number"
+            matInput
+            min="0"
+            formControlName="weight"
+            placeholder="Escribe tu peso en kg"
+          />
+          <mat-error *ngIf="invalidInput('weight')">
+            El peso debe ser mayor a <strong>0</strong>
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="flex-center">
+        <button [disabled]="isDisabled" type="submit" class="primary-button">
+          <span>Actualizar</span>
+          <mat-icon>save</mat-icon>
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<div *ngIf="isLoading" class="flex-center spinner-loading">
+  <mat-spinner [diameter]="100"></mat-spinner>
+</div>

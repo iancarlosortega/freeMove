@@ -1,0 +1,26 @@
+#user-panel {
+  border-bottom: 1px solid lightgray;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.user-name {
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.circle {
+  height: 3.5rem;
+  width: 3.5rem;
+}
+
+.btn-follow button{
+  width: 10rem;
+}

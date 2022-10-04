@@ -1,0 +1,26 @@
+<div id="user-panel" class="bg-white p-2">
+  <div class="user-info">
+    <img [src]="photoUrl" class="circle" />
+    <span class="user-name" [routerLink]="['../', user.idUser]">
+      {{ user.name }}
+    </span>
+  </div>
+  <div class="btn-follow">
+    <button
+      *ngIf="!isCurrentUser && !isFollowing"
+      class="btn bg-primary btn-round text-white text-bold"
+      (click)="unfollow()"
+      [disabled]="isDisabled"
+    >
+      Seguir
+    </button>
+    <button
+      *ngIf="!isCurrentUser && isFollowing"
+      class="btn bg-primary btn-round text-white text-bold"
+      (click)="follow()"
+      [disabled]="isDisabled"
+    >
+      Siguiendo
+    </button>
+  </div>
+</div>

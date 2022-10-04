@@ -4,6 +4,7 @@ import { Subscription, switchMap, tap } from 'rxjs';
 import { RouteService, UserService } from 'src/app/services';
 import { Route } from 'src/app/interfaces';
 import { ConfirmDeleteComponent } from '../components/confirm-delete/confirm-delete.component';
+import { mapRoute } from 'src/app/utils';
 
 @Component({
   selector: 'app-routes',
@@ -30,7 +31,7 @@ export class RoutesComponent implements OnInit, OnDestroy {
         switchMap((user) => this.routeService.getRoutesByUser(user.idUser))
       )
       .subscribe((routes) => {
-        this.routes = routes;
+        this.routes = routes.map((route: Route) => mapRoute(route));
         this.routesAux = routes;
         this.isLoading = false;
       });

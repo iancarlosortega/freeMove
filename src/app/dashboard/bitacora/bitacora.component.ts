@@ -112,19 +112,19 @@ export class BitacoraComponent implements OnInit {
     this.chartData = {
       datasets: [
         {
-          label: 'Distancia',
+          label: 'Distancia(m)',
           data: data.map((route) => route.distance),
           borderColor: 'rgba(0, 0, 255, 0.3)',
           backgroundColor: 'rgba(0, 0, 255, 0.3)',
         },
         {
-          label: 'Tiempo Recorrido',
+          label: 'Tiempo Recorrido(min)',
           data: data.map((route) => route.timeElapsed),
           borderColor: 'rgba(255, 0, 0, 0.3)',
           backgroundColor: 'rgba(255, 0, 0, 0.3)',
         },
         {
-          label: 'Calorías Quemadas',
+          label: 'Calorías Quemadas(kcal)',
           data: data.map((route) => route.burnoutCalories),
           borderColor: 'rgba(255, 0, 0, 0.3)',
           backgroundColor: 'rgba(255, 0, 0, 0.3)',

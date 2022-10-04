@@ -115,8 +115,9 @@ export class AuthService {
             photoUrl: response.user?.photoURL!,
             provider: response.additionalUserInfo?.providerId! as UserProvider,
             role: 'CLIENT-ROLE',
-            followers: 0,
-            following: 0,
+            createdAt: new Date(),
+            followers: [],
+            following: [],
           };
 
           this.userService

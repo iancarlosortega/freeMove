@@ -24,6 +24,7 @@ import {
   animatePath,
   flyInAndRotate,
   createGeoJSONCircle,
+  mapRoute,
 } from 'src/app/utils';
 
 import SwiperCore, { Pagination } from 'swiper';
@@ -90,7 +91,7 @@ export class RouteComponent implements OnInit, AfterViewInit {
             this.router.navigateByUrl('/dashboard/rutas');
             return;
           }
-          this.route = route;
+          this.route = mapRoute(route);
         }),
         switchMap((route) =>
           this.incidentService.getIncidentsFromRoute(route!.idRoute)
@@ -98,13 +99,6 @@ export class RouteComponent implements OnInit, AfterViewInit {
       )
       .subscribe(async (incidents) => {
         this.incidents = incidents;
-
-        //TODO: ELiminar todo este bloque de código cuando se tenga la data real
-        // Cambiar el tipo de coordinates de acuerdo a la respuesta de la base de datos
-        this.route.coordinates = this.route.coordinates.map((route: any) =>
-          route.split(',').map((coord: any) => parseFloat(coord))
-        ) as any;
-
         this.map = new Map({
           container: this.mapElement.nativeElement,
           projection: {
@@ -124,39 +118,18 @@ export class RouteComponent implements OnInit, AfterViewInit {
 
         this.map.on('load', async () => {
           this.add3D();
-          // fetch the geojson for the linestring to be animated
+          const trackGeojson = {
+            type: 'Feature',
+            properties: {},
+            geometry: {
+              type: 'LineString',
+              coordinates: this.route.coordinates,
+            },
+          };
 
-          // const trackGeojson = {
-          //   type: 'Feature',
-          //   properties: {},
-          //   geometry: {
-          //     type: 'LineString',
-          //     // coordinates: this.route.coordinates,
-          //     coordinates: [
-          //       [-79.208501, -3.995997],
-          //       [-79.208284, -3.996099],
-          //       [-79.208157, -3.996608],
-          //       [-79.20808, -3.99727],
-          //       [-79.208029, -3.997753],
-          //       [-79.208012, -3.99781],
-          //       [-79.207949, -3.998529],
-          //       [-79.207917, -3.998956],
-          //       [-79.20789, -3.999375],
-          //       [-79.207897, -3.999947],
-          //       [-79.207871, -4.000537],
-          //       [-79.20781, -4.00104],
-          //       [-79.19724, -4.039425],
-          //     [-79.197393, -4.044753],
-          //     [-79.207178, -3.979853],
-          //     [5.4953, 47.06675],
-          //     [5.49403, 47.06163],
-          //     ],
-          //   },
-          // };
-
-          const trackGeojson = await fetch(
-            `assets/data/female-stage-1.geojson`
-          ).then((d) => d.json());
+          // const trackGeojson = await fetch(
+          //   `assets/data/female-stage-1.geojson`
+          // ).then((d) => d.json());
 
           // kick off the animations
           await this.playAnimations(trackGeojson, this.map);

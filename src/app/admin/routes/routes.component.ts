@@ -3,6 +3,7 @@ import { Map } from 'mapbox-gl';
 import moment from 'moment';
 import { Route } from 'src/app/interfaces';
 import { RouteService } from 'src/app/services';
+import { mapRoute } from 'src/app/utils';
 
 @Component({
   selector: 'app-routes',
@@ -24,13 +25,12 @@ export class RoutesComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     this.routeService.getRoutes().subscribe((routes) => {
-      this.routes = routes;
+      this.routes = routes.map((route: Route) => mapRoute(route));
       this.isLoading = false;
       this.getRangeCounters();
       this.getCurrentHours();
       this.map = new Map({
         container: this.mapElement.nativeElement,
-        // style: 'mapbox://styles/mapbox/dark-v10',
         style: 'mapbox://styles/mapbox/satellite-streets-v11',
         center: [-79.207599, -4.001713],
         // center: this.routes[0].startPosition,
@@ -41,13 +41,6 @@ export class RoutesComponent implements AfterViewInit {
       this.map.on('load', () => {
         // this.add3D();
         this.routes.forEach((route, index) => {
-          //TODO: ELiminar todo este bloque de código cuando se tenga la data real
-          // Cambiar el tipo de coordinates de acuerdo a la respuesta de la base de datos
-          route.coordinates = route.coordinates.map((route: any) =>
-            route.split(',').map((coord: any) => parseFloat(coord))
-          ) as any;
-
-          //TODO: Preguntar si lineas o mapa de calor
           this.map.addSource('route' + index, {
             type: 'geojson',
             data: {
@@ -55,23 +48,10 @@ export class RoutesComponent implements AfterViewInit {
               properties: {},
               geometry: {
                 type: 'LineString',
-                coordinates: route.coordinates as any,
+                coordinates: route.coordinates,
               },
             },
           });
-          // this.map.addLayer({
-          //   id: 'route' + index,
-          //   type: 'line',
-          //   source: 'route' + index,
-          //   layout: {
-          //     'line-join': 'round',
-          //     'line-cap': 'round',
-          //   },
-          //   paint: {
-          //     'line-color': '#843e3e',
-          //     'line-width': 6,
-          //   },
-          // });
 
           this.map.addLayer(
             {
@@ -148,7 +128,7 @@ export class RoutesComponent implements AfterViewInit {
           endDate.set({ hour: 7, minute: 59, second: 59 })
         )
       ) {
-        console.log('entre al primero');
+        console.log('entre 3 y 7');
         this.firstRange++;
       } else if (
         date.isBetween(
@@ -194,7 +174,7 @@ export class RoutesComponent implements AfterViewInit {
     // Sort array by count
     resultArray.sort((a, b) => b.count - a.count);
     // Get the first 3 elements
-    this.currentHours = resultArray.slice(0, 3);
+    this.currentHours = resultArray.slice(0, 5);
   }
 
   add3D() {

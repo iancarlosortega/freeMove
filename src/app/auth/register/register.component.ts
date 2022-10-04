@@ -68,8 +68,9 @@ export class RegisterComponent implements OnInit {
           name: this.registerForm.value.name!,
           role: 'CLIENT-ROLE',
           provider: 'email-password',
-          followers: 0,
-          following: 0,
+          followers: [],
+          following: [],
+          createdAt: new Date(),
         };
 
         this.userService

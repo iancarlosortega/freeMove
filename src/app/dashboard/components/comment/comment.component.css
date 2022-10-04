@@ -1,0 +1,16 @@
+.comment {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.5rem 0;
+}
+
+.circle {
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+.comment-time {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  margin: 0;
+}

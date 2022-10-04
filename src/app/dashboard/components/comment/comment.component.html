@@ -1,0 +1,10 @@
+<div *ngIf="user" class="comment">
+  <img [src]="photoUrl" alt="Foto de Usuario" class="circle" />
+  <div class="comment-info">
+    <div class="comment-body">
+      <span class="text-bold">{{ user.name }} </span>
+      <span>{{ comment.body }}</span>
+    </div>
+    <p class="comment-time">{{ timeAgo }}</p>
+  </div>
+</div>

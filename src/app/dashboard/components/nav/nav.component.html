@@ -118,9 +118,13 @@
           </p>
         </div>
 
-        <button mat-menu-item routerLink="./perfil">
+        <button mat-menu-item [routerLink]="['./usuario', user.idUser]">
           <mat-icon>account_circle</mat-icon>
-          <span>Editar Perfil</span>
+          <span>Perfil</span>
+        </button>
+        <button mat-menu-item routerLink="./ajustes">
+          <mat-icon>settings</mat-icon>
+          <span>Ajustes</span>
         </button>
         <button mat-menu-item (click)="logout()">
           <mat-icon>logout</mat-icon>

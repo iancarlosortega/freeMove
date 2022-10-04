@@ -12,16 +12,19 @@ export interface User {
   identificationCard?: string;
   country?: string;
   city?: string;
-  photoUrl?: string;
-  photoFilename?: string;
   role: UserRole;
   provider: UserProvider;
   // Datos de salud
   weight?: number;
   height?: number;
   // Datos de redes sociales
-  followers?: number;
-  following?: number;
+  followers?: string[];
+  following?: string[];
+  createdAt: any;
+  photoUrl?: string;
+  photoFilename?: string;
+  bannerUrl?: string;
+  bannerFilename?: string;
 }
 
 export type UserProvider = 'email-password' | 'google.com' | 'facebook.com';

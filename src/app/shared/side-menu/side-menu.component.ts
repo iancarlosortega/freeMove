@@ -52,7 +52,7 @@ export class SideMenuComponent implements OnInit, OnDestroy {
               },
               {
                 name: 'Rutas',
-                icon: 'assets/icons/rutas.svg',
+                icon: 'assets/icons/routes.svg',
                 route: './rutas',
                 isAvailable: true,
               },
@@ -64,19 +64,19 @@ export class SideMenuComponent implements OnInit, OnDestroy {
               },
               {
                 name: 'Incidentes',
-                icon: 'assets/icons/incidentes.svg',
+                icon: 'assets/icons/incidents.svg',
                 route: './incidentes',
                 isAvailable: true,
               },
               {
                 name: 'Comunidad',
-                icon: 'assets/icons/comunidad.svg',
+                icon: 'assets/icons/community.svg',
                 route: './comunidad',
                 isAvailable: true,
               },
               {
                 name: 'Rastreo',
-                icon: 'assets/icons/rastreo.svg',
+                icon: 'assets/icons/tracking.svg',
                 route: './rastreo',
                 isAvailable: true,
               },
@@ -88,19 +88,19 @@ export class SideMenuComponent implements OnInit, OnDestroy {
             subItems: [
               {
                 name: 'Usuarios',
-                icon: 'assets/icons/usuarios.svg',
+                icon: 'assets/icons/users.svg',
                 route: './admin/usuarios',
                 isAvailable: true,
               },
               {
                 name: 'Rutas',
-                icon: 'assets/icons/rutas.svg',
+                icon: 'assets/icons/routes.svg',
                 route: './admin/rutas',
                 isAvailable: true,
               },
               {
                 name: 'Incidentes',
-                icon: 'assets/icons/incidentes.svg',
+                icon: 'assets/icons/incidents.svg',
                 route: './admin/incidents',
                 isAvailable: true,
               },
@@ -111,9 +111,9 @@ export class SideMenuComponent implements OnInit, OnDestroy {
             isAvailable: true,
             subItems: [
               {
-                name: 'Perfil',
-                icon: 'assets/icons/perfil.svg',
-                route: './perfil',
+                name: 'Ajustes',
+                icon: 'assets/icons/settings.svg',
+                route: './ajustes',
                 isAvailable: true,
               },
               {
@@ -130,7 +130,7 @@ export class SideMenuComponent implements OnInit, OnDestroy {
               },
               {
                 name: 'Contraseña',
-                icon: 'assets/icons/clave.svg',
+                icon: 'assets/icons/password.svg',
                 route: './cambiar-clave',
                 isAvailable: this.isEmailProvider,
               },

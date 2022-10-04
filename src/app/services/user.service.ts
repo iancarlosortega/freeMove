@@ -1,7 +1,14 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
-import { BehaviorSubject, finalize, map } from 'rxjs';
+import {
+  BehaviorSubject,
+  combineLatest,
+  finalize,
+  map,
+  Observable,
+  of,
+} from 'rxjs';
 import { FileUpload } from '../models';
 import { User } from '../interfaces';
 
@@ -49,6 +56,21 @@ export class UserService {
       .pipe(
         map((a) => {
           const data = a.payload.data() as User;
+          data.idUser = a.payload.id;
+          return data;
+        })
+      );
+  }
+
+  getUserByIdNoRealtime(id: string) {
+    return this.firestore
+      .collection('users')
+      .doc(id)
+      .get()
+      .pipe(
+        map((a) => {
+          const data = a.data() as User;
+          data.idUser = a.id;
           return data;
         })
       );
@@ -68,6 +90,18 @@ export class UserService {
         }),
         map((result) => result[0])
       );
+  }
+
+  getUsersByIds(ids: any[]) {
+    if (ids.length === 0) {
+      return of([]);
+    }
+    const users: Observable<User>[] = [];
+    ids.forEach((id) => {
+      const peticion = this.getUserById(id);
+      users.push(peticion);
+    });
+    return combineLatest(users);
   }
 
   createUser(user: User) {
@@ -103,5 +137,13 @@ export class UserService {
     return this.firestore.collection('users').doc(idUser).update({
       role,
     });
+  }
+
+  getSuggestedUsers() {
+    return this.firestore
+      .collection<User>('users', (ref) =>
+        ref.orderBy('totalFollowers', 'desc').limit(5)
+      )
+      .valueChanges();
   }
 }

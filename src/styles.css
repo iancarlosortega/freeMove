@@ -306,3 +306,62 @@ input::-webkit-inner-spin-button {
 input[type=number] {
   -moz-appearance: textfield;
 }
+
+.bg-dark {
+  background-color: #383E49;
+}
+
+.container {
+  margin: 0 auto;
+  padding: 0px;
+}
+
+.text-primary {
+  color: #E83F6F !important;
+}
+
+.border-primary {
+  border: 1px solid rgba(232, 63, 111, 0.726) !important;
+}
+
+.bg-primary {
+  transition: all 0.3s ease !important;
+  background-color: var(--amarillo) !important;
+}
+
+.border-secondary {
+  border: 1px solid rgba(63, 196, 232, 0.726) !important;
+}
+
+::-webkit-scrollbar {
+  width: 0px;
+  /* remove scrollbar space */
+}
+
+.circle {
+  border-radius: 50%;
+  object-fit: cover;
+  width: 70px;
+  height: 70px;
+  border: 2px solid rgb(241, 241, 241);
+}
+
+.btn-round {
+  border-radius: 100px;
+}
+
+.bg-none {
+  background-color: rgba(255, 255, 255, 0) !important;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.popover-body {
+  padding: 0px !important;
+}
+
+.text-bold {
+  font-weight: bold;
+}

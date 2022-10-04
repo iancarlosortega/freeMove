@@ -35,6 +35,9 @@ export class HomeComponent implements OnInit, OnDestroy {
     provider: 'email-password',
     weight: 0,
     height: 0,
+    createdAt: new Date(),
+    followers: [],
+    following: [],
   };
   userObs!: Subscription;
   routes: Route[] = [];

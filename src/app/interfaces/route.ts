@@ -9,11 +9,10 @@ export interface Route {
   keywords: string[];
   type: string;
   city: string;
-  //TODO: Cambiar date por time
   startPosition: [number, number];
-  startDate: Date;
+  startDate: any;
   endPosition: [number, number];
-  endDate: Date;
+  endDate: any;
   coordinates: [number, number][];
   burnoutCalories: number;
   timeElapsed: number;

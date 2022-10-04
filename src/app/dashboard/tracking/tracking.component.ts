@@ -8,7 +8,11 @@ import {
 import { Subscription, switchMap, tap } from 'rxjs';
 import { Map, Marker } from 'mapbox-gl';
 import { Alert } from 'src/app/interfaces';
-import { AlertService, UserService } from 'src/app/services';
+import {
+  AlertService,
+  GeolocationService,
+  UserService,
+} from 'src/app/services';
 
 @Component({
   selector: 'app-tracking',
@@ -33,7 +37,8 @@ export class TrackingComponent implements AfterViewInit, OnDestroy {
 
   constructor(
     private userService: UserService,
-    private alertService: AlertService
+    private alertService: AlertService,
+    private geoLocationService: GeolocationService
   ) {}
 
   ngAfterViewInit(): void {
@@ -44,19 +49,31 @@ export class TrackingComponent implements AfterViewInit, OnDestroy {
           this.alertService.getAlertToUserVinculated(user.email)
         )
       )
-      .subscribe((alert) => {
+      .subscribe(async (alert) => {
         if (alert) {
           this.alert = alert;
           this.hasBeenVinculated = true;
-          const map = new Map({
-            container: this.mapElement.nativeElement,
-            style: 'mapbox://styles/mapbox/streets-v11',
-            center: this.alert.endPosition || this.alert.startPosition,
-            zoom: 15,
-          });
-          new Marker()
-            .setLngLat(this.alert.endPosition || this.alert.startPosition!)
-            .addTo(map);
+          if (alert.startPosition && alert.endPosition) {
+            const map = new Map({
+              container: this.mapElement.nativeElement,
+              style: 'mapbox://styles/mapbox/streets-v11',
+              center: this.alert.endPosition || this.alert.startPosition,
+              zoom: 15,
+            });
+            new Marker()
+              .setLngLat(this.alert.endPosition || this.alert.startPosition!)
+              .addTo(map);
+          } else {
+            const map = new Map({
+              container: this.mapElement.nativeElement,
+              style: 'mapbox://styles/mapbox/streets-v11',
+              center: await this.geoLocationService.getUserLocation(),
+              zoom: 15,
+            });
+            new Marker()
+              .setLngLat(await this.geoLocationService.getUserLocation())
+              .addTo(map);
+          }
         }
         this.isLoading = false;
       });

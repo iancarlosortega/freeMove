@@ -1,160 +1,166 @@
-<div *ngIf="!isLoading" class="fade-in">
-  <form [formGroup]="profileForm" (submit)="updateProfile()" autocomplete="off">
-    <div class="photo-profile">
-      <!-- Image Preview -->
-      <div class="photo fade-in">
-        <img [src]="photoUrl" alt="Foto de perfil" />
-        <label class="edit-photo" for="inputFile">
-          <div class="flex-center">
-            <mat-icon>edit</mat-icon>
-          </div>
-        </label>
-      </div>
-
-      <input
-        id="inputFile"
-        type="file"
-        accept="image/png, image/jpg, image/*"
-        (change)="selectFile($event)"
-        hidden
-      />
-
-      <div
-        class="percentage wrapper"
-        *ngIf="currentImageToUpload && isUploading"
+<div class="container-fluid" class="p-0" *ngIf="isLoaded">
+  <div class="wrapper">
+    <div id="user-banner">
+      <img *ngIf="bannerUrl" [src]="bannerUrl" alt="Banner" />
+      <button
+        class="btn btn-banner"
+        id="edit-btn"
+        *ngIf="isCurrentUser"
+        (click)="inputBanner.click()"
       >
-        <div class="alert alert-info loading">
-          <p>Cambiando imagen...</p>
-          <p-progressSpinner
-            [style]="{ width: '20px', height: '20px' }"
-            styleClass="custom-spinner"
-            strokeWidth="8"
-            animationDuration=".5s"
-          >
-          </p-progressSpinner>
-        </div>
-
-        <div class="progress mt-2">
+        {{ filename ? filename : "Editar Banner" }}
+      </button>
+      <input
+        class="d-none"
+        type="file"
+        id="inputBanner"
+        #inputBanner
+        accept="image/*"
+        (change)="processImage($event)"
+      />
+    </div>
+    <div id="top-info" class="d-none d-md-block">
+      <div id="info-container" class="text-center row justify-content-center">
+        <div class="col-6 offset-md-1 offset-lg-0" id="profile-info-container">
           <div
-            class="progress-bar progress-bar-striped"
-            role="progressbar"
-            attr.aria-valuenow="{{ uploadPercentage }}"
-            aria-valuemin="0"
-            aria-valuemax="100"
-            [ngStyle]="{ width: uploadPercentage + '%' }"
-            [ngClass]="{
-              'bg-success': uploadPercentage > 70,
-              'bg-info': uploadPercentage > 40 && uploadPercentage < 70,
-              'bg-warning': uploadPercentage > 20 && uploadPercentage < 40,
-              'bg-danger': uploadPercentage > 0 && uploadPercentage < 20
-            }"
+            class="row justify-content-center ms-md-2 ms-lg-auto"
+            id="profile-info-wrapper"
           >
-            {{ uploadPercentage }}%
+            <span
+              [class]="getActiveTabStyle('posts')"
+              (click)="showTab('posts')"
+            >
+              <h6 class="text-muted m-0 p-0">Rutas</h6>
+              <h5 class="m-0 p-0">{{ posts.length }}</h5>
+            </span>
+            <span
+              [class]="getActiveTabStyle('followers')"
+              (click)="showTab('followers')"
+            >
+              <h6 class="text-muted m-0 p-0">Seguidores</h6>
+              <h5 class="m-0 p-0">{{ userFollowers.length }}</h5>
+            </span>
+            <span
+              [class]="getActiveTabStyle('following')"
+              (click)="showTab('following')"
+            >
+              <h6 class="text-muted m-0 p-0">Seguidos</h6>
+              <h5 class="m-0 p-0">{{ userFollowing.length }}</h5>
+            </span>
+            <span
+              [class]="getActiveTabStyle('likes')"
+              (click)="showTab('likes')"
+            >
+              <h6 class="text-muted m-0 p-0">Likes</h6>
+              <h5 class="m-0 p-0">{{ userLikes.length }}</h5>
+            </span>
           </div>
         </div>
       </div>
     </div>
-    <div class="row">
-      <div class="col-12 col-lg-6">
-        <mat-form-field appearance="outline">
-          <mat-label>Nombres y Apellidos</mat-label>
-          <input
-            type="text"
-            matInput
-            formControlName="name"
-            placeholder="Escribe tus nombres completos"
-          />
-          <mat-error *ngIf="invalidInput('name')">
-            Los nombres y apellidos son <strong>obligatorios</strong>
-          </mat-error>
-        </mat-form-field>
-        <mat-form-field appearance="outline">
-          <mat-label>Género</mat-label>
-          <mat-select formControlName="gender">
-            <mat-option value="Masculino">Masculino</mat-option>
-            <mat-option value="Femenino">Femenino</mat-option>
-            <mat-option value="Otro">Otro</mat-option>
-          </mat-select>
-        </mat-form-field>
-        <mat-form-field appearance="outline">
-          <mat-label>País</mat-label>
-          <mat-select formControlName="country">
-            <mat-option *ngFor="let country of countries" [value]="country">
-              {{ country }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-
-        <mat-form-field appearance="outline">
-          <mat-label>Ciudad</mat-label>
-          <mat-select formControlName="city">
-            <mat-option *ngFor="let city of cities" [value]="city">
-              {{ city }}
-            </mat-option>
-          </mat-select>
-          <mat-hint>Debe seleccionar primero el país</mat-hint>
-        </mat-form-field>
+    <div class="row mb-5">
+      <div id="user-info" class="col-12 col-md-3">
+        <div class="user-info ms-2">
+          <img [src]="photoUrl" id="profile-photo" />
+          <h5 class="my-3 text-center">
+            {{ user.name }}
+          </h5>
+          <p class="joined-date">
+            <span class="text-mute">
+              <span>
+                <mat-icon>calendar_month</mat-icon>
+                Se unió en
+                {{ user.createdAt?.toDate() | date: "MMMM 'de' y" }}
+              </span>
+            </span>
+          </p>
+          <div id="mobile-profile-info" class="d-md-none">
+            <span (click)="showTab('posts')">
+              <span class="text-bold">{{ posts.length }} </span>
+              <span>Rutas</span>
+            </span>
+            <span (click)="showTab('following')">
+              <span class="text-bold ms-2">{{ userFollowing.length }} </span>
+              <span>Seguidos</span>
+            </span>
+            <span (click)="showTab('followers')">
+              <span class="text-bold ms-2">{{ userFollowers.length }} </span>
+              <span>Seguidores</span>
+            </span>
+          </div>
+          <button
+            id="btn-message"
+            class="btn my-2 px-2"
+            *ngIf="!isCurrentUser"
+            (click)="openChatRoom()"
+          >
+            <mat-icon>chat</mat-icon>
+            Enviar Mensaje
+          </button>
+          <button
+            *ngIf="!isCurrentUser"
+            class="btn btn-round bg-primary text-white px-4 py-2 text-bold align-self-center"
+            id="btn-follow"
+            (click)="followUser()"
+          >
+            {{ isFollowing ? "Siguiendo" : "Seguir" }}
+          </button>
+        </div>
       </div>
-      <div class="col-12 col-lg-6">
-        <mat-form-field appearance="outline">
-          <mat-label>Teléfono</mat-label>
-          <input
-            type="tel"
-            matInput
-            formControlName="phone"
-            placeholder="+593 9999-9999"
-          />
-        </mat-form-field>
-        <mat-form-field appearance="outline">
-          <mat-label>Edad</mat-label>
-          <input
-            type="number"
-            matInput
-            min="0"
-            formControlName="age"
-            placeholder="Escribe tu edad"
-          />
-          <mat-error *ngIf="invalidInput('age')">
-            La edad debe ser mayor a <strong>0</strong>
-          </mat-error>
-        </mat-form-field>
-        <mat-form-field appearance="outline">
-          <mat-label>Altura</mat-label>
-          <input
-            type="number"
-            matInput
-            min="0"
-            formControlName="height"
-            placeholder="Escribe tu altura en metros"
-          />
-          <mat-error *ngIf="invalidInput('height')">
-            La altura debe ser mayor a <strong>0</strong>
-          </mat-error>
-        </mat-form-field>
-        <mat-form-field appearance="outline">
-          <mat-label>Peso</mat-label>
-          <input
-            type="number"
-            matInput
-            min="0"
-            formControlName="weight"
-            placeholder="Escribe tu peso en kg"
-          />
-          <mat-error *ngIf="invalidInput('weight')">
-            El peso debe ser mayor a <strong>0</strong>
-          </mat-error>
-        </mat-form-field>
+      <div
+        id="user-posts"
+        class="col-12 col-md-8 col-lg-6 mt-2 mt-md-0 px-0"
+        *ngIf="showPosts"
+      >
+        <div *ngFor="let post of posts">
+          <app-post [idCurrentUser]="idCurrentUser" [post]="post"></app-post>
+        </div>
+        <div class="text-muted text-center py-4" *ngIf="posts.length < 1">
+          Este usuario no tiene publicaciones aún.
+        </div>
       </div>
-      <div class="flex-center">
-        <button [disabled]="isDisabled" type="submit" class="primary-button">
-          <span>Actualizar</span>
-          <mat-icon>save</mat-icon>
-        </button>
+      <div
+        id="user-followers"
+        class="col-12 col-md-6 mt-2 mt-md-0 px-0"
+        *ngIf="showFollowers"
+      >
+        <div *ngIf="userFollowers.length > 0" id="userlist-wrapper">
+          <h4 class="bg-white px-3 p-2 mb-0">Seguidores</h4>
+          <div *ngFor="let user of userFollowers" id="user-panel-container">
+            <app-user [user]="user" [idCurrentUser]="idCurrentUser"></app-user>
+          </div>
+        </div>
+      </div>
+      <div
+        id="user-following"
+        class="col-12 col-md-6 mt-2 mt-md-0 px-0"
+        *ngIf="showFollowing"
+      >
+        <div id="userlist-wrapper">
+          <h4 class="bg-white px-3 p-2 mb-0">Seguidos</h4>
+          <div *ngFor="let user of userFollowing" id="user-panel-container">
+            <app-user [user]="user" [idCurrentUser]="idCurrentUser"></app-user>
+          </div>
+        </div>
+      </div>
+      <div
+        id="user-likes"
+        class="col-12 col-md-6 mt-2 mt-md-0 px-0"
+        *ngIf="showLikes"
+      >
+        <h4 class="bg-white px-3 p-2 mb-0">Me gustas</h4>
+        <div *ngFor="let like of userLikes">
+          <app-likes
+            [idCurrentUser]="idCurrentUser"
+            [idPost]="like.idPost"
+          ></app-likes>
+        </div>
+      </div>
+      <div id="right-panel" class="d-none d-lg-inline-block col-md-3">
+        <div class="mt-1" *ngIf="usersSuggested.length > 0">
+          <app-suggested [users]="usersSuggested"></app-suggested>
+        </div>
       </div>
     </div>
-  </form>
-</div>
-
-<div *ngIf="isLoading" class="flex-center spinner-loading">
-  <mat-spinner [diameter]="100"></mat-spinner>
+  </div>
 </div>
