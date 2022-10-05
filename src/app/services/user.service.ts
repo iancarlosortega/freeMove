@@ -133,6 +133,29 @@ export class UserService {
     return uploadTask.percentageChanges();
   }
 
+  updateBanner(fileUpload: FileUpload, user: User) {
+    const filePath = `/userBanners/${user.bannerFilename}`;
+    const storageRef = this.storage.ref(filePath);
+    const uploadTask = this.storage.upload(filePath, fileUpload.file);
+
+    //Get download URL
+    uploadTask
+      .snapshotChanges()
+      .pipe(
+        finalize(() => {
+          storageRef.getDownloadURL().subscribe((downloadURL) => {
+            this.firestore.collection('users').doc(user.idUser).update({
+              bannerFilename: user.bannerFilename,
+              bannerUrl: downloadURL,
+            });
+          });
+        })
+      )
+      .subscribe();
+
+    return uploadTask.percentageChanges();
+  }
+
   toggleRole(idUser: string, role: string) {
     return this.firestore.collection('users').doc(idUser).update({
       role,

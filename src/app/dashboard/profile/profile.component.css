@@ -24,8 +24,10 @@
 #user-banner {
   position: relative;
   height: 350px;
-  background-color: #c8c8c8;
+  background-color: #959595;
   background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 @media (max-width: 1000px) {
@@ -40,6 +42,32 @@
   }
 }
 
+#user-banner img {
+  position: absolute;
+  object-fit: cover;
+  height: 100%;
+  top: 0;
+  z-index: 9;
+}
+
+.uploading {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 999;
+  background-color: black;
+  opacity: 0.5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.uploading ::ng-deep .mat-progress-spinner circle,
+.mat-spinner circle {
+  stroke: #FFF !important;
+}
+
 /* User Info */
 #profile-photo {
   height: 11rem;
@@ -48,7 +76,7 @@
   border: 4px white solid;
   background-color: #c8c8c8;
   border-radius: 50%;
-  z-index: 99;
+  z-index: 9999;
   position: relative;
   object-fit: cover;
 }
@@ -209,7 +237,7 @@ h4 {
   position: absolute;
   top: 20px;
   right: 20px;
-  z-index: 2;
+  z-index: 99;
 }
 
 .btn-banner {
@@ -219,9 +247,9 @@ h4 {
   transition: all 0.3s ease;
 }
 
-.btn-banner:hover {
+/* .btn-banner:hover {
   background: var(--amarillo) !important;
-}
+} */
 
 .joined-date {
   display: flex;

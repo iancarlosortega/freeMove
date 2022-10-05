@@ -119,37 +119,14 @@ export class RoutesComponent implements AfterViewInit {
   getRangeCounters() {
     const routes: Route[] = JSON.parse(JSON.stringify(this.routes));
     routes.forEach((route) => {
-      const date = moment(route.startDate);
-      const startDate = moment(route.startDate);
-      const endDate = moment(route.startDate);
-      if (
-        date.isBetween(
-          startDate.set({ hour: 3, minute: 0, second: 0 }),
-          endDate.set({ hour: 7, minute: 59, second: 59 })
-        )
-      ) {
-        console.log('entre 3 y 7');
+      const hour = moment(route.startDate).hour();
+      if (hour >= 3 && hour < 8) {
         this.firstRange++;
-      } else if (
-        date.isBetween(
-          startDate.set({ hour: 8, minute: 0, second: 0 }),
-          endDate.set({ hour: 12, minute: 59, second: 59 })
-        )
-      ) {
+      } else if (hour >= 8 && hour < 13) {
         this.secondRange++;
-      } else if (
-        date.isBetween(
-          startDate.set({ hour: 13, minute: 0, second: 0 }),
-          endDate.set({ hour: 17, minute: 59, second: 59 })
-        )
-      ) {
+      } else if (hour >= 13 && hour < 18) {
         this.thirdRange++;
-      } else if (
-        date.isBetween(
-          startDate.set({ hour: 18, minute: 0, second: 0 }),
-          endDate.set({ hour: 22, minute: 59, second: 59 })
-        )
-      ) {
+      } else if (hour >= 18 && hour < 22) {
         this.fourthRange++;
       }
     });

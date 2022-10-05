@@ -1,7 +1,7 @@
 <div id="user-panel" class="bg-white p-2">
   <div class="user-info">
     <img [src]="photoUrl" class="circle" />
-    <span class="user-name" [routerLink]="['../', user.idUser]">
+    <span class="user-name pointer" (click)="goToProfile()">
       {{ user.name }}
     </span>
   </div>

@@ -1,11 +1,16 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { trigger, transition, style, animate } from '@angular/animations';
+import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Subscription, switchMap } from 'rxjs';
 import { User } from 'src/app/interfaces';
+import { FileUpload } from 'src/app/models';
 import {
   FollowService,
   LikeService,
   PostService,
+  StorageService,
   UserService,
 } from 'src/app/services';
 
@@ -13,17 +18,26 @@ import {
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css'],
+  animations: [
+    trigger('fade', [
+      transition('void => *', [
+        style({ opacity: 0 }),
+        animate(1000, style({ opacity: 1 })),
+      ]),
+      transition('* => void', [animate(300, style({ opacity: 0 }))]),
+    ]),
+  ],
 })
 export class ProfileComponent implements OnInit, OnDestroy {
   photoUrl: string = '';
-  bannerUrl: string = '';
+  bannerUrl?: string = '';
   userFollowers: any[] = [];
   userFollowing: any[] = [];
   userLikes: any[] = [];
   usersSuggested: User[] = [];
 
   idCurrentUser: string = '';
-  isLoaded: boolean = false;
+  isLoading: boolean = true;
   isCurrentUser!: boolean;
   isFollowing: boolean = false;
   showPosts!: boolean;
@@ -36,28 +50,36 @@ export class ProfileComponent implements OnInit, OnDestroy {
   filename!: any;
   posts: any[] = [];
 
+  currentImageToUpload?: FileUpload;
+  uploadPercentage: number = 0;
+  isUploading: boolean = false;
+  isDisabled: boolean = false;
+
   constructor(
-    private userService: UserService,
+    private sanitizer: DomSanitizer,
     private activatedRoute: ActivatedRoute,
+    private toastr: ToastrService,
+    private userService: UserService,
     private followService: FollowService,
     private likeService: LikeService,
-    private postService: PostService
+    private postService: PostService,
+    private storageService: StorageService
   ) {}
 
   ngOnInit() {
     this.showTab('posts');
-    this.isLoaded = false;
     this.activatedRoute.params
       .pipe(switchMap(({ id }) => this.userService.getUserByIdNoRealtime(id)))
       .subscribe((user) => {
         this.user = user;
-        this.isLoaded = true;
         this.photoUrl = user.photoUrl || 'assets/no-image.png';
+        this.bannerUrl = user.bannerUrl;
         this.checkCurrentUser();
         this.getSuggestedUsers();
         this.getFollowers();
         this.getFollowing();
         this.getLikes();
+        this.isLoading = false;
         this.postService
           .getProfilePosts(this.user.idUser)
           .subscribe((posts) => {
@@ -119,12 +141,10 @@ export class ProfileComponent implements OnInit, OnDestroy {
       this.userFollowers = this.userFollowers.filter(
         (user) => user.idUser !== this.idCurrentUser
       );
-      console.log(this.userFollowers);
       this.followService.unfollow(this.user.idUser, this.idCurrentUser);
     } else {
       this.isFollowing = true;
       this.userFollowers = this.userFollowers.concat(this.currentUser);
-      console.log(this.userFollowing);
       this.followService.follow(this.user.idUser, this.idCurrentUser);
     }
   }
@@ -175,14 +195,62 @@ export class ProfileComponent implements OnInit, OnDestroy {
     });
   }
 
-  processImage(event: any) {
+  changeBanner(event: any) {
+    this.isDisabled = true;
     const file = event.target.files[0];
-    if (file.size > 2000000) {
-      this.filename = 'Max Filesize 2Mb!';
-    } else {
-      this.filename = 'Edit Banner';
-      // this.uploadService.pushUpload(file, 'banner', this.userid);
+
+    let reader = new FileReader();
+    reader.readAsDataURL(file);
+
+    if (!file.type.includes('image')) {
+      this.isDisabled = false;
+      this.bannerUrl = this.user.bannerUrl || 'assets/no-image.png';
+      this.toastr.error('Por favor, solo subir imágenes.', 'Error');
+      return;
     }
+
+    if (file.size > 2000000) {
+      this.isDisabled = false;
+      this.toastr.error('La imagen debe pesar menos de 2MB');
+      return;
+    }
+
+    if (this.user.bannerFilename) {
+      this.storageService.deleteImage('/userBanners', this.user.bannerFilename);
+    }
+
+    this.user.bannerFilename = this.createUniqueFilename(file.name);
+
+    this.currentImageToUpload = new FileUpload(file);
+    this.isUploading = true;
+    reader.onload = (event) => {
+      this.bannerUrl = (<FileReader>event.target).result!.toString();
+    };
+    this.userService
+      .updateBanner(this.currentImageToUpload, this.user)
+      .subscribe((percentage) => {
+        this.userService.setUser(this.user);
+        this.uploadPercentage = Math.round(percentage ? percentage : 0);
+        if (this.uploadPercentage == 100) {
+          this.isUploading = false;
+          this.isDisabled = false;
+          this.uploadPercentage = 0;
+        }
+      });
+  }
+
+  createUniqueFilename(filename: string): string {
+    const id = new Date().getTime();
+    return `${id}-${filename.split('\\').slice(-1)[0]}`;
+  }
+
+  getStyle() {
+    if (this.bannerUrl) {
+      return this.sanitizer.bypassSecurityTrustStyle(
+        `background-image: url(${this.bannerUrl})`
+      );
+    }
+    return;
   }
 
   //TODO: Abrir mensajería

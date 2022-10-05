@@ -111,7 +111,11 @@
     </div>
     <div class="likes">
       <div *ngFor="let user of usersLiked">
-        <app-user [idCurrentUser]="idCurrentUser" [user]="user"></app-user>
+        <app-user
+          (closeModal)="closeModal()"
+          [idCurrentUser]="idCurrentUser"
+          [user]="user"
+        ></app-user>
       </div>
     </div>
   </div>

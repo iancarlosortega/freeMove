@@ -3,6 +3,7 @@ export interface Incident {
   idRoute: string;
   title: string;
   description: string;
+  city: string;
   isActive: boolean;
   type: string;
   createdAt: number;

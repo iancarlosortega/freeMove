@@ -9,9 +9,9 @@ export interface Route {
   keywords: string[];
   type: string;
   city: string;
-  startPosition: [number, number];
+  startPosition: string | [number, number];
   startDate: any;
-  endPosition: [number, number];
+  endPosition: string | [number, number];
   endDate: any;
   coordinates: [number, number][];
   burnoutCalories: number;

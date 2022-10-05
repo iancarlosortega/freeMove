@@ -1,164 +1,180 @@
-<div class="container-fluid" class="p-0" *ngIf="isLoaded">
-  <div class="wrapper">
-    <div id="user-banner">
-      <img *ngIf="bannerUrl" [src]="bannerUrl" alt="Banner" />
-      <button
-        class="btn btn-banner"
-        id="edit-btn"
-        *ngIf="isCurrentUser"
-        (click)="inputBanner.click()"
-      >
-        {{ filename ? filename : "Editar Banner" }}
-      </button>
-      <input
-        class="d-none"
-        type="file"
-        id="inputBanner"
-        #inputBanner
-        accept="image/*"
-        (change)="processImage($event)"
-      />
-    </div>
-    <div id="top-info" class="d-none d-md-block">
-      <div id="info-container" class="text-center row justify-content-center">
-        <div class="col-6 offset-md-1 offset-lg-0" id="profile-info-container">
+<div *ngIf="isLoading" class="flex-center spinner-loading">
+  <mat-spinner [diameter]="100"></mat-spinner>
+</div>
+<div *ngIf="!isLoading" class="fade-in">
+  <div class="container-fluid" class="p-0">
+    <div class="wrapper">
+      <div id="user-banner" [style]="getStyle()">
+        <div @fade class="uploading" *ngIf="isUploading">
+          <mat-spinner [diameter]="100"></mat-spinner>
+        </div>
+        <button
+          class="btn btn-banner"
+          id="edit-btn"
+          *ngIf="isCurrentUser"
+          (click)="inputBanner.click()"
+        >
+          Cambiar Banner
+        </button>
+        <input
+          class="d-none"
+          type="file"
+          id="inputBanner"
+          #inputBanner
+          accept="image/*"
+          (change)="changeBanner($event)"
+        />
+      </div>
+      <div id="top-info" class="d-none d-md-block">
+        <div id="info-container" class="text-center row justify-content-center">
           <div
-            class="row justify-content-center ms-md-2 ms-lg-auto"
-            id="profile-info-wrapper"
+            class="col-6 offset-md-1 offset-lg-0"
+            id="profile-info-container"
           >
-            <span
-              [class]="getActiveTabStyle('posts')"
-              (click)="showTab('posts')"
+            <div
+              class="row justify-content-center ms-md-2 ms-lg-auto"
+              id="profile-info-wrapper"
             >
-              <h6 class="text-muted m-0 p-0">Rutas</h6>
-              <h5 class="m-0 p-0">{{ posts.length }}</h5>
-            </span>
-            <span
-              [class]="getActiveTabStyle('followers')"
-              (click)="showTab('followers')"
-            >
-              <h6 class="text-muted m-0 p-0">Seguidores</h6>
-              <h5 class="m-0 p-0">{{ userFollowers.length }}</h5>
-            </span>
-            <span
-              [class]="getActiveTabStyle('following')"
-              (click)="showTab('following')"
-            >
-              <h6 class="text-muted m-0 p-0">Seguidos</h6>
-              <h5 class="m-0 p-0">{{ userFollowing.length }}</h5>
-            </span>
-            <span
-              [class]="getActiveTabStyle('likes')"
-              (click)="showTab('likes')"
-            >
-              <h6 class="text-muted m-0 p-0">Likes</h6>
-              <h5 class="m-0 p-0">{{ userLikes.length }}</h5>
-            </span>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="row mb-5">
-      <div id="user-info" class="col-12 col-md-3">
-        <div class="user-info ms-2">
-          <img [src]="photoUrl" id="profile-photo" />
-          <h5 class="my-3 text-center">
-            {{ user.name }}
-          </h5>
-          <p class="joined-date">
-            <span class="text-mute">
-              <span>
-                <mat-icon>calendar_month</mat-icon>
-                Se unió en
-                {{ user.createdAt?.toDate() | date: "MMMM 'de' y" }}
+              <span
+                [class]="getActiveTabStyle('posts')"
+                (click)="showTab('posts')"
+              >
+                <h6 class="text-muted m-0 p-0">Rutas</h6>
+                <h5 class="m-0 p-0">{{ posts.length }}</h5>
               </span>
-            </span>
-          </p>
-          <div id="mobile-profile-info" class="d-md-none">
-            <span (click)="showTab('posts')">
-              <span class="text-bold">{{ posts.length }} </span>
-              <span>Rutas</span>
-            </span>
-            <span (click)="showTab('following')">
-              <span class="text-bold ms-2">{{ userFollowing.length }} </span>
-              <span>Seguidos</span>
-            </span>
-            <span (click)="showTab('followers')">
-              <span class="text-bold ms-2">{{ userFollowers.length }} </span>
-              <span>Seguidores</span>
-            </span>
-          </div>
-          <button
-            id="btn-message"
-            class="btn my-2 px-2"
-            *ngIf="!isCurrentUser"
-            (click)="openChatRoom()"
-          >
-            <mat-icon>chat</mat-icon>
-            Enviar Mensaje
-          </button>
-          <button
-            *ngIf="!isCurrentUser"
-            class="btn btn-round bg-primary text-white px-4 py-2 text-bold align-self-center"
-            id="btn-follow"
-            (click)="followUser()"
-          >
-            {{ isFollowing ? "Siguiendo" : "Seguir" }}
-          </button>
-        </div>
-      </div>
-      <div
-        id="user-posts"
-        class="col-12 col-md-8 col-lg-6 mt-2 px-0"
-        *ngIf="showPosts"
-      >
-        <div *ngFor="let post of posts">
-          <app-post [idCurrentUser]="idCurrentUser" [post]="post"></app-post>
-        </div>
-        <div class="text-muted text-center py-4" *ngIf="posts.length < 1">
-          Este usuario no tiene publicaciones aún.
-        </div>
-      </div>
-      <div
-        id="user-followers"
-        class="col-12 col-md-6 mt-2 mt-md-0 px-0"
-        *ngIf="showFollowers"
-      >
-        <div id="userlist-wrapper">
-          <h4 class="bg-white px-3 p-2 mb-0">Seguidores</h4>
-          <div *ngFor="let user of userFollowers" id="user-panel-container">
-            <app-user [user]="user" [idCurrentUser]="idCurrentUser"></app-user>
+              <span
+                [class]="getActiveTabStyle('followers')"
+                (click)="showTab('followers')"
+              >
+                <h6 class="text-muted m-0 p-0">Seguidores</h6>
+                <h5 class="m-0 p-0">{{ userFollowers.length }}</h5>
+              </span>
+              <span
+                [class]="getActiveTabStyle('following')"
+                (click)="showTab('following')"
+              >
+                <h6 class="text-muted m-0 p-0">Seguidos</h6>
+                <h5 class="m-0 p-0">{{ userFollowing.length }}</h5>
+              </span>
+              <span
+                [class]="getActiveTabStyle('likes')"
+                (click)="showTab('likes')"
+              >
+                <h6 class="text-muted m-0 p-0">Likes</h6>
+                <h5 class="m-0 p-0">{{ userLikes.length }}</h5>
+              </span>
+            </div>
           </div>
         </div>
       </div>
-      <div
-        id="user-following"
-        class="col-12 col-md-6 mt-2 mt-md-0 px-0"
-        *ngIf="showFollowing"
-      >
-        <div id="userlist-wrapper">
-          <h4 class="bg-white px-3 p-2 mb-0">Seguidos</h4>
-          <div *ngFor="let user of userFollowing" id="user-panel-container">
-            <app-user [user]="user" [idCurrentUser]="idCurrentUser"></app-user>
+      <div class="row mb-5">
+        <div id="user-info" class="col-12 col-md-3">
+          <div class="user-info ms-2">
+            <img [src]="photoUrl" id="profile-photo" />
+            <h5 class="my-3 text-center">
+              {{ user.name }}
+            </h5>
+            <p class="joined-date">
+              <span class="text-mute">
+                <span>
+                  <mat-icon>calendar_month</mat-icon>
+                  Se unió en
+                  {{ user.createdAt?.toDate() | date: "MMMM 'de' y" }}
+                </span>
+              </span>
+            </p>
+            <div id="mobile-profile-info" class="d-md-none">
+              <span (click)="showTab('posts')">
+                <span class="text-bold">{{ posts.length }} </span>
+                <span>Rutas</span>
+              </span>
+              <span (click)="showTab('following')">
+                <span class="text-bold ms-2">{{ userFollowing.length }} </span>
+                <span>Seguidos</span>
+              </span>
+              <span (click)="showTab('followers')">
+                <span class="text-bold ms-2">{{ userFollowers.length }} </span>
+                <span>Seguidores</span>
+              </span>
+            </div>
+            <button
+              id="btn-message"
+              class="btn my-2 px-2"
+              *ngIf="!isCurrentUser"
+              (click)="openChatRoom()"
+            >
+              <mat-icon>chat</mat-icon>
+              Enviar Mensaje
+            </button>
+            <button
+              *ngIf="!isCurrentUser"
+              class="btn btn-round bg-primary text-white px-4 py-2 text-bold align-self-center"
+              id="btn-follow"
+              (click)="followUser()"
+            >
+              {{ isFollowing ? "Siguiendo" : "Seguir" }}
+            </button>
           </div>
         </div>
-      </div>
-      <div
-        id="user-likes"
-        class="col-12 col-md-6 mt-2 mt-md-0 px-0"
-        *ngIf="showLikes"
-      >
-        <h4 class="bg-white px-3 p-2 mb-0">Me gustas</h4>
-        <div *ngFor="let like of userLikes">
-          <app-likes
-            [idCurrentUser]="idCurrentUser"
-            [idPost]="like.idPost"
-          ></app-likes>
+        <div
+          id="user-posts"
+          class="col-12 col-md-8 col-lg-6 mt-2 px-0"
+          *ngIf="showPosts"
+        >
+          <div *ngFor="let post of posts">
+            <app-post [idCurrentUser]="idCurrentUser" [post]="post"></app-post>
+          </div>
+          <div class="text-muted text-center py-4" *ngIf="posts.length < 1">
+            Este usuario no tiene publicaciones aún.
+          </div>
         </div>
-      </div>
-      <div id="right-panel" class="d-none d-lg-inline-block col-md-3">
-        <div class="mt-1" *ngIf="usersSuggested.length > 0">
-          <app-suggested [users]="usersSuggested"></app-suggested>
+        <div
+          id="user-followers"
+          class="col-12 col-md-6 mt-2 mt-md-0 px-0"
+          *ngIf="showFollowers"
+        >
+          <div id="userlist-wrapper">
+            <h4 class="bg-white px-3 p-2 mb-0">Seguidores</h4>
+            <div *ngFor="let user of userFollowers" id="user-panel-container">
+              <app-user
+                [user]="user"
+                [idCurrentUser]="idCurrentUser"
+              ></app-user>
+            </div>
+          </div>
+        </div>
+        <div
+          id="user-following"
+          class="col-12 col-md-6 mt-2 mt-md-0 px-0"
+          *ngIf="showFollowing"
+        >
+          <div id="userlist-wrapper">
+            <h4 class="bg-white px-3 p-2 mb-0">Seguidos</h4>
+            <div *ngFor="let user of userFollowing" id="user-panel-container">
+              <app-user
+                [user]="user"
+                [idCurrentUser]="idCurrentUser"
+              ></app-user>
+            </div>
+          </div>
+        </div>
+        <div
+          id="user-likes"
+          class="col-12 col-md-6 mt-2 mt-md-0 px-0"
+          *ngIf="showLikes"
+        >
+          <h4 class="bg-white px-3 p-2 mb-0">Me gustas</h4>
+          <div *ngFor="let like of userLikes">
+            <app-likes
+              [idCurrentUser]="idCurrentUser"
+              [idPost]="like.idPost"
+            ></app-likes>
+          </div>
+        </div>
+        <div id="right-panel" class="d-none d-lg-inline-block col-md-3">
+          <div class="mt-1" *ngIf="usersSuggested.length > 0">
+            <app-suggested [users]="usersSuggested"></app-suggested>
+          </div>
         </div>
       </div>
     </div>
