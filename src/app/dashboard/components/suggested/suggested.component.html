@@ -5,13 +5,16 @@
     <div
       id="user-block"
       class="px-0 px-md-1 py-2"
-      [routerLink]="['../', user.idUser]"
+      [routerLink]="['/dashboard/usuario', user.idUser]"
     >
       <img
         [src]="user.photoUrl ? user.photoUrl : 'assets/no-image.png'"
         class="photo-url"
       />
-      <span class="user-name"> {{ user.name }} </span>
+      <div>
+        <span class="user-name"> {{ user.name }} </span>
+        <span class="user-email">{{ user.email }}</span>
+      </div>
     </div>
   </div>
 </div>

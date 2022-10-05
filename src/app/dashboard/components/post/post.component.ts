@@ -1,6 +1,13 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnInit,
+  TemplateRef,
+  ViewChild,
+} from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import moment from 'moment';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { LikeService, PostService, UserService } from 'src/app/services';
 import { Comment, Post, User } from 'src/app/interfaces';
 
@@ -11,15 +18,16 @@ import { Comment, Post, User } from 'src/app/interfaces';
 })
 export class PostComponent implements OnInit {
   @Input() post!: Post;
-  @Input() idPost: string = '';
   @Input() idCurrentUser: string = '';
   user!: User;
+  usersLiked: User[] = [];
   timeAgo: string = '';
   comments: Comment[] = [];
   likes: any[] = [];
   isLiked: boolean = false;
   isDisabled: boolean = false;
   showComments: boolean = false;
+  modalRef?: BsModalRef;
 
   commentForm = this.fb.group({
     comment: ['', [Validators.required, Validators.maxLength(150)]],
@@ -27,6 +35,7 @@ export class PostComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
+    private modalService: BsModalService,
     private userService: UserService,
     private postService: PostService,
     private likeService: LikeService
@@ -43,6 +52,10 @@ export class PostComponent implements OnInit {
     });
   }
 
+  deletePost() {
+    this.postService.deletePost(this.post.idPost);
+  }
+
   getComments() {
     this.postService
       .getCommentsFromPost(this.post.idPost)
@@ -53,10 +66,11 @@ export class PostComponent implements OnInit {
 
   getLikes() {
     this.likeService.getLikesFromPost(this.post.idPost).subscribe((likes) => {
-      this.likes = likes;
-      this.isLiked = this.likes.some(
-        (like) => like.idUser === this.idCurrentUser
-      );
+      this.likes = likes.map((like: any) => like.idUser);
+      this.isLiked = this.likes.some((like) => like === this.idCurrentUser);
+      this.userService.getUsersByIds(this.likes).subscribe((users) => {
+        this.usersLiked = users;
+      });
     });
   }
 
@@ -74,5 +88,15 @@ export class PostComponent implements OnInit {
     const comment = this.commentForm.value.comment;
     this.commentForm.reset();
     this.postService.addComment(this.post.idPost, this.idCurrentUser, comment!);
+  }
+
+  openModal(template: TemplateRef<any>, modalClass: string) {
+    this.modalRef = this.modalService.show(template, {
+      class: 'modal-dialog-centered ' + modalClass,
+    });
+  }
+
+  closeModal() {
+    this.modalRef?.hide();
   }
 }

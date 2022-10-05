@@ -1,17 +1,40 @@
-<div class="card mt-2" *ngIf="user">
+<div class="card" *ngIf="user">
   <header class="post-header">
     <img [src]="user.photoUrl" alt="Imagen de Perfil" class="circle" />
-    <h5>{{ user.name }}</h5>
+    <h5 [routerLink]="['/dashboard/usuario', user.idUser]" class="pointer">
+      {{ user.name }}
+    </h5>
+    <button
+      *ngIf="idCurrentUser === post.idUser"
+      class="post-button"
+      mat-icon-button
+      [matMenuTriggerFor]="settings"
+    >
+      <mat-icon>more_vert</mat-icon>
+
+      <!-- Menu -->
+      <mat-menu #settings xPosition="before">
+        <button mat-menu-item (click)="deletePost()">
+          <mat-icon>delete</mat-icon>
+          <span>Eliminar</span>
+        </button>
+      </mat-menu>
+    </button>
   </header>
   <main class="post-main">
     <video controls [src]="post.url"></video>
     <div class="post-information">
       <div class="post-likes">
-        <mat-icon *ngIf="!isLiked" (click)="addLike()"
-          >favorite_outline</mat-icon
+        <mat-icon class="pointer" *ngIf="!isLiked" (click)="addLike()">
+          favorite_outline
+        </mat-icon>
+        <mat-icon class="pointer" *ngIf="isLiked" (click)="removeLike()">
+          favorite
+        </mat-icon>
+        <span
+          class="text-bold pointer"
+          (click)="openModal(likesModal, 'modal-md')"
         >
-        <mat-icon *ngIf="isLiked" (click)="removeLike()">favorite</mat-icon>
-        <span class="text-bold">
           {{ likes.length }} {{ likes.length === 1 ? "like" : "likes" }}
         </span>
       </div>
@@ -20,8 +43,16 @@
         <span>{{ post.description }}</span>
       </div>
       <p
+        *ngIf="comments.length > 0"
+        class="post-comments d-none d-sm-block"
+        (click)="openModal(commentsModal, 'modal-lg')"
+      >
+        Ver los {{ comments.length }}
+        {{ comments.length === 1 ? "comentario" : "comentarios" }}
+      </p>
+      <p
         *ngIf="!showComments && comments.length > 0"
-        class="post-comments"
+        class="post-comments d-sm-none"
         (click)="showComments = true"
       >
         Ver los {{ comments.length }}
@@ -29,16 +60,22 @@
       </p>
       <p
         *ngIf="showComments && comments.length > 0"
-        class="post-comments"
+        class="post-comments d-sm-none"
         (click)="showComments = false"
       >
         Ocultar comentarios
       </p>
-      <div *ngIf="showComments && comments.length > 0">
+      <div *ngIf="showComments" class="comments-mobile d-sm-none">
         <div *ngFor="let comment of comments">
-          <app-comment [comment]="comment"></app-comment>
+          <app-comment
+            [idPost]="post.idPost"
+            [idPostUser]="post.idUser"
+            [idCurrentUser]="idCurrentUser"
+            [comment]="comment"
+          ></app-comment>
         </div>
       </div>
+
       <p class="post-time">{{ timeAgo }}</p>
     </div>
   </main>
@@ -58,3 +95,102 @@
     </footer>
   </form>
 </div>
+
+<ng-template #likesModal>
+  <div class="modal-content">
+    <div class="modal-header">
+      <h4 class="modal-title">Me gusta</h4>
+      <button
+        type="button"
+        class="close pull-right btn-close"
+        aria-label="Close"
+        (click)="closeModal()"
+      >
+        <span aria-hidden="true" class="visually-hidden">&times;</span>
+      </button>
+    </div>
+    <div class="likes">
+      <div *ngFor="let user of usersLiked">
+        <app-user [idCurrentUser]="idCurrentUser" [user]="user"></app-user>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #commentsModal>
+  <div class="comments-modal" *ngIf="user">
+    <video class="modal-video" controls [src]="post.url"></video>
+    <main class="post-main">
+      <header class="post-header">
+        <img [src]="user.photoUrl" alt="Imagen de Perfil" class="circle" />
+        <h5 [routerLink]="['/dashboard/usuario', user.idUser]" class="pointer">
+          {{ user.name }}
+        </h5>
+        <button
+          *ngIf="idCurrentUser === post.idUser"
+          class="post-button"
+          mat-icon-button
+          [matMenuTriggerFor]="settings"
+        >
+          <mat-icon>more_vert</mat-icon>
+
+          <!-- Menu -->
+          <mat-menu #settings xPosition="before">
+            <button mat-menu-item (click)="deletePost()">
+              <mat-icon>delete</mat-icon>
+              <span>Eliminar</span>
+            </button>
+          </mat-menu>
+        </button>
+      </header>
+      <hr />
+      <div class="modal-comments padding-util">
+        <span class="text-bold">{{ user.name }} </span>
+        <span>{{ post.description }}</span>
+        <div *ngFor="let comment of comments">
+          <app-comment
+            (closeModal)="closeModal()"
+            [idPost]="post.idPost"
+            [idPostUser]="post.idUser"
+            [idCurrentUser]="idCurrentUser"
+            [comment]="comment"
+          ></app-comment>
+        </div>
+      </div>
+      <hr />
+      <div class="post-information">
+        <div class="post-likes">
+          <mat-icon class="pointer" *ngIf="!isLiked" (click)="addLike()">
+            favorite_outline
+          </mat-icon>
+          <mat-icon class="pointer" *ngIf="isLiked" (click)="removeLike()">
+            favorite
+          </mat-icon>
+          <span
+            class="text-bold pointer"
+            (click)="openModal(likesModal, 'modal-md')"
+          >
+            {{ likes.length }} {{ likes.length === 1 ? "like" : "likes" }}
+          </span>
+        </div>
+
+        <p class="post-time">{{ timeAgo }}</p>
+      </div>
+      <hr />
+      <form autocomplete="off" [formGroup]="commentForm">
+        <footer class="post-footer">
+          <textarea
+            formControlName="comment"
+            autocomplete="off"
+            rows="1"
+            maxlength="150"
+            placeholder="Añade un comentario..."
+          ></textarea>
+          <button [disabled]="commentForm.invalid" (click)="addComment()">
+            Publicar
+          </button>
+        </footer>
+      </form>
+    </main>
+  </div>
+</ng-template>

@@ -1,1 +1,10 @@
-<p>community works!</p>
+<main class="community">
+  <section class="posts">
+    <div *ngFor="let post of posts">
+      <app-post [post]="post" [idCurrentUser]="currentUser.idUser"></app-post>
+    </div>
+  </section>
+  <aside class="suggested">
+    <app-suggested [users]="usersSuggested"></app-suggested>
+  </aside>
+</main>

@@ -9,6 +9,21 @@ import { Comment, Post } from 'src/app/interfaces';
 export class PostService {
   constructor(private firestore: AngularFirestore) {}
 
+  getAllPosts() {
+    return this.firestore
+      .collection('posts', (ref) => ref.orderBy('createdAt', 'desc'))
+      .snapshotChanges()
+      .pipe(
+        map((actions) => {
+          return actions.map((a) => {
+            const data = a.payload.doc.data() as Post;
+            data.idPost = a.payload.doc.id;
+            return data;
+          });
+        })
+      );
+  }
+
   getPostById(id: string) {
     return this.firestore
       .collection('posts')
@@ -40,9 +55,22 @@ export class PostService {
   getCommentsFromPost(idPost: string) {
     return this.firestore
       .collection<Comment>('posts/' + idPost + '/comments', (ref) =>
-        ref.orderBy('createdAt', 'asc')
+        ref.orderBy('createdAt', 'desc')
       )
-      .valueChanges();
+      .snapshotChanges()
+      .pipe(
+        map((actions) => {
+          return actions.map((a) => {
+            const data = a.payload.doc.data() as Comment;
+            data.idComment = a.payload.doc.id;
+            return data;
+          });
+        })
+      );
+  }
+
+  deletePost(idPost: string) {
+    return this.firestore.collection('posts').doc(idPost).delete();
   }
 
   addComment(idPost: string, idUser: string, body: string) {
@@ -51,5 +79,12 @@ export class PostService {
       body,
       createdAt: new Date(),
     });
+  }
+
+  deleteComment(idPost: string, idComment: string) {
+    this.firestore
+      .collection('posts/' + idPost + '/comments')
+      .doc(idComment)
+      .delete();
   }
 }

@@ -235,6 +235,22 @@ img {
   color: var(--alerterrortext);
 }
 
+/* Modal */
+
+.modal-dialog {
+  max-width: 100%;
+}
+
+.modal-md {
+  max-width: 35rem;
+  width: 90%;
+}
+
+.modal-lg {
+  max-width: 80rem;
+  width: 90%;
+}
+
 /* Calendar */
 
 .p-calendar, p-dropdown, .p-dropdown {

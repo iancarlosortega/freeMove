@@ -4,6 +4,10 @@
   padding: 0.5rem 0;
 }
 
+.comment-info {
+  flex: 1;
+}
+
 .circle {
   width: 2.5rem;
   height: 2.5rem;
@@ -13,4 +17,8 @@
   font-size: 0.7rem;
   text-transform: uppercase;
   margin: 0;
+}
+
+.comment-button {
+  transform: translateY(-0.5rem);
 }

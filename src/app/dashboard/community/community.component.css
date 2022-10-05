@@ -1,0 +1,11 @@
+.community {
+  max-width: 70rem;
+  display: grid;
+  gap: 1rem;
+}
+
+@media (min-width: 768px){
+  .community {
+    grid-template-columns: 75% 25%;
+  }
+}

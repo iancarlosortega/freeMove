@@ -2,9 +2,27 @@
   <img [src]="photoUrl" alt="Foto de Usuario" class="circle" />
   <div class="comment-info">
     <div class="comment-body">
-      <span class="text-bold">{{ user.name }} </span>
+      <span (click)="goToProfile()" class="text-bold pointer"
+        >{{ user.name }}
+      </span>
       <span>{{ comment.body }}</span>
     </div>
     <p class="comment-time">{{ timeAgo }}</p>
   </div>
+  <button
+    *ngIf="idCurrentUser === user.idUser || idCurrentUser === idPostUser"
+    class="comment-button"
+    mat-icon-button
+    [matMenuTriggerFor]="settings"
+  >
+    <mat-icon>expand_more</mat-icon>
+
+    <!-- Menu -->
+    <mat-menu #settings>
+      <button mat-menu-item (click)="deleteComment()">
+        <mat-icon>delete</mat-icon>
+        <span>Eliminar</span>
+      </button>
+    </mat-menu>
+  </button>
 </div>

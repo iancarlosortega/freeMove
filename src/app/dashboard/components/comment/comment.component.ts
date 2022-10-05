@@ -1,7 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { UserService } from 'src/app/services';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { PostService, UserService } from 'src/app/services';
 import { Comment, User } from 'src/app/interfaces';
 import moment from 'moment';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-comment',
@@ -9,11 +10,19 @@ import moment from 'moment';
   styleUrls: ['./comment.component.css'],
 })
 export class CommentComponent implements OnInit {
+  @Output() closeModal: EventEmitter<boolean> = new EventEmitter();
   @Input() comment!: Comment;
+  @Input() idCurrentUser: string = '';
+  @Input() idPostUser: string = '';
+  @Input() idPost: string = '';
   user!: User;
   photoUrl: string = '';
   timeAgo: string = '';
-  constructor(private userService: UserService) {}
+  constructor(
+    private router: Router,
+    private userService: UserService,
+    private postService: PostService
+  ) {}
 
   ngOnInit(): void {
     this.userService.getUserById(this.comment.idUser).subscribe((user) => {
@@ -23,5 +32,14 @@ export class CommentComponent implements OnInit {
         .locale('es')
         .fromNow();
     });
+  }
+
+  deleteComment() {
+    this.postService.deleteComment(this.idPost, this.comment.idComment);
+  }
+
+  goToProfile() {
+    this.router.navigate(['/dashboard/usuario', this.comment.idUser]);
+    this.closeModal.emit(true);
   }
 }
