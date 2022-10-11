@@ -2,7 +2,7 @@ import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { Map } from 'mapbox-gl';
 import moment from 'moment';
 import { Route } from 'src/app/interfaces';
-import { RouteService } from 'src/app/services';
+import { IncidentService, RouteService } from 'src/app/services';
 import { mapRoute } from 'src/app/utils';
 
 @Component({
@@ -11,8 +11,10 @@ import { mapRoute } from 'src/app/utils';
   styleUrls: ['./routes.component.css'],
 })
 export class RoutesComponent implements AfterViewInit {
-  @ViewChild('mapDiv') mapElement!: ElementRef;
-  map!: Map;
+  @ViewChild('mapRoutes') mapRoutes!: ElementRef;
+  @ViewChild('mapIncidents') mapIncidents!: ElementRef;
+  routeMap!: Map;
+  incidentMap!: Map;
   routes: Route[] = [];
   isLoading: boolean = true;
   currentHours: any[] = [];
@@ -21,7 +23,10 @@ export class RoutesComponent implements AfterViewInit {
   thirdRange: number = 0;
   fourthRange: number = 0;
 
-  constructor(private routeService: RouteService) {}
+  constructor(
+    private routeService: RouteService,
+    private incidentService: IncidentService
+  ) { }
 
   ngAfterViewInit(): void {
     this.routeService.getRoutes().subscribe((routes) => {
@@ -29,8 +34,102 @@ export class RoutesComponent implements AfterViewInit {
       this.isLoading = false;
       this.getRangeCounters();
       this.getCurrentHours();
-      this.map = new Map({
-        container: this.mapElement.nativeElement,
+      this.getRecurrentRoutes();
+      this.getRecurrentIncidents();
+    });
+  }
+
+  getRecurrentRoutes() {
+    this.routeMap = new Map({
+      container: this.mapRoutes.nativeElement,
+      style: 'mapbox://styles/mapbox/satellite-streets-v11',
+      center: [-79.207599, -4.001713],
+      // center: this.routes[0].startPosition,
+      zoom: 12,
+      bearing: 0,
+    });
+
+    this.routeMap.on('load', () => {
+      // this.add3D();
+      this.routes.forEach((route, index) => {
+        this.routeMap.addSource('route' + index, {
+          type: 'geojson',
+          data: {
+            type: 'Feature',
+            properties: {},
+            geometry: {
+              type: 'LineString',
+              coordinates: route.coordinates,
+            },
+          },
+        });
+
+        this.routeMap.addLayer(
+          {
+            id: 'routeheat' + index,
+            type: 'heatmap',
+            source: 'route' + index,
+            maxzoom: 24,
+            paint: {
+              // increase weight as diameter breast height increases
+              'heatmap-weight': {
+                property: 'dbh',
+                type: 'exponential',
+                stops: [
+                  [1, 0],
+                  [62, 1],
+                ],
+              },
+              // increase intensity as zoom level increases
+              'heatmap-intensity': {
+                stops: [
+                  [11, 1],
+                  [15, 3],
+                ],
+              },
+              // assign color values be applied to points depending on their density
+              'heatmap-color': [
+                'interpolate',
+                ['linear'],
+                ['heatmap-density'],
+                0,
+                'rgba(236,222,239,0)',
+                0.2,
+                'rgb(208,209,230)',
+                0.4,
+                'rgb(166,189,219)',
+                0.6,
+                'rgb(103,169,207)',
+                0.8,
+                'rgb(28,144,153)',
+              ],
+              // increase radius as zoom increases
+              'heatmap-radius': {
+                stops: [
+                  [11, 15],
+                  [15, 20],
+                ],
+              },
+              // decrease opacity to transition into the circle layer
+              'heatmap-opacity': {
+                default: 1,
+                stops: [
+                  [14, 1],
+                  [15, 0],
+                ],
+              },
+            },
+          },
+          'waterway-label'
+        );
+      });
+    });
+  }
+
+  getRecurrentIncidents() {
+    this.incidentService.getIncidents().subscribe((incidents) => {
+      this.incidentMap = new Map({
+        container: this.mapIncidents.nativeElement,
         style: 'mapbox://styles/mapbox/satellite-streets-v11',
         center: [-79.207599, -4.001713],
         // center: this.routes[0].startPosition,
@@ -38,26 +137,26 @@ export class RoutesComponent implements AfterViewInit {
         bearing: 0,
       });
 
-      this.map.on('load', () => {
+      this.incidentMap.on('load', () => {
         // this.add3D();
-        this.routes.forEach((route, index) => {
-          this.map.addSource('route' + index, {
+        incidents.forEach((incident, index) => {
+          this.incidentMap.addSource('incident' + index, {
             type: 'geojson',
             data: {
               type: 'Feature',
               properties: {},
               geometry: {
                 type: 'LineString',
-                coordinates: route.coordinates,
+                coordinates: [incident.position],
               },
             },
           });
 
-          this.map.addLayer(
+          this.incidentMap.addLayer(
             {
-              id: 'routeheat' + index,
+              id: 'incidentheat' + index,
               type: 'heatmap',
-              source: 'route' + index,
+              source: 'incident' + index,
               maxzoom: 24,
               paint: {
                 // increase weight as diameter breast height increases
@@ -157,14 +256,14 @@ export class RoutesComponent implements AfterViewInit {
   add3D() {
     // add map 3d terrain and sky layer and fog
     // Add some fog in the background
-    this.map.setFog({
+    this.routeMap.setFog({
       range: [0.5, 10],
       color: 'white',
       'horizon-blend': 0.2,
     });
 
     // Add a sky layer over the horizon
-    this.map.addLayer({
+    this.routeMap.addLayer({
       id: 'sky',
       type: 'sky',
       paint: {
@@ -174,12 +273,12 @@ export class RoutesComponent implements AfterViewInit {
     });
 
     // Add terrain source, with slight exaggeration
-    this.map.addSource('mapbox-dem', {
+    this.routeMap.addSource('mapbox-dem', {
       type: 'raster-dem',
       url: 'mapbox://mapbox.terrain-rgb',
       tileSize: 512,
       maxzoom: 14,
     });
-    this.map.setTerrain({ source: 'mapbox-dem', exaggeration: 1 });
+    this.routeMap.setTerrain({ source: 'mapbox-dem', exaggeration: 1 });
   }
 }

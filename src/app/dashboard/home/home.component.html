@@ -1,19 +1,50 @@
 <div class="dashboard">
   <main class="main">
-    <swiper
-      *ngIf="photos.length > 0"
-      class="slider fade-in"
-      [loop]="true"
-      [autoplay]="{
-        delay: 5000,
-        disableOnInteraction: false
-      }"
-    >
-      <ng-template swiperSlide *ngFor="let photo of photos">
-        <img [src]="photo" />
-      </ng-template>
-    </swiper>
-    <div class="charts">
+    <section *ngIf="routes.length > 0">
+      <header class="main-header">
+        <div class="main-title">
+          <h1>Recuerdos</h1>
+          <img src="assets/icons/camera.svg" alt="Icono de camara" />
+        </div>
+        <button routerLink="./galleria">
+          Ver todos
+          <mat-icon> arrow_forward </mat-icon>
+        </button>
+      </header>
+      <swiper
+        class="slider fade-in"
+        [loop]="true"
+        [spaceBetween]="20"
+        [slidesPerView]="1.2"
+        [pagination]="true"
+        [grabCursor]="true"
+        [breakpoints]="{
+          '499': {
+            slidesPerView: 2.2
+          },
+          '768': {
+            slidesPerView: 2.5
+          },
+          '992': {
+            slidesPerView: 3.2
+          },
+          '1200': {
+            slidesPerView: 4.5
+          }
+        }"
+      >
+        <ng-template swiperSlide *ngFor="let route of sliderRoutes">
+          <div class="route-slider" [routerLink]="['./rutas', route.idRoute]">
+            <div class="route-title">
+              <h5>{{ route.name }}</h5>
+            </div>
+            <img class="route-img" [src]="route.photo" [alt]="route.name" />
+          </div>
+        </ng-template>
+      </swiper>
+    </section>
+
+    <section class="charts">
       <div class="chart">
         <app-chart
           [chartData]="last7daysData"
@@ -26,11 +57,21 @@
           title="Rendimiento en los últimos 15 días"
         ></app-chart>
       </div>
-    </div>
+    </section>
+    <section class="community">
+      <div class="community-info">
+        <h2>Comunidad</h2>
+        <p>Conoce a otros usuarios y comparte tus experiencias en las rutas.</p>
+        <button class="button-54" routerLink="./comunidad">
+          Ir a Comunidad
+        </button>
+      </div>
+      <img src="assets/dashboard/go-community.svg" alt="Image Viewer" />
+    </section>
   </main>
   <aside class="aside">
     <div class="stadistics">
-      <header class="stadistics-header" routerLink="/dashboard/bitacora">
+      <header class="stadistics-header" routerLink="./bitacora">
         <h4>Mis Estadísticas</h4>
         <img src="assets/icons/bicicleta.svg" alt="Bicicleta" />
       </header>
@@ -39,12 +80,12 @@
         <div class="group-info">
           <div class="group-item">
             <h6>
-              {{ monthStadistics.distanceTraveled }}
+              {{ monthStadistics.distanceTraveled | number: "1.0-2" }}
             </h6>
             <p>Kilómetros</p>
           </div>
           <div class="group-item">
-            <h6>{{ monthStadistics.burnoutCalories }}</h6>
+            <h6>{{ monthStadistics.burnoutCalories | number: "1.0-2" }}</h6>
             <p>Calorías</p>
           </div>
           <div class="group-item">
@@ -72,7 +113,7 @@
       </div>
     </div>
     <div class="health">
-      <header class="stadistics-header">
+      <header class="stadistics-header" routerLink="./salud">
         <h4>Mi Salud</h4>
         <img src="assets/icons/persona.svg" alt="Persona" />
       </header>
@@ -82,7 +123,7 @@
             <h5>Estatura</h5>
             <div class="flex-center">
               <div class="height">
-                <p>{{ user.height }}</p>
+                <p>{{ user.height | number: "1.0-2" }}</p>
                 <p>metros</p>
               </div>
               <div>
@@ -93,11 +134,11 @@
           <div class="weight-center">
             <div class="weight">
               <h5>Peso Actual:</h5>
-              <p>{{ user.weight }} kg</p>
+              <p>{{ user.weight | number: "1.0-2" }} kg</p>
             </div>
             <div class="weight">
               <h5>Peso Ideal:</h5>
-              <p>{{ user.weight! / user.height! }} kg</p>
+              <p>{{ user.weight! / user.height! | number: "1.0-2" }} kg</p>
             </div>
           </div>
         </div>

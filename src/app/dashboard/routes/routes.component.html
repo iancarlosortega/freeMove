@@ -16,7 +16,9 @@
     <header class="route-header">
       <div class="route-header-info">
         <div class="route-title">
-          <h3>{{ route.name }} ({{ route.distance }} metros)</h3>
+          <h3>
+            {{ route.name }} ({{ route.distance | number: "1.0-2" }} metros)
+          </h3>
           <button
             pButton
             icon="pi pi-trash"
@@ -99,9 +101,7 @@
   <mat-spinner [diameter]="100"></mat-spinner>
 </div>
 
-<div
-  *ngIf="routes.length === 0 && !isLoading"
-  class="alert alert--info fade-in"
->
-  No se encontró ningún resultado.
+<div *ngIf="routes.length === 0 && !isLoading" class="no-results fade-in">
+  <img src="assets/dashboard/routes.svg" alt="Photos" />
+  <p>No se encontraron resultados de rutas</p>
 </div>

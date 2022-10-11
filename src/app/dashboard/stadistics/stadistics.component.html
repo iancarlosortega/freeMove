@@ -5,9 +5,7 @@
 <div class="fade-in" *ngIf="routes.length > 0 && !isLoading">
   <app-bitacora [routes]="routes"></app-bitacora>
 </div>
-<div
-  *ngIf="routes.length === 0 && !isLoading"
-  class="alert alert--info fade-in"
->
-  No hay rutas registradas.
+<div *ngIf="routes.length === 0 && !isLoading" class="no-results fade-in">
+  <img src="assets/dashboard/routes.svg" alt="Photos" />
+  <p>No se encontraron resultados de rutas</p>
 </div>

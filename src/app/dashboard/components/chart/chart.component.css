@@ -1,5 +1,7 @@
-.graph h5 {
+.card-title {
   text-align: center;
+  font-weight: lighter;
+  margin-bottom: 1.5rem;
 }
 
 canvas {

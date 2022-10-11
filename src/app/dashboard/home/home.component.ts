@@ -1,11 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription, switchMap, tap } from 'rxjs';
+import { Subscription, switchMap, take, tap } from 'rxjs';
+import SwiperCore from 'swiper';
+import moment from 'moment';
+import { ChartConfiguration } from 'chart.js';
 import { RouteService, UserService } from 'src/app/services';
 import { Route, User } from 'src/app/interfaces';
-import SwiperCore, { Autoplay } from 'swiper';
-import { ChartConfiguration } from 'chart.js';
-import moment from 'moment';
-SwiperCore.use([Autoplay]);
+import { mapRoute } from 'src/app/utils';
 
 @Component({
   selector: 'app-home',
@@ -13,20 +13,6 @@ SwiperCore.use([Autoplay]);
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit, OnDestroy {
-  photos: string[] = [];
-  currentDay = new Date();
-  currentDayRoutes: Route[] = [];
-  currentMonthRoutes: Route[] = [];
-  monthStadistics = {
-    distanceTraveled: 0,
-    burnoutCalories: 0,
-    numberOfRoutes: 0,
-  };
-  dayStadistics = {
-    distanceTraveled: 0,
-    burnoutCalories: 0,
-    numberOfRoutes: 0,
-  };
   user: User = {
     idUser: '',
     name: '',
@@ -41,6 +27,20 @@ export class HomeComponent implements OnInit, OnDestroy {
   };
   userObs!: Subscription;
   routes: Route[] = [];
+  sliderRoutes: any[] = [];
+  currentDay = new Date();
+  currentDayRoutes: Route[] = [];
+  currentMonthRoutes: Route[] = [];
+  monthStadistics = {
+    distanceTraveled: 0,
+    burnoutCalories: 0,
+    numberOfRoutes: 0,
+  };
+  dayStadistics = {
+    distanceTraveled: 0,
+    burnoutCalories: 0,
+    numberOfRoutes: 0,
+  };
   last7daysData: ChartConfiguration['data'] = {
     datasets: [],
     labels: [],
@@ -60,18 +60,23 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.userObs = this.userService.user$
       .pipe(
         tap((user) => (this.user = user)),
-        switchMap((user) => this.routeService.getRoutesByUser(user.idUser))
+        switchMap((user) => this.routeService.getRoutesByUser(user.idUser)),
+        take(1)
       )
       .subscribe((routes) => {
-        this.routes = routes;
+        this.routes = routes.map((route) => mapRoute(route));
+        routes.forEach((route) => {
+          route.photos?.forEach((photo) => {
+            this.sliderRoutes.push({
+              idRoute: route.idRoute,
+              name: route.name,
+              photo: photo.photoUrl,
+            });
+          });
+        });
         this.last7daysData = this.createChart(7);
         this.last15daysData = this.createChart(15);
 
-        routes.forEach((route) => {
-          route.photos?.forEach((photo) => {
-            this.photos.push(photo.photoUrl);
-          });
-        });
         // Filtrar rutas del mes actual
         this.currentMonthRoutes = routes.filter((route) => {
           const routeDate = new Date(route.startDate);

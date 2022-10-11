@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, ViewChild } from '@angular/core';
 import { ChartConfiguration } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
 
@@ -7,7 +7,7 @@ import { BaseChartDirective } from 'ng2-charts';
   templateUrl: './chart.component.html',
   styleUrls: ['./chart.component.css'],
 })
-export class ChartComponent implements OnInit {
+export class ChartComponent {
   @ViewChild(BaseChartDirective) chart?: BaseChartDirective;
   @Input() title: string = 'Chart';
   @Input() chartData: ChartConfiguration['data'] = {
@@ -35,8 +35,4 @@ export class ChartComponent implements OnInit {
       },
     },
   };
-
-  constructor() {}
-
-  ngOnInit(): void {}
 }

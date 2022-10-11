@@ -1,6 +1,6 @@
 .footer {
   background-color: #141414;
-  color: #ADADAD;
+  color: #adadad;
 }
 
 .footer-logos {
@@ -15,16 +15,27 @@
   cursor: pointer;
 }
 
-@media (min-width:768px){
+@media (min-width: 768px) {
   .footer-logos {
     padding: 2rem 0;
     flex-direction: row;
   }
 }
 
-@media (min-width:992px){
+@media (min-width: 992px) {
   .footer-logos {
     padding: 4rem;
+  }
+}
+
+.footer-logos img {
+  height: 4rem;
+  object-fit: contain;
+}
+
+@media (min-width: 1280px){
+  .footer-logos img {
+    height: 6rem;
   }
 }
 
@@ -37,7 +48,7 @@
   text-align: center;
 }
 
-@media (min-width: 768px){
+@media (min-width: 768px) {
   .footer-texts {
     padding: 4rem 0;
     flex-direction: row;
@@ -45,7 +56,7 @@
   }
 }
 
-@media (min-width: 768px){
+@media (min-width: 768px) {
   .text-short {
     width: 15rem;
     text-align: center;
@@ -72,3 +83,4 @@
 .footer-links img {
   height: 100%;
 }
+

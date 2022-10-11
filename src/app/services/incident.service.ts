@@ -67,6 +67,10 @@ export class IncidentService {
             data.idIncident = a.payload.doc.id;
             return data;
           });
+        }),
+        catchError((error) => {
+          console.log(error);
+          return [];
         })
       );
   }

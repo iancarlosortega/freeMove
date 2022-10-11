@@ -46,6 +46,8 @@ import { SuggestedComponent } from './components/suggested/suggested.component';
 import { TrackingComponent } from './tracking/tracking.component';
 import { UnlinkAccountComponent } from './components/unlink-account/unlink-account.component';
 import { UserComponent } from './components/user/user.component';
+import { GalleryComponent } from './gallery/gallery.component';
+import { HealthComponent } from './health/health.component';
 
 @NgModule({
   declarations: [
@@ -79,6 +81,8 @@ import { UserComponent } from './components/user/user.component';
     TrackingComponent,
     UnlinkAccountComponent,
     UserComponent,
+    GalleryComponent,
+    HealthComponent,
   ],
   imports: [
     CommonModule,

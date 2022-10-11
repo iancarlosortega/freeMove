@@ -57,6 +57,18 @@ export class SideMenuComponent implements OnInit, OnDestroy {
                 isAvailable: true,
               },
               {
+                name: 'Galería',
+                icon: 'assets/icons/gallery.svg',
+                route: './galleria',
+                isAvailable: true,
+              },
+              {
+                name: 'Salud',
+                icon: 'assets/icons/health.svg',
+                route: './salud',
+                isAvailable: true,
+              },
+              {
                 name: 'Bitácora',
                 icon: 'assets/icons/bitacora.svg',
                 route: './bitacora',

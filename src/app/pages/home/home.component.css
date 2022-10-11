@@ -16,8 +16,7 @@
 .header-slider img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  object-position: 60% 50%;
+  object-fit: fill;
   aspect-ratio: 16/9;
   filter: brightness(0.8);
 }
@@ -28,13 +27,13 @@
   right: 30%;
 }
 
-@media (min-width: 768px){
+@media (min-width: 768px) {
   .header-logo {
     right: 40%;
   }
 }
 
-@media (min-width: 992px){
+@media (min-width: 992px) {
   .header-logo {
     right: 50%;
   }
@@ -46,7 +45,7 @@
   padding: 2rem 0;
 }
 
-@media (min-width:768px){
+@media (min-width: 768px) {
   .city-information {
     padding: 2rem;
   }
@@ -62,7 +61,7 @@
 }
 
 .city-header h2 {
-  color: #9F9F9F;
+  color: #9f9f9f;
   font-weight: 300;
   font-size: 2.5rem;
   text-transform: uppercase;
@@ -76,21 +75,21 @@
 
 .info-cards {
   border-radius: 5px;
-  border: 1px solid #F1F1F1;
+  border: 1px solid #f1f1f1;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
   display: grid;
-  gap: 1rem; 
-  grid-template-columns: repeat(2, 1fr); 
+  gap: 1rem;
+  grid-template-columns: repeat(2, 1fr);
   padding: 2.5rem 1.5rem;
 }
 
-@media (min-width: 768px){
+@media (min-width: 768px) {
   .info-cards {
     grid-template-columns: repeat(3, 1fr);
   }
 }
 
-@media (min-width: 992px){
+@media (min-width: 992px) {
   .info-cards {
     grid-template-columns: repeat(6, 1fr);
   }
@@ -128,7 +127,7 @@
   padding: 1rem;
 }
 
-@media (min-width:768px){
+@media (min-width: 768px) {
   .container2 {
     padding: 3rem;
   }
@@ -142,7 +141,7 @@
   padding: 1.5rem;
 }
 
-@media (min-width: 768px){
+@media (min-width: 768px) {
   .health-container {
     padding: 3rem;
     grid-template-columns: 1fr 1fr;
@@ -154,7 +153,7 @@
   place-content: center;
 }
 
-@media (min-width: 992px){
+@media (min-width: 992px) {
   .health-img {
     padding: 3rem;
   }
@@ -168,7 +167,7 @@
   margin-bottom: 1rem;
 }
 
-@media (min-width: 768px){
+@media (min-width: 768px) {
   .health-text h3 {
     text-align: left;
   }
@@ -178,10 +177,10 @@
   padding-left: 2rem;
 }
 
-@media (min-width:768px){
+@media (min-width: 768px) {
   .health-text ul {
-      padding-left: 1rem;
-    }
+    padding-left: 1rem;
+  }
 }
 
 .health-text li {
@@ -195,7 +194,7 @@
   grid-template-columns: 1fr;
 }
 
-@media (min-width: 768px){
+@media (min-width: 768px) {
   .services-container {
     grid-template-columns: 1fr 1fr;
   }
@@ -205,13 +204,13 @@
   }
 }
 
-@media (min-width:992px){
+@media (min-width: 992px) {
   .services-container {
     grid-template-columns: 1fr 1fr 1fr;
   }
 
   .last-card {
-    grid-column: inherit
+    grid-column: inherit;
   }
 }
 
@@ -279,7 +278,7 @@
   text-align: center;
 }
 
-@media (min-width: 768px){
+@media (min-width: 768px) {
   .process-title {
     margin: 3rem 0;
   }
@@ -294,14 +293,14 @@
   margin-bottom: 8rem;
 }
 
-@media (min-width:768px){
+@media (min-width: 768px) {
   .process-container {
     flex-direction: row;
     gap: 1.5rem;
   }
 }
 
-@media (min-width: 992px){
+@media (min-width: 992px) {
   .process-container {
     gap: 3rem;
   }
@@ -315,7 +314,7 @@
   padding: 1.5rem;
 }
 
-@media (min-width: 992px){
+@media (min-width: 992px) {
   .process-item {
     padding: 2rem;
     height: 7rem;
@@ -327,7 +326,7 @@
   transform: rotateZ(90deg);
 }
 
-@media (min-width: 768px){
+@media (min-width: 768px) {
   .process-arrow {
     transform: initial;
   }

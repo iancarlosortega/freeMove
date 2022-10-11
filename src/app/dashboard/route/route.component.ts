@@ -92,6 +92,7 @@ export class RouteComponent implements OnInit, AfterViewInit {
             return;
           }
           this.route = mapRoute(route);
+          console.log(this.route);
         }),
         switchMap((route) =>
           this.incidentService.getIncidentsFromRoute(route!.idRoute)
@@ -112,9 +113,9 @@ export class RouteComponent implements OnInit, AfterViewInit {
           bearing: 0,
         });
 
-        this.generateGalleryOfPhotos();
-        this.generatePhotosInMap();
-        this.generateIncidentsInMap();
+        // this.generateGalleryOfPhotos();
+        // this.generatePhotosInMap();
+        // this.generateIncidentsInMap();
 
         this.map.on('load', async () => {
           this.add3D();

@@ -1,0 +1,9 @@
+<div *ngIf="!isLoading && images.length === 0" class="no-results fade-in">
+  <img src="assets/dashboard/photos.svg" alt="Photos" />
+  <p>No ha tomado fotos aún en sus rutas</p>
+</div>
+<gallery
+  *ngIf="!isLoading && images.length > 0"
+  class="fade-in"
+  [items]="images"
+></gallery>

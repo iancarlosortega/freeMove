@@ -7,17 +7,11 @@ import { MaterialModule } from '../material/material.module';
 import { PrimeNgModule } from '../prime-ng/prime-ng.module';
 
 import { IncidentsComponent } from './incidents/incidents.component';
-import { RouteComponent } from './route/route.component';
 import { RoutesComponent } from './routes/routes.component';
 import { UsersComponent } from './users/users.component';
 
 @NgModule({
-  declarations: [
-    IncidentsComponent,
-    RouteComponent,
-    RoutesComponent,
-    UsersComponent,
-  ],
+  declarations: [IncidentsComponent, RoutesComponent, UsersComponent],
   imports: [
     CommonModule,
     AdminRoutingModule,

@@ -9,6 +9,7 @@ import { PaginatorModule } from 'primeng/paginator';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { TableModule } from 'primeng/table';
+import { ToggleButtonModule } from 'primeng/togglebutton';
 
 @NgModule({
   exports: [
@@ -21,6 +22,7 @@ import { TableModule } from 'primeng/table';
     ProgressSpinnerModule,
     RadioButtonModule,
     TableModule,
+    ToggleButtonModule
   ],
 })
 export class PrimeNgModule {}

@@ -51,6 +51,7 @@ export class RouteService {
       .pipe(
         map((a) => {
           const data = a.payload.data() as Route;
+          data.idRoute = a.payload.id;
           return data;
         }),
         catchError((error) => {

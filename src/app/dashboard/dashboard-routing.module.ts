@@ -20,6 +20,8 @@ import { RoutesComponent } from './routes/routes.component';
 import { StadisticsComponent } from './stadistics/stadistics.component';
 import { TrackingComponent } from './tracking/tracking.component';
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
+import { GalleryComponent } from './gallery/gallery.component';
+import { HealthComponent } from './health/health.component';
 
 const routes: Routes = [
   {
@@ -57,6 +59,16 @@ const routes: Routes = [
         path: 'bitacora',
         component: StadisticsComponent,
         data: { breadcrumb: 'Bitácora' },
+      },
+      {
+        path: 'galleria',
+        component: GalleryComponent,
+        data: { breadcrumb: 'Gallería de Fotos' },
+      },
+      {
+        path: 'salud',
+        component: HealthComponent,
+        data: { breadcrumb: 'Niveles de Salud'},
       },
       {
         path: 'incidentes',
