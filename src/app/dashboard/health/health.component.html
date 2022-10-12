@@ -77,80 +77,84 @@
   <hr class="divider" />
   <div *ngIf="idealWeight > 0" class="fade-in">
     <h1 class="result">Tu resultado personal</h1>
-    <div class="weight-bar">
-      <div class="low-weight weight">
-        <div
-          *ngIf="user.weight! < firstRange"
-          class="weight-message current-range"
-        >
-          <p>Peso actual</p>
-          <span class="text-bold"> {{ user.weight | number: "1.0-2" }}kg </span>
+    <div class="measurer">
+      <div class="weight-bar">
+        <div class="low-weight weight">
+          <div
+            *ngIf="user.weight! < firstRange"
+            class="weight-message current-range"
+          >
+            <p>Peso actual</p>
+            <span class="text-bold">
+              {{ user.weight | number: "1.0-2" }}kg
+            </span>
+          </div>
+          <p>bajo peso</p>
+          <div class="low-weight-bar bar"></div>
         </div>
-        <p>bajo peso</p>
-        <div class="low-weight-bar bar"></div>
-      </div>
-      <div class="normal-weight weight">
-        <div class="weight-message">
-          <p *ngIf="user.weight! < firstRange || user.weight! > secondRange">
-            Rango ideal
-          </p>
-          <p *ngIf="user.weight! >= firstRange && user.weight! < secondRange">
-            Peso actual
-          </p>
-          <span class="text-bold">
-            {{ firstRange | number: "1.0-2" }}kg -
-            {{ secondRange | number: "1.0-2" }}kg
-          </span>
+        <div class="normal-weight weight">
+          <div class="weight-message">
+            <p *ngIf="user.weight! < firstRange || user.weight! > secondRange">
+              Rango ideal
+            </p>
+            <p *ngIf="user.weight! >= firstRange && user.weight! < secondRange">
+              Peso actual
+            </p>
+            <span class="text-bold">
+              {{ firstRange | number: "1.0-2" }}kg -
+              {{ secondRange | number: "1.0-2" }}kg
+            </span>
+          </div>
+          <p>peso normal</p>
+          <div class="normal-weight-bar bar"></div>
         </div>
-        <p>peso normal</p>
-        <div class="normal-weight-bar bar"></div>
-      </div>
-      <div class="high-weight weight">
-        <div
-          *ngIf="user.weight! >= secondRange && user.weight! < thirdRange"
-          class="weight-message current-range"
-        >
-          <p>Peso actual</p>
-          <span class="text-bold">
-            {{ user.weight! | number: "1.0-2" }}kg
-          </span>
+        <div class="high-weight weight">
+          <div
+            *ngIf="user.weight! >= secondRange && user.weight! < thirdRange"
+            class="weight-message current-range"
+          >
+            <p>Peso actual</p>
+            <span class="text-bold">
+              {{ user.weight! | number: "1.0-2" }}kg
+            </span>
+          </div>
+          <p>sobrepeso</p>
+          <div class="high-weight-bar bar"></div>
         </div>
-        <p>sobrepeso</p>
-        <div class="high-weight-bar bar"></div>
-      </div>
-      <div class="obesity-weight weight">
-        <div
-          *ngIf="user.weight! >= thirdRange && user.weight! < fourthRange"
-          class="weight-message current-range"
-        >
-          <p>Peso actual</p>
-          <span class="text-bold">
-            {{ user.weight! | number: "1.0-2" }}kg
-          </span>
+        <div class="obesity-weight weight">
+          <div
+            *ngIf="user.weight! >= thirdRange && user.weight! < fourthRange"
+            class="weight-message current-range"
+          >
+            <p>Peso actual</p>
+            <span class="text-bold">
+              {{ user.weight! | number: "1.0-2" }}kg
+            </span>
+          </div>
+          <p>obesidad</p>
+          <div class="obesity-weight-bar bar"></div>
         </div>
-        <p>obesidad</p>
-        <div class="obesity-weight-bar bar"></div>
-      </div>
-      <div class="obesity-high-weight weight">
-        <div
-          *ngIf="user.weight! >= fourthRange"
-          class="weight-message current-range"
-        >
-          <p>Peso actual</p>
-          <span class="text-bold">
-            {{ user.weight! | number: "1.0-2" }}kg
-          </span>
+        <div class="obesity-high-weight weight">
+          <div
+            *ngIf="user.weight! >= fourthRange"
+            class="weight-message current-range"
+          >
+            <p>Peso actual</p>
+            <span class="text-bold">
+              {{ user.weight! | number: "1.0-2" }}kg
+            </span>
+          </div>
+          <p>obsidad mórbida</p>
+          <div class="obesity-high-weight-bar bar"></div>
         </div>
-        <p>obsidad mórbida</p>
-        <div class="obesity-high-weight-bar bar"></div>
       </div>
-    </div>
-    <div class="range-weights">
-      <p></p>
-      <p>{{ firstRange | number: "1.0-2" }}kg</p>
-      <p>{{ secondRange | number: "1.0-2" }}kg</p>
-      <p>{{ thirdRange | number: "1.0-2" }}kg</p>
-      <p>{{ fourthRange | number: "1.0-2" }}kg</p>
+      <div class="range-weights">
+        <p></p>
+        <p>{{ firstRange | number: "1.0-2" }}kg</p>
+        <p>{{ secondRange | number: "1.0-2" }}kg</p>
+        <p>{{ thirdRange | number: "1.0-2" }}kg</p>
+        <p>{{ fourthRange | number: "1.0-2" }}kg</p>
+      </div>
     </div>
   </div>
 </main>

@@ -32,6 +32,10 @@
   margin: 1rem 0;
 }
 
+.header-incident {
+  margin: 2.5rem 0;
+}
+
 .header h1 {
   margin: 0;
   font-size: 1.7rem;
