@@ -27,6 +27,8 @@ import { CommunityComponent } from './community/community.component';
 import { ConfirmAlertComponent } from './components/confirm-alert/confirm-alert.component';
 import { ConfirmDeleteComponent } from './components/confirm-delete/confirm-delete.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { GalleryComponent } from './gallery/gallery.component';
+import { HealthComponent } from './health/health.component';
 import { HomeComponent } from './home/home.component';
 import { IncidentComponent } from './incident/incident.component';
 import { IncidentsComponent } from './incidents/incidents.component';
@@ -40,14 +42,13 @@ import { ProfileComponent } from './profile/profile.component';
 import { RouteComponent } from './route/route.component';
 import { RoutesComponent } from './routes/routes.component';
 import { SearchComponent } from './search/search.component';
+import { ShowRouteComponent } from './components/show-route/show-route.component';
 import { StadisticsComponent } from './stadistics/stadistics.component';
 import { StopAlertComponent } from './components/stop-alert/stop-alert.component';
 import { SuggestedComponent } from './components/suggested/suggested.component';
 import { TrackingComponent } from './tracking/tracking.component';
 import { UnlinkAccountComponent } from './components/unlink-account/unlink-account.component';
 import { UserComponent } from './components/user/user.component';
-import { GalleryComponent } from './gallery/gallery.component';
-import { HealthComponent } from './health/health.component';
 
 @NgModule({
   declarations: [
@@ -62,6 +63,8 @@ import { HealthComponent } from './health/health.component';
     ConfirmAlertComponent,
     ConfirmDeleteComponent,
     DashboardComponent,
+    GalleryComponent,
+    HealthComponent,
     HomeComponent,
     IncidentComponent,
     IncidentsComponent,
@@ -75,14 +78,13 @@ import { HealthComponent } from './health/health.component';
     RouteComponent,
     RoutesComponent,
     SearchComponent,
+    ShowRouteComponent,
     StadisticsComponent,
     StopAlertComponent,
     SuggestedComponent,
     TrackingComponent,
     UnlinkAccountComponent,
     UserComponent,
-    GalleryComponent,
-    HealthComponent,
   ],
   imports: [
     CommonModule,
@@ -101,6 +103,6 @@ import { HealthComponent } from './health/health.component';
     SwiperModule,
     SharedModule,
   ],
-  exports: [BitacoraComponent],
+  exports: [BitacoraComponent, ShowRouteComponent],
 })
 export class DashboardModule {}

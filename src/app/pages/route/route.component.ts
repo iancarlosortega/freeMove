@@ -12,10 +12,9 @@ import { mapRoute } from 'src/app/utils';
 })
 export class RouteComponent implements OnInit {
   route!: Route;
-
   constructor(
-    private router: Router,
     private activatedRoute: ActivatedRoute,
+    private router: Router,
     private routeService: RouteService
   ) {}
 
@@ -24,10 +23,11 @@ export class RouteComponent implements OnInit {
       .pipe(switchMap(({ id }) => this.routeService.getRouteById(id)))
       .subscribe((route) => {
         if (!route) {
-          this.router.navigateByUrl('/dashboard');
+          this.router.navigateByUrl('/');
           return;
         }
         this.route = mapRoute(route);
+        console.log(this.route);
       });
   }
 }

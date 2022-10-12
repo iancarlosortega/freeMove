@@ -32,6 +32,7 @@ export class HealthComponent implements OnInit {
     isMan: [false, [Validators.required]],
     isWoman: [false, [Validators.required]],
     height: ['', [Validators.required]],
+    weight: ['', [Validators.required]],
   });
 
   constructor(
@@ -90,11 +91,12 @@ export class HealthComponent implements OnInit {
       return;
     }
 
-    const { gender, height } = this.healthForm.value;
+    const { gender, height, weight } = this.healthForm.value;
     this.user = {
       ...this.user,
       gender,
       height,
+      weight,
     };
     this.userService.updateUser(this.user);
     this.userService.setUser(this.user);

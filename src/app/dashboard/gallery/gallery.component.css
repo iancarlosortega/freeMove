@@ -24,6 +24,10 @@ gallery-image {
   text-align: center;
 }
 
-.no-resuls img{
+.no-results img{
   max-width: 300px;
+}
+
+.no-results p {
+  color: #707070;
 }

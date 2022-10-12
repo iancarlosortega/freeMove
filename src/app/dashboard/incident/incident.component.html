@@ -1,5 +1,11 @@
 <h3>{{ incident.title }}</h3>
 <p>{{ incident.description }}</p>
+<div class="incident-keywords" *ngIf="incident.keywords">
+  <p>Palabras Clave:</p>
+  <span class="keyword" *ngFor="let keyword of incident.keywords">
+    {{ keyword }}
+  </span>
+</div>
 <div class="photos">
   <swiper
     [spaceBetween]="10"

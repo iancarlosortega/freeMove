@@ -8,5 +8,6 @@ export interface Incident {
   type: string;
   createdAt: number;
   position: [number, number];
+  keywords: string[];
   photos: string[];
 }

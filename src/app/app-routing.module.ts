@@ -5,11 +5,16 @@ import { DashboardModule } from './dashboard/dashboard.module';
 import { DashboardGuard } from './guards';
 
 import { HomeComponent } from './pages/home/home.component';
+import { RouteComponent } from './pages/route/route.component';
 
 const routes: Routes = [
   {
     path: '',
     component: HomeComponent,
+  },
+  {
+    path: 'ruta/:id',
+    component: RouteComponent,
   },
   {
     path: 'auth',

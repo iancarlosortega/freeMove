@@ -121,7 +121,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin: 2rem 0;
+  margin: 4rem 0;
   gap: 4rem;
 }
 
@@ -134,8 +134,13 @@
 
 .community-info {
   width: 100%;
-  max-width: 20rem;
   text-align: center;
+}
+
+@media (min-width: 768px){
+  .community-info {
+    width: 20rem;
+  }
 }
 
 .community-info h2 {
@@ -187,6 +192,13 @@
   gap: 1.5rem;
 }
 
+@media (min-width: 768px) and (max-width: 992px) {
+  .aside {
+    display: grid;
+    grid-template-columns: 50% 50%;
+  }
+}
+
 .stadistics,
 .health {
   background-color: rgba(194, 231, 201, 0.6);
@@ -195,13 +207,6 @@
   flex-direction: column;
   gap: 1rem;
   padding: 1rem;
-}
-
-@media (min-width: 992px) {
-  .stadistics,
-  .health {
-    padding: 2rem;
-  }
 }
 
 .health {
@@ -288,13 +293,6 @@
   color: var(--azul-oscuro);
 }
 
-@media (min-width: 768px) and (max-width: 992px) {
-  .health-tablet {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-  }
-}
-
 .height-center h5 {
   margin-bottom: 1rem;
 }
@@ -303,7 +301,6 @@
   text-align: center;
   display: flex;
   justify-content: center;
-  flex-direction: column;
   gap: 0.25rem;
 }
 
@@ -336,4 +333,61 @@
 .weight h5,
 .weight p {
   margin: 0 !important;
+}
+
+.weight p {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: white;
+  padding: 0.25rem 1rem;
+  border-radius: 5px;
+  background-color: #148429;
+}
+
+.weight-level {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1rem 0;
+}
+
+.weight-level h5 {
+  margin: 0 !important;
+}
+
+.weight-level span {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: white;
+  padding: 0.25rem 1rem;
+  border-radius: 5px;
+}
+
+.low-weight {
+  background-color: #f2ac20;
+}
+
+.normal-weight {
+  background-color: #148429;
+}
+
+.high-weight {
+  background-color: #f2ac20;
+}
+
+.weight-button {
+  --color: var(--verde);
+  padding: 0.8em 1.7em;
+  background-color: transparent;
+  border-radius: .3em;
+  cursor: pointer;
+  font-weight: 400;
+  font-size: 17px;
+  border: 1px solid;
+  font-family: inherit;
+  text-transform: uppercase;
+  color: var(--color);
+  width: 100%;
 }

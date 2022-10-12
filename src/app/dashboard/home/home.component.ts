@@ -50,6 +50,9 @@ export class HomeComponent implements OnInit, OnDestroy {
     datasets: [],
     labels: [],
   };
+  idealWeight: number = 0;
+  firstRange: number = 0;
+  secondRange: number = 0;
 
   constructor(
     private userService: UserService,
@@ -121,6 +124,11 @@ export class HomeComponent implements OnInit, OnDestroy {
         );
 
         this.dayStadistics.numberOfRoutes = this.currentDayRoutes.length;
+
+        // Calcular el peso ideal
+        if (this.user.gender !== 'Otro' && this.user.gender) {
+          this.getIdealWeight(this.user.gender, this.user.height!);
+        }
       });
   }
 
@@ -213,5 +221,16 @@ export class HomeComponent implements OnInit, OnDestroy {
     return value.replace(/\w\S*/g, (txt) => {
       return txt.charAt(0).toUpperCase() + txt.substring(1).toLowerCase();
     });
+  }
+
+  getIdealWeight(gender: string, height: number) {
+    if (gender === 'Masculino') {
+      this.idealWeight = height - 100 - (height - 150) / 4;
+    } else {
+      this.idealWeight = height - 100 - (height - 150) / 2.5;
+    }
+
+    this.firstRange = this.idealWeight - 6.2;
+    this.secondRange = this.idealWeight + 7.3;
   }
 }

@@ -97,7 +97,8 @@
                 <span>Seguidores</span>
               </span>
             </div>
-            <button
+            <!-- TODO: Enviar mensajes -->
+            <!-- <button
               id="btn-message"
               class="btn my-2 px-2"
               *ngIf="!isCurrentUser"
@@ -105,10 +106,10 @@
             >
               <mat-icon>chat</mat-icon>
               Enviar Mensaje
-            </button>
+            </button> -->
             <button
               *ngIf="!isCurrentUser"
-              class="btn btn-round bg-primary text-white px-4 py-2 text-bold align-self-center"
+              class="btn btn-round bg-primary text-white mt-3 px-4 py-2 text-bold align-self-center"
               id="btn-follow"
               (click)="followUser()"
             >

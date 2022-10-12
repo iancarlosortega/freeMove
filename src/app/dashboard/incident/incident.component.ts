@@ -35,6 +35,7 @@ export class IncidentComponent implements AfterViewInit {
     photos: [],
     isActive: false,
     city: '',
+    keywords: [],
   };
   incidentImages: GalleryItem[] = [];
 

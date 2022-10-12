@@ -11,6 +11,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { SwiperModule } from 'swiper/angular';
 import { MaterialModule } from './material/material.module';
 
+import { DashboardModule } from './dashboard/dashboard.module';
 import { SharedModule } from './shared/shared.module';
 
 import { AppComponent } from './app.component';
@@ -24,18 +25,20 @@ registerLocaleData(localeEs);
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient } from '@angular/common/http';
+import { RouteComponent } from './pages/route/route.component';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient, './assets/i18n/', '.json');
 }
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent],
+  declarations: [AppComponent, HomeComponent, RouteComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
+    DashboardModule,
     SharedModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     SwiperModule,
