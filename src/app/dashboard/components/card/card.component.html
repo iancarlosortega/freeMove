@@ -4,11 +4,14 @@
   </div>
   <div class="card-info">
     <h3 class="card-title">{{ title }}</h3>
-    <p *ngIf="!isDate" class="card-description">
+    <p *ngIf="!isDate && !isNumber" class="card-description">
       {{ description }} {{ measurement }}
     </p>
     <p *ngIf="isDate" class="card-description">
       {{ description | date: "mediumTime" }}
+    </p>
+    <p *ngIf="isNumber" class="card-description">
+      {{ description | number: "1.0-2" }} {{ measurement }}
     </p>
   </div>
 </div>

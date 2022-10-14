@@ -1,0 +1,31 @@
+.route {
+  margin: 2rem 1rem;
+}
+
+@media (min-width: 768px){
+  .route {
+    max-width: 720px;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+}
+
+@media (min-width: 992px) {
+  .route {
+    max-width: 960px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .route {
+    max-width: 1140px;
+  }
+}
+
+@media (min-width: 1400px){
+  .route {
+    max-width: 1320px;
+  }
+}

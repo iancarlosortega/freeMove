@@ -29,28 +29,46 @@
       </header>
 
       <div class="info-cards">
-        <div class="card">
-          <p>Rutas</p>
+        <div class="info-card">
+          <p>
+            {{ routes.length }}
+          </p>
           <div class="card-img">
             <img src="assets/home/rutas-icon.svg" alt="Rutas" />
+            <p>
+              {{ routes.length > 1 || routes.length == 0 ? "rutas" : "ruta" }}
+            </p>
           </div>
-          <p>21</p>
         </div>
-        <div class="card">
-          <p>Ciclistas</p>
+        <div class="info-card">
+          <p>
+            {{ users.length }}
+          </p>
           <div class="card-img">
             <img src="assets/home/ciclistas-icon.svg" alt="Ciclistas" />
+            <p>
+              {{
+                users.length > 1 || users.length == 0 ? "ciclistas" : "ciclista"
+              }}
+            </p>
           </div>
-          <p>57</p>
         </div>
-        <div class="card">
-          <p>Incidentes</p>
+        <div class="info-card">
+          <p>
+            {{ incidents.length }}
+          </p>
           <div class="card-img">
             <img src="assets/home/incidentes-icon.svg" alt="Incidentes" />
+            <p>
+              {{
+                incidents.length > 1 || incidents.length == 0
+                  ? "incidents"
+                  : "incidente"
+              }}
+            </p>
           </div>
-          <p>8</p>
         </div>
-        <div class="card">
+        <!-- <div class="card">
           <p>Accesibilidad</p>
           <div class="card-img">
             <img src="assets/home/accesibilidad-icon.svg" alt="Accesibilidad" />
@@ -70,7 +88,7 @@
             <img src="assets/home/conductores-icon.svg" alt="Conductores" />
           </div>
           <p>14</p>
-        </div>
+        </div> -->
       </div>
     </section>
   </div>

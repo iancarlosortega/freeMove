@@ -29,7 +29,7 @@ export class IncidentComponent implements AfterViewInit {
     idRoute: '',
     title: '',
     description: '',
-    type: '',
+    category: '',
     createdAt: 0,
     position: [0, 0],
     photos: [],

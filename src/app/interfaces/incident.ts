@@ -5,7 +5,7 @@ export interface Incident {
   description: string;
   city: string;
   isActive: boolean;
-  type: string;
+  category: string;
   createdAt: number;
   position: [number, number];
   keywords: string[];

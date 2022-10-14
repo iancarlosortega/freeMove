@@ -1,4 +1,4 @@
-<nav class="navbar" *ngIf="!isPhone">
+<nav class="navbar" *ngIf="!isPhone" [ngClass]="{ 'bg-transparent': isHome }">
   <div class="navbar-logo" routerLink="/">
     <img src="assets/logoFreeMove.png" alt="FreeMove Logo" />
   </div>
@@ -31,9 +31,13 @@
   </ul>
 </nav>
 
-<nav class="navbar-phone" *ngIf="isPhone">
+<nav
+  class="navbar-phone"
+  *ngIf="isPhone"
+  [ngClass]="{ 'bg-transparent': isHome }"
+>
   <ul class="navbar-responsive">
-    <li class="item">
+    <li class="item" routerLink="/">
       <img
         class="item-logo"
         src="assets/logoFreeMove.png"

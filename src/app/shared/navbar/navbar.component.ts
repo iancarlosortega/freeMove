@@ -1,4 +1,10 @@
-import { AfterViewInit, Component, EventEmitter, Output } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  EventEmitter,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { Router } from '@angular/router';
 
@@ -7,15 +13,24 @@ import { Router } from '@angular/router';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css'],
 })
-export class NavbarComponent implements AfterViewInit {
+export class NavbarComponent implements OnInit, AfterViewInit {
   @Output() isLoading: EventEmitter<boolean> = new EventEmitter();
   isPhone: boolean = false;
+  isHome: boolean = false;
   showMenu: boolean = false;
 
   constructor(
     private breakpointObs: BreakpointObserver,
     private router: Router
   ) {}
+
+  ngOnInit(): void {
+    if (this.router.url === '/') {
+      this.isHome = true;
+    } else {
+      this.isHome = false;
+    }
+  }
 
   ngAfterViewInit() {
     setTimeout(() => {

@@ -1,11 +1,7 @@
-import { trigger, transition, style, animate } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
-import {
-  Router,
-  GuardsCheckStart,
-  GuardsCheckEnd,
-  NavigationCancel,
-} from '@angular/router';
+import { trigger, transition, style, animate } from '@angular/animations';
+import { Incident, Route, User } from 'src/app/interfaces';
+import { IncidentService, RouteService, UserService } from 'src/app/services';
 import SwiperCore, { Autoplay } from 'swiper';
 SwiperCore.use([Autoplay]);
 
@@ -30,21 +26,27 @@ export class HomeComponent implements OnInit {
     'assets/slider/slider-3.jpg',
     'assets/slider/slider-4.jpg',
   ];
-  isLoading: boolean = false;
+  users: User[] = [];
+  routes: Route[] = [];
+  incidents: Incident[] = [];
+  isLoading: boolean = true;
 
-  constructor(private router: Router) {}
+  constructor(
+    private userService: UserService,
+    private routeService: RouteService,
+    private incidentService: IncidentService
+  ) {}
 
   ngOnInit(): void {
-    this.router.events.subscribe((event) => {
-      if (event instanceof GuardsCheckStart) {
-        this.isLoading = true;
-      }
-      if (
-        event instanceof GuardsCheckEnd ||
-        event instanceof NavigationCancel
-      ) {
-        this.isLoading = false;
-      }
+    this.userService.getUsers().subscribe((users) => {
+      this.users = users;
+      this.routeService.getRoutes().subscribe((routes) => {
+        this.routes = routes;
+        this.incidentService.getIncidents().subscribe((incidents) => {
+          this.incidents = incidents;
+          this.isLoading = false;
+        });
+      });
     });
   }
 

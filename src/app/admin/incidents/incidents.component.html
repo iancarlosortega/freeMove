@@ -12,7 +12,7 @@
   [scrollable]="scrollable"
   scrollDirection="both"
   currentPageReportTemplate="Mostrando {first} - {last} de {totalRecords} incidentes"
-  [globalFilterFields]="['title', 'city', 'type', 'createdAt']"
+  [globalFilterFields]="['title', 'city', 'category', 'createdAt']"
 >
   <ng-template pTemplate="caption">
     <div class="p-d-flex wrapper">
@@ -48,10 +48,10 @@
           <p-sortIcon field="city"></p-sortIcon>
         </div>
       </th>
-      <th pSortableColumn="type" style="width: 150px">
+      <th pSortableColumn="category" style="width: 150px">
         <div class="p-d-flex p-jc-between p-ai-center">
-          Tipo
-          <p-sortIcon field="type"></p-sortIcon>
+          Categoría
+          <p-sortIcon field="category"></p-sortIcon>
         </div>
       </th>
       <th pSortableColumn="createdAt" style="width: 200px">
@@ -84,7 +84,7 @@
         {{ incident.city }}
       </td>
       <td style="width: 150px">
-        {{ incident.type }}
+        {{ incident.category }}
       </td>
       <td style="width: 200px">
         {{ incident.createdAt | date: "dd/MM/yyyy, h:mm a" }}
