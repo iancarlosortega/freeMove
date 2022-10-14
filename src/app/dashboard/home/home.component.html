@@ -98,11 +98,11 @@
         <h5>{{ currentDay | date: "EEEE d 'de' MMMM" | titlecase }}</h5>
         <div class="group-info">
           <div class="group-item">
-            <h6>{{ dayStadistics.distanceTraveled }}</h6>
+            <h6>{{ dayStadistics.distanceTraveled | number: "1.0-2" }}</h6>
             <p>Kilómetros</p>
           </div>
           <div class="group-item">
-            <h6>{{ dayStadistics.burnoutCalories }}</h6>
+            <h6>{{ dayStadistics.burnoutCalories | number: "1.0-2" }}</h6>
             <p>Calorías</p>
           </div>
           <div class="group-item">
