@@ -344,18 +344,3 @@
 .high-weight {
   background-color: #f2ac20;
 }
-
-.weight-button {
-  --color: var(--verde);
-  padding: 0.8em 1.7em;
-  background-color: transparent;
-  border-radius: .3em;
-  cursor: pointer;
-  font-weight: 400;
-  font-size: 17px;
-  border: 1px solid;
-  font-family: inherit;
-  text-transform: uppercase;
-  color: var(--color);
-  width: 100%;
-}
