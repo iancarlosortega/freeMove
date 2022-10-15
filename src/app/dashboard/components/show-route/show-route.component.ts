@@ -61,13 +61,11 @@ export class ShowRouteComponent implements OnInit {
       .subscribe(async (incidents) => {
         this.incidents = incidents;
         this.shareUrl = `${this.document.location.origin}/ruta/${this.route.idRoute}`;
-        console.log(this.shareUrl);
         this.map = new Map({
           container: this.mapElement.nativeElement,
           projection: {
             name: 'globe',
           },
-          // style: 'mapbox://styles/mapbox/satellite-v9',
           style: 'mapbox://styles/mapbox/satellite-streets-v11',
           zoom: 1.9466794621990684,
           center: { lng: 12.563530000000014, lat: 58.27372323078674 },
@@ -80,7 +78,7 @@ export class ShowRouteComponent implements OnInit {
         this.generateIncidentsInMap();
 
         this.map.on('load', async () => {
-          this.add3D();
+          // this.add3D();
           const trackGeojson = {
             type: 'Feature',
             properties: {},
@@ -133,7 +131,6 @@ export class ShowRouteComponent implements OnInit {
     return new Promise<void>(async (resolve) => {
       // add a geojson source and layer for the linestring to the map
       this.addPathSourceAndLayer(trackGeojson);
-      const prod = false;
       // get the start of the linestring, to be used for animating a zoom-in from high altitude
       var targetLngLat = {
         lng: trackGeojson.geometry.coordinates[0][0],
@@ -146,21 +143,21 @@ export class ShowRouteComponent implements OnInit {
         targetLngLat,
         duration: 5000,
         startAltitude: 3000000,
-        endAltitude: 15000,
+        endAltitude: 5000,
         startBearing: 0,
         endBearing: -20,
-        startPitch: 40,
-        endPitch: 50,
+        startPitch: 30,
+        endPitch: 40,
       });
 
       // follow the path while slowly rotating the camera, passing in the camera bearing and altitude from the previous animation
       await animatePath({
         map,
-        duration: 30000,
+        duration: 10000,
         path: trackGeojson,
         startBearing: bearing,
         startAltitude: altitude,
-        pitch: 50,
+        pitch: 40,
       });
 
       // get the bounds of the linestring, use fitBounds() to animate to a final view
