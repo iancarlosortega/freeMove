@@ -78,7 +78,6 @@ export class ShowRouteComponent implements OnInit {
         this.generateIncidentsInMap();
 
         this.map.on('load', async () => {
-          // this.add3D();
           const trackGeojson = {
             type: 'Feature',
             properties: {},
@@ -87,44 +86,9 @@ export class ShowRouteComponent implements OnInit {
               coordinates: this.route.coordinates,
             },
           };
-
-          // const trackGeojson = await fetch(
-          //   `assets/data/female-stage-1.geojson`
-          // ).then((d) => d.json());
-
-          // kick off the animations
           await this.playAnimations(trackGeojson, this.map);
         });
       });
-  }
-
-  add3D() {
-    // add map 3d terrain and sky layer and fog
-    // Add some fog in the background
-    this.map.setFog({
-      range: [0.5, 10],
-      color: 'white',
-      'horizon-blend': 0.2,
-    });
-
-    // Add a sky layer over the horizon
-    this.map.addLayer({
-      id: 'sky',
-      type: 'sky',
-      paint: {
-        'sky-type': 'atmosphere',
-        'sky-atmosphere-color': 'rgba(85, 151, 210, 0.5)',
-      },
-    });
-
-    // Add terrain source, with slight exaggeration
-    this.map.addSource('mapbox-dem', {
-      type: 'raster-dem',
-      url: 'mapbox://mapbox.terrain-rgb',
-      tileSize: 512,
-      maxzoom: 14,
-    });
-    this.map.setTerrain({ source: 'mapbox-dem', exaggeration: 1 });
   }
 
   async playAnimations(trackGeojson: any, map: Map) {
