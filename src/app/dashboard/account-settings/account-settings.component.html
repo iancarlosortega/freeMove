@@ -119,20 +119,20 @@
           </mat-error>
         </mat-form-field>
         <mat-form-field appearance="outline">
-          <mat-label>Altura</mat-label>
+          <mat-label>Altura (cm)</mat-label>
           <input
             type="number"
             matInput
             min="0"
             formControlName="height"
-            placeholder="Escribe tu altura en metros"
+            placeholder="Escribe tu altura en centimetros"
           />
           <mat-error *ngIf="invalidInput('height')">
             La altura debe ser mayor a <strong>0</strong>
           </mat-error>
         </mat-form-field>
         <mat-form-field appearance="outline">
-          <mat-label>Peso</mat-label>
+          <mat-label>Peso (kg)</mat-label>
           <input
             type="number"
             matInput

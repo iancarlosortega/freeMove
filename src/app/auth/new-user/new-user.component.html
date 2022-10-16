@@ -27,7 +27,7 @@
             formControlName="age"
             placeholder="Escribe tu edad"
           />
-          <mat-error *ngIf="campoNoValido('age')">
+          <mat-error *ngIf="invalidInput('age')">
             La edad debe ser mayor a <strong>0</strong>
           </mat-error>
         </mat-form-field>
@@ -81,20 +81,20 @@
       <!-- TextFields -->
       <div class="form-inputs">
         <mat-form-field appearance="outline">
-          <mat-label>Altura</mat-label>
+          <mat-label>Altura (cm)</mat-label>
           <input
             type="number"
             matInput
             min="0"
             formControlName="height"
-            placeholder="Escribe tu altura en metros"
+            placeholder="Escribe tu altura en centimetros"
           />
-          <mat-error *ngIf="campoNoValido('height')">
+          <mat-error *ngIf="invalidInput('height')">
             La altura debe ser mayor a <strong>0</strong>
           </mat-error>
         </mat-form-field>
         <mat-form-field appearance="outline">
-          <mat-label>Peso</mat-label>
+          <mat-label>Peso (kg)</mat-label>
           <input
             type="number"
             matInput
@@ -102,7 +102,7 @@
             formControlName="weight"
             placeholder="Escribe tu peso en kg"
           />
-          <mat-error *ngIf="campoNoValido('weight')">
+          <mat-error *ngIf="invalidInput('weight')">
             El peso debe ser mayor a <strong>0</strong>
           </mat-error>
         </mat-form-field>

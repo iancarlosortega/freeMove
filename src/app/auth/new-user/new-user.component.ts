@@ -73,7 +73,7 @@ export class NewUserComponent implements OnInit, OnDestroy {
     this.userObs.unsubscribe();
   }
 
-  campoNoValido(campo: string) {
+  invalidInput(campo: string) {
     return (
       this.newUserForm.get(campo)?.invalid &&
       this.newUserForm.get(campo)?.touched
