@@ -61,14 +61,14 @@ const routes: Routes = [
         data: { breadcrumb: 'Bitácora' },
       },
       {
-        path: 'galleria',
+        path: 'galeria',
         component: GalleryComponent,
-        data: { breadcrumb: 'Gallería de Fotos' },
+        data: { breadcrumb: 'Galería de Fotos' },
       },
       {
         path: 'salud',
         component: HealthComponent,
-        data: { breadcrumb: 'Niveles de Salud'},
+        data: { breadcrumb: 'Niveles de Salud' },
       },
       {
         path: 'incidentes',

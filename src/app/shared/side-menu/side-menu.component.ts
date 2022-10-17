@@ -59,7 +59,7 @@ export class SideMenuComponent implements OnInit, OnDestroy {
               {
                 name: 'Galería',
                 icon: 'assets/icons/gallery.svg',
-                route: './galleria',
+                route: './galeria',
                 isAvailable: true,
               },
               {
