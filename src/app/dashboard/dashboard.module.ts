@@ -50,6 +50,7 @@ import { SuggestedComponent } from './components/suggested/suggested.component';
 import { TrackingComponent } from './tracking/tracking.component';
 import { UnlinkAccountComponent } from './components/unlink-account/unlink-account.component';
 import { UserComponent } from './components/user/user.component';
+import { FiltersComponent } from './components/filters/filters.component';
 
 @NgModule({
   declarations: [
@@ -87,6 +88,7 @@ import { UserComponent } from './components/user/user.component';
     UnlinkAccountComponent,
     UserComponent,
     PhotosComponent,
+    FiltersComponent,
   ],
   imports: [
     CommonModule,
