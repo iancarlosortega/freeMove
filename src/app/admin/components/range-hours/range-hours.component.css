@@ -1,0 +1,52 @@
+.header {
+  margin: 1rem 0;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 1.7rem;
+  color: #3d3d3d;
+}
+
+.range-hours {
+  max-width: 60rem;
+}
+
+.range-hours ul {
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .range-hours ul {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 992px) {
+  .range-hours ul {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+}
+
+.range {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid #e5e5e5;
+  padding: 1rem;
+  background-color: #fff;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.range h3 {
+  font-size: 1.2rem;
+  margin: 0;
+}
+
+.range p {
+  margin: 0;
+}

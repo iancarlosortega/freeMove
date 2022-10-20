@@ -1,0 +1,16 @@
+<div class="top-hours">
+  <header class="header">
+    <h1>Horas más recurrentes</h1>
+  </header>
+  <ul>
+    <li class="top" *ngFor="let hour of currentHours; let i = index">
+      <div class="top-circle">
+        {{ i + 1 }}
+      </div>
+      <div class="top-info">
+        <p class="text-bold">{{ hour.hour }}H00:</p>
+        <p>{{ hour.count }} {{ hour.count > 1 ? "rutas" : "ruta" }}</p>
+      </div>
+    </li>
+  </ul>
+</div>

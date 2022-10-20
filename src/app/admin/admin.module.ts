@@ -9,9 +9,14 @@ import { PrimeNgModule } from '../prime-ng/prime-ng.module';
 import { IncidentsComponent } from './incidents/incidents.component';
 import { RoutesComponent } from './routes/routes.component';
 import { UsersComponent } from './users/users.component';
+import { TopHoursComponent } from './components/top-hours/top-hours.component';
+import { RangeHoursComponent } from './components/range-hours/range-hours.component';
+import { HeatMapComponent } from './components/heat-map/heat-map.component';
+import { RecurrentIncidentsComponent } from './components/recurrent-incidents/recurrent-incidents.component';
+import { RecurrentRoutesComponent } from './components/recurrent-routes/recurrent-routes.component';
 
 @NgModule({
-  declarations: [IncidentsComponent, RoutesComponent, UsersComponent],
+  declarations: [IncidentsComponent, RoutesComponent, UsersComponent, TopHoursComponent, RangeHoursComponent, HeatMapComponent, RecurrentIncidentsComponent, RecurrentRoutesComponent],
   imports: [
     CommonModule,
     AdminRoutingModule,

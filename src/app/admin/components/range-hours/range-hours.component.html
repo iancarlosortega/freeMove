@@ -1,0 +1,35 @@
+<div class="range-hours">
+  <header class="header">
+    <h1>Rango de horas más recurrentes</h1>
+  </header>
+  <ul>
+    <li class="range">
+      <h3>3H00 - 7H59</h3>
+      <p>
+        {{ firstRange }}
+        {{ firstRange > 1 || firstRange == 0 ? "rutas" : "ruta" }}
+      </p>
+    </li>
+    <li class="range">
+      <h3>8H00 - 12H59</h3>
+      <p>
+        {{ secondRange }}
+        {{ secondRange > 1 || secondRange == 0 ? "rutas" : "ruta" }}
+      </p>
+    </li>
+    <li class="range">
+      <h3>13H00 - 17H59</h3>
+      <p>
+        {{ thirdRange }}
+        {{ thirdRange > 1 || thirdRange == 0 ? "rutas" : "ruta" }}
+      </p>
+    </li>
+    <li class="range">
+      <h3>18H00 - 22H59</h3>
+      <p>
+        {{ fourthRange }}
+        {{ fourthRange > 1 || fourthRange == 0 ? "rutas" : "ruta" }}
+      </p>
+    </li>
+  </ul>
+</div>
