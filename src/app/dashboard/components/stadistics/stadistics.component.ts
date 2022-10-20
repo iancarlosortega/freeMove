@@ -58,7 +58,7 @@ export class StadisticsComponent {
     this.chartData = {
       datasets: [
         {
-          label: 'Distancia(m)',
+          label: 'Distancia(km)',
           data: data.map((route) => route.distance),
           borderColor: 'rgba(0, 0, 255, 0.3)',
           backgroundColor: 'rgba(0, 0, 255, 0.3)',
