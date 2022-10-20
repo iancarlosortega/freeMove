@@ -9,7 +9,6 @@ import { PaginatorModule } from 'primeng/paginator';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { TableModule } from 'primeng/table';
-import { TabViewModule } from 'primeng/tabview';
 import { ToggleButtonModule } from 'primeng/togglebutton';
 
 @NgModule({
@@ -23,7 +22,6 @@ import { ToggleButtonModule } from 'primeng/togglebutton';
     ProgressSpinnerModule,
     RadioButtonModule,
     TableModule,
-    TabViewModule,
     ToggleButtonModule,
   ],
 })
