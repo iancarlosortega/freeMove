@@ -1,0 +1,10 @@
+.photos {
+  margin-bottom: 1rem;
+}
+
+.photos img {
+  cursor: pointer;
+  aspect-ratio: 16/9;
+  object-fit: cover;
+  height: 200px;
+}

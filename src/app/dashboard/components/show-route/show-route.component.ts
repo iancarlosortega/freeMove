@@ -7,28 +7,17 @@ import {
   Renderer2,
   ViewChild,
 } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
 import { Map } from 'mapbox-gl';
-import {
-  Gallery,
-  GalleryItem,
-  ImageItem,
-  ImageSize,
-  ThumbnailsPosition,
-} from 'ng-gallery';
-import { Lightbox } from 'ng-gallery/lightbox';
 import * as turf from '@turf/turf';
+import { Popup, Marker } from 'mapbox-gl';
+import { IncidentService } from 'src/app/services';
+import { Incident, Route } from 'src/app/interfaces';
 import {
   animatePath,
   flyInAndRotate,
   createGeoJSONCircle,
 } from 'src/app/utils';
-
-import SwiperCore, { Pagination } from 'swiper';
-import { Popup, Marker } from 'mapbox-gl';
-import { Incident, Route } from 'src/app/interfaces';
-import { IncidentService } from 'src/app/services';
-import { DOCUMENT } from '@angular/common';
-SwiperCore.use([Pagination]);
 
 @Component({
   selector: 'app-show-route',
@@ -44,13 +33,10 @@ export class ShowRouteComponent implements OnInit {
   shareUrl: string = '';
   map!: Map;
   incidents: Incident[] = [];
-  routeImages: GalleryItem[] = [];
-  incidentImages: GalleryItem[] = [];
+  routeImages: string[] = [];
 
   constructor(
     @Inject(DOCUMENT) private document: any,
-    public gallery: Gallery,
-    public lightbox: Lightbox,
     private renderer: Renderer2,
     private incidentService: IncidentService
   ) {}
@@ -59,6 +45,7 @@ export class ShowRouteComponent implements OnInit {
     this.incidentService
       .getIncidentsFromRoute(this.route!.idRoute)
       .subscribe(async (incidents) => {
+        this.routeImages = this.route.photos?.map((photo) => photo.photoUrl);
         this.incidents = incidents;
         this.shareUrl = `${this.document.location.origin}/ruta/${this.route.idRoute}`;
         this.map = new Map({
@@ -73,7 +60,6 @@ export class ShowRouteComponent implements OnInit {
           bearing: 0,
         });
 
-        this.generateGalleryOfPhotos();
         this.generatePhotosInMap();
         this.generateIncidentsInMap();
 
@@ -233,18 +219,6 @@ export class ShowRouteComponent implements OnInit {
         'fill-extrusion-height': 1200,
       },
     });
-  }
-
-  generateGalleryOfPhotos() {
-    this.routeImages = this.route.photos?.map(
-      (photo) => new ImageItem({ src: photo.photoUrl, thumb: photo.photoUrl })
-    );
-    const lightboxRef = this.gallery.ref('lightbox');
-    lightboxRef.setConfig({
-      imageSize: ImageSize.Cover,
-      thumbPosition: ThumbnailsPosition.Top,
-    });
-    lightboxRef.load(this.routeImages);
   }
 
   generatePhotosInMap() {

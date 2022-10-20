@@ -6,34 +6,6 @@
     {{ keyword }}
   </span>
 </div>
-<div class="photos">
-  <swiper
-    [spaceBetween]="10"
-    [slidesPerView]="1.2"
-    [pagination]="true"
-    [grabCursor]="true"
-    [breakpoints]="{
-      '499': {
-        slidesPerView: 2.2
-      },
-      '768': {
-        slidesPerView: 2.5
-      },
-      '992': {
-        slidesPerView: 3.2
-      },
-      '1200': {
-        slidesPerView: 4.5
-      }
-    }"
-  >
-    <ng-template
-      swiperSlide
-      *ngFor="let photo of incident.photos; let i = index"
-    >
-      <img [src]="photo" (click)="lightbox.open(i)" />
-    </ng-template>
-  </swiper>
-</div>
+<app-photos [photos]="incident.photos"></app-photos>
 <div #mapDiv class="map"></div>
 <div class="incident-marker" #incidentMarker></div>

@@ -1,5 +1,5 @@
 <header class="route-header">
-  <h3>{{ route.name }}({{ route.distance | number: "1.0-2" }} metros)</h3>
+  <h3>{{ route.name }} ({{ route.distance | number: "1.0-2" }} metros)</h3>
   <p class="route-city">
     Ciudad: <span>{{ route.city }}</span>
   </p>
@@ -17,35 +17,10 @@
       {{ keyword }}
     </span>
   </div>
-  <div class="photos">
-    <swiper
-      [spaceBetween]="10"
-      [slidesPerView]="1.2"
-      [pagination]="true"
-      [grabCursor]="true"
-      [breakpoints]="{
-        '499': {
-          slidesPerView: 2.2
-        },
-        '768': {
-          slidesPerView: 2.5
-        },
-        '992': {
-          slidesPerView: 3.2
-        },
-        '1200': {
-          slidesPerView: 4.5
-        }
-      }"
-    >
-      <ng-template
-        swiperSlide
-        *ngFor="let photo of route.photos; let i = index"
-      >
-        <img [src]="photo.photoUrl" (click)="lightbox.open(i)" />
-      </ng-template>
-    </swiper>
-  </div>
+  <app-photos
+    *ngIf="routeImages.length > 0"
+    [photos]="routeImages"
+  ></app-photos>
 </header>
 <main class="main-container">
   <div #mapDiv class="map">
