@@ -37,19 +37,19 @@ import { LinkAccountComponent } from './link-account/link-account.component';
 import { LinkAccountInvitationComponent } from './link-account-invitation/link-account-invitation.component';
 import { NavComponent } from './components/nav/nav.component';
 import { NotificationsComponent } from './notifications/notifications.component';
+import { PhotosComponent } from './components/photos/photos.component';
 import { PostComponent } from './components/post/post.component';
 import { ProfileComponent } from './profile/profile.component';
 import { RouteComponent } from './route/route.component';
 import { RoutesComponent } from './routes/routes.component';
 import { SearchComponent } from './search/search.component';
 import { ShowRouteComponent } from './components/show-route/show-route.component';
-import { StadisticsComponent } from './stadistics/stadistics.component';
+import { StadisticsComponent } from './components/stadistics/stadistics.component';
 import { StopAlertComponent } from './components/stop-alert/stop-alert.component';
 import { SuggestedComponent } from './components/suggested/suggested.component';
 import { TrackingComponent } from './tracking/tracking.component';
 import { UnlinkAccountComponent } from './components/unlink-account/unlink-account.component';
 import { UserComponent } from './components/user/user.component';
-import { PhotosComponent } from './components/photos/photos.component';
 
 @NgModule({
   declarations: [
@@ -105,6 +105,6 @@ import { PhotosComponent } from './components/photos/photos.component';
     SwiperModule,
     SharedModule,
   ],
-  exports: [BitacoraComponent, ShowRouteComponent],
+  exports: [StadisticsComponent, ShowRouteComponent],
 })
 export class DashboardModule {}

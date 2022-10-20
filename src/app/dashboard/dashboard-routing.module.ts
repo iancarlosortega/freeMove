@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AdminGuard, ProviderGuard } from '../guards';
 import { SearchComponent } from './search/search.component';
 
+import { BitacoraComponent } from './bitacora/bitacora.component';
 import { ChangeEmailComponent } from './change-email/change-email.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { CommunityComponent } from './community/community.component';
@@ -17,7 +18,6 @@ import { NotificationsComponent } from './notifications/notifications.component'
 import { ProfileComponent } from './profile/profile.component';
 import { RouteComponent } from './route/route.component';
 import { RoutesComponent } from './routes/routes.component';
-import { StadisticsComponent } from './stadistics/stadistics.component';
 import { TrackingComponent } from './tracking/tracking.component';
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
 import { GalleryComponent } from './gallery/gallery.component';
@@ -57,7 +57,7 @@ const routes: Routes = [
       },
       {
         path: 'bitacora',
-        component: StadisticsComponent,
+        component: BitacoraComponent,
         data: { breadcrumb: 'Bitácora' },
       },
       {
