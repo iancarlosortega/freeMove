@@ -107,6 +107,6 @@ import { FiltersComponent } from './components/filters/filters.component';
     SwiperModule,
     SharedModule,
   ],
-  exports: [StadisticsComponent, ShowRouteComponent],
+  exports: [FiltersComponent, StadisticsComponent, ShowRouteComponent],
 })
 export class DashboardModule {}

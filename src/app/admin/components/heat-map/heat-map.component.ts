@@ -101,6 +101,7 @@ export class HeatMapComponent implements AfterViewInit {
           'waterway-label'
         );
       });
+      this.routeMap.resize();
     });
   }
 }

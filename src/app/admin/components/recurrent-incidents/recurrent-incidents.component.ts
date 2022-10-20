@@ -46,6 +46,7 @@ export class RecurrentIncidentsComponent implements AfterViewInit {
           .setPopup(popup)
           .addTo(this.incidentMap);
       });
+      this.incidentMap.resize();
     });
   }
 }

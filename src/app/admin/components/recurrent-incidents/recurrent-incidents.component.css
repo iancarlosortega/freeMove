@@ -10,16 +10,6 @@
   }
 }
 
-.header {
-  margin: 1rem 0;
-}
-
-.header h1 {
-  margin: 0;
-  font-size: 1.7rem;
-  color: #3d3d3d;
-}
-
 .marker {
   background-size: cover;
   width: 35px;
