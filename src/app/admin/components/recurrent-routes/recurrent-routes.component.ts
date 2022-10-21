@@ -16,6 +16,7 @@ import { Route } from 'src/app/interfaces';
 export class RecurrentRoutesComponent implements AfterViewInit {
   @ViewChild('mapRoutes') mapRoutes!: ElementRef;
   @Input() routes: Route[] = [];
+  @Input() totalRoutes: Route[] = [];
   routeMap!: Map;
   constructor() {}
 
@@ -28,31 +29,44 @@ export class RecurrentRoutesComponent implements AfterViewInit {
       bearing: 0,
     });
     this.routeMap.on('load', () => {
-      this.routes.forEach((route, index) => {
-        this.routeMap.addSource('recurrent-route' + index, {
-          type: 'geojson',
-          data: {
-            type: 'Feature',
-            properties: {},
-            geometry: {
-              type: 'LineString',
-              coordinates: route.coordinates,
-            },
+      this.loadRoutes(this.routes);
+    });
+  }
+
+  updateData(newRoutes: any) {
+    this.routes.forEach((route, index) => {
+      this.routeMap.removeLayer('recurrent-route' + index);
+      this.routeMap.removeSource('recurrent-route' + index);
+    });
+    this.loadRoutes(newRoutes);
+    this.routes = newRoutes;
+  }
+
+  loadRoutes(routes: Route[]) {
+    routes.forEach((route, index) => {
+      this.routeMap.addSource('recurrent-route' + index, {
+        type: 'geojson',
+        data: {
+          type: 'Feature',
+          properties: {},
+          geometry: {
+            type: 'LineString',
+            coordinates: route.coordinates,
           },
-        });
-        this.routeMap.addLayer({
-          id: 'recurrent-route' + index,
-          type: 'line',
-          source: 'recurrent-route' + index,
-          layout: {
-            'line-join': 'round',
-            'line-cap': 'round',
-          },
-          paint: {
-            'line-color': '#c58b16',
-            'line-width': 8,
-          },
-        });
+        },
+      });
+      this.routeMap.addLayer({
+        id: 'recurrent-route' + index,
+        type: 'line',
+        source: 'recurrent-route' + index,
+        layout: {
+          'line-join': 'round',
+          'line-cap': 'round',
+        },
+        paint: {
+          'line-color': '#c58b16',
+          'line-width': 8,
+        },
       });
     });
   }

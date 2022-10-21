@@ -31,16 +31,4 @@ export class RoutesComponent implements AfterViewInit {
         this.isLoading = false;
       });
   }
-
-  updateRecurrentRoutes(event: any) {
-    console.log(event);
-  }
-
-  updateRecurrentIncidents(event: any) {
-    console.log(event);
-  }
-
-  updateHeatMap(event: any) {
-    console.log(event);
-  }
 }

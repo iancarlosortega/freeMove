@@ -14,9 +14,10 @@ import { RangeHoursComponent } from './components/range-hours/range-hours.compon
 import { HeatMapComponent } from './components/heat-map/heat-map.component';
 import { RecurrentIncidentsComponent } from './components/recurrent-incidents/recurrent-incidents.component';
 import { RecurrentRoutesComponent } from './components/recurrent-routes/recurrent-routes.component';
+import { MapFiltersComponent } from './components/map-filters/map-filters.component';
 
 @NgModule({
-  declarations: [IncidentsComponent, RoutesComponent, UsersComponent, TopHoursComponent, RangeHoursComponent, HeatMapComponent, RecurrentIncidentsComponent, RecurrentRoutesComponent],
+  declarations: [IncidentsComponent, RoutesComponent, UsersComponent, TopHoursComponent, RangeHoursComponent, HeatMapComponent, RecurrentIncidentsComponent, RecurrentRoutesComponent, MapFiltersComponent],
   imports: [
     CommonModule,
     AdminRoutingModule,

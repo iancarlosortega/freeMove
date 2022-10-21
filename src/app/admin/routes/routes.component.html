@@ -28,32 +28,29 @@
     <header class="header">
       <h1>Rutas Recurrentes</h1>
     </header>
-    <app-filters
-      (updateRoutes)="updateRecurrentRoutes($event)"
+    <app-recurrent-routes 
       [routes]="routes"
-    ></app-filters>
-    <app-recurrent-routes [routes]="routes"></app-recurrent-routes>
+      [totalRoutes]="routes"
+    ></app-recurrent-routes>
   </section>
 
   <section class="map">
     <header class="header">
       <h1>Incidentes Recurrentes</h1>
     </header>
-    <app-filters
-      (updateRoutes)="updateRecurrentIncidents($event)"
-      [routes]="routes"
-    ></app-filters>
-    <app-recurrent-incidents [incidents]="incidents"></app-recurrent-incidents>
+    <app-recurrent-incidents
+      [incidents]="incidents"
+      [totalIncidents]="incidents"
+    ></app-recurrent-incidents>
   </section>
 
   <section class="map">
     <header class="header">
       <h1>Mapa de Calor</h1>
     </header>
-    <app-filters
-      (updateRoutes)="updateHeatMap($event)"
+    <app-heat-map 
       [routes]="routes"
-    ></app-filters>
-    <app-heat-map [routes]="routes"></app-heat-map>
+      [totalRoutes]="routes"
+    ></app-heat-map>
   </section>
 </div>

@@ -1,0 +1,36 @@
+.filters {
+  display: grid;
+  row-gap: 1rem;
+  column-gap: 3rem;
+  margin-bottom: 1rem;
+}
+
+@media (min-width: 768px) {
+  .filters {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.filter-group {
+  margin: 0.5rem 0;
+}
+
+.filter-group h5 {
+  font-weight: 500;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
+.filter-input {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.filter-input p-calendar {
+  width: 100%;
+}
+
+.primary-button {
+  border-radius: 6px;
+  padding: 0.5rem 0.8rem;
+}

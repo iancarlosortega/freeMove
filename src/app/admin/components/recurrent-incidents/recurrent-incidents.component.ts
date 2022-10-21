@@ -17,6 +17,7 @@ import { Incident } from 'src/app/interfaces';
 export class RecurrentIncidentsComponent implements AfterViewInit {
   @ViewChild('mapIncidents') mapIncidents!: ElementRef;
   @Input() incidents: Incident[] = [];
+  @Input() totalIncidents: Incident[] = [];
   incidentMap!: Map;
   constructor(private renderer: Renderer2) {}
 
@@ -30,23 +31,35 @@ export class RecurrentIncidentsComponent implements AfterViewInit {
     });
 
     this.incidentMap.on('load', () => {
-      this.incidents.forEach((incident) => {
-        const popup = new Popup({ offset: 25 }).setHTML(
-          `<h5>${incident.title}</h5>
+      this.loadMarkers(this.incidents);
+    });
+  }
+
+  updateData(newIncidents: any) {
+    const markers = document.querySelectorAll('.incident-marker');
+    markers.forEach((marker) => {
+      marker.remove();
+    });
+    this.loadMarkers(newIncidents);
+    this.incidents = newIncidents;
+  }
+
+  loadMarkers(incidents: Incident[]) {
+    incidents.forEach((incident) => {
+      const popup = new Popup({ offset: 25 }).setHTML(
+        `<h5>${incident.title}</h5>
         <p>${incident.description}</p>
         <a class="primary-button" href="/dashboard/incidentes/${incident.idIncident}">Ver Más</a>`
-        );
+      );
 
-        const element = this.renderer.createElement('div');
-        this.renderer.addClass(element, 'marker');
-        this.renderer.addClass(element, 'incident-marker');
+      const element = this.renderer.createElement('div');
+      this.renderer.addClass(element, 'marker');
+      this.renderer.addClass(element, 'incident-marker');
 
-        new Marker(element)
-          .setLngLat(incident.position)
-          .setPopup(popup)
-          .addTo(this.incidentMap);
-      });
-      this.incidentMap.resize();
+      new Marker(element)
+        .setLngLat(incident.position)
+        .setPopup(popup)
+        .addTo(this.incidentMap);
     });
   }
 }
