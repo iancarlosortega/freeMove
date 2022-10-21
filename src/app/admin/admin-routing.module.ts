@@ -20,7 +20,7 @@ const routes: Routes = [
         data: { breadcrumb: 'Gestión de Rutas' },
       },
       {
-        path: 'incidents',
+        path: 'incidentes',
         component: IncidentsComponent,
         data: { breadcrumb: 'Gestión de Incidentes' },
       },

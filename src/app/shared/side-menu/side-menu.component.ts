@@ -113,7 +113,7 @@ export class SideMenuComponent implements OnInit, OnDestroy {
               {
                 name: 'Incidentes',
                 icon: 'assets/icons/incidents.svg',
-                route: './admin/incidents',
+                route: './admin/incidentes',
                 isAvailable: true,
               },
             ],
