@@ -156,27 +156,11 @@ export class ShowRouteComponent implements OnInit {
       ) as any,
     });
 
-    this.map.addSource('start-pin-top', {
-      type: 'geojson',
-      data: createGeoJSONCircle(
-        trackGeojson.geometry.coordinates[0],
-        0.25
-      ) as any,
-    });
-
     this.map.addSource('end-pin-base', {
       type: 'geojson',
       data: createGeoJSONCircle(
         trackGeojson.geometry.coordinates.slice(-1)[0],
         0.04
-      ) as any,
-    });
-
-    this.map.addSource('end-pin-top', {
-      type: 'geojson',
-      data: createGeoJSONCircle(
-        trackGeojson.geometry.coordinates.slice(-1)[0],
-        0.25
       ) as any,
     });
 
@@ -186,17 +170,7 @@ export class ShowRouteComponent implements OnInit {
       source: 'start-pin-base',
       paint: {
         'fill-extrusion-color': '#0bfc03',
-        'fill-extrusion-height': 1000,
-      },
-    });
-    this.map.addLayer({
-      id: 'start-fill-pin-top',
-      type: 'fill-extrusion',
-      source: 'start-pin-top',
-      paint: {
-        'fill-extrusion-color': '#0bfc03',
-        'fill-extrusion-base': 1000,
-        'fill-extrusion-height': 1200,
+        'fill-extrusion-height': 100,
       },
     });
 
@@ -206,17 +180,7 @@ export class ShowRouteComponent implements OnInit {
       source: 'end-pin-base',
       paint: {
         'fill-extrusion-color': '#eb1c1c',
-        'fill-extrusion-height': 1000,
-      },
-    });
-    this.map.addLayer({
-      id: 'end-fill-pin-top',
-      type: 'fill-extrusion',
-      source: 'end-pin-top',
-      paint: {
-        'fill-extrusion-color': '#eb1c1c',
-        'fill-extrusion-base': 1000,
-        'fill-extrusion-height': 1200,
+        'fill-extrusion-height': 100,
       },
     });
   }
