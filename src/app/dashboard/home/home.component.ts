@@ -3,8 +3,8 @@ import { Subscription, switchMap, take, tap } from 'rxjs';
 import SwiperCore from 'swiper';
 import moment from 'moment';
 import { ChartConfiguration } from 'chart.js';
-import { RouteService, UserService } from 'src/app/services';
-import { Route, User } from 'src/app/interfaces';
+import { IncidentService, RouteService, UserService } from 'src/app/services';
+import { Incident, Route, User } from 'src/app/interfaces';
 import { mapRoute } from 'src/app/utils';
 
 @Component({
@@ -28,6 +28,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   userObs!: Subscription;
   routes: Route[] = [];
   sliderRoutes: any[] = [];
+  sliderIncidents: Incident[] = [];
   currentDay = new Date();
   currentDayRoutes: Route[] = [];
   currentMonthRoutes: Route[] = [];
@@ -56,7 +57,8 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   constructor(
     private userService: UserService,
-    private routeService: RouteService
+    private routeService: RouteService,
+    private incidentService: IncidentService
   ) {}
 
   ngOnInit(): void {
@@ -64,11 +66,20 @@ export class HomeComponent implements OnInit, OnDestroy {
       .pipe(
         tap((user) => (this.user = user)),
         switchMap((user) => this.routeService.getRoutesByUser(user.idUser)),
-        take(1)
+        take(1),
+        tap((routes) => (this.routes = routes.map((route) => mapRoute(route)))),
+        switchMap((_) => this.incidentService.getIncidents())
       )
-      .subscribe((routes) => {
-        this.routes = routes.map((route) => mapRoute(route));
-        routes.forEach((route) => {
+      .subscribe((incidents) => {
+        // Filter incidents by last 7 days
+        this.sliderIncidents = incidents.filter((incident) =>
+          moment(incident.createdAt).isSameOrAfter(
+            moment().subtract(7, 'days'),
+            'days'
+          )
+        );
+        console.log(this.sliderIncidents);
+        this.routes.forEach((route) => {
           route.photos?.forEach((photo) => {
             this.sliderRoutes.push({
               idRoute: route.idRoute,
@@ -81,7 +92,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         this.last15daysData = this.createChart(15);
 
         // Filtrar rutas del mes actual
-        this.currentMonthRoutes = routes.filter((route) => {
+        this.currentMonthRoutes = this.routes.filter((route) => {
           const routeDate = new Date(route.startDate);
           return (
             routeDate.getMonth() === this.currentDay.getMonth() &&
@@ -90,7 +101,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         });
 
         // Filtrar rutas del día actual
-        this.currentDayRoutes = routes.filter((route) => {
+        this.currentDayRoutes = this.routes.filter((route) => {
           const routeDate = new Date(route.startDate);
           return (
             routeDate.getDate() === this.currentDay.getDate() &&

@@ -48,7 +48,7 @@
 .main-title img {
   width: 2rem;
   height: 2rem;
-  transform: translateY(-0.3rem);
+  transform: translateY(-0.2rem);
 }
 
 .main-header button {
@@ -70,7 +70,7 @@
   margin-bottom: 2rem;
 }
 
-.route-slider {
+.slider-item {
   position: relative;
   margin-bottom: 2rem;
   height: 20rem;
@@ -79,7 +79,7 @@
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 
-.route-title {
+.slider-item-title {
   position: absolute;
   bottom: 20px;
   z-index: 9;
@@ -88,7 +88,7 @@
   justify-content: center;
 }
 
-.route-slider h5 {
+.slider-item-title h5 {
   width: 90%;
   padding: 0.5rem;
   text-align: center;
@@ -99,7 +99,7 @@
   font-size: 1rem;
 }
 
-.route-img{
+.slider-item-img{
   aspect-ratio: 9/16;
   object-fit: cover;
   height: 100%;
