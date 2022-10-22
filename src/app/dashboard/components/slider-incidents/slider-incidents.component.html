@@ -1,0 +1,54 @@
+<section *ngIf="sliderIncidents.length > 0">
+  <header class="header">
+    <div class="header-title">
+      <h1>Incidentes Recientes</h1>
+      <img src="assets/icons/warning.png" alt="Icono de incidente" />
+    </div>
+    <button routerLink="./incidentes">
+      Ver todos
+      <mat-icon> arrow_forward </mat-icon>
+    </button>
+  </header>
+
+  <swiper
+    class="slider fade-in"
+    [loop]="true"
+    [spaceBetween]="20"
+    [slidesPerView]="1.2"
+    [pagination]="true"
+    [grabCursor]="true"
+    [breakpoints]="{
+      '499': {
+        slidesPerView: 2.2
+      },
+      '768': {
+        slidesPerView: 2.5
+      },
+      '992': {
+        slidesPerView: 3.2
+      },
+      '1200': {
+        slidesPerView: 4.5
+      }
+    }"
+  >
+    <ng-template swiperSlide *ngFor="let incident of sliderIncidents">
+      <div
+        class="slider-item"
+        [routerLink]="['./incidentes', incident.idIncident]"
+      >
+        <div class="slider-item-title">
+          <h5>{{ incident.title }}</h5>
+        </div>
+        <img
+          class="slider-item-img"
+          [src]="
+            incident.photos
+              ? incident.photos[0]
+              : 'assets/imagen_no_disponible.jpg'
+          "
+        />
+      </div>
+    </ng-template>
+  </swiper>
+</section>

@@ -1,0 +1,68 @@
+.community {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 4rem 0;
+  gap: 4rem;
+}
+
+
+@media (min-width: 768px) {
+  .community {
+    flex-direction: row;
+  }
+}
+
+.community-info {
+  width: 100%;
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .community-info {
+    width: 20rem;
+  }
+}
+
+.community-info h2 {
+  font-size: 3rem;
+  font-weight: lighter;
+  color: var(--azul-oscuro);
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.community img {
+  width: 100%;
+  max-width: 500px;
+}
+
+.community-button {
+  margin: 2rem 0;
+  font-family: "Open Sans", sans-serif;
+  font-size: 16px;
+  letter-spacing: 2px;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: #000;
+  cursor: pointer;
+  border: 3px solid;
+  padding: 0.25em 0.5em;
+  box-shadow: 1px 1px 0px 0px, 2px 2px 0px 0px, 3px 3px 0px 0px, 4px 4px 0px 0px, 5px 5px 0px 0px;
+  position: relative;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.community-button:active {
+  box-shadow: 0px 0px 0px 0px;
+  top: 5px;
+  left: 5px;
+}
+
+@media (min-width: 768px) {
+  .community-button {
+    padding: 0.25em 0.75em;
+  }
+}

@@ -1,0 +1,43 @@
+<section *ngIf="sliderRoutes.length > 0">
+  <header class="header">
+    <div class="header-title">
+      <h1>Recuerdos</h1>
+      <img src="assets/icons/camera.svg" alt="Icono de camara" />
+    </div>
+    <button routerLink="./galeria">
+      Ver todos
+      <mat-icon> arrow_forward </mat-icon>
+    </button>
+  </header>
+  <swiper
+    class="slider fade-in"
+    [loop]="true"
+    [spaceBetween]="20"
+    [slidesPerView]="1.2"
+    [pagination]="true"
+    [grabCursor]="true"
+    [breakpoints]="{
+      '499': {
+        slidesPerView: 2.2
+      },
+      '768': {
+        slidesPerView: 2.5
+      },
+      '992': {
+        slidesPerView: 3.2
+      },
+      '1200': {
+        slidesPerView: 4.5
+      }
+    }"
+  >
+    <ng-template swiperSlide *ngFor="let route of sliderRoutes">
+      <div class="slider-item" [routerLink]="['./rutas', route.idRoute]">
+        <div class="slider-item-title">
+          <h5>{{ route.name }}</h5>
+        </div>
+        <img class="slider-item-img" [src]="route.photo" [alt]="route.name" />
+      </div>
+    </ng-template>
+  </swiper>
+</section>

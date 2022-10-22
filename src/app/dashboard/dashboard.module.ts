@@ -51,6 +51,11 @@ import { TrackingComponent } from './tracking/tracking.component';
 import { UnlinkAccountComponent } from './components/unlink-account/unlink-account.component';
 import { UserComponent } from './components/user/user.component';
 import { FiltersComponent } from './components/filters/filters.component';
+import { SliderRoutesComponent } from './components/slider-routes/slider-routes.component';
+import { SliderIncidentsComponent } from './components/slider-incidents/slider-incidents.component';
+import { DashboardAsideComponent } from './components/dashboard-aside/dashboard-aside.component';
+import { DashboardCommunityComponent } from './components/dashboard-community/dashboard-community.component';
+import { DashboardChartsComponent } from './components/dashboard-charts/dashboard-charts.component';
 
 @NgModule({
   declarations: [
@@ -89,6 +94,11 @@ import { FiltersComponent } from './components/filters/filters.component';
     UserComponent,
     PhotosComponent,
     FiltersComponent,
+    SliderRoutesComponent,
+    SliderIncidentsComponent,
+    DashboardAsideComponent,
+    DashboardCommunityComponent,
+    DashboardChartsComponent,
   ],
   imports: [
     CommonModule,
