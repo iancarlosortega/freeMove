@@ -15,7 +15,7 @@ export class SliderIncidentsComponent implements OnInit {
 
   ngOnInit(): void {
     this.sliderIncidents = this.incidents.filter((incident) =>
-      moment(incident.createdAt).isSameOrAfter(
+      moment(incident.createdAt.toDate()).isSameOrAfter(
         moment().subtract(7, 'days'),
         'days'
       )
