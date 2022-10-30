@@ -14,12 +14,16 @@
   <div *ngIf="!alert.isActive" class="alert alert--success">
     La alerta se encuentra en pausa.
   </div>
-  <h4>{{ (alert.startTime | date: "fullDate" | titlecase) || "" }}</h4>
+  <h4>
+    {{ (alert.startTime?.toDate() | date: "fullDate" | titlecase) || "" }}
+  </h4>
   <div class="route-time">
     <div class="route-time-group">
       <div class="route-time-group-info">
         <p>Tiempo de Inicio</p>
-        <p>{{ alert.startTime | date: "mediumTime" || "--:--:--" }}</p>
+        <p>
+          {{ alert.startTime?.toDate() | date: "mediumTime" || "--:--:--" }}
+        </p>
       </div>
       <div class="route-time-group-icon">
         <img src="assets/icons/location.svg" alt="Icono de ubicación" />
@@ -28,7 +32,7 @@
     <div class="route-time-group">
       <div class="route-time-group-info">
         <p>Tiempo de Fin</p>
-        <p>{{ alert.endTime | date: "mediumTime" || "--:--:--" }}</p>
+        <p>{{ alert.endTime?.toDate() | date: "mediumTime" || "--:--:--" }}</p>
       </div>
       <div class="route-time-group-icon">
         <img src="assets/icons/flag.svg" alt="Icono de Bandera de Meta" />

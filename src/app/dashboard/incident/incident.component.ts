@@ -1,20 +1,10 @@
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { switchMap } from 'rxjs';
+import firebase from '@firebase/app-compat';
 import { Map, Marker } from 'mapbox-gl';
-import { Incident } from 'src/app/interfaces';
 import { IncidentService } from 'src/app/services';
-import {
-  Gallery,
-  GalleryItem,
-  ImageItem,
-  ImageSize,
-  ThumbnailsPosition,
-} from 'ng-gallery';
-import { Lightbox } from 'ng-gallery/lightbox';
-
-import SwiperCore, { Pagination } from 'swiper';
-SwiperCore.use([Pagination]);
+import { Incident } from 'src/app/interfaces';
 
 @Component({
   selector: 'app-incident',
@@ -30,18 +20,15 @@ export class IncidentComponent implements AfterViewInit {
     title: '',
     description: '',
     category: '',
-    createdAt: 0,
+    createdAt: firebase.firestore.Timestamp.now(),
     position: [0, 0],
     photos: [],
     isActive: false,
     city: '',
     keywords: [],
   };
-  incidentImages: GalleryItem[] = [];
 
   constructor(
-    public gallery: Gallery,
-    public lightbox: Lightbox,
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private incidentService: IncidentService
@@ -65,20 +52,6 @@ export class IncidentComponent implements AfterViewInit {
         new Marker(this.incidentMarker.nativeElement)
           .setLngLat(this.incident.position)
           .addTo(map);
-        this.incidentImages = this.incident.photos.map(
-          (photo) => new ImageItem({ src: photo, thumb: photo })
-        );
-        // Get a lightbox gallery ref
-        const lightboxRef = this.gallery.ref('lightbox');
-
-        // Add custom gallery config to the lightbox (optional)
-        lightboxRef.setConfig({
-          imageSize: ImageSize.Cover,
-          thumbPosition: ThumbnailsPosition.Top,
-        });
-
-        // Load items into the lightbox gallery ref
-        lightboxRef.load(this.incidentImages);
       });
   }
 }

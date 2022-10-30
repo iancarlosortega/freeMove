@@ -1,8 +1,10 @@
+import firebase from 'firebase/compat';
 export interface User {
   idUser: string;
   // Datos de registro
   name: string;
   email: string;
+  createdAt?: firebase.firestore.Timestamp;
   password?: string;
   password2?: string;
   // Datos adicionales
@@ -20,7 +22,6 @@ export interface User {
   // Datos de redes sociales
   followers?: string[];
   following?: string[];
-  createdAt: any;
   photoUrl?: string;
   photoFilename?: string;
   bannerUrl?: string;

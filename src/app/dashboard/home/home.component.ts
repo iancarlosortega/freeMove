@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription, switchMap, take, tap } from 'rxjs';
+import firebase from '@firebase/app-compat';
 import { IncidentService, RouteService, UserService } from 'src/app/services';
 import { Incident, Route, User } from 'src/app/interfaces';
 import { mapRoute } from 'src/app/utils';
@@ -18,7 +19,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     provider: 'email-password',
     weight: 0,
     height: 0,
-    createdAt: new Date(),
+    createdAt: firebase.firestore.Timestamp.now(),
     followers: [],
     following: [],
   };

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, Validators } from '@angular/forms';
 import { trigger, transition, style, animate } from '@angular/animations';
+import firebase from '@firebase/app-compat';
 import { AuthService, UserService, ValidatorService } from 'src/app/services';
 import { User } from 'src/app/interfaces';
 
@@ -70,7 +71,7 @@ export class RegisterComponent implements OnInit {
           provider: 'email-password',
           followers: [],
           following: [],
-          createdAt: new Date(),
+          createdAt: firebase.firestore.Timestamp.now(),
         };
 
         this.userService

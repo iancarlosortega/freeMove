@@ -26,7 +26,6 @@ export class GalleryComponent implements OnInit {
       )
       .subscribe((routes) => {
         routes.forEach((route) => {
-          console.log(route.idRoute);
           route.photos?.forEach((photo) => {
             const image = new ImageItem({
               src: photo.photoUrl,

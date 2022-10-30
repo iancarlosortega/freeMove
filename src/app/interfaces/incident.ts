@@ -1,3 +1,4 @@
+import firebase from 'firebase/compat';
 export interface Incident {
   idIncident: string;
   idRoute: string;
@@ -6,7 +7,7 @@ export interface Incident {
   city: string;
   isActive: boolean;
   category: string;
-  createdAt: number;
+  createdAt: firebase.firestore.Timestamp;
   position: [number, number];
   keywords: string[];
   photos: string[];

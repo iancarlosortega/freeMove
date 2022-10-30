@@ -16,9 +16,7 @@ export interface Route {
   coordinates: [number, number][];
   burnoutCalories: number;
   timeElapsed: number;
-  timeInMoving: number;
   velocityAvg: number;
-  velocityMax: number;
   activityType: string;
   count?: number;
 }

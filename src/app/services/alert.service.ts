@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
+import firebase from '@firebase/app-compat';
 import { map } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
@@ -56,11 +57,10 @@ export class AlertService {
           .doc(alert.idAlert)
           .update({
             isActive: true,
-            startTime: Date.now(),
+            startTime: firebase.firestore.Timestamp.now(),
             startPosition: await this.geolocationService.getUserLocation(),
-            endTime: '',
+            endTime: null,
             endPosition: [0, 0],
-            //TODO: Cambiar las coords
             coordinates: await this.geolocationService.getUserLocation(),
           });
       });
@@ -79,7 +79,7 @@ export class AlertService {
           .doc(alert.idAlert)
           .update({
             isActive: false,
-            endTime: Date.now(),
+            endTime: firebase.firestore.Timestamp.now(),
             endPosition: await this.geolocationService.getUserLocation(),
           });
       }
@@ -109,7 +109,7 @@ export class AlertService {
             emailFrom: userFrom.email,
             linkedAccount: '',
             startTime: '',
-            endTime: '',
+            endTime: null,
             startPosition: [0, 0],
             endPosition: [0, 0],
             coordinates: [],

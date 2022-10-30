@@ -1,4 +1,5 @@
 import moment from 'moment';
+import firebase from 'firebase/compat';
 import { Route } from '../interfaces';
 
 export const mapRoute = (route: Route) => {

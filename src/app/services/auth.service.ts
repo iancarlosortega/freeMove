@@ -132,7 +132,7 @@ export class AuthService {
             photoUrl: response.user?.photoURL!,
             provider: response.additionalUserInfo?.providerId! as UserProvider,
             role: 'CLIENT-ROLE',
-            createdAt: new Date(),
+            createdAt: firebase.firestore.Timestamp.now(),
             followers: [],
             following: [],
           };

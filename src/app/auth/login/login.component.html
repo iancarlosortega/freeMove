@@ -11,24 +11,14 @@
     <form class="login-form" [formGroup]="loginForm" (submit)="loginUser()">
       <mat-form-field appearance="outline">
         <mat-label>Correo Electrónico</mat-label>
-        <input
-          type="email"
-          matInput
-          formControlName="email"
-          placeholder="example@gmail.com"
-        />
+        <input type="email" matInput formControlName="email" placeholder="example@gmail.com" />
         <mat-error *ngIf="invalidInput('email')">
           El correo electrónico es <strong>obligatorio</strong>
         </mat-error>
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>Contraseña</mat-label>
-        <input
-          type="password"
-          matInput
-          formControlName="password"
-          placeholder="********"
-        />
+        <input type="password" matInput formControlName="password" placeholder="********" />
         <mat-error *ngIf="invalidInput('password')">
           Mínimo <strong>6</strong> caracteres
         </mat-error>
@@ -61,10 +51,10 @@
       <img src="assets/icons/facebook.svg" alt="Facebook" />
       <p>Continuar con Facebook</p>
     </button>
-    <button class="button-oauth" (click)="loginMicrosoft()">
-      <img src="assets/icons/microsoft.svg" alt="UTPL" />
-      <p>Continuar con UTPL</p>
-    </button>
+    <!-- <button class="button-oauth" (click)="loginMicrosoft()"> -->
+    <!--   <img src="assets/icons/microsoft.svg" alt="UTPL" /> -->
+    <!--   <p>Continuar con UTPL</p> -->
+    <!-- </button> -->
 
     <footer class="login-footer">
       <p>¿No tienes una cuenta?</p>

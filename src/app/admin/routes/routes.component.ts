@@ -2,7 +2,7 @@ import { AfterViewInit, Component } from '@angular/core';
 import { switchMap, tap } from 'rxjs';
 import { Incident, Route } from 'src/app/interfaces';
 import { IncidentService, RouteService } from 'src/app/services';
-import { mapRoute } from 'src/app/utils';
+import { mapRoute } from "src/app/utils";
 
 @Component({
   selector: 'app-routes',
@@ -17,7 +17,7 @@ export class RoutesComponent implements AfterViewInit {
   constructor(
     private routeService: RouteService,
     private incidentService: IncidentService
-  ) {}
+  ) { }
 
   ngAfterViewInit(): void {
     this.routeService

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import firebase from '@firebase/app-compat';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 import { User } from 'src/app/interfaces';
@@ -17,7 +18,7 @@ export class HealthComponent implements OnInit {
     email: '',
     role: 'ADMIN-ROLE',
     provider: 'email-password',
-    createdAt: undefined,
+    createdAt: firebase.firestore.Timestamp.now(),
     weight: 0,
   };
   isLoading: boolean = true;

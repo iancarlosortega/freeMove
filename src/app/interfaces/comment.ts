@@ -1,6 +1,7 @@
+import firebase from 'firebase/compat';
 export interface Comment {
   idComment: string;
   idUser: string;
   body: string;
-  createdAt: any;
+  createdAt: firebase.firestore.Timestamp;
 }
