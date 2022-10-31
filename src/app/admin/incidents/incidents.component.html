@@ -84,7 +84,13 @@
         {{ incident.city }}
       </td>
       <td style="width: 150px">
-        {{ incident.category }}
+        <div class="flex-center">
+          <img
+            class="incident-category-icon"
+            [src]="getIncidentIcon(incident.category)"
+            alt="Icono de incidente"
+          />
+        </div>
       </td>
       <td style="width: 200px">
         {{ incident.createdAt.toDate() | date: "dd/MM/yyyy, h:mm a" }}

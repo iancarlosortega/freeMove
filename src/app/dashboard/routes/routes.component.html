@@ -4,6 +4,7 @@
     <input (keyup)="filterRoutes($event)" type="text" placeholder="Buscar..." />
   </div>
   <button
+    *ngIf="routes.length > 0"
     pButton
     type="button"
     label="Eliminar Historial"

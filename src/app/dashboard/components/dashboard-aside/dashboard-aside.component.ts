@@ -32,7 +32,7 @@ export class DashboardAsideComponent implements OnInit {
   ngOnInit(): void {
     // Filtrar rutas del mes actual
     this.currentMonthRoutes = this.routes.filter((route) => {
-      const routeDate = route.startDate.toDate();
+      const routeDate = route.startDate;
       return (
         routeDate.getMonth() === this.currentDay.getMonth() &&
         routeDate.getFullYear() === this.currentDay.getFullYear()
@@ -41,7 +41,7 @@ export class DashboardAsideComponent implements OnInit {
 
     // Filtrar rutas del día actual
     this.currentDayRoutes = this.routes.filter((route) => {
-      const routeDate = route.startDate.toDate();
+      const routeDate = route.startDate;
       return (
         routeDate.getDate() === this.currentDay.getDate() &&
         routeDate.getMonth() === this.currentDay.getMonth() &&

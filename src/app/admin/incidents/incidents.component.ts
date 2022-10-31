@@ -60,4 +60,19 @@ export class IncidentsComponent implements OnInit {
   goToIncident(id: number) {
     this.router.navigate(['dashboard/incidentes', id]);
   }
+
+  getIncidentIcon(category: string) {
+    switch (category) {
+      case 'Accidente':
+        return '/assets/icons/accident.png';
+      case 'Robo':
+        return '/assets/icons/robbery.png';
+      case 'Ciclovía en mal estado':
+        return '/assets/icons/road-bad-state.png';
+      case 'Ciclovía obstruida':
+        return '/assets/icons/road-blocked.png';
+      default:
+        return '/assets/icons/accident.svg';
+    }
+  }
 }

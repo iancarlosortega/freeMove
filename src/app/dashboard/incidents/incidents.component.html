@@ -14,7 +14,13 @@
       *ngFor="let incident of incidents"
       [routerLink]="['./', incident.idIncident]"
     >
-      <h4>{{ incident.title }}</h4>
+      <header class="list-header">
+        <img
+          [src]="getIncidentIcon(incident.category)"
+          alt="Icono de incidente"
+        />
+        <h4>{{ incident.title }}</h4>
+      </header>
       <p>
         {{
           incident.description.length > 230

@@ -2,3 +2,8 @@
   width: 100%;
   text-align: center !important;
 }
+
+.incident-category-icon {
+  width: 5rem;
+  height: 5rem;
+}
