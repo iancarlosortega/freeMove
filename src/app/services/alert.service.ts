@@ -60,7 +60,7 @@ export class AlertService {
             startTime: firebase.firestore.Timestamp.now(),
             startPosition: await this.geolocationService.getUserLocation(),
             endTime: null,
-            endPosition: [0, 0],
+            endPosition: await this.geolocationService.getUserLocation(),
             coordinates: await this.geolocationService.getUserLocation(),
           });
       });
@@ -100,20 +100,11 @@ export class AlertService {
           return true;
         }
 
-        this.firestore
-          .collection('alerts')
-          .doc(alert.idAlert)
-          .update({
-            notificationStatus: 'pending',
-            emailToVinculate: linkedEmail,
-            emailFrom: userFrom.email,
-            linkedAccount: '',
-            startTime: '',
-            endTime: null,
-            startPosition: [0, 0],
-            endPosition: [0, 0],
-            coordinates: [],
-          });
+        this.firestore.collection('alerts').doc(alert.idAlert).update({
+          notificationStatus: 'pending',
+          emailToVinculate: linkedEmail,
+          emailFrom: userFrom.email,
+        });
 
         const notification: Notification = {
           idAlert: alert.idAlert,

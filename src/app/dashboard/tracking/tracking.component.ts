@@ -34,6 +34,7 @@ export class TrackingComponent implements AfterViewInit, OnDestroy {
   idUser: string = '';
   isLoading: boolean = true;
   hasBeenVinculated: boolean = false;
+  isPending: boolean = false;
 
   constructor(
     private userService: UserService,
@@ -50,30 +51,33 @@ export class TrackingComponent implements AfterViewInit, OnDestroy {
         )
       )
       .subscribe(async (alert) => {
-        if (alert) {
-          this.alert = alert;
-          this.hasBeenVinculated = true;
-          if (alert.startPosition && alert.endPosition) {
-            const map = new Map({
-              container: this.mapElement.nativeElement,
-              style: 'mapbox://styles/mapbox/streets-v11',
-              center: this.alert.endPosition || this.alert.startPosition,
-              zoom: 15,
-            });
-            new Marker()
-              .setLngLat(this.alert.endPosition || this.alert.startPosition!)
-              .addTo(map);
-          } else {
-            const map = new Map({
-              container: this.mapElement.nativeElement,
-              style: 'mapbox://styles/mapbox/streets-v11',
-              center: await this.geoLocationService.getUserLocation(),
-              zoom: 15,
-            });
-            new Marker()
-              .setLngLat(await this.geoLocationService.getUserLocation())
-              .addTo(map);
-          }
+        if (!alert) {
+          this.isLoading = false;
+          return;
+        }
+        this.alert = alert;
+        this.isPending = alert.notificationStatus === 'pending';
+        this.hasBeenVinculated = alert.notificationStatus === 'accepted';
+        if (alert.startPosition && alert.endPosition) {
+          const map = new Map({
+            container: this.mapElement.nativeElement,
+            style: 'mapbox://styles/mapbox/streets-v11',
+            center: this.alert.endPosition || this.alert.startPosition,
+            zoom: 15,
+          });
+          new Marker()
+            .setLngLat(this.alert.endPosition || this.alert.startPosition!)
+            .addTo(map);
+        } else {
+          const map = new Map({
+            container: this.mapElement.nativeElement,
+            style: 'mapbox://styles/mapbox/streets-v11',
+            center: await this.geoLocationService.getUserLocation(),
+            zoom: 15,
+          });
+          new Marker()
+            .setLngLat(await this.geoLocationService.getUserLocation())
+            .addTo(map);
         }
         this.isLoading = false;
       });

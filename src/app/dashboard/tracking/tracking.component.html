@@ -2,12 +2,28 @@
   <mat-spinner [diameter]="100"></mat-spinner>
 </div>
 
-<div *ngIf="!hasBeenVinculated && !isLoading" class="alert alert--info fade-in">
+<div
+  *ngIf="!hasBeenVinculated && !isPending && !isLoading"
+  class="alert alert--info fade-in"
+>
   Esta cuenta no ha sido vinculada con otros usuarios para el rastreo de la
   ubicación.
 </div>
 
-<header *ngIf="hasBeenVinculated && !isLoading" class="fade-in">
+<div *ngIf="isPending && !isLoading" class="alert alert--info fade-in">
+  <p>
+    <strong>¡Espera!</strong> Esta cuenta está pendiente de ser vinculada con
+    otros usuarios para el rastreo de la ubicación.
+    <span
+      class="alert-pending"
+      [routerLink]="['/dashboard/invitacion-vinculamiento/', alert.idAlert]"
+    >
+      ¡Pulsa aquí para saber más información!
+    </span>
+  </p>
+</div>
+
+<header *ngIf="hasBeenVinculated && !isPending && !isLoading" class="fade-in">
   <div *ngIf="alert.isActive" class="alert alert--error">
     La alerta se encuentra activa.
   </div>
@@ -41,4 +57,4 @@
   </div>
   <div class="route-path"></div>
 </header>
-<div #mapDiv class="map"></div>
+<div #mapDiv class="map" [ngClass]="{ 'no-map': !alert.startPosition }"></div>

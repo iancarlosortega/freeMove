@@ -53,6 +53,7 @@ export class LinkAccountComponent implements OnInit, OnDestroy {
             );
             const data = await alertRef.get();
             this.alert = data.data() as Alert;
+            console.log(this.alert);
             return;
           }
           this.alert = alert;
@@ -105,7 +106,6 @@ export class LinkAccountComponent implements OnInit, OnDestroy {
       }, 3500);
       return;
     }
-
     this.alertService
       .createInvitation(linkedEmail, this.user, this.alert)
       .subscribe((error) => {

@@ -10,6 +10,16 @@
   }
 }
 
+.no-map {
+  opacity: 0;
+}
+
+.alert-pending {
+  font-weight: bold;
+  color: var(--azul-oscuro);
+  cursor: pointer;
+}
+
 .route-time {
   display: flex;
   justify-content: space-between;

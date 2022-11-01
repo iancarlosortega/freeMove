@@ -43,7 +43,9 @@ export class LinkAccountInvitationComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.notificationObs.unsubscribe();
-    this.notification2Obs.unsubscribe();
+    if (this.notification2Obs) {
+      this.notification2Obs.unsubscribe();
+    }
   }
 
   accept() {
