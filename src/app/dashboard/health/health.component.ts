@@ -64,9 +64,9 @@ export class HealthComponent implements OnInit {
     this.userObs.unsubscribe();
   }
 
-  invalidInput(campo: string) {
+  invalidInput(field: string) {
     return (
-      this.healthForm.get(campo)?.invalid && this.healthForm.get(campo)?.touched
+      this.healthForm.get(field)?.invalid && this.healthForm.get(field)?.touched
     );
   }
 

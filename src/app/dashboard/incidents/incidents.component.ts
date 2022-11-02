@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { IncidentService } from 'src/app/services';
-import { Incident } from 'src/app/interfaces';
+import { Incident, IncidentCategory } from 'src/app/interfaces';
 
 @Component({
   selector: 'app-incidents',
@@ -48,7 +48,7 @@ export class IncidentsComponent implements OnInit {
     return text.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
   }
 
-  getIncidentIcon(category: string) {
+  getIncidentIcon(category: IncidentCategory) {
     switch (category) {
       case 'Accidente':
         return '/assets/icons/accident.png';

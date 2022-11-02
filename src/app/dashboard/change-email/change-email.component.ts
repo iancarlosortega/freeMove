@@ -70,10 +70,10 @@ export class ChangeEmailComponent implements OnInit {
     this.userObs.unsubscribe();
   }
 
-  invalidInput(campo: string) {
+  invalidInput(field: string) {
     return (
-      this.newEmailForm.get(campo)?.invalid &&
-      this.newEmailForm.get(campo)?.touched
+      this.newEmailForm.get(field)?.invalid &&
+      this.newEmailForm.get(field)?.touched
     );
   }
 

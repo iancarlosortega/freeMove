@@ -23,6 +23,7 @@ import { UnlinkAccountComponent } from '../components/unlink-account/unlink-acco
 })
 export class LinkAccountComponent implements OnInit, OnDestroy {
   userObs!: Subscription;
+  securityObs!: Subscription;
   user!: User;
   alert!: Alert;
   isLoading: boolean = true;
@@ -44,21 +45,15 @@ export class LinkAccountComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.userObs = this.userService.user$.subscribe((user) => {
       this.user = user;
-      this.securityService
+      this.securityObs = this.securityService
         .getAlertByUser(user.idUser)
-        .subscribe(async (alert) => {
+        .subscribe((alert) => {
           if (!alert) {
-            const alertRef = await this.securityService.createAlert(
-              user.idUser
-            );
-            const data = await alertRef.get();
-            this.alert = data.data() as Alert;
-            console.log(this.alert);
-            return;
+            this.securityService.createAlert(user.idUser);
           }
           this.alert = alert;
           this.isLoading = false;
-          switch (alert.notificationStatus) {
+          switch (alert?.notificationStatus) {
             case 'accepted':
               this.linkAccountForm
                 .get('linkedEmail')
@@ -82,12 +77,13 @@ export class LinkAccountComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.userObs.unsubscribe();
+    this.securityObs.unsubscribe();
   }
 
-  invalidInput(campo: string) {
+  invalidInput(field: string) {
     return (
-      this.linkAccountForm.get(campo)?.invalid &&
-      this.linkAccountForm.get(campo)?.touched
+      this.linkAccountForm.get(field)?.invalid &&
+      this.linkAccountForm.get(field)?.touched
     );
   }
 

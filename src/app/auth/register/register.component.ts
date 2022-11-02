@@ -30,7 +30,7 @@ export class RegisterComponent implements OnInit {
       password2: ['', [Validators.required]],
     },
     {
-      validators: [this.validator.camposIguales('password', 'password2')],
+      validators: [this.validator.sameFields('password', 'password2')],
     }
   );
 
@@ -44,10 +44,10 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  campoNoValido(campo: string) {
+  invalidInput(field: string) {
     return (
-      this.registerForm.get(campo)?.invalid &&
-      this.registerForm.get(campo)?.touched
+      this.registerForm.get(field)?.invalid &&
+      this.registerForm.get(field)?.touched
     );
   }
 

@@ -16,10 +16,10 @@ export class ForgotPasswordComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  invalidInput(campo: string) {
+  invalidInput(field: string) {
     return (
-      this.forgotPasswordForm.get(campo)?.invalid &&
-      this.forgotPasswordForm.get(campo)?.touched
+      this.forgotPasswordForm.get(field)?.invalid &&
+      this.forgotPasswordForm.get(field)?.touched
     );
   }
 

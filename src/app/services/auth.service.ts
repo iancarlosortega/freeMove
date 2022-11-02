@@ -103,23 +103,6 @@ export class AuthService {
     this.loginProvider(facebookAuthProvider);
   }
 
-  loginMicrosoft() {
-    const microsoftAuthProvider = new firebase.auth.OAuthProvider(
-      'microsoft.com'
-    );
-    microsoftAuthProvider.setCustomParameters({
-      prompt: 'consent',
-      // client_id: '4fcea722-792a-4b7c-b61a-c6f4382b82a8',
-      tenant: 'b6082ba6-6159-418b-87ac-3f6b99bca40a',
-      // redirect_uri: 'http://localhost:4200/',
-    });
-    microsoftAuthProvider.addScope('user.read');
-    microsoftAuthProvider.addScope('openid');
-    microsoftAuthProvider.addScope('profile');
-    microsoftAuthProvider.addScope('mail.send');
-    this.loginProvider(microsoftAuthProvider);
-  }
-
   loginProvider(provider: any) {
     this.afAuth
       .signInWithPopup(provider)

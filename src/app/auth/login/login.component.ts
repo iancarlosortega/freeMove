@@ -42,9 +42,9 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  invalidInput(campo: string) {
+  invalidInput(field: string) {
     return (
-      this.loginForm.get(campo)?.invalid && this.loginForm.get(campo)?.touched
+      this.loginForm.get(field)?.invalid && this.loginForm.get(field)?.touched
     );
   }
 
@@ -81,9 +81,5 @@ export class LoginComponent implements OnInit {
 
   loginFacebook() {
     this.authService.loginFacebook();
-  }
-
-  loginMicrosoft() {
-    this.authService.loginMicrosoft();
   }
 }

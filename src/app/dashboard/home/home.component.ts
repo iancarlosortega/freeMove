@@ -1,7 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription, switchMap, take, tap } from 'rxjs';
+import { Observable, Subscription, switchMap, take, tap } from 'rxjs';
 import firebase from '@firebase/app-compat';
-import { IncidentService, RouteService, UserService } from 'src/app/services';
+import {
+  GeolocationService,
+  IncidentService,
+  RouteService,
+  UserService,
+} from 'src/app/services';
 import { Incident, Route, User } from 'src/app/interfaces';
 import { mapRoute } from 'src/app/utils';
 
@@ -15,7 +20,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     idUser: '',
     name: '',
     email: '',
-    role: 'ADMIN-ROLE',
+    role: 'CLIENT-ROLE',
     provider: 'email-password',
     weight: 0,
     height: 0,
@@ -27,14 +32,17 @@ export class HomeComponent implements OnInit, OnDestroy {
   routes: Route[] = [];
   incidents: Incident[] = [];
   isLoading: boolean = true;
+  coordinates!: Observable<Object>;
 
   constructor(
     private userService: UserService,
     private routeService: RouteService,
-    private incidentService: IncidentService
+    private incidentService: IncidentService,
+    private geolocationService: GeolocationService
   ) {}
 
   ngOnInit(): void {
+    this.coordinates = this.geolocationService.getLocation();
     this.userObs = this.userService.user$
       .pipe(
         tap((user) => (this.user = user)),

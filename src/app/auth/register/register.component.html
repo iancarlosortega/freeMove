@@ -21,7 +21,7 @@
           formControlName="name"
           placeholder="Escribe tus nombres completos"
         />
-        <mat-error *ngIf="campoNoValido('name')">
+        <mat-error *ngIf="invalidInput('name')">
           Los nombres y apellidos son <strong>obligatorios</strong>
         </mat-error>
       </mat-form-field>
@@ -33,7 +33,7 @@
           formControlName="email"
           placeholder="example@gmail.com"
         />
-        <mat-error *ngIf="campoNoValido('email')">
+        <mat-error *ngIf="invalidInput('email')">
           El correo electrónico es <strong>requerido</strong>
         </mat-error>
       </mat-form-field>
@@ -45,7 +45,7 @@
           formControlName="password"
           placeholder="********"
         />
-        <mat-error *ngIf="campoNoValido('password')">
+        <mat-error *ngIf="invalidInput('password')">
           Mínimo <strong>6</strong> caracteres
         </mat-error>
       </mat-form-field>
@@ -57,7 +57,7 @@
           formControlName="password2"
           placeholder="Repetir la contraseña"
         />
-        <mat-error *ngIf="campoNoValido('password2')">
+        <mat-error *ngIf="invalidInput('password2')">
           Las contraseñas deben ser <strong>iguales</strong>
         </mat-error>
       </mat-form-field>

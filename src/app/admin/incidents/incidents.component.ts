@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { Table } from 'primeng/table';
 import { ToastrService } from 'ngx-toastr';
 import { IncidentService } from 'src/app/services';
-import { Incident } from 'src/app/interfaces';
+import { Incident, IncidentCategory } from 'src/app/interfaces';
 
 @Component({
   selector: 'app-incidents',
@@ -61,7 +61,7 @@ export class IncidentsComponent implements OnInit {
     this.router.navigate(['dashboard/incidentes', id]);
   }
 
-  getIncidentIcon(category: string) {
+  getIncidentIcon(category: IncidentCategory) {
     switch (category) {
       case 'Accidente':
         return '/assets/icons/accident.png';

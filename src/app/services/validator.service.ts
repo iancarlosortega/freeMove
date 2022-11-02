@@ -7,18 +7,18 @@ import { AbstractControl, ValidationErrors } from '@angular/forms';
 export class ValidatorService {
   constructor() {}
 
-  camposIguales(campo1: string, campo2: string) {
+  sameFields(field1: string, field2: string) {
     return (formGroup: AbstractControl): ValidationErrors | null => {
-      const pass1 = formGroup.get(campo1)?.value;
-      const pass2 = formGroup.get(campo2)?.value;
+      const pass1 = formGroup.get(field1)?.value;
+      const pass2 = formGroup.get(field2)?.value;
 
       if (pass1 !== pass2) {
-        formGroup.get(campo2)?.setErrors({ noIguales: true });
+        formGroup.get(field2)?.setErrors({ noIguales: true });
         return {
           noIguales: true,
         };
       }
-      formGroup.get(campo2)?.setErrors(null);
+      formGroup.get(field2)?.setErrors(null);
       return null;
     };
   }

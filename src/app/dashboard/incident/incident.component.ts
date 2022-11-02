@@ -19,7 +19,7 @@ export class IncidentComponent implements AfterViewInit {
     idRoute: '',
     title: '',
     description: '',
-    category: '',
+    category: 'Accidente',
     createdAt: firebase.firestore.Timestamp.now(),
     position: [0, 0],
     photos: [],

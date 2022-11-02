@@ -6,9 +6,15 @@ export interface Incident {
   description: string;
   city: string;
   isActive: boolean;
-  category: string;
+  category: IncidentCategory;
   createdAt: firebase.firestore.Timestamp;
   position: [number, number];
   keywords: string[];
   photos: string[];
 }
+
+export type IncidentCategory =
+  | 'Accidente'
+  | 'Robo'
+  | 'Ciclovía obstruida'
+  | 'Ciclovía en mal estado';

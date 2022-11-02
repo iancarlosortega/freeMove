@@ -40,7 +40,7 @@ export class ChangePasswordComponent implements OnInit, OnDestroy {
       password2: ['', [Validators.required]],
     },
     {
-      validators: [this.validator.camposIguales('password', 'password2')],
+      validators: [this.validator.sameFields('password', 'password2')],
     }
   );
 
@@ -68,10 +68,10 @@ export class ChangePasswordComponent implements OnInit, OnDestroy {
     this.userObs.unsubscribe();
   }
 
-  invalidInput(campo: string) {
+  invalidInput(field: string) {
     return (
-      this.newPasswordForm.get(campo)?.invalid &&
-      this.newPasswordForm.get(campo)?.touched
+      this.newPasswordForm.get(field)?.invalid &&
+      this.newPasswordForm.get(field)?.touched
     );
   }
 

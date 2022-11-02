@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { DashboardRoutingModule } from './dashboard-routing.module';
-//TODO: Borrar el módulo del Modal en caso de no usarlo
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BarRatingModule } from 'ngx-bar-rating';
 import { GalleryModule } from 'ng-gallery';
@@ -26,7 +25,11 @@ import { CommentComponent } from './components/comment/comment.component';
 import { CommunityComponent } from './community/community.component';
 import { ConfirmAlertComponent } from './components/confirm-alert/confirm-alert.component';
 import { ConfirmDeleteComponent } from './components/confirm-delete/confirm-delete.component';
+import { DashboardAsideComponent } from './components/dashboard-aside/dashboard-aside.component';
+import { DashboardChartsComponent } from './components/dashboard-charts/dashboard-charts.component';
+import { DashboardCommunityComponent } from './components/dashboard-community/dashboard-community.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { FiltersComponent } from './components/filters/filters.component';
 import { GalleryComponent } from './gallery/gallery.component';
 import { HealthComponent } from './health/health.component';
 import { HomeComponent } from './home/home.component';
@@ -44,18 +47,14 @@ import { RouteComponent } from './route/route.component';
 import { RoutesComponent } from './routes/routes.component';
 import { SearchComponent } from './search/search.component';
 import { ShowRouteComponent } from './components/show-route/show-route.component';
+import { SliderIncidentsComponent } from './components/slider-incidents/slider-incidents.component';
+import { SliderRoutesComponent } from './components/slider-routes/slider-routes.component';
 import { StadisticsComponent } from './components/stadistics/stadistics.component';
 import { StopAlertComponent } from './components/stop-alert/stop-alert.component';
 import { SuggestedComponent } from './components/suggested/suggested.component';
 import { TrackingComponent } from './tracking/tracking.component';
 import { UnlinkAccountComponent } from './components/unlink-account/unlink-account.component';
 import { UserComponent } from './components/user/user.component';
-import { FiltersComponent } from './components/filters/filters.component';
-import { SliderRoutesComponent } from './components/slider-routes/slider-routes.component';
-import { SliderIncidentsComponent } from './components/slider-incidents/slider-incidents.component';
-import { DashboardAsideComponent } from './components/dashboard-aside/dashboard-aside.component';
-import { DashboardCommunityComponent } from './components/dashboard-community/dashboard-community.component';
-import { DashboardChartsComponent } from './components/dashboard-charts/dashboard-charts.component';
 
 @NgModule({
   declarations: [
@@ -69,7 +68,11 @@ import { DashboardChartsComponent } from './components/dashboard-charts/dashboar
     CommunityComponent,
     ConfirmAlertComponent,
     ConfirmDeleteComponent,
+    DashboardAsideComponent,
+    DashboardChartsComponent,
+    DashboardCommunityComponent,
     DashboardComponent,
+    FiltersComponent,
     GalleryComponent,
     HealthComponent,
     HomeComponent,
@@ -80,25 +83,21 @@ import { DashboardChartsComponent } from './components/dashboard-charts/dashboar
     LinkAccountInvitationComponent,
     NavComponent,
     NotificationsComponent,
+    PhotosComponent,
     PostComponent,
     ProfileComponent,
     RouteComponent,
     RoutesComponent,
     SearchComponent,
     ShowRouteComponent,
+    SliderIncidentsComponent,
+    SliderRoutesComponent,
     StadisticsComponent,
     StopAlertComponent,
     SuggestedComponent,
     TrackingComponent,
     UnlinkAccountComponent,
     UserComponent,
-    PhotosComponent,
-    FiltersComponent,
-    SliderRoutesComponent,
-    SliderIncidentsComponent,
-    DashboardAsideComponent,
-    DashboardCommunityComponent,
-    DashboardChartsComponent,
   ],
   imports: [
     CommonModule,
