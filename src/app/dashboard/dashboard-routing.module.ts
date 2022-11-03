@@ -2,36 +2,36 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { AdminGuard, ProviderGuard } from '../guards';
-import { SearchComponent } from './search/search.component';
 
+import { AccountSettingsComponent } from './account-settings/account-settings.component';
 import { BitacoraComponent } from './bitacora/bitacora.component';
 import { ChangeEmailComponent } from './change-email/change-email.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { CommunityComponent } from './community/community.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { HomeComponent } from './home/home.component';
+import { GalleryComponent } from './gallery/gallery.component';
+import { HealthComponent } from './health/health.component';
 import { IncidentComponent } from './incident/incident.component';
 import { IncidentsComponent } from './incidents/incidents.component';
+import { LayoutComponent } from './layout/layout.component';
 import { LinkAccountComponent } from './link-account/link-account.component';
 import { LinkAccountInvitationComponent } from './link-account-invitation/link-account-invitation.component';
 import { NotificationsComponent } from './notifications/notifications.component';
 import { ProfileComponent } from './profile/profile.component';
 import { RouteComponent } from './route/route.component';
 import { RoutesComponent } from './routes/routes.component';
+import { SearchComponent } from './search/search.component';
 import { TrackingComponent } from './tracking/tracking.component';
-import { AccountSettingsComponent } from './account-settings/account-settings.component';
-import { GalleryComponent } from './gallery/gallery.component';
-import { HealthComponent } from './health/health.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: DashboardComponent,
+    component: LayoutComponent,
     data: { breadcrumb: 'Dashboard' },
     children: [
       {
         path: '',
-        component: HomeComponent,
+        component: DashboardComponent,
         data: { breadcrumb: '' },
       },
       {

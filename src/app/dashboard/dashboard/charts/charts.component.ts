@@ -4,11 +4,11 @@ import moment from 'moment';
 import { Route } from 'src/app/interfaces';
 
 @Component({
-  selector: 'app-dashboard-charts',
-  templateUrl: './dashboard-charts.component.html',
-  styleUrls: ['./dashboard-charts.component.css'],
+  selector: 'app-charts',
+  templateUrl: './charts.component.html',
+  styleUrls: ['./charts.component.css'],
 })
-export class DashboardChartsComponent implements OnInit {
+export class ChartsComponent implements OnInit {
   @Input() routes: Route[] = [];
 
   last7daysData: ChartConfiguration['data'] = {

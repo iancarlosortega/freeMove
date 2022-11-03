@@ -5,23 +5,23 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { MaterialModule } from '../material/material.module';
 
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
-import { NewUserComponent } from './new-user/new-user.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { LoginComponent } from './login/login.component';
+import { NewUserComponent } from './new-user/new-user.component';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [
-    LoginComponent,
-    RegisterComponent,
-    NewUserComponent,
     ForgotPasswordComponent,
+    LoginComponent,
+    NewUserComponent,
+    RegisterComponent,
   ],
   imports: [
     CommonModule,
     AuthRoutingModule,
-    MaterialModule,
     ReactiveFormsModule,
+    MaterialModule,
   ],
 })
 export class AuthModule {}

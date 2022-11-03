@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { IncidentsComponent } from './incidents/incidents.component';
 
+import { IncidentsComponent } from './incidents/incidents.component';
 import { RoutesComponent } from './routes/routes.component';
 import { UsersComponent } from './users/users.component';
 

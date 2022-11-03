@@ -6,18 +6,28 @@ import { DashboardModule } from '../dashboard/dashboard.module';
 import { MaterialModule } from '../material/material.module';
 import { PrimeNgModule } from '../prime-ng/prime-ng.module';
 
+import { HeatMapComponent } from './routes/heat-map/heat-map.component';
 import { IncidentsComponent } from './incidents/incidents.component';
-import { RoutesComponent } from './routes/routes.component';
-import { UsersComponent } from './users/users.component';
-import { TopHoursComponent } from './components/top-hours/top-hours.component';
-import { RangeHoursComponent } from './components/range-hours/range-hours.component';
-import { HeatMapComponent } from './components/heat-map/heat-map.component';
-import { RecurrentIncidentsComponent } from './components/recurrent-incidents/recurrent-incidents.component';
-import { RecurrentRoutesComponent } from './components/recurrent-routes/recurrent-routes.component';
 import { MapFiltersComponent } from './components/map-filters/map-filters.component';
+import { RangeHoursComponent } from './routes/range-hours/range-hours.component';
+import { RecurrentIncidentsComponent } from './routes/recurrent-incidents/recurrent-incidents.component';
+import { RecurrentRoutesComponent } from './routes/recurrent-routes/recurrent-routes.component';
+import { RoutesComponent } from './routes/routes.component';
+import { TopHoursComponent } from './routes/top-hours/top-hours.component';
+import { UsersComponent } from './users/users.component';
 
 @NgModule({
-  declarations: [IncidentsComponent, RoutesComponent, UsersComponent, TopHoursComponent, RangeHoursComponent, HeatMapComponent, RecurrentIncidentsComponent, RecurrentRoutesComponent, MapFiltersComponent],
+  declarations: [
+    HeatMapComponent,
+    IncidentsComponent,
+    MapFiltersComponent,
+    RangeHoursComponent,
+    RecurrentIncidentsComponent,
+    RecurrentRoutesComponent,
+    RoutesComponent,
+    TopHoursComponent,
+    UsersComponent,
+  ],
   imports: [
     CommonModule,
     AdminRoutingModule,

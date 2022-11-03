@@ -1,9 +1,0 @@
-<div *ngIf="!isLoading" class="dashboard fade-in">
-  <main class="main">
-    <app-slider-routes [routes]="routes"></app-slider-routes>
-    <app-slider-incidents [incidents]="incidents"></app-slider-incidents>
-    <app-dashboard-charts [routes]="routes"></app-dashboard-charts>
-    <app-dashboard-community></app-dashboard-community>
-  </main>
-  <app-dashboard-aside [routes]="routes" [user]="user"></app-dashboard-aside>
-</div>

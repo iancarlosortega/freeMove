@@ -16,25 +16,25 @@ import { SwiperModule } from 'swiper/angular';
 import { SharedModule } from '../shared/shared.module';
 
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
+import { AsideComponent } from './dashboard/aside/aside.component';
 import { BitacoraComponent } from './bitacora/bitacora.component';
 import { CardComponent } from './components/card/card.component';
 import { ChangeEmailComponent } from './change-email/change-email.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { ChartComponent } from './components/chart/chart.component';
+import { ChartsComponent } from './dashboard/charts/charts.component';
 import { CommentComponent } from './components/comment/comment.component';
 import { CommunityComponent } from './community/community.component';
+import { CommunityComponent as DashboardCommunityComponent } from './dashboard/community/community.component';
 import { ConfirmAlertComponent } from './components/confirm-alert/confirm-alert.component';
 import { ConfirmDeleteComponent } from './components/confirm-delete/confirm-delete.component';
-import { DashboardAsideComponent } from './components/dashboard-aside/dashboard-aside.component';
-import { DashboardChartsComponent } from './components/dashboard-charts/dashboard-charts.component';
-import { DashboardCommunityComponent } from './components/dashboard-community/dashboard-community.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { FiltersComponent } from './components/filters/filters.component';
 import { GalleryComponent } from './gallery/gallery.component';
 import { HealthComponent } from './health/health.component';
-import { HomeComponent } from './home/home.component';
 import { IncidentComponent } from './incident/incident.component';
 import { IncidentsComponent } from './incidents/incidents.component';
+import { LayoutComponent } from './layout/layout.component';
 import { LikesComponent } from './components/likes/likes.component';
 import { LinkAccountComponent } from './link-account/link-account.component';
 import { LinkAccountInvitationComponent } from './link-account-invitation/link-account-invitation.component';
@@ -47,8 +47,8 @@ import { RouteComponent } from './route/route.component';
 import { RoutesComponent } from './routes/routes.component';
 import { SearchComponent } from './search/search.component';
 import { ShowRouteComponent } from './components/show-route/show-route.component';
-import { SliderIncidentsComponent } from './components/slider-incidents/slider-incidents.component';
-import { SliderRoutesComponent } from './components/slider-routes/slider-routes.component';
+import { SliderIncidentsComponent } from './dashboard/slider-incidents/slider-incidents.component';
+import { SliderRoutesComponent } from './dashboard/slider-routes/slider-routes.component';
 import { StadisticsComponent } from './components/stadistics/stadistics.component';
 import { StopAlertComponent } from './components/stop-alert/stop-alert.component';
 import { SuggestedComponent } from './components/suggested/suggested.component';
@@ -59,25 +59,25 @@ import { UserComponent } from './components/user/user.component';
 @NgModule({
   declarations: [
     AccountSettingsComponent,
+    AsideComponent,
     BitacoraComponent,
     CardComponent,
     ChangeEmailComponent,
     ChangePasswordComponent,
     ChartComponent,
+    ChartsComponent,
     CommentComponent,
     CommunityComponent,
     ConfirmAlertComponent,
     ConfirmDeleteComponent,
-    DashboardAsideComponent,
-    DashboardChartsComponent,
     DashboardCommunityComponent,
     DashboardComponent,
     FiltersComponent,
     GalleryComponent,
     HealthComponent,
-    HomeComponent,
     IncidentComponent,
     IncidentsComponent,
+    LayoutComponent,
     LikesComponent,
     LinkAccountComponent,
     LinkAccountInvitationComponent,
