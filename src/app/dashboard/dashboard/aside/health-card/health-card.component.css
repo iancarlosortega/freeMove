@@ -1,0 +1,99 @@
+.health {
+  background-color: rgba(242, 172, 32, 0.6);
+}
+
+.group-health h5 {
+  text-align: center;
+  font-weight: 600;
+  color: #666666;
+}
+
+.group-health {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 1rem;
+}
+
+.height-center h5 {
+  margin-bottom: 1rem;
+}
+
+.height {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  gap: 0.25rem;
+}
+
+.height p {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.weight-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.weight {
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+}
+
+.weight p {
+  font-size: 1.1rem;
+}
+
+.weight h5,
+.weight p {
+  margin: 0 !important;
+}
+
+.weight p {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: white;
+  padding: 0.25rem 1rem;
+  border-radius: 5px;
+  background-color: #148429;
+}
+
+.weight-level {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1rem 0;
+}
+
+.weight-level h5 {
+  margin: 0 !important;
+}
+
+.weight-level span {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: white;
+  padding: 0.25rem 1rem;
+  border-radius: 5px;
+}
+
+.low-weight {
+  background-color: #f2ac20;
+}
+
+.normal-weight {
+  background-color: #148429;
+}
+
+.high-weight {
+  background-color: #f2ac20;
+}

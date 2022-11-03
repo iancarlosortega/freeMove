@@ -55,6 +55,8 @@ import { SuggestedComponent } from './components/suggested/suggested.component';
 import { TrackingComponent } from './tracking/tracking.component';
 import { UnlinkAccountComponent } from './components/unlink-account/unlink-account.component';
 import { UserComponent } from './components/user/user.component';
+import { HealthCardComponent } from './dashboard/aside/health-card/health-card.component';
+import { StadisticsCardComponent } from './dashboard/aside/stadistics-card/stadistics-card.component';
 
 @NgModule({
   declarations: [
@@ -98,6 +100,8 @@ import { UserComponent } from './components/user/user.component';
     TrackingComponent,
     UnlinkAccountComponent,
     UserComponent,
+    HealthCardComponent,
+    StadisticsCardComponent,
   ],
   imports: [
     CommonModule,

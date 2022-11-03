@@ -1,0 +1,42 @@
+<div class="aside-card">
+  <header class="aside-card-header" routerLink="./bitacora">
+    <h4>Mis Estadísticas</h4>
+    <img src="assets/icons/bicicleta.svg" alt="Bicicleta" />
+  </header>
+  <div class="group">
+    <h5>{{ currentDay | date: "MMMM" | titlecase }}</h5>
+    <div class="group-info">
+      <div class="group-item">
+        <h6>
+          {{ monthStadistics.distanceTraveled | number: "1.0-2" }}
+        </h6>
+        <p>Kilómetros</p>
+      </div>
+      <div class="group-item">
+        <h6>{{ monthStadistics.burnoutCalories | number: "1.0-2" }}</h6>
+        <p>Calorías</p>
+      </div>
+      <div class="group-item">
+        <h6>{{ monthStadistics.numberOfRoutes }}</h6>
+        <p>Rutas</p>
+      </div>
+    </div>
+  </div>
+  <div class="group">
+    <h5>{{ currentDay | date: "EEEE d 'de' MMMM" | titlecase }}</h5>
+    <div class="group-info">
+      <div class="group-item">
+        <h6>{{ dayStadistics.distanceTraveled | number: "1.0-2" }}</h6>
+        <p>Kilómetros</p>
+      </div>
+      <div class="group-item">
+        <h6>{{ dayStadistics.burnoutCalories | number: "1.0-2" }}</h6>
+        <p>Calorías</p>
+      </div>
+      <div class="group-item">
+        <h6>{{ dayStadistics.numberOfRoutes }}</h6>
+        <p>Rutas</p>
+      </div>
+    </div>
+  </div>
+</div>

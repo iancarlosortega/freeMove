@@ -1,0 +1,41 @@
+<div class="aside-card health">
+  <header class="aside-card-header" routerLink="./salud">
+    <h4>Mi Salud</h4>
+    <img src="assets/icons/persona.svg" alt="Persona" />
+  </header>
+  <div class="group-health">
+    <div class="height-center">
+      <h5>Estatura</h5>
+      <div class="flex-center">
+        <div class="height">
+          <p>{{ user.height | number: "1.0-2" }}</p>
+          <p>cm</p>
+        </div>
+        <div>
+          <img src="assets/icons/height.jpg" alt="Icono de Cuerpo" />
+        </div>
+      </div>
+    </div>
+    <div class="weight-center">
+      <div class="weight">
+        <h5>Peso Actual:</h5>
+        <p>{{ user.weight | number: "1.0-2" }} kg</p>
+      </div>
+      <div class="weight-level">
+        <h5>Rango actual:</h5>
+        <span *ngIf="user.weight! < firstRange" class="low-weight">
+          bajo peso
+        </span>
+        <span
+          *ngIf="user.weight! >= firstRange && user.weight! < secondRange"
+          class="normal-weight"
+        >
+          peso normal
+        </span>
+        <span *ngIf="user.weight! > secondRange" class="high-weight">
+          sobrepeso
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
