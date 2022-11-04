@@ -9,7 +9,7 @@ import { AuthService } from 'src/app/services';
 })
 export class ForgotPasswordComponent implements OnInit {
   forgotPasswordForm = this.fb.group({
-    email: ['', Validators.required],
+    email: ['', [Validators.required, Validators.email]],
   });
 
   constructor(private fb: FormBuilder, private authService: AuthService) {}
