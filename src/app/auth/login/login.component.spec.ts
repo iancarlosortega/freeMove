@@ -18,6 +18,7 @@ describe('LoginComponent', () => {
   let fixture: ComponentFixture<LoginComponent>;
   let emailField: AbstractControl;
   let passwordField: AbstractControl;
+  //TODO: Implementar pruebas con el campo de remember
   let rememberField: AbstractControl;
 
   beforeEach(async () => {
