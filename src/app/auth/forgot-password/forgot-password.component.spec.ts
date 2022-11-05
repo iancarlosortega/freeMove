@@ -42,7 +42,7 @@ describe('ForgotPasswordComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should create a form with four fields, email, name, password and password2', () => {
+  it('should create a form with email field', () => {
     expect(component.forgotPasswordForm.contains('email')).toBeTruthy();
   });
 
@@ -56,7 +56,7 @@ describe('ForgotPasswordComponent', () => {
     expect(emailField?.valid).toBeFalsy();
   });
 
-  it('should call register method from AuthService if form is valid', () => {
+  it('should call forgotPassword method from AuthService if form is valid', () => {
     const authService = TestBed.inject(AuthService);
     const spy = spyOn(authService, 'forgotPassword').and.callThrough();
 
@@ -65,7 +65,7 @@ describe('ForgotPasswordComponent', () => {
     expect(spy).toHaveBeenCalled();
   });
 
-  it('should not call register method from AuthService if form is invalid', () => {
+  it('should not call forgotPassword method from AuthService if form is invalid', () => {
     const authService = TestBed.inject(AuthService);
     const spy = spyOn(authService, 'forgotPassword').and.callThrough();
 
