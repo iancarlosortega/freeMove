@@ -14,6 +14,7 @@ export interface User {
   identificationCard?: string;
   country?: string;
   city?: string;
+  canton?: string;
   role: UserRole;
   provider: UserProvider;
   // Datos de salud

@@ -95,9 +95,16 @@ export class NewUserComponent implements OnInit, OnDestroy {
       phone: phone!,
       gender: gender!,
       country: country!,
+      canton: '',
       city: city?.toString() || '',
       height: Number(height)!,
       weight: Number(weight)!,
+      photoUrl:
+        'https://firebasestorage.googleapis.com/v0/b/freemove-aa0c5.appspot.com/o/assets%2Fdefault_user_image.png?alt=media&token=0974f49e-569d-4a7d-a824-0c9e86e4100a',
+      bannerUrl:
+        'https://firebasestorage.googleapis.com/v0/b/freemove-aa0c5.appspot.com/o/assets%2Fdefault_banner_image.jpg?alt=media&token=88c770e1-8503-4e55-9514-3d8cb5a29c67',
+      photoFilename: 'default_user_image.png',
+      bannerFilename: 'default_banner_image.jpg',
     };
 
     this.userService
