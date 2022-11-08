@@ -46,7 +46,7 @@ export class AccountSettingsComponent implements OnInit, OnDestroy {
       [Validators.required, , Validators.minLength(6)],
     ],
     country: [{ value: '', disabled: false }],
-    city: [{ value: '', disabled: false }],
+    city: [{ value: '', disabled: true }],
     age: [{ value: '', disabled: false }],
     gender: [{ value: '', disabled: false }],
     phone: [{ value: '', disabled: false }],

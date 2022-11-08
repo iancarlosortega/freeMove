@@ -72,6 +72,8 @@ export class RegisterComponent implements OnInit {
           followers: [],
           following: [],
           createdAt: firebase.firestore.Timestamp.now(),
+          photoUrl: null!,
+          bannerUrl: null!,
         };
 
         this.userService

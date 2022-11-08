@@ -112,12 +112,13 @@ export class AuthService {
             idUser: response.user?.uid!,
             name: response.user?.displayName!,
             email: response.user?.email!,
-            photoUrl: response.user?.photoURL!,
+            photoUrl: response.user?.photoURL || null!,
             provider: response.additionalUserInfo?.providerId! as UserProvider,
             role: 'CLIENT-ROLE',
             createdAt: firebase.firestore.Timestamp.now(),
             followers: [],
             following: [],
+            bannerUrl: null!,
           };
 
           this.userService
