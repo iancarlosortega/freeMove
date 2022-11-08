@@ -8,12 +8,21 @@ describe('HealthCardComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ HealthCardComponent ]
-    })
-    .compileComponents();
+      declarations: [HealthCardComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(HealthCardComponent);
     component = fixture.componentInstance;
+    component.user = {
+      idUser: '1',
+      email: 'iancarlosortegaleon@gmail.com',
+      name: 'Ian Carlos',
+      age: 20,
+      gender: 'Masculino',
+      phone: '+380501234567',
+      role: 'ADMIN-ROLE',
+      provider: 'email-password',
+    };
     fixture.detectChanges();
   });
 

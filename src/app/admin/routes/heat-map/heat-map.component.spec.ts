@@ -1,6 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { HeatMapComponent } from './heat-map.component';
+import { environment } from 'src/environments/environment';
+import Mapboxgl from 'mapbox-gl';
+
+Mapboxgl.accessToken = environment.mapboxToken;
 
 describe('HeatMapComponent', () => {
   let component: HeatMapComponent;
@@ -8,9 +12,8 @@ describe('HeatMapComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ HeatMapComponent ]
-    })
-    .compileComponents();
+      declarations: [HeatMapComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(HeatMapComponent);
     component = fixture.componentInstance;

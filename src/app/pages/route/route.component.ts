@@ -27,7 +27,6 @@ export class RouteComponent implements OnInit {
           return;
         }
         this.route = mapRoute(route);
-        console.log(this.route);
       });
   }
 }

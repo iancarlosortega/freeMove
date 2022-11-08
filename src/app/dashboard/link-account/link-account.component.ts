@@ -38,18 +38,17 @@ export class LinkAccountComponent implements OnInit, OnDestroy {
     public dialog: MatDialog,
     private fb: FormBuilder,
     private userService: UserService,
-    private securityService: AlertService,
     private alertService: AlertService
   ) {}
 
   ngOnInit(): void {
     this.userObs = this.userService.user$.subscribe((user) => {
       this.user = user;
-      this.securityObs = this.securityService
+      this.securityObs = this.alertService
         .getAlertByUser(user.idUser)
         .subscribe((alert) => {
           if (!alert) {
-            this.securityService.createAlert(user.idUser);
+            this.alertService.createAlert(user.idUser);
           }
           this.alert = alert;
           this.isLoading = false;
