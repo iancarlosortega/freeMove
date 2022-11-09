@@ -135,6 +135,19 @@ describe('ChangeEmailComponent', () => {
     expect(component.newEmailForm.valid).toBeTruthy();
   });
 
+  it('should return false if input is invalid', () => {
+    oldEmailField.enable();
+    oldEmailField?.setValue('');
+    oldEmailField?.markAsTouched();
+    expect(component.invalidInput('oldEmail')).toBeTruthy();
+  });
+
+  it('should return true if input is valid', () => {
+    oldEmailField?.setValue('iancarlosortegaleon@gmail.com');
+    oldEmailField?.markAsTouched();
+    expect(component.invalidInput('oldEmail')).toBeFalsy();
+  });
+
   it('should newEmailForm be initialized with the current user email', () => {
     expect(oldEmailField?.value).toBe('iancarlosortegaleon@gmail.com');
   });
@@ -155,5 +168,18 @@ describe('ChangeEmailComponent', () => {
     component.updateEmail();
 
     expect(spy).toHaveBeenCalled();
+  });
+
+  it('should not call loginEmailPassword method from AuthService when form is invalid', () => {
+    const authService = TestBed.inject(AuthService);
+    const spy = spyOn(authService, 'loginEmailPassword').and.callThrough();
+
+    oldEmailField?.setValue('');
+    newEmailField?.setValue('');
+    passwordField?.setValue('');
+
+    component.updateEmail();
+
+    expect(spy).not.toHaveBeenCalled();
   });
 });
