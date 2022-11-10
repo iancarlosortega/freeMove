@@ -1,4 +1,4 @@
-<main class="community">
+<main class="community fade-in" *ngIf="!isLoading && posts.length > 0">
   <section class="posts">
     <div *ngFor="let post of posts">
       <app-post [post]="post" [idCurrentUser]="currentUser.idUser"></app-post>
@@ -8,3 +8,11 @@
     <app-suggested [users]="usersSuggested"></app-suggested>
   </aside>
 </main>
+
+<div *ngIf="posts.length === 0 && !isLoading" class="alert alert--info fade-in">
+  No se encontró ningún resultado.
+</div>
+
+<div *ngIf="isLoading" class="flex-center spinner-loading">
+  <mat-spinner [diameter]="100"></mat-spinner>
+</div>

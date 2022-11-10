@@ -16,7 +16,12 @@
         </div>
       </div>
     </div>
-    <div class="weight-center">
+    <div *ngIf="!user.gender">
+      <div class="mt-3 alert alert--success text-center">
+        <p>¡Completa tu perfil para ver tu rango de peso ideal!</p>
+      </div>
+    </div>
+    <div class="weight-center" *ngIf="user.gender">
       <div class="weight">
         <h5>Peso Actual:</h5>
         <p>{{ user.weight | number: "1.0-2" }} kg</p>

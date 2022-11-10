@@ -17,9 +17,7 @@
   transform: translateY(-0.5rem);
 }
 
-video {
-  width: 100%;
-  height: 100%;
+.post-main img {
   aspect-ratio: 16/9;
   object-fit: cover;
 }
@@ -102,6 +100,7 @@ hr {
 
 .comments-modal {
   display: grid;
+  border-radius: 10px;
 }
 
 @media (min-width: 992px){
@@ -110,9 +109,12 @@ hr {
   }
 }
 
-.modal-video {
-  object-fit: contain;
+.modal-img {
   background-color: black;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 16/9;
+  object-fit: cover;
 }
 
 .modal-comments {

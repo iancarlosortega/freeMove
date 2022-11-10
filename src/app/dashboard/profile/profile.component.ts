@@ -164,7 +164,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   }
 
   getSuggestedUsers() {
-    this.userService.getUsers().subscribe((userlist) => {
+    this.userService.getSuggestedUsers().subscribe((userlist) => {
       this.usersSuggested = userlist.filter(
         (user) =>
           user.idUser !== this.user.idUser && user.idUser !== this.idCurrentUser

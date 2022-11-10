@@ -18,6 +18,7 @@ export class PostComponent implements OnInit {
   timeAgo: string = '';
   comments: Comment[] = [];
   likes: any[] = [];
+  photoUrl: string = 'assets/no-image.png';
   isLiked: boolean = false;
   isDisabled: boolean = false;
   showComments: boolean = false;
@@ -38,6 +39,7 @@ export class PostComponent implements OnInit {
   ngOnInit(): void {
     this.userService.getUserById(this.post.idUser).subscribe((user) => {
       this.user = user;
+      this.photoUrl = user.photoUrl || 'assets/no-image.png';
       this.getComments();
       this.getLikes();
       this.timeAgo = moment(this.post.createdAt.toDate())

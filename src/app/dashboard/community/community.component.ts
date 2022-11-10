@@ -11,6 +11,7 @@ export class CommunityComponent implements OnInit {
   currentUser!: User;
   posts: Post[] = [];
   usersSuggested: User[] = [];
+  isLoading: boolean = true;
   constructor(
     private postService: PostService,
     private userService: UserService
@@ -27,11 +28,12 @@ export class CommunityComponent implements OnInit {
   getPosts() {
     this.postService.getAllPosts().subscribe((posts) => {
       this.posts = posts;
+      this.isLoading = false;
     });
   }
 
   getSuggestedUsers() {
-    this.userService.getUsers().subscribe((userlist) => {
+    this.userService.getSuggestedUsers().subscribe((userlist) => {
       this.usersSuggested = userlist.filter(
         (user) => user.idUser !== this.currentUser.idUser
       );

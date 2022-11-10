@@ -48,6 +48,21 @@ export class UserService {
       );
   }
 
+  getSuggestedUsers() {
+    return this.firestore
+      .collection('users', (ref) => ref.orderBy('followers', 'desc').limit(6))
+      .snapshotChanges()
+      .pipe(
+        map((actions) => {
+          return actions.map((a) => {
+            const data = a.payload.doc.data() as User;
+            data.idUser = a.payload.doc.id;
+            return data;
+          });
+        })
+      );
+  }
+
   getUserById(id: string) {
     return this.firestore
       .collection('users')
@@ -160,13 +175,5 @@ export class UserService {
     return this.firestore.collection('users').doc(idUser).update({
       role,
     });
-  }
-
-  getSuggestedUsers() {
-    return this.firestore
-      .collection<User>('users', (ref) =>
-        ref.orderBy('totalFollowers', 'desc').limit(5)
-      )
-      .valueChanges();
   }
 }

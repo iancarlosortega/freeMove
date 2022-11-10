@@ -1,6 +1,6 @@
-<div class="card" *ngIf="user">
+<div class="card mb-4" *ngIf="user">
   <header class="post-header">
-    <img [src]="user.photoUrl" alt="Imagen de Perfil" class="circle" />
+    <img [src]="photoUrl" alt="Imagen de Perfil" class="circle" />
     <h5 [routerLink]="['/dashboard/usuario', user.idUser]" class="pointer">
       {{ user.name }}
     </h5>
@@ -22,7 +22,7 @@
     </button>
   </header>
   <main class="post-main">
-    <video controls [src]="post.url"></video>
+    <img [src]="post.url" />
     <div class="post-information">
       <div class="post-likes">
         <mat-icon class="pointer" *ngIf="!isLiked" (click)="addLike()">
@@ -44,7 +44,7 @@
       </div>
       <p
         *ngIf="comments.length > 0"
-        class="post-comments d-none d-sm-block"
+        class="post-comments d-none d-sm-block pointer"
         (click)="openModal(commentsModal, 'modal-lg')"
       >
         Ver los {{ comments.length }}
@@ -52,7 +52,7 @@
       </p>
       <p
         *ngIf="!showComments && comments.length > 0"
-        class="post-comments d-sm-none"
+        class="post-comments d-sm-none pointer"
         (click)="showComments = true"
       >
         Ver los {{ comments.length }}
@@ -60,7 +60,7 @@
       </p>
       <p
         *ngIf="showComments && comments.length > 0"
-        class="post-comments d-sm-none"
+        class="post-comments d-sm-none pointer"
         (click)="showComments = false"
       >
         Ocultar comentarios
@@ -123,7 +123,7 @@
 
 <ng-template #commentsModal>
   <div class="comments-modal" *ngIf="user">
-    <video class="modal-video" controls [src]="post.url"></video>
+    <img class="modal-img" [src]="post.url" />
     <main class="post-main">
       <header class="post-header">
         <img [src]="user.photoUrl" alt="Imagen de Perfil" class="circle" />
