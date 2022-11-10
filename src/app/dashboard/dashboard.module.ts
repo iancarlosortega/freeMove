@@ -35,7 +35,6 @@ import { HealthComponent } from './health/health.component';
 import { IncidentComponent } from './incident/incident.component';
 import { IncidentsComponent } from './incidents/incidents.component';
 import { LayoutComponent } from './layout/layout.component';
-import { LikesComponent } from './components/likes/likes.component';
 import { LinkAccountComponent } from './link-account/link-account.component';
 import { LinkAccountInvitationComponent } from './link-account-invitation/link-account-invitation.component';
 import { NavComponent } from './components/nav/nav.component';
@@ -57,6 +56,7 @@ import { UnlinkAccountComponent } from './components/unlink-account/unlink-accou
 import { UserComponent } from './components/user/user.component';
 import { HealthCardComponent } from './dashboard/aside/health-card/health-card.component';
 import { StadisticsCardComponent } from './dashboard/aside/stadistics-card/stadistics-card.component';
+import { FollowButtonComponent } from './components/follow-button/follow-button.component';
 
 @NgModule({
   declarations: [
@@ -80,7 +80,6 @@ import { StadisticsCardComponent } from './dashboard/aside/stadistics-card/stadi
     IncidentComponent,
     IncidentsComponent,
     LayoutComponent,
-    LikesComponent,
     LinkAccountComponent,
     LinkAccountInvitationComponent,
     NavComponent,
@@ -102,6 +101,7 @@ import { StadisticsCardComponent } from './dashboard/aside/stadistics-card/stadi
     UserComponent,
     HealthCardComponent,
     StadisticsCardComponent,
+    FollowButtonComponent,
   ],
   imports: [
     CommonModule,

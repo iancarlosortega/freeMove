@@ -191,7 +191,9 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
   getLikes() {
     this.likeService.getUserLikes(this.user.idUser).subscribe((likes) => {
-      this.userLikes = likes;
+      this.likeService.getPostsLiked(likes).subscribe((posts) => {
+        this.userLikes = posts;
+      });
     });
   }
 

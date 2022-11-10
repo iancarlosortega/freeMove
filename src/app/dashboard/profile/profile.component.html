@@ -165,11 +165,8 @@
           *ngIf="showLikes"
         >
           <h4 class="bg-white px-3 p-2 mb-0">Me gustas</h4>
-          <div *ngFor="let like of userLikes">
-            <app-likes
-              [idCurrentUser]="idCurrentUser"
-              [idPost]="like.idPost"
-            ></app-likes>
+          <div *ngFor="let post of userLikes">
+            <app-post [idCurrentUser]="idCurrentUser" [post]="post"></app-post>
           </div>
         </div>
         <div id="right-panel" class="d-none d-lg-inline-block col-md-3">

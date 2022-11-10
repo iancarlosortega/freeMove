@@ -1,11 +1,17 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { combineLatest, Observable, of } from 'rxjs';
+import { Post } from '../interfaces';
+import { PostService } from './post.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LikeService {
-  constructor(private firestore: AngularFirestore) {}
+  constructor(
+    private firestore: AngularFirestore,
+    private postService: PostService
+  ) {}
 
   getLikesFromPost(idPost: string) {
     return this.firestore
@@ -17,6 +23,18 @@ export class LikeService {
     return this.firestore
       .collection('users/' + idUser + '/likes')
       .valueChanges();
+  }
+
+  getPostsLiked(ids: any[]) {
+    if (ids.length === 0) {
+      return of([]);
+    }
+    const posts: Observable<Post>[] = [];
+    ids.forEach((id) => {
+      const peticion = this.postService.getPostById(id.idPost);
+      posts.push(peticion);
+    });
+    return combineLatest(posts);
   }
 
   addLike(idPost: string, idUser: string) {
