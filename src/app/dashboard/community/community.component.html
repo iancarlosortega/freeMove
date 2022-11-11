@@ -4,7 +4,7 @@
       <app-post [post]="post" [idCurrentUser]="currentUser.idUser"></app-post>
     </div>
   </section>
-  <aside class="suggested">
+  <aside class="suggested" *ngIf="usersSuggested.length > 0">
     <app-suggested [users]="usersSuggested"></app-suggested>
   </aside>
 </main>

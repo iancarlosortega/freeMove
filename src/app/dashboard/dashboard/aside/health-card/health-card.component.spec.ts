@@ -22,11 +22,16 @@ describe('HealthCardComponent', () => {
       phone: '+380501234567',
       role: 'ADMIN-ROLE',
       provider: 'email-password',
+      height: 180,
     };
     fixture.detectChanges();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should calculate ideal weight', () => {
+    expect(component.idealWeight).toBe(72.5);
   });
 });

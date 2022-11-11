@@ -5,22 +5,8 @@
       {{ user.name }}
     </span>
   </div>
-  <div class="btn-follow">
-    <button
-      *ngIf="!isCurrentUser && !isFollowing"
-      class="btn bg-primary btn-round text-white text-bold"
-      (click)="unfollow()"
-      [disabled]="isDisabled"
-    >
-      Seguir
-    </button>
-    <button
-      *ngIf="!isCurrentUser && isFollowing"
-      class="btn bg-primary btn-round text-white text-bold"
-      (click)="follow()"
-      [disabled]="isDisabled"
-    >
-      Siguiendo
-    </button>
-  </div>
+  <app-follow-button
+    [user]="user"
+    [idCurrentUser]="idCurrentUser"
+  ></app-follow-button>
 </div>

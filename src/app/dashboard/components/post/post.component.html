@@ -22,7 +22,11 @@
     </button>
   </header>
   <main class="post-main">
-    <img [src]="post.url" />
+    <img
+      class="pointer"
+      [src]="post.url"
+      (click)="openModal(commentsModal, 'modal-lg')"
+    />
     <div class="post-information">
       <div class="post-likes">
         <mat-icon class="pointer" *ngIf="!isLiked" (click)="addLike()">
