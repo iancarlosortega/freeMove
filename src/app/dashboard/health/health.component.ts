@@ -32,8 +32,14 @@ export class HealthComponent implements OnInit {
     gender: ['', [Validators.required]],
     isMan: [false, [Validators.required]],
     isWoman: [false, [Validators.required]],
-    height: ['', [Validators.required]],
-    weight: ['', [Validators.required]],
+    height: [
+      '',
+      [Validators.required, Validators.min(80), Validators.max(250)],
+    ],
+    weight: [
+      '',
+      [Validators.required, Validators.min(20), Validators.max(250)],
+    ],
   });
 
   constructor(
@@ -87,7 +93,6 @@ export class HealthComponent implements OnInit {
       this.healthForm.invalid ||
       this.healthForm.get('gender')?.value === 'Otro'
     ) {
-      console.log('Formulario no válido');
       this.toastrService.error('Rellene todos los campos', 'Error');
       return;
     }
