@@ -38,7 +38,6 @@ import { LayoutComponent } from './layout/layout.component';
 import { LinkAccountComponent } from './link-account/link-account.component';
 import { LinkAccountInvitationComponent } from './link-account-invitation/link-account-invitation.component';
 import { NavComponent } from './components/nav/nav.component';
-import { NotificationsComponent } from './notifications/notifications.component';
 import { PhotosComponent } from './components/photos/photos.component';
 import { PostComponent } from './components/post/post.component';
 import { ProfileComponent } from './profile/profile.component';
@@ -83,7 +82,6 @@ import { FollowButtonComponent } from './components/follow-button/follow-button.
     LinkAccountComponent,
     LinkAccountInvitationComponent,
     NavComponent,
-    NotificationsComponent,
     PhotosComponent,
     PostComponent,
     ProfileComponent,
