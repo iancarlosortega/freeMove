@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { BreakpointObserver } from '@angular/cdk/layout';
-import { Router } from '@angular/router';
 import { Table } from 'primeng/table';
 import { ToastrService } from 'ngx-toastr';
 import { IncidentService } from 'src/app/services';
@@ -21,7 +20,6 @@ export class IncidentsComponent implements OnInit {
 
   constructor(
     private observer: BreakpointObserver,
-    private router: Router,
     private incidentService: IncidentService,
     private toastrService: ToastrService
   ) {}
@@ -55,10 +53,6 @@ export class IncidentsComponent implements OnInit {
       this.toastrService.success('Estado actualizado');
       this.isDisabled = false;
     });
-  }
-
-  goToIncident(id: number) {
-    this.router.navigate(['dashboard/incidentes', id]);
   }
 
   getIncidentIcon(category: IncidentCategory) {

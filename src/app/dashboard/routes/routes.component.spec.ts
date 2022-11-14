@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef } from '@angular/material/dialog';
 import { Observable, of } from 'rxjs';
 import { Route, User } from 'src/app/interfaces';
 import { MaterialModule } from 'src/app/material/material.module';
