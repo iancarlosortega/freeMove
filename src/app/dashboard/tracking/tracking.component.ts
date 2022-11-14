@@ -86,12 +86,4 @@ export class TrackingComponent implements AfterViewInit, OnDestroy {
   ngOnDestroy(): void {
     this.userObs.unsubscribe();
   }
-
-  activateAlert() {
-    this.alertService.activateAlert(this.idUser);
-  }
-
-  desactivateAlert() {
-    this.alertService.desactivateAlert(this.alert);
-  }
 }

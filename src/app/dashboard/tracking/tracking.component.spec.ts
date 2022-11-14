@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 import { Observable, of } from 'rxjs';
 import { User } from 'src/app/interfaces';
+import { MaterialModule } from 'src/app/material/material.module';
 import {
   UserService,
   AlertService,
@@ -28,15 +30,19 @@ class AlertServiceStub {
     return of({
       idUser: '1',
       idAlert: '1',
-      isActive: true,
-      notificationStatus: 'pending',
+      isActive: false,
+      notificationStatus: 'accepted',
       emailToVinculate: 'iancarlosortegaleon@gmail.com',
       emailFrom: '',
     });
   }
 }
 
-class GeolocationServiceStub {}
+class GeolocationServiceStub {
+  getUserLocation() {
+    return Promise.resolve([0, 0]);
+  }
+}
 
 describe('TrackingComponent', () => {
   let component: TrackingComponent;
@@ -45,6 +51,7 @@ describe('TrackingComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [TrackingComponent],
+      imports: [MaterialModule],
       providers: [
         { provide: UserService, useClass: UserServiceStub },
         { provide: AlertService, useClass: AlertServiceStub },
@@ -59,5 +66,19 @@ describe('TrackingComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should have an idUser', () => {
+    expect(component.idUser).not.toBeNull();
+  });
+
+  it('should have a map', () => {
+    const map = fixture.debugElement.query(By.css('.map'));
+    expect(map).toBeTruthy();
+  });
+
+  it('should map not be visible if alert has no coordinates to show', () => {
+    const map = fixture.debugElement.query(By.css('.map'));
+    expect(map.classes['no-map']).toBeTruthy();
   });
 });
