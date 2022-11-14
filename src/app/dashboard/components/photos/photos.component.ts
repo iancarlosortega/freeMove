@@ -15,7 +15,7 @@ export class PhotosComponent implements OnInit {
   constructor(public gallery: Gallery, public lightbox: Lightbox) {}
 
   ngOnInit(): void {
-    const routeImages = this.photos?.map(
+    const galleryImages = this.photos?.map(
       (photo) => new ImageItem({ src: photo, thumb: photo })
     );
     const lightboxRef = this.gallery.ref('lightbox');
@@ -23,6 +23,6 @@ export class PhotosComponent implements OnInit {
       imageSize: ImageSize.Cover,
       thumbPosition: ThumbnailsPosition.Top,
     });
-    lightboxRef.load(routeImages);
+    lightboxRef.load(galleryImages);
   }
 }

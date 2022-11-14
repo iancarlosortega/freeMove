@@ -27,6 +27,7 @@ export class IncidentComponent implements AfterViewInit {
     city: '',
     keywords: [],
   };
+  isLoading: boolean = true;
 
   constructor(
     private router: Router,
@@ -52,6 +53,7 @@ export class IncidentComponent implements AfterViewInit {
         new Marker(this.incidentMarker.nativeElement)
           .setLngLat(this.incident.position)
           .addTo(map);
+        this.isLoading = false;
       });
   }
 }

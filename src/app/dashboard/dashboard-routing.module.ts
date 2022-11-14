@@ -16,7 +16,6 @@ import { IncidentsComponent } from './incidents/incidents.component';
 import { LayoutComponent } from './layout/layout.component';
 import { LinkAccountComponent } from './link-account/link-account.component';
 import { LinkAccountInvitationComponent } from './link-account-invitation/link-account-invitation.component';
-import { NotificationsComponent } from './notifications/notifications.component';
 import { ProfileComponent } from './profile/profile.component';
 import { RouteComponent } from './route/route.component';
 import { RoutesComponent } from './routes/routes.component';
@@ -131,11 +130,6 @@ const routes: Routes = [
         path: 'invitacion-vinculamiento/:id',
         component: LinkAccountInvitationComponent,
         data: { breadcrumb: 'Invitación de Vinculamiento de Cuenta' },
-      },
-      {
-        path: 'notificaciones',
-        component: NotificationsComponent,
-        data: { breadcrumb: 'Notificaciones' },
       },
       {
         path: 'usuario/:id',

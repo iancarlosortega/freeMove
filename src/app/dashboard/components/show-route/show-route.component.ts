@@ -198,7 +198,7 @@ export class ShowRouteComponent implements OnInit {
         `url(${photo.photoUrl})`
       );
       new Marker(element)
-        .setLngLat([photo.latitude, photo.longitude])
+        .setLngLat([photo.longitude, photo.latitude])
         .setPopup(popup)
         .addTo(this.map);
     });

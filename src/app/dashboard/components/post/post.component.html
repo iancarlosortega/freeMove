@@ -1,6 +1,11 @@
 <div class="card mb-4" *ngIf="user">
   <header class="post-header">
-    <img [src]="photoUrl" alt="Imagen de Perfil" class="circle" />
+    <img
+      [src]="photoUrl"
+      alt="Imagen de Perfil"
+      class="circle"
+      referrerpolicy="no-referrer"
+    />
     <h5 [routerLink]="['/dashboard/usuario', user.idUser]" class="pointer">
       {{ user.name }}
     </h5>

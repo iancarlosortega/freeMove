@@ -70,7 +70,11 @@
       <div class="row mb-5">
         <div id="user-info" class="col-12 col-md-3">
           <div class="user-info ms-2">
-            <img [src]="photoUrl" id="profile-photo" />
+            <img
+              [src]="photoUrl"
+              id="profile-photo"
+              referrerpolicy="no-referrer"
+            />
             <h5 class="my-3 text-center">
               {{ user.name }}
             </h5>
