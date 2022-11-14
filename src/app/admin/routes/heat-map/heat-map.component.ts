@@ -18,6 +18,7 @@ export class HeatMapComponent implements AfterViewInit {
   @Input() routes: Route[] = [];
   @Input() totalRoutes: Route[] = [];
   routeMap!: Map;
+
   constructor() {}
 
   ngAfterViewInit(): void {

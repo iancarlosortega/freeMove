@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { HeatMapComponent } from './heat-map.component';
 import { environment } from 'src/environments/environment';
+import { By } from '@angular/platform-browser';
 import Mapboxgl from 'mapbox-gl';
 
 Mapboxgl.accessToken = environment.mapboxToken;
@@ -22,5 +23,10 @@ describe('HeatMapComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should have a map', () => {
+    const map = fixture.debugElement.query(By.css('.map'));
+    expect(map).toBeTruthy();
   });
 });
