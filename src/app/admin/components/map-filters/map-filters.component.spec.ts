@@ -38,4 +38,10 @@ describe('MapFiltersComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should update the data to the father component with the data filtered by date', () => {
+    const spy = spyOn(component.updateData, 'emit');
+    component.getDataByDate('M', new Date(), new Date());
+    expect(spy).toHaveBeenCalled();
+  });
 });
