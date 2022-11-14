@@ -45,10 +45,33 @@ describe('CommentComponent', () => {
       createdAt: new Date() as any,
       body: 'Hello world',
     };
+    component.idCurrentUser = '1';
+    component.idPostUser = '1';
     fixture.detectChanges();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should delete button call deleteComment method', () => {
+    const deleteButton = fixture.nativeElement.querySelector('mat-menu button');
+    const deleteCommentSpy = spyOn(component, 'deleteComment');
+    deleteButton.click();
+    expect(deleteCommentSpy).toHaveBeenCalled();
+  });
+
+  it('should call goToProfile method when button is clicked', () => {
+    const goToProfileSpy = spyOn(component, 'goToProfile');
+    const button = fixture.nativeElement.querySelector('.comment-body > span');
+    button.click();
+    expect(goToProfileSpy).toHaveBeenCalled();
+  });
+
+  it('should emit value to the father component to close the modal', () => {
+    const closeModalSpy = spyOn(component.closeModal, 'emit');
+    const button = fixture.nativeElement.querySelector('.comment-body > span');
+    button.click();
+    expect(closeModalSpy).toHaveBeenCalledWith(true);
   });
 });
