@@ -8,9 +8,8 @@ describe('RecurrentRoutesComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ RecurrentRoutesComponent ]
-    })
-    .compileComponents();
+      declarations: [RecurrentRoutesComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(RecurrentRoutesComponent);
     component = fixture.componentInstance;
@@ -19,5 +18,11 @@ describe('RecurrentRoutesComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should have a map', () => {
+    const map = fixture.nativeElement.querySelector('.map');
+    expect(map).toBeTruthy();
+    expect(component.routeMap).toBeTruthy();
   });
 });
