@@ -62,4 +62,9 @@ describe('NavComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should have 3 menus', () => {
+    const menus = fixture.nativeElement.querySelectorAll('mat-menu');
+    expect(menus.length).toBe(3);
+  });
 });
