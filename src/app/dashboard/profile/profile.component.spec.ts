@@ -1,3 +1,4 @@
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
@@ -85,6 +86,7 @@ describe('ProfileComponent', () => {
         { provide: StorageService, useClass: StorageServiceStub },
         { provide: DomSanitizer, useClass: DomSanitizerStub },
       ],
+      schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
 
     fixture = TestBed.createComponent(ProfileComponent);

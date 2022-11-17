@@ -9,6 +9,7 @@ import { MaterialModule } from 'src/app/material/material.module';
 import { PrimeNgModule } from 'src/app/prime-ng/prime-ng.module';
 
 import { IncidentsComponent } from './incidents.component';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 class IncidentServiceStub {
   getIncidents(): Observable<Incident[]> {
@@ -53,6 +54,7 @@ describe('IncidentsComponent', () => {
           useClass: ToastrServiceStub,
         },
       ],
+      schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
 
     fixture = TestBed.createComponent(IncidentsComponent);

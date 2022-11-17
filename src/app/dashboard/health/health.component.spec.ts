@@ -1,3 +1,4 @@
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AbstractControl, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
@@ -53,6 +54,7 @@ describe('HealthComponent', () => {
         { provide: ToastrService, useClass: ToastrServiceStub },
         { provide: UserService, useClass: UserServiceStub },
       ],
+      schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
 
     fixture = TestBed.createComponent(HealthComponent);
@@ -187,7 +189,7 @@ describe('HealthComponent', () => {
     expect(spy).toHaveBeenCalled();
   });
 
-  it('should set man gender if user clicks gender man button', () => {
+  it('should set man gender if user clicks gender man button', async () => {
     spyOn(component, 'setManGender');
     const elements = fixture.debugElement.queryAll(By.css('p-togglebutton'));
     elements[0].triggerEventHandler('click', null);

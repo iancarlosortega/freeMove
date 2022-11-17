@@ -4,6 +4,7 @@ import { HeatMapComponent } from './heat-map.component';
 import { environment } from 'src/environments/environment';
 import { By } from '@angular/platform-browser';
 import Mapboxgl from 'mapbox-gl';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 Mapboxgl.accessToken = environment.mapboxToken;
 
@@ -14,6 +15,7 @@ describe('HeatMapComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [HeatMapComponent],
+      schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
 
     fixture = TestBed.createComponent(HeatMapComponent);

@@ -9,6 +9,7 @@ import firebase from '@firebase/app-compat';
 
 import { RoutesComponent } from './routes.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 class RouteServiceStub {
   getRoutesByUser(idUser: string): Observable<Route[]> {
@@ -72,7 +73,6 @@ describe('RoutesComponent', () => {
       imports: [MaterialModule, PrimeNgModule, BrowserAnimationsModule],
       providers: [
         { provide: RouteService, useClass: RouteServiceStub },
-        // { provide: MatDialog, useClass: MatDialogStub },
         {
           provide: MatDialogRef,
           useFactory: () =>
@@ -80,6 +80,7 @@ describe('RoutesComponent', () => {
         },
         { provide: UserService, useClass: UserServiceStub },
       ],
+      schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
 
     fixture = TestBed.createComponent(RoutesComponent);

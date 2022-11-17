@@ -1,3 +1,4 @@
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TranslateService } from '@ngx-translate/core';
 import { PrimeNGConfig } from 'primeng/api';
@@ -28,6 +29,7 @@ describe('MapFiltersComponent', () => {
         { provide: PrimeNGConfig, useClass: PrimeNGConfigStub },
         { provide: TranslateService, useClass: TranslateServiceStub },
       ],
+      schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
 
     fixture = TestBed.createComponent(MapFiltersComponent);

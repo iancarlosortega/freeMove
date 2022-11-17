@@ -4,6 +4,7 @@ import { AuthService, UserService, AlertService } from 'src/app/services';
 import { Alert, User } from 'src/app/interfaces';
 
 import { SideMenuComponent } from './side-menu.component';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 class AuthServiceStub {}
 class UserServiceStub {
@@ -44,6 +45,7 @@ describe('SideMenuComponent', () => {
         { provide: UserService, useClass: UserServiceStub },
         { provide: AlertService, useClass: AlertServiceStub },
       ],
+      schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
 
     fixture = TestBed.createComponent(SideMenuComponent);

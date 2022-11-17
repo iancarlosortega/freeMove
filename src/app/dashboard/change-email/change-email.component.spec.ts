@@ -1,3 +1,4 @@
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AbstractControl, ReactiveFormsModule } from '@angular/forms';
 import firebase from 'firebase/compat';
@@ -62,6 +63,7 @@ describe('ChangeEmailComponent', () => {
         { provide: UserService, useClass: UserServiceStub },
         { provide: ToastrService, useClass: ToastrServiceStub },
       ],
+      schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
 
     fixture = TestBed.createComponent(ChangeEmailComponent);

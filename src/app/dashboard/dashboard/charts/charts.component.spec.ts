@@ -1,3 +1,4 @@
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Route } from 'src/app/interfaces';
 
@@ -10,6 +11,7 @@ describe('ChartsComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ChartsComponent],
+      schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
 
     fixture = TestBed.createComponent(ChartsComponent);

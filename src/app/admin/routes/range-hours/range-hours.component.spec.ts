@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import moment from 'moment';
 
 import { RangeHoursComponent } from './range-hours.component';
 
