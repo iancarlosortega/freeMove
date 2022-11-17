@@ -95,4 +95,41 @@ describe('ProfileComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should show the correct tab', () => {
+    component.showTab('posts');
+    expect(component.showPosts).toBeTrue();
+    expect(component.showFollowers).toBeFalse();
+    expect(component.showFollowing).toBeFalse();
+    expect(component.showLikes).toBeFalse();
+
+    component.showTab('followers');
+    expect(component.showPosts).toBeFalse();
+    expect(component.showFollowers).toBeTrue();
+    expect(component.showFollowing).toBeFalse();
+    expect(component.showLikes).toBeFalse();
+
+    component.showTab('following');
+    expect(component.showPosts).toBeFalse();
+    expect(component.showFollowers).toBeFalse();
+    expect(component.showFollowing).toBeTrue();
+    expect(component.showLikes).toBeFalse();
+
+    component.showTab('likes');
+    expect(component.showPosts).toBeFalse();
+    expect(component.showFollowers).toBeFalse();
+    expect(component.showFollowing).toBeFalse();
+    expect(component.showLikes).toBeTrue();
+  });
+
+  it('should get the style from the active tab', () => {
+    const style = component.getActiveTabStyle('posts');
+    expect(style).toContain('current');
+  });
+
+  it('should create a unique filename', () => {
+    const filename = component.createUniqueFilename('image.png');
+    const id = new Date().getTime();
+    expect(filename).toContain(id.toString());
+  });
 });
