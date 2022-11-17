@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { Route } from 'src/app/interfaces';
 
 import { ChartsComponent } from './charts.component';
 
@@ -18,5 +19,34 @@ describe('ChartsComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should return the labels of days and month from the data passed', () => {
+    const data = [
+      {
+        idRoute: '1',
+        idUser: '1',
+        name: 'Route 1',
+        distance: 100,
+        calification: 5,
+        difficulty: 'Fácil',
+        startDate: new Date('2021-01-01'),
+        endDate: new Date('2021-01-01'),
+      } as Route,
+    ];
+
+    const labels = component.getLabelsFromData(data);
+    expect(labels).toEqual(['31/12']);
+  });
+
+  it('should return the string in titleCase', () => {
+    const string = 'hola mundo';
+    const stringTitleCase = component.toTitleCase(string);
+    expect(stringTitleCase).toEqual('Hola Mundo');
+  });
+
+  it('should have two charts', () => {
+    const charts = fixture.nativeElement.querySelectorAll('.chart');
+    expect(charts.length).toEqual(2);
   });
 });
