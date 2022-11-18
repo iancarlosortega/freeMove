@@ -26,13 +26,14 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient } from '@angular/common/http';
 import { RouteComponent } from './pages/route/route.component';
+import { CountUpDirective } from './pages/directives/count-up.directive';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient, './assets/i18n/', '.json');
 }
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, RouteComponent],
+  declarations: [AppComponent, HomeComponent, RouteComponent, CountUpDirective],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,

@@ -29,7 +29,8 @@ export class HomeComponent implements OnInit {
   users: User[] = [];
   routes: Route[] = [];
   incidents: Incident[] = [];
-  isLoading: boolean = true;
+  isLoading: boolean = false;
+  isCountReady: boolean = false;
 
   constructor(
     private userService: UserService,
@@ -44,7 +45,7 @@ export class HomeComponent implements OnInit {
         this.routes = routes;
         this.incidentService.getIncidents().subscribe((incidents) => {
           this.incidents = incidents;
-          this.isLoading = false;
+          this.isCountReady = true;
         });
       });
     });

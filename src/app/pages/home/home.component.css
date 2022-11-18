@@ -85,7 +85,7 @@
 }
 
 .info-card {
-  width: 15rem;
+  width: 18rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -97,6 +97,7 @@
 }
 
 .info-card > p {
+  width: 10rem;
   font-size: 6rem;
   font-weight: 600;
 }

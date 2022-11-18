@@ -13,7 +13,7 @@
       }"
     >
       <ng-template swiperSlide *ngFor="let photo of sliderPhotos">
-        <img [src]="photo" />
+        <img [src]="photo" alt="Slider images" />
       </ng-template>
     </swiper>
     <div class="header-logo">
@@ -30,9 +30,12 @@
 
       <div class="info-cards">
         <div class="info-card">
-          <p>
-            {{ routes.length }}
-          </p>
+          <p *ngIf="!isCountReady">0</p>
+          <p
+            *ngIf="isCountReady"
+            [countUp]="routes.length"
+            [duration]="1000"
+          ></p>
           <div class="card-img">
             <img src="assets/home/rutas-icon.svg" alt="Rutas" />
             <p>
@@ -41,9 +44,12 @@
           </div>
         </div>
         <div class="info-card">
-          <p>
-            {{ users.length }}
-          </p>
+          <p *ngIf="!isCountReady">0</p>
+          <p
+            *ngIf="isCountReady"
+            [countUp]="users.length"
+            [duration]="1000"
+          ></p>
           <div class="card-img">
             <img src="assets/home/ciclistas-icon.svg" alt="Ciclistas" />
             <p>
@@ -54,9 +60,12 @@
           </div>
         </div>
         <div class="info-card">
-          <p>
-            {{ incidents.length }}
-          </p>
+          <p *ngIf="!isCountReady">0</p>
+          <p
+            *ngIf="isCountReady"
+            [countUp]="incidents.length"
+            [duration]="1000"
+          ></p>
           <div class="card-img">
             <img src="assets/home/incidentes-icon.svg" alt="Incidentes" />
             <p>
