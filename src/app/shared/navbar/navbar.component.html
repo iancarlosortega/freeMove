@@ -1,6 +1,9 @@
 <nav class="navbar" *ngIf="!isPhone" [ngClass]="{ 'bg-transparent': isHome }">
   <div class="navbar-logo" routerLink="/">
-    <img src="assets/logoFreeMove.png" alt="FreeMove Logo" />
+    <picture>
+      <source type="image/webp" srcset="assets/logoFreeMove.webp" />
+      <img src="assets/logoFreeMove.png" alt="FreeMove Logo" />
+    </picture>
   </div>
   <ul class="navbar-listado">
     <li class="navbar-listado-item">
@@ -38,11 +41,14 @@
 >
   <ul class="navbar-responsive">
     <li class="item" routerLink="/">
-      <img
-        class="item-logo"
-        src="assets/logoFreeMove.png"
-        alt="FreeMove Logo"
-      />
+      <picture>
+        <source type="image/webp" srcset="assets/logoFreeMove.webp" />
+        <img
+          class="item-logo"
+          src="assets/logoFreeMove.png"
+          alt="FreeMove Logo"
+        />
+      </picture>
     </li>
     <li class="item">
       <button class="item-button" (click)="showMenu = true">

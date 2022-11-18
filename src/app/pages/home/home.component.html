@@ -13,11 +13,17 @@
       }"
     >
       <ng-template swiperSlide *ngFor="let photo of sliderPhotos">
-        <img [src]="photo" alt="Slider images" />
+        <picture>
+          <source type="image/webp" srcset="{{photo}}.webp" />
+          <img src="{{ photo }}.jpg" alt="Slider images" />
+        </picture>
       </ng-template>
     </swiper>
     <div class="header-logo">
-      <img src="assets/home/logo-header.png" alt="FreeMove" />
+      <picture>
+        <source type="image/webp" srcset="assets/home/logo-header.webp" />
+        <img src="assets/home/logo-header.png" alt="FreeMove" />
+      </picture>
     </div>
   </header>
 
@@ -25,7 +31,7 @@
     <section class="city-information" id="city">
       <header class="city-header">
         <h2>Ciudad Inteligente</h2>
-        <button class="primary-button city-button">Más información</button>
+        <!-- <button class="primary-button city-button">Más información</button> -->
       </header>
 
       <div class="info-cards">
@@ -82,10 +88,25 @@
   </div>
 
   <section class="health-information" id="health">
+    <picture>
+      <source
+        class="health-background"
+        type="image/webp"
+        srcset="assets/home/salud-fondo.webp"
+      />
+      <img
+        class="health-background"
+        src="assets/home/salud-fondo.png"
+        alt="Salud"
+      />
+    </picture>
     <div class="container container2">
       <div class="health-container">
         <div class="health-img">
-          <img src="assets/logoFreeMoveAzul.png" alt="FreMove logo" />
+          <picture>
+            <source type="image/webp" srcset="assets/logoFreeMoveAzul.webp" />
+            <img src="assets/logoFreeMoveAzul.png" alt="FreMove logo" />
+          </picture>
         </div>
         <div class="health-text">
           <h3>Salud</h3>
@@ -103,7 +124,11 @@
   <section class="services-information" id="services">
     <div class="services-container">
       <div class="services-card">
-        <img src="assets/home/bitacora.png" alt="Bitácora" />
+        <picture>
+          <source type="image/webp" srcset="assets/home/bitacora.webp" />
+          <img src="assets/home/bitacora.png" alt="Bitácora" />
+        </picture>
+
         <div class="services-card-information">
           <div class="services-card-information-listado">
             <ul>
@@ -116,7 +141,11 @@
         </div>
       </div>
       <div class="services-card">
-        <img src="assets/home/seguridad.png" alt="Seguridad" />
+        <picture>
+          <source type="image/webp" srcset="assets/home/seguridad.webp" />
+          <img src="assets/home/seguridad.png" alt="Seguridad" />
+        </picture>
+
         <div class="services-card-information">
           <div class="services-card-information-listado">
             <ul>
@@ -129,7 +158,11 @@
         </div>
       </div>
       <div class="services-card last-card">
-        <img src="assets/home/comparte.png" alt="Comparte" />
+        <picture>
+          <source type="image/webp" srcset="assets/home/comparte.webp" />
+          <img src="assets/home/comparte.png" alt="Comparte" />
+        </picture>
+
         <div class="services-card-information">
           <div class="services-card-information-listado">
             <ul>

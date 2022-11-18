@@ -57,7 +57,6 @@
   flex-direction: column;
   gap: 0.25rem;
   justify-content: center;
-  padding-bottom: 1.5rem;
 }
 
 .city-header h2 {
@@ -116,14 +115,18 @@
 /* Health */
 
 .health-information {
-  background-image: url(/assets/home/salud-fondo.png);
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  width: 100%;
+  position: relative;
+}
+
+.health-background {
+  position: absolute;
+  object-fit: cover;
+  height: 100%;
 }
 
 .container2 {
+  position: relative;
+  z-index: 9;
   padding: 1rem;
 }
 

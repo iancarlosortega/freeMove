@@ -21,10 +21,10 @@ SwiperCore.use([Autoplay]);
 })
 export class HomeComponent implements OnInit {
   sliderPhotos = [
-    'assets/slider/slider-1.jpg',
-    'assets/slider/slider-2.jpg',
-    'assets/slider/slider-3.jpg',
-    'assets/slider/slider-4.jpg',
+    'assets/slider/slider-1',
+    'assets/slider/slider-2',
+    'assets/slider/slider-3',
+    'assets/slider/slider-4',
   ];
   users: User[] = [];
   routes: Route[] = [];
