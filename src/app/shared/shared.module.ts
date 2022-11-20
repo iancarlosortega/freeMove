@@ -1,26 +1,46 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { MaterialModule } from '../material/material.module';
 
-import { NavbarComponent } from './navbar/navbar.component';
-import { FooterComponent } from './footer/footer.component';
-import { SideMenuComponent } from './side-menu/side-menu.component';
+import { BarRatingModule } from 'ngx-bar-rating';
+import { GalleryModule } from 'ng-gallery';
+import { LightboxModule } from 'ng-gallery/lightbox';
+import { MaterialModule } from '../material/material.module';
+import { ShareButtonsModule } from 'ngx-sharebuttons/buttons';
+import { ShareIconsModule } from 'ngx-sharebuttons/icons';
+import { SwiperModule } from 'swiper/angular';
+
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
+import { CardComponent } from './card/card.component';
+import { PhotosComponent } from './photos/photos.component';
+import { ShowRouteComponent } from './show-route/show-route.component';
+import { SideMenuComponent } from './side-menu/side-menu.component';
 
 @NgModule({
   declarations: [
-    NavbarComponent,
-    FooterComponent,
-    SideMenuComponent,
     BreadcrumbComponent,
+    CardComponent,
+    PhotosComponent,
+    ShowRouteComponent,
+    SideMenuComponent,
   ],
   exports: [
-    NavbarComponent,
-    FooterComponent,
-    SideMenuComponent,
     BreadcrumbComponent,
+    CardComponent,
+    PhotosComponent,
+    ShowRouteComponent,
+    SideMenuComponent,
   ],
-  imports: [CommonModule, RouterModule, MaterialModule],
+  imports: [
+    CommonModule,
+    RouterModule,
+    BarRatingModule,
+    GalleryModule,
+    LightboxModule,
+    MaterialModule,
+    ShareButtonsModule,
+    ShareIconsModule,
+    SwiperModule,
+  ],
 })
 export class SharedModule {}

@@ -1,11 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { DashboardModule } from './dashboard/dashboard.module';
 
 import { DashboardGuard } from './guards';
 
 import { HomeComponent } from './pages/home/home.component';
-import { RouteComponent } from './pages/route/route.component';
 
 const routes: Routes = [
   {
@@ -13,8 +11,9 @@ const routes: Routes = [
     component: HomeComponent,
   },
   {
-    path: 'ruta/:id',
-    component: RouteComponent,
+    path: 'ruta',
+    loadChildren: () =>
+      import('./route/route.module').then((m) => m.RouteModule),
   },
   {
     path: 'auth',
