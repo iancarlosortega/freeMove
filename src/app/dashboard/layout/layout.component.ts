@@ -1,6 +1,10 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { MatSidenav } from '@angular/material/sidenav';
+import Mapboxgl from 'mapbox-gl';
+import { environment } from 'src/environments/environment';
+
+Mapboxgl.accessToken = environment.mapboxToken;
 
 @Component({
   selector: 'app-layout',

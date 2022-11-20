@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { trigger, transition, style, animate } from '@angular/animations';
-import { Incident, Route, User } from 'src/app/interfaces';
 import { IncidentService, RouteService, UserService } from 'src/app/services';
-import SwiperCore, { Autoplay } from 'swiper';
-SwiperCore.use([Autoplay]);
+import { Incident, Route, User } from 'src/app/interfaces';
 
 @Component({
   selector: 'app-home',

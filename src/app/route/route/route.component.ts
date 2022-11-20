@@ -4,6 +4,10 @@ import { switchMap } from 'rxjs';
 import { RouteService } from 'src/app/services';
 import { Route } from 'src/app/interfaces';
 import { mapRoute } from 'src/app/utils';
+import Mapboxgl from 'mapbox-gl';
+import { environment } from 'src/environments/environment';
+
+Mapboxgl.accessToken = environment.mapboxToken;
 
 @Component({
   selector: 'app-route',

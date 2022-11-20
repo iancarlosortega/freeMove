@@ -4,21 +4,14 @@
 <div *ngIf="!isLoading">
   <header class="header">
     <app-navbar (isLoading)="changeLoadingState()"></app-navbar>
-    <swiper
-      class="header-slider"
-      [loop]="true"
-      [autoplay]="{
-        delay: 5000,
-        disableOnInteraction: true
-      }"
-    >
-      <ng-template swiperSlide *ngFor="let photo of sliderPhotos">
-        <picture>
+    <div class="header-slider">
+      <div class="header-wrapper">
+        <picture *ngFor="let photo of sliderPhotos">
           <source type="image/webp" srcset="{{photo}}.webp" />
           <img src="{{ photo }}.jpg" alt="Slider images" />
         </picture>
-      </ng-template>
-    </swiper>
+      </div>
+    </div>
     <div class="header-logo">
       <picture>
         <source type="image/webp" srcset="assets/home/logo-header.webp" />

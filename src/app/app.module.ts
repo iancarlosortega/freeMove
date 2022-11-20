@@ -8,7 +8,6 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { environment } from 'src/environments/environment';
 
 import { ToastrModule } from 'ngx-toastr';
-import { SwiperModule } from 'swiper/angular';
 import { MaterialModule } from './material/material.module';
 import { ComponentsModule } from './components/components.module';
 
@@ -30,7 +29,6 @@ registerLocaleData(localeEs);
     HttpClientModule,
     ComponentsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
-    SwiperModule,
     MaterialModule,
     ToastrModule.forRoot({
       positionClass: 'toast-top-right',
