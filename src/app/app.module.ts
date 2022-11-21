@@ -5,6 +5,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AngularFireModule } from '@angular/fire/compat';
+import {
+  AngularFirePerformanceModule,
+  PerformanceMonitoringService,
+} from '@angular/fire/compat/performance';
 import { environment } from 'src/environments/environment';
 
 import { ToastrModule } from 'ngx-toastr';
@@ -29,6 +33,7 @@ registerLocaleData(localeEs);
     HttpClientModule,
     ComponentsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFirePerformanceModule,
     MaterialModule,
     ToastrModule.forRoot({
       positionClass: 'toast-top-right',
@@ -37,7 +42,10 @@ registerLocaleData(localeEs);
       preventDuplicates: true,
     }),
   ],
-  providers: [{ provide: LOCALE_ID, useValue: 'es' }],
+  providers: [
+    { provide: LOCALE_ID, useValue: 'es' },
+    PerformanceMonitoringService,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
