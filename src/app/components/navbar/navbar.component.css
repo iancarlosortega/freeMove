@@ -174,10 +174,11 @@
   cursor: pointer;
 }
 
-.listado-items-responsive a {
+.listado-items-responsive p {
   color: white;
   font-size: 1.2rem;
   font-weight: 600;
   text-decoration: none;
   text-transform: uppercase;
+  margin: 0;
 }
