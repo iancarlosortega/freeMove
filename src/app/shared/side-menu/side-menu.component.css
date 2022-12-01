@@ -28,6 +28,7 @@
 }
 
 .list-items p {
+  font-size: 0.85rem;
   margin: 0;
 }
 
@@ -53,7 +54,7 @@
   text-align: center;
   color: #3c3c3c;
   font-weight: 500;
-  font-size: 1.3rem;
+  font-size: 1.1rem;
   margin: 1rem 0;
 }
 
@@ -76,6 +77,7 @@
   text-decoration: none;
   transition: 0.5s;
   width: 100%;
+  font-size: 0.85rem;
 }
 
 .gradient-button:hover {

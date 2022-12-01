@@ -347,11 +347,6 @@ input::-webkit-inner-spin-button {
   border: 1px solid rgba(63, 196, 232, 0.726) !important;
 }
 
-::-webkit-scrollbar {
-  width: 0px;
-  /* remove scrollbar space */
-}
-
 .circle {
   border-radius: 50%;
   object-fit: cover;

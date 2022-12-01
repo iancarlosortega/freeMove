@@ -11,7 +11,7 @@ export class PostService {
 
   getAllPosts() {
     return this.firestore
-      .collection('posts', (ref) => ref.orderBy('createdAt', 'desc'))
+      .collection('posts', (ref) => ref.orderBy('createdAt', 'desc').limit(6))
       .snapshotChanges()
       .pipe(
         map((actions) => {
