@@ -9,3 +9,18 @@
     grid-template-columns: 75% 25%;
   }
 }
+
+.posts {
+  height: 50rem;
+  overflow-y: scroll;
+}
+
+.suggested {
+  display: none;
+}
+
+@media (min-width: 768px){
+  .suggested {
+    display: block;
+  }
+}

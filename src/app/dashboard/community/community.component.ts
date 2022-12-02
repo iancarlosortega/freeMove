@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Post, User } from 'src/app/interfaces';
 import { PostService, UserService } from 'src/app/services';
+import { User } from 'src/app/interfaces';
 
 @Component({
   selector: 'app-community',
@@ -9,11 +9,10 @@ import { PostService, UserService } from 'src/app/services';
 })
 export class CommunityComponent implements OnInit {
   currentUser!: User;
-  posts: Post[] = [];
   usersSuggested: User[] = [];
-  isLoading: boolean = true;
+
   constructor(
-    private postService: PostService,
+    public postService: PostService,
     private userService: UserService
   ) {}
 
@@ -26,10 +25,14 @@ export class CommunityComponent implements OnInit {
   }
 
   getPosts() {
-    this.postService.getAllPosts().subscribe((posts) => {
-      this.posts = posts;
-      this.isLoading = false;
+    this.postService.init('posts', 'createdAt', {
+      reverse: true,
+      prepend: false,
     });
+    // this.postService.getAllPosts().subscribe((posts) => {
+    //   this.posts = posts;
+    //   this.isLoading = false;
+    // });
   }
 
   getSuggestedUsers() {
@@ -38,5 +41,11 @@ export class CommunityComponent implements OnInit {
         (user) => user.idUser !== this.currentUser.idUser
       );
     });
+  }
+
+  scrollHandler(e: any) {
+    if (e === 'bottom') {
+      this.postService.more();
+    }
   }
 }

@@ -55,6 +55,7 @@ import { UserComponent } from './components/user/user.component';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient } from '@angular/common/http';
+import { ScrollableDirective } from './directives/scrollable.directive';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient, './assets/i18n/', '.json');
@@ -100,6 +101,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     TrackingComponent,
     UnlinkAccountComponent,
     UserComponent,
+    ScrollableDirective,
   ],
   imports: [
     CommonModule,
