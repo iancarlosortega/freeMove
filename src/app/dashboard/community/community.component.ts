@@ -29,10 +29,6 @@ export class CommunityComponent implements OnInit {
       reverse: true,
       prepend: false,
     });
-    // this.postService.getAllPosts().subscribe((posts) => {
-    //   this.posts = posts;
-    //   this.isLoading = false;
-    // });
   }
 
   getSuggestedUsers() {

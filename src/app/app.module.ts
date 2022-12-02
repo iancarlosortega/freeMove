@@ -9,6 +9,7 @@ import {
   AngularFirePerformanceModule,
   PerformanceMonitoringService,
 } from '@angular/fire/compat/performance';
+import { AngularFireAnalyticsModule } from '@angular/fire/compat/analytics';
 import { environment } from 'src/environments/environment';
 
 import { ToastrModule } from 'ngx-toastr';
@@ -34,6 +35,7 @@ registerLocaleData(localeEs);
     ComponentsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirePerformanceModule,
+    AngularFireAnalyticsModule,
     MaterialModule,
     ToastrModule.forRoot({
       positionClass: 'toast-top-right',
