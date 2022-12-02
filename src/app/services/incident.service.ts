@@ -24,6 +24,23 @@ export class IncidentService {
       );
   }
 
+  getRecentIncidents() {
+    return this.firestore
+      .collection('incidents', (ref) =>
+        ref.orderBy('createdAt', 'desc').limit(10)
+      )
+      .snapshotChanges()
+      .pipe(
+        map((actions) => {
+          return actions.map((a) => {
+            const data = a.payload.doc.data() as Incident;
+            data.idIncident = a.payload.doc.id;
+            return data;
+          });
+        })
+      );
+  }
+
   getActiveIncidents() {
     return this.firestore
       .collection('incidents', (ref) => ref.where('isActive', '==', true))

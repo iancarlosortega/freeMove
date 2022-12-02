@@ -11,7 +11,6 @@
   </header>
   <swiper
     class="slider fade-in"
-    [loop]="true"
     [spaceBetween]="20"
     [slidesPerView]="1.2"
     [pagination]="true"
@@ -31,7 +30,10 @@
       }
     }"
   >
-    <ng-template swiperSlide *ngFor="let route of sliderRoutes">
+    <ng-template
+      swiperSlide
+      *ngFor="let route of sliderRoutes | slice : 0 : 10"
+    >
       <div class="slider-item" [routerLink]="['./rutas', route.idRoute]">
         <div class="slider-item-title">
           <h5>{{ route.name }}</h5>

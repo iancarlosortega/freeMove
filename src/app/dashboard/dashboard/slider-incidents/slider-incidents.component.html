@@ -1,4 +1,4 @@
-<section *ngIf="sliderIncidents.length > 0">
+<section *ngIf="incidents.length > 0">
   <header class="header">
     <div class="header-title">
       <h1>Incidentes Recientes</h1>
@@ -12,7 +12,6 @@
 
   <swiper
     class="slider fade-in"
-    [loop]="true"
     [spaceBetween]="20"
     [slidesPerView]="1.2"
     [pagination]="true"
@@ -32,7 +31,7 @@
       }
     }"
   >
-    <ng-template swiperSlide *ngFor="let incident of sliderIncidents">
+    <ng-template swiperSlide *ngFor="let incident of incidents">
       <div
         class="slider-item"
         [routerLink]="['./incidentes', incident.idIncident]"

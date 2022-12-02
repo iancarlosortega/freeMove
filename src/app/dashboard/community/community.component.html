@@ -1,6 +1,6 @@
 <main class="community fade-in" *ngIf="(postService.data | async)?.length > 0">
   <section scrollable (scrollPosition)="scrollHandler($event)" class="posts">
-    <div *ngFor="let post of postService.data | async">
+    <div class="post" *ngFor="let post of postService.data | async">
       <app-post [post]="post" [idCurrentUser]="currentUser.idUser"></app-post>
     </div>
     <div *ngIf="postService.loading | async" class="flex-center fade-in">

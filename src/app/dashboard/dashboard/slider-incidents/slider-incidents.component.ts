@@ -1,5 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-import moment from 'moment';
+import { Component, OnInit } from '@angular/core';
+import { IncidentService } from 'src/app/services';
 import { Incident } from 'src/app/interfaces';
 
 @Component({
@@ -8,17 +8,13 @@ import { Incident } from 'src/app/interfaces';
   styleUrls: ['../slider-routes/slider-routes.component.css'],
 })
 export class SliderIncidentsComponent implements OnInit {
-  @Input() incidents: Incident[] = [];
-  sliderIncidents: Incident[] = [];
+  incidents: Incident[] = [];
 
-  constructor() {}
+  constructor(private incidentService: IncidentService) {}
 
   ngOnInit(): void {
-    this.sliderIncidents = this.incidents.filter((incident) =>
-      moment(incident.createdAt.toDate()).isSameOrAfter(
-        moment().subtract(7, 'days'),
-        'days'
-      )
-    );
+    this.incidentService.getRecentIncidents().subscribe((incidents) => {
+      this.incidents = incidents;
+    });
   }
 }

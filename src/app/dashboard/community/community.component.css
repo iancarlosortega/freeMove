@@ -15,6 +15,10 @@
   overflow-y: scroll;
 }
 
+.post {
+  width: 100%;
+}
+
 .suggested {
   display: none;
 }
