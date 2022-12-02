@@ -35,7 +35,7 @@ export class UserService {
 
   getUsers() {
     return this.firestore
-      .collection('users')
+      .collection('users', (ref) => ref.orderBy('createdAt', 'desc'))
       .snapshotChanges()
       .pipe(
         map((actions) => {

@@ -42,6 +42,12 @@
           <p-sortIcon field="email"></p-sortIcon>
         </div>
       </th>
+      <th pSortableColumn="createdAt" style="width: 300px">
+        <div class="p-d-flex p-jc-between p-ai-center">
+          Fecha de registro
+          <p-sortIcon field="createdAt"></p-sortIcon>
+        </div>
+      </th>
       <th pSortableColumn="country" style="width: 150px">
         <div class="p-d-flex p-jc-between p-ai-center">
           País
@@ -64,6 +70,9 @@
       </td>
       <td style="width: 300px">
         {{ user.email }}
+      </td>
+      <td style="width: 300px">
+        {{ user.createdAt.toDate() | date : "dd/MM/yyyy, h:mm a" }}
       </td>
       <td style="width: 150px">
         {{ user.country }}

@@ -10,6 +10,10 @@
       {{ routes.length > 1 || routes.length == 0 ? "rutas" : "ruta" }}
     </p>
   </div>
+  <div class="total">
+    <h1>Distancia recorrida:</h1>
+    <p>{{ totalDistance | number : "1.0-2" }} km</p>
+  </div>
   <section class="hours">
     <app-top-hours [routes]="routes"></app-top-hours>
     <app-range-hours [routes]="routes"></app-range-hours>
@@ -28,14 +32,20 @@
     <header class="header">
       <h1>Rutas Recurrentes</h1>
     </header>
-    <app-recurrent-routes [routes]="routes" [totalRoutes]="routes"></app-recurrent-routes>
+    <app-recurrent-routes
+      [routes]="routes"
+      [totalRoutes]="routes"
+    ></app-recurrent-routes>
   </section>
 
   <section class="map">
     <header class="header">
       <h1>Incidentes Recurrentes</h1>
     </header>
-    <app-recurrent-incidents [incidents]="incidents" [totalIncidents]="incidents"></app-recurrent-incidents>
+    <app-recurrent-incidents
+      [incidents]="incidents"
+      [totalIncidents]="incidents"
+    ></app-recurrent-incidents>
   </section>
 
   <section class="map">
