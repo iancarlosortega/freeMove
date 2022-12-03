@@ -12,7 +12,7 @@ export class SearchService {
   searchRoutes(query: string) {
     return this.firestore
       .collection<Route>('routes', (ref) =>
-        ref.where('nameToSearch', '==', query.toLowerCase())
+        ref.where('name', '==', query).orderBy('createdAt', 'desc').limit(10)
       )
       .snapshotChanges()
       .pipe(
@@ -29,7 +29,7 @@ export class SearchService {
   searchSuggestedRoutes(query: string) {
     const query1$ = this.firestore
       .collection('routes', (ref) =>
-        ref.where('nameToSearch', '>=', query.toLowerCase())
+        ref.where('name', '>=', query.toLowerCase()).limit(10)
       )
       .valueChanges();
 

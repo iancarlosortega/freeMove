@@ -1,5 +1,7 @@
 <header class="route-header">
-  <h3>{{ route.name }} ({{ route.distance | number: "1.0-2" }} km)</h3>
+  <h3>
+    {{ route.name | titlecase }} ({{ route.distance | number : "1.0-2" }} km)
+  </h3>
   <p class="route-city">
     Ciudad: <span>{{ route.city }}</span>
   </p>
@@ -11,14 +13,17 @@
       [readOnly]="true"
     ></bar-rating>
   </div>
-  <div class="route-keywords" *ngIf="route.keywords">
+  <div
+    class="route-keywords"
+    *ngIf="route.keywords && route.keywords.length > 0"
+  >
     <p>Palabras Clave:</p>
     <span class="keyword" *ngFor="let keyword of route.keywords">
       {{ keyword }}
     </span>
   </div>
   <app-photos
-    *ngIf="routeImages.length > 0"
+    *ngIf="route.photos && routeImages.length > 0"
     [photos]="routeImages"
   ></app-photos>
 </header>

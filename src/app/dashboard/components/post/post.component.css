@@ -99,12 +99,13 @@ hr {
 /* Comments Modal */
 
 .comments-modal {
-  display: grid;
+  width: 100%;
   border-radius: 10px;
 }
 
 @media (min-width: 992px){
   .comments-modal {
+    display: grid;
     grid-template-columns: 40% 60%;
   }
 }

@@ -1,13 +1,15 @@
 <div *ngIf="!isLoading" class="fade-in">
-  <h3>{{ incident.title }} ({{ incident.city }})</h3>
+  <h3>{{ incident.title | titlecase }} ({{ incident.city }})</h3>
   <p>{{ incident.description }}</p>
-  <div class="incident-keywords" *ngIf="incident.keywords">
+  <div class="incident-keywords" *ngIf="incident.keywords.length > 0">
     <p>Palabras Clave:</p>
     <span class="keyword" *ngFor="let keyword of incident.keywords">
       {{ keyword }}
     </span>
   </div>
-  <app-photos [photos]="incident.photos"></app-photos>
+  <div *ngIf="incident.photos.length > 0">
+    <app-photos [photos]="incident.photos"></app-photos>
+  </div>
 </div>
 <div #mapDiv class="map"></div>
 <div class="incident-marker" #incidentMarker></div>

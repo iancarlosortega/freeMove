@@ -33,6 +33,21 @@ export class UserService {
     return this._user$.asObservable();
   }
 
+  // test() {
+  //   return this.firestore
+  //     .collection('incidents')
+  //     .get()
+  //     .subscribe((querySnapshot) => {
+  //       querySnapshot.forEach((doc) => {
+  //         const { photo } = doc.data() as any;
+  //         if (photo) {
+  //           console.log('Ok');
+  //           doc.ref.update({ photos: [photo] });
+  //         }
+  //       });
+  //     });
+  // }
+
   getUsers() {
     return this.firestore
       .collection('users', (ref) => ref.orderBy('createdAt', 'desc'))
