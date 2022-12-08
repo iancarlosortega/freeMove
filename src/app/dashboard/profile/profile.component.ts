@@ -116,7 +116,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this.userFollowers = [];
     this.user.followers?.forEach((doc: DocumentReference) => {
       doc.get().then((user: any) => {
-        console.log('a');
         this.userFollowers.push(user.data());
       });
     });
@@ -185,6 +184,16 @@ export class ProfileComponent implements OnInit, OnDestroy {
       return style + ' current';
     }
     return style;
+  }
+
+  updateFollow(event: boolean) {
+    if (event) {
+      this.userFollowers.push(this.currentUser);
+    } else {
+      this.userFollowers = this.userFollowers.filter(
+        (user) => user.idUser !== this.currentUser.idUser
+      );
+    }
   }
 
   changeBanner(event: any) {

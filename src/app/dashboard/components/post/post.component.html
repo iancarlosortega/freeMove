@@ -5,6 +5,7 @@
       alt="Imagen de Perfil"
       class="circle"
       referrerpolicy="no-referrer"
+      loading="lazy"
     />
     <h5 [routerLink]="['/dashboard/usuario', user.idUser]" class="pointer">
       {{ user.name }}
@@ -31,6 +32,7 @@
       class="pointer"
       [src]="post.url"
       (click)="openModal(commentsModal, 'modal-lg')"
+      loading="lazy"
     />
     <div class="post-information">
       <div class="post-likes">
@@ -140,7 +142,7 @@
 
 <ng-template #commentsModal>
   <div class="comments-modal" *ngIf="user">
-    <img class="modal-img" [src]="post.url" />
+    <img class="modal-img" [src]="post.url" loading="lazy" />
     <main class="post-main">
       <header class="post-header">
         <img
@@ -148,6 +150,7 @@
           alt="Imagen de Perfil"
           class="circle"
           referrerpolicy="no-referrer"
+          loading="lazy"
         />
         <h5 [routerLink]="['/dashboard/usuario', user.idUser]" class="pointer">
           {{ user.name }}

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FollowService } from 'src/app/services';
 import { User } from 'src/app/interfaces';
 
@@ -8,6 +8,7 @@ import { User } from 'src/app/interfaces';
   styleUrls: ['./follow-button.component.css'],
 })
 export class FollowButtonComponent {
+  @Output() updateFollow: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Input() user!: User;
   @Input() idCurrentUser!: string;
   @Input() isFollowing: boolean = false;
@@ -23,6 +24,7 @@ export class FollowButtonComponent {
         .then(() => {
           this.isFollowing = false;
           this.isDisabled = false;
+          this.updateFollow.emit(false);
         });
     } else {
       this.followService
@@ -30,6 +32,7 @@ export class FollowButtonComponent {
         .then(() => {
           this.isFollowing = true;
           this.isDisabled = false;
+          this.updateFollow.emit(true);
         });
     }
   }
