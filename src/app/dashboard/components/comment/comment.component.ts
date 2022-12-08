@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { PostService, UserService } from 'src/app/services';
 import { Comment, User } from 'src/app/interfaces';
 import moment from 'moment';
 import { Router } from '@angular/router';
@@ -11,31 +10,24 @@ import { Router } from '@angular/router';
 })
 export class CommentComponent implements OnInit {
   @Output() closeModal: EventEmitter<boolean> = new EventEmitter();
+  @Output() deleteComment: EventEmitter<string> = new EventEmitter();
   @Input() comment!: Comment;
-  @Input() idCurrentUser: string = '';
-  @Input() idPostUser: string = '';
   @Input() idPost: string = '';
+  @Input() canDelete: boolean = false;
   user!: User;
   photoUrl: string = '';
   timeAgo: string = '';
-  constructor(
-    private router: Router,
-    private userService: UserService,
-    private postService: PostService
-  ) {}
+  constructor(private router: Router) {}
 
   ngOnInit(): void {
-    this.userService.getUserById(this.comment.idUser).subscribe((user) => {
+    this.comment.idUser.get().then((doc: any) => {
+      const user = doc.data();
       this.user = user;
       this.photoUrl = user.photoUrl || 'assets/no-image.png';
       this.timeAgo = moment(this.comment.createdAt.toDate())
         .locale('es')
         .fromNow();
     });
-  }
-
-  deleteComment() {
-    this.postService.deleteComment(this.idPost, this.comment.idComment);
   }
 
   goToProfile() {

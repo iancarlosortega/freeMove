@@ -83,7 +83,7 @@
                 <span>
                   <mat-icon>calendar_month</mat-icon>
                   Se unió en
-                  {{ user.createdAt?.toDate() | date: "MMMM 'de' y" }}
+                  {{ user.createdAt?.toDate() | date : "MMMM 'de' y" }}
                 </span>
               </span>
             </p>
@@ -101,24 +101,11 @@
                 <span>Seguidores</span>
               </span>
             </div>
-            <!-- TODO: Enviar mensajes -->
-            <!-- <button
-              id="btn-message"
-              class="btn my-2 px-2"
-              *ngIf="!isCurrentUser"
-              (click)="openChatRoom()"
-            >
-              <mat-icon>chat</mat-icon>
-              Enviar Mensaje
-            </button> -->
-            <button
-              *ngIf="!isCurrentUser"
-              class="btn btn-round bg-primary text-white mt-3 px-4 py-2 text-bold align-self-center"
-              id="btn-follow"
-              (click)="followUser()"
-            >
-              {{ isFollowing ? "Siguiendo" : "Seguir" }}
-            </button>
+            <app-follow-button
+              [user]="user"
+              [idCurrentUser]="idCurrentUser"
+              [isFollowing]="isFollowing"
+            ></app-follow-button>
           </div>
         </div>
         <div
@@ -127,7 +114,7 @@
           *ngIf="showPosts"
         >
           <div *ngFor="let post of posts">
-            <app-post [idCurrentUser]="idCurrentUser" [post]="post"></app-post>
+            <app-post [currentUser]="user" [post]="post"></app-post>
           </div>
           <div class="text-muted text-center py-4" *ngIf="posts.length < 1">
             Este usuario no tiene publicaciones aún.
@@ -170,7 +157,7 @@
         >
           <h4 class="bg-white px-3 p-2 mb-0">Me gustas</h4>
           <div *ngFor="let post of userLikes">
-            <app-post [idCurrentUser]="idCurrentUser" [post]="post"></app-post>
+            <app-post [currentUser]="user" [post]="post"></app-post>
           </div>
         </div>
         <div id="right-panel" class="d-none d-lg-inline-block col-md-3">

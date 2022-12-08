@@ -2,8 +2,9 @@ import { Component, Input, OnInit, TemplateRef } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import moment from 'moment';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-import { LikeService, PostService, UserService } from 'src/app/services';
+import { LikeService, PostService } from 'src/app/services';
 import { Comment, Post, User } from 'src/app/interfaces';
+import { DocumentReference } from '@angular/fire/compat/firestore';
 
 @Component({
   selector: 'app-post',
@@ -12,7 +13,7 @@ import { Comment, Post, User } from 'src/app/interfaces';
 })
 export class PostComponent implements OnInit {
   @Input() post!: Post;
-  @Input() idCurrentUser: string = '';
+  @Input() currentUser!: User;
   user!: User;
   usersLiked: User[] = [];
   timeAgo: string = '';
@@ -31,13 +32,13 @@ export class PostComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private modalService: BsModalService,
-    private userService: UserService,
     private postService: PostService,
     private likeService: LikeService
   ) {}
 
   ngOnInit(): void {
-    this.userService.getUserById(this.post.idUser).subscribe((user) => {
+    this.post.idUser.get().then((doc: any) => {
+      const user = doc.data();
       this.user = user;
       this.photoUrl = user.photoUrl || 'assets/no-image.png';
       this.getComments();
@@ -61,29 +62,50 @@ export class PostComponent implements OnInit {
   }
 
   getLikes() {
-    this.likeService.getLikesFromPost(this.post.idPost).subscribe((likes) => {
-      this.likes = likes.map((like: any) => like.idUser);
-      this.isLiked = this.likes.some((like) => like === this.idCurrentUser);
-      this.userService.getUsersByIds(this.likes).subscribe((users) => {
-        this.usersLiked = users;
-      });
+    this.likes = this.post.likes?.map((like) => like.id) || [];
+    this.post.likes?.forEach((like: DocumentReference) => {
+      like.get().then((doc: any) => this.usersLiked.push(doc.data()));
     });
   }
 
   addLike() {
-    this.likeService.addLike(this.post.idPost, this.idCurrentUser);
+    this.isDisabled = true;
     this.isLiked = true;
+    this.likes.push(this.currentUser.idUser);
+    this.usersLiked.push(this.currentUser);
+    this.likeService
+      .addLike(this.post.idPost, this.currentUser.idUser)
+      .then(() => {
+        this.isDisabled = false;
+      });
   }
 
   removeLike() {
-    this.likeService.removeLike(this.post.idPost, this.idCurrentUser);
+    this.isDisabled = true;
     this.isLiked = false;
+    this.likes = this.likes.filter((like) => like !== this.currentUser.idUser);
+    this.usersLiked = this.usersLiked.filter(
+      (user) => user.idUser !== this.currentUser.idUser
+    );
+    this.likeService
+      .removeLike(this.post.idPost, this.currentUser.idUser)
+      .then(() => {
+        this.isDisabled = false;
+      });
   }
 
   addComment() {
-    const comment = this.commentForm.value.comment;
+    const commentBody = this.commentForm.get('comment')?.value;
     this.commentForm.reset();
-    this.postService.addComment(this.post.idPost, this.idCurrentUser, comment!);
+    this.postService.addComment(
+      this.post.idPost,
+      this.currentUser.idUser,
+      commentBody!
+    );
+  }
+
+  deleteComment(idComment: string) {
+    this.postService.deleteComment(this.post.idPost, idComment);
   }
 
   openModal(template: TemplateRef<any>, modalClass: string) {

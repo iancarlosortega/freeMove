@@ -10,7 +10,7 @@
     <p class="comment-time">{{ timeAgo }}</p>
   </div>
   <button
-    *ngIf="idCurrentUser === user.idUser || idCurrentUser === idPostUser"
+    *ngIf="canDelete"
     class="comment-button"
     mat-icon-button
     [matMenuTriggerFor]="settings"
@@ -19,7 +19,7 @@
 
     <!-- Menu -->
     <mat-menu #settings>
-      <button mat-menu-item (click)="deleteComment()">
+      <button mat-menu-item (click)="deleteComment.emit(comment.idComment)">
         <mat-icon>delete</mat-icon>
         <span>Eliminar</span>
       </button>

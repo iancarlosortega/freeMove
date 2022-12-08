@@ -12,11 +12,20 @@ export class UserComponent implements OnInit {
   @Input() user!: User;
   @Input() idCurrentUser!: string;
   photoUrl: string = '';
+  isFollowing: boolean = false;
 
   constructor(private router: Router) {}
 
   ngOnInit() {
     this.photoUrl = this.user.photoUrl || 'assets/no-image.png';
+    this.user.followers?.forEach((user) =>
+      user.get().then((doc) => {
+        if (this.idCurrentUser === doc.id) {
+          this.isFollowing = true;
+          return;
+        }
+      })
+    );
   }
 
   goToProfile() {

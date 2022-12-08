@@ -3,8 +3,12 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { of } from 'rxjs';
 import { PostService, UserService } from 'src/app/services';
+import firebase from '@firebase/app-compat';
+import { environment } from 'src/environments/environment';
 
 import { CommentComponent } from './comment.component';
+
+firebase.initializeApp(environment.firebaseConfig);
 
 class UserServiceStub {
   getUserById() {
@@ -43,7 +47,7 @@ describe('CommentComponent', () => {
     component = fixture.componentInstance;
     component.comment = {
       idComment: '1',
-      idUser: '1',
+      idUser: firebase.firestore().doc('users/1'),
       createdAt: new Date() as any,
       body: 'Hello world',
     };

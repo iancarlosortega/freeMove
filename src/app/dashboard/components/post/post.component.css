@@ -96,6 +96,13 @@ hr {
   overflow-y: scroll;
 }
 
+.like-button {
+  cursor: pointer;
+  height: 1.6rem;
+  border: none;
+  background-color: transparent;
+}
+
 /* Comments Modal */
 
 .comments-modal {

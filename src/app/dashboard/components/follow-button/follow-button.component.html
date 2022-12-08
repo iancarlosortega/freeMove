@@ -1,16 +1,8 @@
 <button
-  *ngIf="!isCurrentUser && !isFollowing"
-  class="btn bg-primary btn-round text-white text-bold"
-  (click)="unfollow()"
-  [disabled]="isDisabled"
->
-  Seguir
-</button>
-<button
-  *ngIf="!isCurrentUser && isFollowing"
+  *ngIf="!(idCurrentUser === user.idUser)"
   class="btn bg-primary btn-round text-white text-bold"
   (click)="follow()"
   [disabled]="isDisabled"
 >
-  Siguiendo
+  {{ isFollowing ? "Siguiendo" : "Seguir" }}
 </button>

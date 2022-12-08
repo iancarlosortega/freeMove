@@ -6,6 +6,7 @@ import { User } from 'src/app/interfaces';
 import { MaterialModule } from 'src/app/material/material.module';
 import { PrimeNgModule } from 'src/app/prime-ng/prime-ng.module';
 import { UserService } from 'src/app/services';
+import firebase from '@firebase/app-compat';
 
 import { UsersComponent } from './users.component';
 
@@ -23,6 +24,7 @@ class UserServiceStub {
       phone: '+380501234567',
       role: 'ADMIN-ROLE',
       provider: 'email-password',
+      createdAt: firebase.firestore.Timestamp.now(),
     });
   }
 
@@ -36,6 +38,7 @@ class UserServiceStub {
         phone: '+380501234567',
         role: 'ADMIN-ROLE',
         provider: 'email-password',
+        createdAt: firebase.firestore.Timestamp.now(),
       },
       {
         idUser: '3',
@@ -45,6 +48,7 @@ class UserServiceStub {
         phone: '+380501234567',
         role: 'ADMIN-ROLE',
         provider: 'email-password',
+        createdAt: firebase.firestore.Timestamp.now(),
       },
     ]);
   }

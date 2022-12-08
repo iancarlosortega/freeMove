@@ -8,36 +8,44 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 export class FollowService {
   constructor(private firestore: AngularFirestore) {}
 
-  async follow(idProfile: string, idCurrentUser: string) {
+  follow(idProfile: string, idCurrentUser: string) {
     return this.firestore
       .collection('users')
       .doc(idCurrentUser)
       .update({
-        following: firebase.firestore.FieldValue.arrayUnion(idProfile),
+        following: firebase.firestore.FieldValue.arrayUnion(
+          this.firestore.doc(`/users/${idProfile}`).ref
+        ),
       })
       .then(() => {
         this.firestore
           .collection('users')
           .doc(idProfile)
           .update({
-            followers: firebase.firestore.FieldValue.arrayUnion(idCurrentUser),
+            followers: firebase.firestore.FieldValue.arrayUnion(
+              this.firestore.doc(`/users/${idCurrentUser}`).ref
+            ),
           });
       });
   }
 
-  async unfollow(idProfile: string, idCurrentUser: string) {
+  unfollow(idProfile: string, idCurrentUser: string) {
     return this.firestore
       .collection('users')
       .doc(idCurrentUser)
       .update({
-        following: firebase.firestore.FieldValue.arrayRemove(idProfile),
+        following: firebase.firestore.FieldValue.arrayRemove(
+          this.firestore.doc(`/users/${idProfile}`).ref
+        ),
       })
       .then(() => {
         this.firestore
           .collection('users')
           .doc(idProfile)
           .update({
-            followers: firebase.firestore.FieldValue.arrayRemove(idCurrentUser),
+            followers: firebase.firestore.FieldValue.arrayRemove(
+              this.firestore.doc(`/users/${idCurrentUser}`).ref
+            ),
           });
       });
   }

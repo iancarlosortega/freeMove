@@ -8,6 +8,9 @@ import firebase from '@firebase/app-compat';
 import { PostService, LikeService, UserService } from 'src/app/services';
 
 import { PostComponent } from './post.component';
+import { environment } from 'src/environments/environment';
+
+firebase.initializeApp(environment.firebaseConfig);
 
 class PostServiceStub {
   addComment() {}
@@ -16,7 +19,7 @@ class PostServiceStub {
     return of([
       {
         idComment: '1',
-        idUser: '1',
+        idUser: firebase.firestore().doc('users/1'),
         body: 'body',
         createdAt: firebase.firestore.Timestamp.now(),
       },
@@ -71,11 +74,22 @@ describe('PostComponent', () => {
     component = fixture.componentInstance;
     component.post = {
       idPost: '1',
-      idUser: '1',
+      idUser: firebase.firestore().doc('users/1'),
       createdAt: new Date() as any,
       url: 'https://www.fakeapi.com',
     };
-    component.idCurrentUser = '1';
+    component.currentUser = {
+      idUser: '1',
+      email: 'iancarlosortegaleon@gmail.com',
+      name: 'Ian Carlos',
+      age: 20,
+      phone: '+380501234567',
+      gender: 'Masculino',
+      weight: 70,
+      height: 170,
+      role: 'ADMIN-ROLE',
+      provider: 'email-password',
+    };
     fixture.detectChanges();
   });
 

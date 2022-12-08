@@ -1,4 +1,5 @@
 import firebase from 'firebase/compat';
+import { DocumentReference } from '@angular/fire/compat/firestore';
 export interface User {
   idUser: string;
   // Datos de registro
@@ -21,8 +22,9 @@ export interface User {
   weight?: number;
   height?: number;
   // Datos de redes sociales
-  followers?: string[];
-  following?: string[];
+  followers?: DocumentReference[];
+  following?: DocumentReference[];
+  likes?: DocumentReference[];
   photoUrl?: string;
   photoFilename?: string;
   bannerUrl?: string;

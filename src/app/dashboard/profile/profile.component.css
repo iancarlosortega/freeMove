@@ -127,11 +127,13 @@
   font-size: 14px;
   font-weight: 550;
   width: 100%;
+  margin: 1rem 0;
 }
 
 @media (min-width: 768px) {
   #btn-follow {
     width: 10rem;
+    margin: 0;
   }
 }
 
@@ -247,10 +249,6 @@ h4 {
   transition: all 0.3s ease;
 }
 
-/* .btn-banner:hover {
-  background: var(--amarillo) !important;
-} */
-
 .joined-date {
   display: flex;
   align-items: center;
@@ -262,9 +260,15 @@ h4 {
 
 .text-mute {
   display: flex;
-  width: 13rem;
   justify-content: center;
   text-align: center;
+  margin-bottom: 1rem;
+}
+
+@media (min-width: 768px){
+  .text-mute {
+    width: 13rem;
+  }
 }
 
 .text-mute mat-icon {

@@ -1,7 +1,7 @@
 <main class="community fade-in" *ngIf="(postService.data | async)?.length > 0">
   <section scrollable (scrollPosition)="scrollHandler($event)" class="posts">
     <div class="post" *ngFor="let post of postService.data | async">
-      <app-post [post]="post" [idCurrentUser]="currentUser.idUser"></app-post>
+      <app-post [post]="post" [currentUser]="currentUser"></app-post>
     </div>
     <div *ngIf="postService.loading | async" class="flex-center fade-in">
       <mat-spinner [diameter]="100"></mat-spinner>

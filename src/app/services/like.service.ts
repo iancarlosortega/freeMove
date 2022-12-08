@@ -1,53 +1,52 @@
 import { Injectable } from '@angular/core';
+import firebase from '@firebase/app-compat';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { combineLatest, Observable, of } from 'rxjs';
-import { Post } from '../interfaces';
-import { PostService } from './post.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LikeService {
-  constructor(
-    private firestore: AngularFirestore,
-    private postService: PostService
-  ) {}
-
-  getLikesFromPost(idPost: string) {
-    return this.firestore
-      .collection('posts/' + idPost + '/likes')
-      .valueChanges();
-  }
-
-  getUserLikes(idUser: string) {
-    return this.firestore
-      .collection('users/' + idUser + '/likes')
-      .valueChanges();
-  }
-
-  getPostsLiked(ids: any[]) {
-    if (ids.length === 0) {
-      return of([]);
-    }
-    const posts: Observable<Post>[] = [];
-    ids.forEach((id) => {
-      const peticion = this.postService.getPostById(id.idPost);
-      posts.push(peticion);
-    });
-    return combineLatest(posts);
-  }
+  constructor(private firestore: AngularFirestore) {}
 
   addLike(idPost: string, idUser: string) {
-    this.firestore.doc('posts/' + idPost + '/likes/' + idUser).set({
-      idUser,
-    });
-    this.firestore.doc('users/' + idUser + '/likes/' + idPost).set({
-      idPost,
-    });
+    return this.firestore
+      .collection('posts')
+      .doc(idPost)
+      .update({
+        likes: firebase.firestore.FieldValue.arrayUnion(
+          this.firestore.doc(`/users/${idUser}`).ref
+        ),
+      })
+      .then(() => {
+        this.firestore
+          .collection('users')
+          .doc(idUser)
+          .update({
+            likes: firebase.firestore.FieldValue.arrayUnion(
+              this.firestore.doc(`/posts/${idPost}`).ref
+            ),
+          });
+      });
   }
 
   removeLike(idPost: string, idUser: string) {
-    this.firestore.doc('posts/' + idPost + '/likes/' + idUser).delete();
-    this.firestore.doc('users/' + idUser + '/likes/' + idPost).delete();
+    return this.firestore
+      .collection('posts')
+      .doc(idPost)
+      .update({
+        likes: firebase.firestore.FieldValue.arrayRemove(
+          this.firestore.doc(`/users/${idUser}`).ref
+        ),
+      })
+      .then(() => {
+        this.firestore
+          .collection('users')
+          .doc(idUser)
+          .update({
+            likes: firebase.firestore.FieldValue.arrayRemove(
+              this.firestore.doc(`/posts/${idPost}`).ref
+            ),
+          });
+      });
   }
 }

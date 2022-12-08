@@ -4,15 +4,10 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription, switchMap } from 'rxjs';
-import { User } from 'src/app/interfaces';
+import { PostService, StorageService, UserService } from 'src/app/services';
+import { DocumentReference } from '@angular/fire/compat/firestore';
 import { FileUpload } from 'src/app/models';
-import {
-  FollowService,
-  LikeService,
-  PostService,
-  StorageService,
-  UserService,
-} from 'src/app/services';
+import { User } from 'src/app/interfaces';
 
 @Component({
   selector: 'app-profile',
@@ -60,8 +55,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
     private activatedRoute: ActivatedRoute,
     private toastr: ToastrService,
     private userService: UserService,
-    private followService: FollowService,
-    private likeService: LikeService,
     private postService: PostService,
     private storageService: StorageService
   ) {}
@@ -120,45 +113,50 @@ export class ProfileComponent implements OnInit, OnDestroy {
   }
 
   getFollowers() {
-    this.userService
-      .getUsersByIds(this.user.followers || [])
-      .subscribe((users) => {
-        this.userFollowers = users;
+    this.userFollowers = [];
+    this.user.followers?.forEach((doc: DocumentReference) => {
+      doc.get().then((user: any) => {
+        console.log('a');
+        this.userFollowers.push(user.data());
       });
+    });
   }
 
   getFollowing() {
-    this.userService
-      .getUsersByIds(this.user.following || [])
-      .subscribe((users) => {
-        this.userFollowing = users;
+    this.userFollowing = [];
+    this.user.following?.forEach((doc: DocumentReference) => {
+      doc.get().then((user: any) => {
+        this.userFollowing.push(user.data());
       });
+    });
   }
 
-  followUser() {
-    if (this.isFollowing) {
-      this.isFollowing = false;
-      this.userFollowers = this.userFollowers.filter(
-        (user) => user.idUser !== this.idCurrentUser
-      );
-      this.followService.unfollow(this.user.idUser, this.idCurrentUser);
-    } else {
-      this.isFollowing = true;
-      this.userFollowers = this.userFollowers.concat(this.currentUser);
-      this.followService.follow(this.user.idUser, this.idCurrentUser);
-    }
+  getLikes() {
+    this.userLikes = [];
+    this.user.likes?.forEach((doc: DocumentReference) => {
+      doc.get().then((user: any) => {
+        this.userLikes.push(user.data());
+      });
+    });
   }
 
   checkCurrentUser() {
+    this.isFollowing = false;
     this.userObs = this.userService.user$.subscribe((user) => {
       this.currentUser = user;
       this.idCurrentUser = user.idUser;
-      if (user.idUser === this.user.idUser) {
+      if (this.idCurrentUser === this.user.idUser) {
         this.isCurrentUser = true;
       } else {
         this.isCurrentUser = false;
-        this.isFollowing =
-          this.user.followers?.includes(this.idCurrentUser) || false;
+        this.user.followers?.forEach((user) =>
+          user.get().then((doc) => {
+            if (this.idCurrentUser === doc.id) {
+              this.isFollowing = true;
+              return;
+            }
+          })
+        );
       }
     });
   }
@@ -187,14 +185,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
       return style + ' current';
     }
     return style;
-  }
-
-  getLikes() {
-    this.likeService.getUserLikes(this.user.idUser).subscribe((likes) => {
-      this.likeService.getPostsLiked(likes).subscribe((posts) => {
-        this.userLikes = posts;
-      });
-    });
   }
 
   changeBanner(event: any) {
@@ -253,10 +243,5 @@ export class ProfileComponent implements OnInit, OnDestroy {
       );
     }
     return;
-  }
-
-  //TODO: Abrir mensajería
-  openChatRoom() {
-    console.log('open chat room');
   }
 }

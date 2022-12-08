@@ -4,7 +4,7 @@ import {
   AngularFirestoreCollection,
 } from '@angular/fire/compat/firestore';
 import { BehaviorSubject, map, Observable, scan, take, tap } from 'rxjs';
-import { Comment, Post } from 'src/app/interfaces';
+import { Comment } from 'src/app/interfaces';
 
 interface QueryConfig {
   path: string; //  path to collection
@@ -126,33 +126,20 @@ export class PostService {
       .subscribe();
   }
 
-  getAllPosts() {
-    return this.firestore
-      .collection('posts', (ref) => ref.orderBy('createdAt', 'desc').limit(6))
-      .snapshotChanges()
-      .pipe(
-        map((actions) => {
-          return actions.map((a) => {
-            const data = a.payload.doc.data() as Post;
-            data.idPost = a.payload.doc.id;
-            return data;
-          });
-        })
-      );
-  }
-
-  getPostById(id: string) {
+  //TODO: Script to update
+  updateIdUserToRef() {
     return this.firestore
       .collection('posts')
-      .doc(id)
-      .snapshotChanges()
-      .pipe(
-        map((a) => {
-          const data = a.payload.data() as Post;
-          data.idPost = a.payload.id;
-          return data;
-        })
-      );
+      .get()
+      .subscribe((querySnapshot) => {
+        querySnapshot.forEach((doc: any) => {
+          const data = doc.data();
+          this.firestore
+            .collection('posts')
+            .doc(doc.id)
+            .update({ idUser: this.firestore.doc('users/' + data.idUser).ref });
+        });
+      });
   }
 
   getProfilePosts(idUser: string) {
@@ -160,12 +147,6 @@ export class PostService {
       .collection('posts', (ref) =>
         ref.where('idUser', '==', idUser).orderBy('createdAt', 'desc')
       )
-      .valueChanges();
-  }
-
-  getMostLikedPosts() {
-    return this.firestore
-      .collection('posts', (ref) => ref.orderBy('totalLikes', 'desc').limit(3))
       .valueChanges();
   }
 
@@ -192,7 +173,7 @@ export class PostService {
 
   addComment(idPost: string, idUser: string, body: string) {
     this.firestore.collection('posts/' + idPost + '/comments').add({
-      idUser,
+      idUser: this.firestore.doc('users/' + idUser).ref,
       body,
       createdAt: new Date(),
     });
