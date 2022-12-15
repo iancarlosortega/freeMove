@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Subscription } from 'rxjs';
+import { Subscription, take } from 'rxjs';
 import { AlertService, UserService } from 'src/app/services';
 import { Alert, User } from 'src/app/interfaces';
 import { MatDialog } from '@angular/material/dialog';
@@ -24,6 +24,7 @@ import { UnlinkAccountComponent } from '../components/unlink-account/unlink-acco
 export class LinkAccountComponent implements OnInit, OnDestroy {
   userObs!: Subscription;
   securityObs!: Subscription;
+  alertObs!: Subscription;
   user!: User;
   alert!: Alert;
   isLoading: boolean = true;
@@ -47,28 +48,29 @@ export class LinkAccountComponent implements OnInit, OnDestroy {
       this.securityObs = this.alertService
         .getAlertByUser(user.idUser)
         .subscribe((alert) => {
-          if (!alert) {
+          if (alert) {
+            this.alert = alert;
+            this.isLoading = false;
+            switch (alert?.notificationStatus) {
+              case 'accepted':
+                this.linkAccountForm
+                  .get('linkedEmail')
+                  ?.setValue(this.alert.linkedAccount);
+                this.linkAccountForm.enable();
+                break;
+              case 'pending':
+                this.linkAccountForm
+                  .get('linkedEmail')
+                  ?.setValue(this.alert.emailToVinculate);
+                this.linkAccountForm.disable();
+                break;
+              default:
+                this.linkAccountForm.reset();
+                this.linkAccountForm.enable();
+                break;
+            }
+          } else {
             this.alertService.createAlert(user.idUser);
-          }
-          this.alert = alert;
-          this.isLoading = false;
-          switch (alert?.notificationStatus) {
-            case 'accepted':
-              this.linkAccountForm
-                .get('linkedEmail')
-                ?.setValue(this.alert.linkedAccount);
-              this.linkAccountForm.enable();
-              break;
-            case 'pending':
-              this.linkAccountForm
-                .get('linkedEmail')
-                ?.setValue(this.alert.emailToVinculate);
-              this.linkAccountForm.disable();
-              break;
-            default:
-              this.linkAccountForm.reset();
-              this.linkAccountForm.enable();
-              break;
           }
         });
     });
@@ -77,6 +79,9 @@ export class LinkAccountComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.userObs.unsubscribe();
     this.securityObs.unsubscribe();
+    if (this.alertObs) {
+      this.alertObs.unsubscribe();
+    }
   }
 
   invalidInput(field: string) {
@@ -101,9 +106,11 @@ export class LinkAccountComponent implements OnInit, OnDestroy {
       }, 3500);
       return;
     }
-    this.alertService
+    this.alertObs = this.alertService
       .createInvitation(linkedEmail, this.user, this.alert)
+      .pipe(take(1))
       .subscribe((error) => {
+        console.log(error);
         if (error) {
           this.isErrorUser = true;
           setTimeout(() => {
@@ -130,7 +137,7 @@ export class LinkAccountComponent implements OnInit, OnDestroy {
 
     dialog.afterClosed().subscribe(async (result: boolean) => {
       if (result) {
-        this.alertService
+        this.alertObs = this.alertService
           .createInvitation(linkedEmail, this.user, this.alert)
           .subscribe((error) => {
             if (error) {
