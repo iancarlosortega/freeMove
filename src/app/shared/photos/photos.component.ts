@@ -20,7 +20,7 @@ export class PhotosComponent implements OnInit {
     );
     const lightboxRef = this.gallery.ref('lightbox');
     lightboxRef.setConfig({
-      imageSize: ImageSize.Cover,
+      imageSize: ImageSize.Contain,
       thumbPosition: ThumbnailsPosition.Top,
     });
     lightboxRef.load(galleryImages);

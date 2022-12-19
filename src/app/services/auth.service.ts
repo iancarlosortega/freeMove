@@ -20,6 +20,30 @@ export class AuthService {
     private toastr: ToastrService
   ) {}
 
+  async login(email: string, password: string) {
+    try {
+      const result = await this.afAuth.signInWithEmailAndPassword(
+        email,
+        password
+      );
+      return !!result;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  async createAccount(email: string, password: string) {
+    try {
+      const result = await this.afAuth.createUserWithEmailAndPassword(
+        email,
+        password
+      );
+      return !!result;
+    } catch (e) {
+      return false;
+    }
+  }
+
   getClaims() {
     return this.afAuth.idTokenResult;
   }
